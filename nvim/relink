@@ -8,5 +8,5 @@ which rg > /dev/null 2>&1 || brew install rg
 
 for f in `find -E . -regex ".*\.vim$|.*\.lua$"`; do
     rm -rf ~/.config/nvim/$f
-    ln -s ~/dotfiles/nvim/$f ~/.config/nvim/$f
+    ln -s ~/GoogleDrive/config/dotfiles/nvim/$f ~/.config/nvim/$f
 done
