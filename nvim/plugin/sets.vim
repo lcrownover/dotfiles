@@ -1,4 +1,3 @@
-set guicursor=
 set relativenumber
 set nohlsearch
 set hidden

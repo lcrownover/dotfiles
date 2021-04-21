@@ -2,10 +2,21 @@
 "======== MAKE IT PRETTY ============"
 "************************************"
 
-" turn on the color
-let g:lightline = { 'colorscheme': 'ayu' }
-let ayucolor="mirage"
-colorscheme ayu
+" gruvbox when im feeling froggy
+"let g:gruvbox_italic=1
+"let g:lightline = {}
+"let g:lightline.colorscheme = 'gruvbox'
+"colorscheme gruvbox
+
+" ayu when spicy
+"let g:lightline = { 'colorscheme': 'ayu' }
+"let ayucolor="mirage"
+"colorscheme ayu
+
+" onedark when theres no place like home
+let g:onedark_terminal_italics = 1
+let g:lightline = { 'colorscheme': 'onedark' }
+colorscheme onedark
 
 " used for tmux color passing
 if exists('+termguicolors')
