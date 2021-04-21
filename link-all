@@ -7,7 +7,6 @@ cd ~/dotfiles
 
 for d in `find . -type d -maxdepth 1 -not -path ./.git`; do
     if [[ -f $d/link ]]; then
-        echo "running $d/link"
         cd $d
         bash link
         cd ..
