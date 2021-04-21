@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
 brew install --HEAD neovim
+which rg > /dev/null 2>&1 || brew install rg
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 nvim +PlugInstall +qall
