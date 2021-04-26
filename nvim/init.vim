@@ -94,12 +94,12 @@ au BufNewFile,BufRead *.rb,*.pp setlocal noet ts=2 sw=2 sts=2
 "************************************"
 
 " better split settings
-nnoremap <Leader>- <c-w>s
-nnoremap <Leader>w\ <c-w>v
-nnoremap <leader>wj <c-w><c-j>
-nnoremap <leader>wk <c-w><c-k>
-nnoremap <leader>wl <c-w><c-l>
-nnoremap <leader>wh <c-w><c-h>
+nnoremap <c-w>- <c-w>s
+nnoremap <c-w>\ <c-w>v
+"nnoremap <leader>wj <c-w><c-j>
+"nnoremap <leader>wk <c-w><c-k>
+"nnoremap <leader>wl <c-w><c-l>
+"nnoremap <leader>wh <c-w><c-h>
 set splitbelow
 set splitright
 

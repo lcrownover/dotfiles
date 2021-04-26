@@ -47,6 +47,9 @@ alias code='code -n .'
 # neovim
 alias vim='nvim'
 
+# openfortivpn
+alias vpn='tab-color 250 100 250; sudo openfortivpn -c ~/dotfiles/openfortivpn/my-conf'
+
 # git
 alias pcm='git checkout master'
 alias gs='git status'
