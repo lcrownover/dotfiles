@@ -18,6 +18,10 @@ Plug 'airblade/vim-gitgutter'
 "a= align by =
 Plug 'godlygeek/tabular'
 
+" nvim LSP
+"Plug 'neovim/nvim-lspconfig'
+"Plug 'hrsh7th/nvim-compe'
+
 " telescope!
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -25,7 +29,6 @@ Plug 'sharkdp/bat'
 Plug 'sharkdp/fd'
 Plug 'BurntSushi/ripgrep'
 Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'neovim/nvim-lspconfig'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
@@ -61,11 +64,6 @@ call plug#end()
 "======== FUNCTIONALITY ============="
 "************************************"
 let mapleader = " "
-
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
