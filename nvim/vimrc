@@ -1,0 +1,216 @@
+call plug#begin('~/.vim/plugged')
+
+" stylish!
+Plug 'itchyny/lightline.vim'
+
+" all the colors
+Plug 'ayu-theme/ayu-vim'
+Plug 'gruvbox-community/gruvbox'
+Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'lifepillar/vim-solarized8'
+
+" Leader C to comment
+Plug 'scrooloose/nerdcommenter'
+
+" yay git
+Plug 'airblade/vim-gitgutter'
+
+"a= align by =
+Plug 'godlygeek/tabular'
+
+" oh yeah
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" scrub file navigation
+Plug 'scrooloose/nerdtree'
+
+" leader u
+Plug 'mbbill/undotree'
+
+"C-n add cursor on match
+"C-A-n select all matches
+Plug 'mg979/vim-visual-multi'
+
+"fancy commands like :ChMod, :Find
+Plug 'tpope/vim-eunuch'
+
+"cs{[ to change { to [
+Plug 'tpope/vim-surround'
+
+"linting and language
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'rodjek/vim-puppet'
+
+"write things in pairs automatically
+Plug 'jiangmiao/auto-pairs'
+
+call plug#end()
+
+
+"************************************"
+"========   SET ME BABY  ============"
+"************************************"
+
+set relativenumber
+set nohlsearch
+set hidden
+set noerrorbells
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set number
+set nowrap
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set incsearch
+set termguicolors
+set scrolloff=8
+set colorcolumn=80
+set signcolumn=yes
+set cursorline
+set clipboard=unnamed
+
+" needed for lightline
+set laststatus=2
+
+" Extra space for messages
+set cmdheight=2
+
+"************************************"
+"======== MAKE IT PRETTY ============"
+"************************************"
+
+" gruvbox when im feeling froggy
+"let g:gruvbox_italic=1
+"let g:lightline = {}
+"let g:lightline.colorscheme = 'gruvbox'
+"colorscheme gruvbox
+
+" ayu when spicy
+"let g:lightline = { 'colorscheme': 'ayu' }
+"let ayucolor="mirage"
+"colorscheme ayu
+
+" onedark when theres no place like home
+let g:onedark_terminal_italics = 1
+let g:lightline = { 'colorscheme': 'onedark' }
+colorscheme onedark
+
+" solarized?
+"let g:lightline = { 'colorscheme': 'solarized' }
+"set background=dark
+"colorscheme solarized8
+
+" used for tmux color passing
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+"************************************"
+"======== FUNCTIONALITY ============="
+"************************************"
+let mapleader = " "
+
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+augroup lcrown
+    autocmd!
+    autocmd BufWritePre * :call TrimWhitespace()
+augroup END
+
+nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <c-h> :bprev<CR>
+nnoremap <c-l> :bnext<CR>
+
+
+" fzf yay
+nnoremap <leader>ff :Files<cr>
+nnoremap <leader>fg :Ag<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+
+"************************************"
+"======== GO GO PUPPET =============="
+"************************************"
+au BufNewFile,BufRead *.rb,*.pp setlocal noet ts=2 sw=2 sts=2
+
+
+"************************************"
+"======== SPLITTING IS COOL ========="
+"************************************"
+
+" better split settings
+nnoremap <c-w>- <c-w>s
+nnoremap <c-w>\ <c-w>v
+set splitbelow
+set splitright
+
+
+"************************************"
+"======== BUFFER SWITCHING =========="
+"************************************"
+
+" fast buffer ls
+map <Leader>b :ls<CR>
+map <Leader>bh :bprev<CR>
+map <Leader>bl :bnext<CR>
+
+
+"************************************"
+"======== NERD TREE SETTINGS ========"
+"************************************"
+
+" open nerdtree with ctrl p
+map <c-p> :NERDTreeToggle<CR>
+" nerdtree settings
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeQuitOnOpen = 1
+" open current buffer in NERDTree
+map <leader>p :NERDTreeFind<cr>
+
+
+"************************************"
+"======== CUSTOM SHORTCUTS =========="
+"************************************"
+
+" toggle mouse mode
+map <Leader>m :set invmouse<CR>
+
+" easier commenting, for some reason C-_ means C-/
+map <c-_> <Leader>c<Space>
+
+" highlight search
+map <Leader>h :noh<CR>
+
+ "quick key for regex
+map <leader>r :%s/
+
+" faster display of registers
+map <Leader>c :reg<CR>
+
+" keep visual mode after indenting
+"vmap <tab> >gvV
+
+if exists(":Tabularize")
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
+
+
