@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+rm -f ~/.vimrc
+rm -rf ~/.config/nvim/init.vim
+rm -rf ~/.config/nvim/lua
+ln -s "$(pwd)/init.vim" ~/.config/nvim/init.vim
+ln -s "$(pwd)/lua" ~/.config/nvim/lua
