@@ -62,6 +62,13 @@ Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 
+" Get those settings
+lua require('lcrown.telescope')
+lua require('lcrown.treesitter')
+lua require('lcrown.devicons')
+lua require('lcrown.lspconfig')
+lua require('lcrown.compe')
+
 
 "************************************"
 "========   SET ME BABY  ============"
@@ -95,12 +102,6 @@ set laststatus=2
 " Extra space for messages
 set cmdheight=2
 
-" Get those settings
-lua require('lcrown.telescope')
-lua require('lcrown.treesitter')
-lua require('lcrown.devicons')
-lua require('lcrown.lspconfig')
-lua require('lcrown.compe')
 
 "************************************"
 "======== MAKE IT PRETTY ============"
@@ -168,6 +169,13 @@ nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
+" custom navigation
+nnoremap <leader>p <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>f <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>t <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <c-f> <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <c-p> <cmd>lua require('telescope.builtin').find_files()<cr>
+
 " compe
 set completeopt=menuone,noselect
 inoremap <silent><expr> <C-Space> compe#complete()
@@ -186,7 +194,7 @@ inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 "************************************"
 "======== GO GO PUPPET =============="
 "************************************"
-au BufNewFile,BufRead *.rb,*.pp setlocal noet ts=2 sw=2 sts=2
+au BufNewFile,BufRead *.rb,*.pp setlocal expandtab ts=2 sw=2 sts=2
 
 
 "************************************"
@@ -204,15 +212,15 @@ set splitright
 "======== NERD TREE SETTINGS ========"
 "************************************"
 
-" open nerdtree with ctrl p
-map <c-p> :NERDTreeToggle<CR>
+" open nerdtree with ctrl d
+map <c-b> :NERDTreeToggle<CR>
 " nerdtree settings
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeQuitOnOpen = 1
 " open current buffer in NERDTree
-map <leader>p :NERDTreeFind<cr>
+map <leader>b :NERDTreeFind<cr>
 
 
 "************************************"

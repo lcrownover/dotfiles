@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
 rm -f ~/.zshrc
+rm -rf ~/.config/zsh
 ln -s "$(pwd)/zshrc" ~/.zshrc
+ln -s "$(pwd)/zsh" ~/.config/zsh
