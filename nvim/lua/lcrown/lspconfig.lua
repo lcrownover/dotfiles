@@ -1,4 +1,6 @@
 require('lspconfig').pyright.setup{}
+require('lspconfig').bashls.setup{}
+require('lspconfig').gopls.setup{}
 
 
 local nvim_lsp = require('lspconfig')
@@ -38,7 +40,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "gopls", "rust_analyzer", "tsserver", "bash" }
+local servers = { "pyright", "gopls", "rust_analyzer", "tsserver", "bash-language-server" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
