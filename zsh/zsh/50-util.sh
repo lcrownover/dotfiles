@@ -1,6 +1,9 @@
 # openfortivpn
 alias vpn="tab-color 250 100 250; sudo openfortivpn -c $HOME/dotfiles/openfortivpn/my-conf"
 
+# todo
+alias todo="vim ~/.todo.md"
+
 # hostfmt
 alias hostfmt="$GDRIVEDIR/code/projects/hostfmt.py"
 

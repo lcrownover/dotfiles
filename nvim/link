@@ -3,5 +3,5 @@
 rm -f ~/.vimrc
 rm -rf ~/.config/nvim/init.vim
 rm -rf ~/.config/nvim/lua
-ln -s "$(pwd)/init.vim" ~/.config/nvim/init.vim
-ln -s "$(pwd)/lua" ~/.config/nvim/lua
+ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
+ln -s ~/dotfiles/nvim/lua ~/.config/nvim/lua

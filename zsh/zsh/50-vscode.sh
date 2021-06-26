@@ -24,6 +24,6 @@ function vscode_notes() {
 	exit
 }
 
-alias vp='vscode_puppet'
-alias vn='vscode_nagios'
-alias notes='vscode_notes'
+alias vsp='vscode_puppet'
+alias vsn='vscode_nagios'
+alias vsnotes='vscode_notes'

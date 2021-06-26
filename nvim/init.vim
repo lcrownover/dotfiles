@@ -16,13 +16,14 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'itchyny/lightline.vim'
 
 " all the colors
-Plug 'ayu-theme/ayu-vim'
-Plug 'gruvbox-community/gruvbox'
-Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'joshdick/onedark.vim'
-Plug 'lifepillar/vim-solarized8'
-Plug 'arcticicestudio/nord-vim'
-Plug 'haishanh/night-owl.vim'
+"Plug 'ayu-theme/ayu-vim'
+"Plug 'gruvbox-community/gruvbox'
+"Plug 'shinchu/lightline-gruvbox.vim'
+"Plug 'lifepillar/vim-solarized8'
+"Plug 'arcticicestudio/nord-vim'
+"Plug 'haishanh/night-owl.vim'
+"Plug 'folke/tokyonight.nvim'
 
 " Leader C to comment
 Plug 'scrooloose/nerdcommenter'
@@ -33,10 +34,6 @@ Plug 'airblade/vim-gitgutter'
 "a= align by =
 Plug 'godlygeek/tabular'
 
-" oh yeah
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-"Plug 'junegunn/fzf.vim'
-
 " scrub file navigation
 Plug 'scrooloose/nerdtree'
 
@@ -44,7 +41,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'mbbill/undotree'
 
 "C-n add cursor on match
-"C-A-n select all matches
 Plug 'mg979/vim-visual-multi'
 
 "fancy commands like :ChMod, :Find
@@ -57,17 +53,14 @@ Plug 'tpope/vim-surround'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rodjek/vim-puppet'
 
-"write things in pairs automatically
-Plug 'jiangmiao/auto-pairs'
-
 call plug#end()
 
 " Get those settings
-lua require('lcrown.telescope')
-lua require('lcrown.treesitter')
-lua require('lcrown.devicons')
-lua require('lcrown.lspconfig')
-lua require('lcrown.compe')
+lua require('lcrown-config.telescope')
+lua require('lcrown-config.treesitter')
+lua require('lcrown-config.devicons')
+lua require('lcrown-config.lspconfig')
+lua require('lcrown-config.compe')
 
 
 "************************************"
@@ -84,9 +77,10 @@ set expandtab
 set smartindent
 set number
 set nowrap
-set noswapfile
-set nobackup
-set undodir=~/.vim/undodir
+set noswapfile nobackup
+set backupdir=~/.backup//
+set directory=~/.backup//
+set undodir=~/.backup//
 set undofile
 set incsearch
 set termguicolors
@@ -95,6 +89,7 @@ set colorcolumn=80
 set signcolumn=yes
 set cursorline
 set clipboard=unnamed
+set shellcmdflag=-ic
 
 " needed for lightline
 set laststatus=2
@@ -108,10 +103,15 @@ set cmdheight=2
 "************************************"
 
 " gruvbox when im feeling froggy
-let g:gruvbox_italic=1
-let g:lightline = {}
-let g:lightline.colorscheme = 'gruvbox'
-colorscheme gruvbox
+"let g:gruvbox_italic=1
+"let g:lightline = {}
+"let g:lightline.colorscheme = 'gruvbox'
+"colorscheme gruvbox
+
+" tokyo night when im all about neovim
+"let g:tokyonight_style = "night"
+"let g:lightline = { 'colorscheme': 'tokyonight' }
+"colorscheme tokyonight
 
 " ayu when spicy
 "let g:lightline = { 'colorscheme': 'ayu' }
@@ -119,9 +119,9 @@ colorscheme gruvbox
 "colorscheme ayu
 
 " onedark when theres no place like home
-"let g:onedark_terminal_italics = 1
-"let g:lightline = { 'colorscheme': 'onedark' }
-"colorscheme onedark
+let g:onedark_terminal_italics = 1
+let g:lightline = { 'colorscheme': 'onedark' }
+colorscheme onedark
 
 " solarized?
 "let g:lightline = { 'colorscheme': 'solarized' }
@@ -168,11 +168,13 @@ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>f' <cmd>lua require('telescope.builtin').marks()<cr>
 
 " custom navigation
 nnoremap <leader>p <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>f <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>t <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>l <cmd>lua require('telescope.builtin').git_commits()<cr>
 nnoremap <c-f> <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <c-p> <cmd>lua require('telescope.builtin').find_files()<cr>
 
@@ -183,6 +185,13 @@ inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+" lsp remaps
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<cr>
+nnoremap <silent> <C-]> <cmd>lua vim.lsp.buf.definition()<cr>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<cr>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<cr>
+nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<cr>
 
 " fzf yay
 "nnoremap <leader>ff :Files<cr>
@@ -223,12 +232,10 @@ let NERDTreeQuitOnOpen = 1
 map <leader>b :NERDTreeFind<cr>
 
 
+
 "************************************"
 "======== CUSTOM SHORTCUTS =========="
 "************************************"
-
-" toggle mouse mode
-map <Leader>m :set invmouse<CR>
 
 " easier commenting, for some reason C-_ means C-/
 map <c-_> <Leader>c<Space>
@@ -236,14 +243,18 @@ map <c-_> <Leader>c<Space>
 " highlight search
 map <Leader>h :noh<CR>
 
- "quick key for regex
-map <leader>r :%s/
+" close buffer
+map <Leader>w :bd<CR>
+
+"quick key for regex
+nnoremap <leader>r :%s/
+vmap <leader>r :s/
 
 " faster display of registers
 map <Leader>c :reg<CR>
 
 " keep visual mode after indenting
-"vmap <tab> >gvV
+vmap > >gv
 
 if exists(":Tabularize")
   nmap <Leader>a= :Tabularize /=<CR>

@@ -2,5 +2,5 @@
 
 rm -f ~/.zshrc
 rm -rf ~/.config/zsh
-ln -s "$(pwd)/zshrc" ~/.zshrc
-ln -s "$(pwd)/zsh" ~/.config/zsh
+ln -s ~/dotfiles/zsh/zshrc ~/.zshrc
+ln -s ~/dotfiles/zsh/zsh ~/.config/zsh
