@@ -21,12 +21,10 @@ GEM_HOME="$HOME/.gem"
 export PATH="$GEM_HOME/bin:$PATH"
 eval "$(rbenv init -)"
 
-#export ZSH_CONF_DIR="$HOME/.config/zsh"
+# custom prompt
+PROMPT='%{$fg[red]%}[%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[blue]%}%M:%{$fg[magenta]%}%1~%{$fg[red]%}] $(git_prompt_info)% %{$reset_color%}'
 
-## Source all my configs from the conf dir
-#for f in $ZSH_CONF_DIR/*.sh; do
-    #source $f
-#done
+# everything else can be loaded by zshenv as this file is loaded in a non-interactive session
 
 source ~/.zshenv
 

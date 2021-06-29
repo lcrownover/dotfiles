@@ -5,7 +5,7 @@ test -d ~/.backup || mkdir ~/.backup
 alias vim='nvim'
 
 # vim
-function vim_puppet() { cdp; vim }
+function vim_puppet() { cdp; tab-color 250 173 33; vim }
 function vim_nagios() { cdnag; vim }
 
 function vim_notes() {

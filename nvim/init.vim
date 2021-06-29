@@ -172,7 +172,6 @@ nnoremap <leader>f' <cmd>lua require('telescope.builtin').marks()<cr>
 " custom navigation
 nnoremap <leader>p <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>f <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>t <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>l <cmd>lua require('telescope.builtin').git_commits()<cr>
 nnoremap <c-f> <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <c-p> <cmd>lua require('telescope.builtin').find_files()<cr>
@@ -231,16 +230,31 @@ let NERDTreeQuitOnOpen = 1
 map <leader>b :NERDTreeFind<cr>
 
 
-
 "************************************"
-"======== CUSTOM SHORTCUTS =========="
+"========     EXEGGUTOR    =========="
 "************************************"
 
-" just a quicker way to execute current file
+
+" remaps to handle terminal usage and command execution
+nnoremap <leader>e :vnew <bar> :setlocal buftype=nofile <bar> r !<space>
+
+" open a new nvim terminal
+if has('nvim')
+    nnoremap <leader>t :terminal<cr>i
+    tnoremap <esc> <c-\><c-n>
+    tnoremap <c-v><esc> <esc>
+endif
+
+" execute current file
 nnoremap <leader>x :!%:p<cr>
 
 " go to the directory of the current buffer
 nnoremap <leader>c :cd %:p:h<cr>
+
+
+"************************************"
+"======== CUSTOM SHORTCUTS =========="
+"************************************"
 
 " easier commenting, for some reason C-_ means C-/
 map <c-_> <Leader>c<Space>

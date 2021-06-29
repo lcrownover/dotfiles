@@ -16,9 +16,9 @@ alias cdey="cd $HOME/tools/eyaml"
 # this is used by a lot of other funcs
 function puppet_navigate_to_basedir() {
 	if [ -z $1 ]; then
-		tab-color 250 173 33; cd $PUPPET_BASE_DIR
+		cd $PUPPET_BASE_DIR
 	else
-		tab-color 250 173 33; cd $PUPPET_BASE_DIR/puppet_$1
+		cd $PUPPET_BASE_DIR/puppet_$1
 	fi
 }
 
