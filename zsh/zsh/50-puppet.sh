@@ -20,8 +20,6 @@ function puppet_navigate_to_basedir() {
 	else
 		tab-color 250 173 33; cd $PUPPET_BASE_DIR/puppet_$1
 	fi
-    echo ""
-    echo ""
 }
 
 # puppet fileserver repos
@@ -88,7 +86,6 @@ function puppet_git_checkout_branch_all() {
 
 # merges the given branch to master on all puppet modules
 function puppet_git_merge_to_master_all() {
-    echo ""
 	if [ "$1" = "" ]; then
 		echo "gotta give me a branch name matching regex 'feature_.*' as \$1"
 		return 1
