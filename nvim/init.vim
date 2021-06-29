@@ -9,7 +9,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
-" lsp!
+" lsp
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'hrsh7th/vim-vsnip'
@@ -31,7 +31,7 @@ Plug 'scrooloose/nerdcommenter'
 " yay git
 Plug 'airblade/vim-gitgutter'
 
-"a= align by =
+" a= align by =
 Plug 'godlygeek/tabular'
 
 " scrub file navigation
@@ -55,11 +55,11 @@ Plug 'rodjek/vim-puppet'
 call plug#end()
 
 " Get those settings
-lua require('lcrown-config.telescope')
-lua require('lcrown-config.treesitter')
-lua require('lcrown-config.devicons')
-lua require('lcrown-config.lspconfig')
-lua require('lcrown-config.compe')
+lua require('config.telescope')
+lua require('config.treesitter')
+lua require('config.devicons')
+lua require('config.lspconfig')
+lua require('config.compe')
 
 
 "************************************"
@@ -88,7 +88,7 @@ set colorcolumn=80
 set signcolumn=yes
 set cursorline
 set clipboard=unnamed
-"set shellcmdflag=-ic
+set iskeyword-=_
 
 " needed for lightline
 set laststatus=2
@@ -145,6 +145,7 @@ endif
 "************************************"
 "======== FUNCTIONALITY ============="
 "************************************"
+
 let mapleader = " "
 
 fun! TrimWhitespace()
