@@ -1,10 +1,15 @@
 call plug#begin('~/.vim/plugged')
 
+" testing my own plugin
+"Plug 'lcrownover/funzy.nvim'
+
 " telescope
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
+
+" lsp!
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'hrsh7th/vim-vsnip'
@@ -17,13 +22,8 @@ Plug 'itchyny/lightline.vim'
 
 " all the colors
 Plug 'joshdick/onedark.vim'
-"Plug 'ayu-theme/ayu-vim'
 "Plug 'gruvbox-community/gruvbox'
 "Plug 'shinchu/lightline-gruvbox.vim'
-"Plug 'lifepillar/vim-solarized8'
-"Plug 'arcticicestudio/nord-vim'
-"Plug 'haishanh/night-owl.vim'
-"Plug 'folke/tokyonight.nvim'
 
 " Leader C to comment
 Plug 'scrooloose/nerdcommenter'
@@ -50,7 +50,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 
 "linting and language
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rodjek/vim-puppet'
 
 call plug#end()
@@ -89,7 +88,7 @@ set colorcolumn=80
 set signcolumn=yes
 set cursorline
 set clipboard=unnamed
-set shellcmdflag=-ic
+"set shellcmdflag=-ic
 
 " needed for lightline
 set laststatus=2
@@ -237,6 +236,12 @@ map <leader>b :NERDTreeFind<cr>
 "======== CUSTOM SHORTCUTS =========="
 "************************************"
 
+" just a quicker way to execute current file
+nnoremap <leader>x :!%:p<cr>
+
+" go to the directory of the current buffer
+nnoremap <leader>c :cd %:p:h<cr>
+
 " easier commenting, for some reason C-_ means C-/
 map <c-_> <Leader>c<Space>
 
@@ -249,9 +254,6 @@ map <Leader>w :bd<CR>
 "quick key for regex
 nnoremap <leader>r :%s/
 vmap <leader>r :s/
-
-" faster display of registers
-map <Leader>c :reg<CR>
 
 " keep visual mode after indenting
 vmap > >gv

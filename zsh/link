@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
 rm -f ~/.zshrc
+rm -f ~/.zshenv
 rm -rf ~/.config/zsh
+
 ln -s ~/dotfiles/zsh/zshrc ~/.zshrc
+ln -s ~/dotfiles/zsh/zshenv ~/.zshenv
 ln -s ~/dotfiles/zsh/zsh ~/.config/zsh
+ln -s ~/dotfiles/zsh/iterm2_shell_integration.zsh ~/.iterm2_shell_integration.zsh
+
+

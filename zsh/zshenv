@@ -1,0 +1,13 @@
+# This file is sourced from ~/.zshrc and loads the rest of the zsh configs
+#
+# this file is the entrypoint when non-interactive shells open a zsh process
+
+setopt aliases
+
+export ZSH_CONF_DIR="$HOME/.config/zsh"
+
+# Source all my configs from the conf dir
+for f in $ZSH_CONF_DIR/*.sh; do
+    source $f
+done
+

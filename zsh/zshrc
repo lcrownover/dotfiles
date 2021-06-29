@@ -1,5 +1,5 @@
 # uncomment this line to measure performance
-# zmodload zsh/zprof
+#zmodload zsh/zprof
 
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
@@ -17,15 +17,21 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 unsetopt AUTO_CD
 
-export ZSH_CONF_DIR="$HOME/.config/zsh"
+GEM_HOME="$HOME/.gem"
+export PATH="$GEM_HOME/bin:$PATH"
+eval "$(rbenv init -)"
 
-# Source all my configs from the conf dir
-for f in $ZSH_CONF_DIR/*.sh; do
-    source $f
-done
+#export ZSH_CONF_DIR="$HOME/.config/zsh"
+
+## Source all my configs from the conf dir
+#for f in $ZSH_CONF_DIR/*.sh; do
+    #source $f
+#done
+
+source ~/.zshenv
 
 # uncomment this line to display measured performance
-# zprof
+#zprof
 
 #
 # If there's anything below this comment,
