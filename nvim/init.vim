@@ -76,10 +76,6 @@ set expandtab
 set smartindent
 set number
 set nowrap
-set noswapfile nobackup
-set backupdir=~/.backup//
-set directory=~/.backup//
-set undodir=~/.backup//
 set undofile
 set incsearch
 set termguicolors
@@ -153,6 +149,7 @@ fun! TrimWhitespace()
     keeppatterns %s/\s\+$//e
     call winrestview(l:save)
 endfun
+nnoremap <leader><c-f> :call TrimWhitespace()<cr>
 
 augroup lcrown
     autocmd!
@@ -235,10 +232,6 @@ map <leader>b :NERDTreeFind<cr>
 "========     EXEGGUTOR    =========="
 "************************************"
 
-
-" remaps to handle terminal usage and command execution
-nnoremap <leader>e :vnew <bar> :setlocal buftype=nofile <bar> r !<space>
-
 " open a new nvim terminal
 if has('nvim')
     nnoremap <leader>t :terminal<cr>i
@@ -246,8 +239,17 @@ if has('nvim')
     tnoremap <c-v><esc> <esc>
 endif
 
+" remaps to handle terminal usage and command execution
+nnoremap <leader>xc :vnew <bar> :setlocal buftype=nofile <bar> r !<space>
+
+" execute the current buffer with bash
+nnoremap <leader>xb :w !bash<cr>
+
+" change the mode
+nnoremap <leader>xm :Chmod +x<cr>
+
 " execute current file
-nnoremap <leader>x :!%:p<cr>
+nnoremap <leader>xf :!%:p<cr>
 
 " go to the directory of the current buffer
 nnoremap <leader>c :cd %:p:h<cr>
@@ -257,11 +259,16 @@ nnoremap <leader>c :cd %:p:h<cr>
 "======== CUSTOM SHORTCUTS =========="
 "************************************"
 
-" easier commenting, for some reason C-_ means C-/
-map <c-_> <Leader>c<Space>
+" visual multi maps
+let g:VM_maps = {}
+let g:VM_maps["Undo"] = 'u'
+let g:VM_maps["Redo"] = '<C-r>'
 
-" highlight search
-map <Leader>h :noh<CR>
+" easy datetime stamp
+nnoremap <leader>d :exe ":normal a _" . strftime("%c") . "_"<cr>
+
+" easier commenting, for some reason C-_ means C-/
+nnoremap <c-_> <Leader>c<Space>
 
 " close buffer
 map <Leader>w :bd<CR>
@@ -272,6 +279,7 @@ vmap <leader>r :s/
 
 " keep visual mode after indenting
 vmap > >gv
+vmap < <gv
 
 if exists(":Tabularize")
   nmap <Leader>a= :Tabularize /=<CR>
