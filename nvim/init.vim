@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
 " testing my own plugin
-"Plug 'lcrownover/funzy.nvim'
+" Plug 'lcrownover/funzy.nvim'
 
 " telescope
 Plug 'nvim-lua/popup.nvim'
@@ -18,15 +18,14 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " stylish!
-Plug 'itchyny/lightline.vim'
+Plug 'hoob3rt/lualine.nvim'
 
 " all the colors
 Plug 'joshdick/onedark.vim'
-"Plug 'gruvbox-community/gruvbox'
-"Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'gruvbox-community/gruvbox'
 
-" Leader C to comment
-Plug 'scrooloose/nerdcommenter'
+" ctrl+c to comment
+Plug 'terrortylor/nvim-comment'
 
 " yay git
 Plug 'airblade/vim-gitgutter'
@@ -40,26 +39,29 @@ Plug 'scrooloose/nerdtree'
 " leader u
 Plug 'mbbill/undotree'
 
-"C-n add cursor on match
+" C-n add cursor on match
 Plug 'mg979/vim-visual-multi'
 
-"fancy commands like :ChMod, :Find
+" fancy commands like :ChMod, :Find
 Plug 'tpope/vim-eunuch'
 
-"cs{[ to change { to [
+" cs{[ to change { to [
 Plug 'tpope/vim-surround'
 
-"linting and language
+" linting and language
 Plug 'rodjek/vim-puppet'
 
 call plug#end()
 
 " Get those settings
+lua require('config.theme')
+lua require('config.lualine')
 lua require('config.telescope')
 lua require('config.treesitter')
 lua require('config.devicons')
 lua require('config.lspconfig')
 lua require('config.compe')
+lua require('config.nvim-comment')
 
 
 "************************************"
@@ -80,7 +82,7 @@ set undofile
 set incsearch
 set termguicolors
 set scrolloff=8
-set colorcolumn=80
+set colorcolumn=80,120
 set signcolumn=yes
 set cursorline
 set clipboard=unnamed
@@ -92,44 +94,6 @@ set laststatus=2
 " Extra space for messages
 set cmdheight=2
 
-
-"************************************"
-"======== MAKE IT PRETTY ============"
-"************************************"
-
-" gruvbox when im feeling froggy
-"let g:gruvbox_italic=1
-"let g:lightline = {}
-"let g:lightline.colorscheme = 'gruvbox'
-"colorscheme gruvbox
-
-" tokyo night when im all about neovim
-"let g:tokyonight_style = "night"
-"let g:lightline = { 'colorscheme': 'tokyonight' }
-"colorscheme tokyonight
-
-" ayu when spicy
-"let g:lightline = { 'colorscheme': 'ayu' }
-"let ayucolor="mirage"
-"colorscheme ayu
-
-" onedark when theres no place like home
-let g:onedark_terminal_italics = 1
-let g:lightline = { 'colorscheme': 'onedark' }
-colorscheme onedark
-
-" solarized?
-"let g:lightline = { 'colorscheme': 'solarized' }
-"set background=dark
-"colorscheme solarized8
-
-" ITS NIGHTTIME
-"let g:lightline = { 'colorscheme': 'nightowl' }
-"colorscheme night-owl
-
-" nord!?
-"let g:lightline = { 'colorscheme': 'nord' }
-"colorscheme nord
 
 " used for tmux color passing
 if exists('+termguicolors')
@@ -161,14 +125,14 @@ nnoremap <c-h> :bprev<CR>
 nnoremap <c-l> :bnext<CR>
 
 " telescope!
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({follow = true})<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-nnoremap <leader>f' <cmd>lua require('telescope.builtin').marks()<cr>
+nnoremap <leader>fm <cmd>lua require('telescope.builtin').marks()<cr>
 
 " custom navigation
-nnoremap <leader>p <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>p <cmd>lua require('telescope.builtin').find_files({follow = true})<cr>
 nnoremap <leader>f <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>l <cmd>lua require('telescope.builtin').git_commits()<cr>
 nnoremap <c-f> <cmd>lua require('telescope.builtin').live_grep()<cr>
@@ -265,10 +229,10 @@ let g:VM_maps["Undo"] = 'u'
 let g:VM_maps["Redo"] = '<C-r>'
 
 " easy datetime stamp
-nnoremap <leader>d :exe ":normal a _" . strftime("%c") . "_"<cr>
+nnoremap <leader>d :exe ':normal a _' . strftime('%c') . '_'<cr>
 
 " easier commenting, for some reason C-_ means C-/
-nnoremap <c-_> <Leader>c<Space>
+noremap <c-_> :CommentToggle<cr>
 
 " close buffer
 map <Leader>w :bd<CR>

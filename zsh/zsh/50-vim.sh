@@ -4,14 +4,36 @@ test -d ~/.backup || mkdir ~/.backup
 # neovim
 alias vim='nvim'
 
+# clean swap
+alias clean_swap="rm -f $HOME/local/share/nvim/swap/*"
+
+# edit config
+function navigate_and_edit_nvim_config() {
+    cwd="$(pwd)"
+    cd $HOME/.config/nvim
+    nvim init.vim
+    cd $cwd
+}
+alias vimc='navigate_and_edit_nvim_config'
+
 # vim
-function vim_puppet() { cdp; tab-color 250 173 33; vim }
+function vim_puppet() {
+    cwd="$(pwd)"
+    cdp
+    tab-color 250 173 33
+    vim puppet-control-repo/inventory.yaml
+    tab-reset
+    cd $cwd
+}
 function vim_nagios() { cdnag; vim }
 
 function vim_notes() {
+    cwd="$(pwd)"
 	cd ~/GoogleDrive/notes
 	tab-color 255 0 255
-	vim
+	vim README.md
+    tab-reset
+    cd $cwd
 }
 
 alias vip='vim_puppet'
