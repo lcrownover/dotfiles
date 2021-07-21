@@ -5,6 +5,7 @@
 export BOLT=~/.puppetlabs/bolt
 export PUPPET_BASE_DIR="$HOME/puppet/is"
 export PATH="/opt/puppetlabs/bin/:$PATH"
+export PATH="$HOME/repos/puppet-editor-services/:$PATH"
 
 alias boltfile="vim $HOME/.puppetlabs/bolt/Puppetfile"
 alias cdb="cd $HOME/.puppetlabs/bolt"
@@ -139,7 +140,7 @@ function puppet_pull_all() {
 		cd $pdir
         [ "$1" = "master" ] && git checkout master --quiet
         echo "[$(git branch --show-current)] $pdir"
-		git pull --quiet
+		git pull origin $(git rev-parse --abbrev-ref HEAD) --quiet
 		cd ..
 	done
 	cd $cwd

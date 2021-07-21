@@ -51,6 +51,19 @@ require('telescope').setup{
 
     -- Developer configurations: Not meant for general override
     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
+  },
+  pickers = {
+    buffers = {
+      sort_lastused = true,
+      mappings = {
+        i = {
+          ["<leader>w"] = require("telescope.actions").delete_buffer,
+        },
+        n = {
+          ["<leader>w"] = require("telescope.actions").delete_buffer,
+        }
+      }
+    },
   }
 }
 

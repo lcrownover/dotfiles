@@ -5,7 +5,9 @@ test -d ~/.backup || mkdir ~/.backup
 alias vim='nvim'
 
 # clean swap
-alias clean_swap="rm -f $HOME/local/share/nvim/swap/*"
+alias swap_clean=" rm -f $HOME/.local/share/nvim/swap/*.s*"
+alias swap_cd=" cd $HOME/.local/share/nvim/swap/"
+alias swap_list=" ls $HOME/.local/share/nvim/swap/*.s*"
 
 # edit config
 function navigate_and_edit_nvim_config() {

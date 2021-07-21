@@ -81,7 +81,7 @@ set nowrap
 set undofile
 set incsearch
 set termguicolors
-set scrolloff=8
+set scrolloff=10
 set colorcolumn=80,120
 set signcolumn=yes
 set cursorline
@@ -209,7 +209,7 @@ nnoremap <leader>xc :vnew <bar> :setlocal buftype=nofile <bar> r !<space>
 " execute the current buffer with bash
 nnoremap <leader>xb :w !bash<cr>
 
-" change the mode
+" change the mode to executable
 nnoremap <leader>xm :Chmod +x<cr>
 
 " execute current file
@@ -235,7 +235,7 @@ nnoremap <leader>d :exe ':normal a _' . strftime('%c') . '_'<cr>
 noremap <c-_> :CommentToggle<cr>
 
 " close buffer
-map <Leader>w :bd<CR>
+nnoremap <leader>w :bd<cr>
 
 "quick key for regex
 nnoremap <leader>r :%s/
