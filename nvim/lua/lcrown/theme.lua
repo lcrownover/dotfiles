@@ -26,13 +26,13 @@ elseif theme == 'gruvbox' then
     vim.g.gruvbox_invert_selection = '0'
     vim.cmd('colorscheme gruvbox')
     vim.cmd('highlight ColorColumn ctermbg=0 guibg=grey')
-    vim.cmd('hi SignColumn guibg=none')
-    vim.cmd('hi CursorLineNR guibg=None')
-    vim.cmd('highlight Normal guibg=none')
+    vim.cmd('highlight SignColumn guibg=none')
+    vim.cmd('highlight CursorLineNR guibg=none')
+    vim.cmd('highlight Normal guibg=none guifg=#d2c49f')
     vim.cmd('highlight LineNr guifg=#5eacd3')
     vim.cmd('highlight netrwDir guifg=#5eacd3')
     vim.cmd('highlight qfFileName guifg=#aed75f')
-    vim.cmd('hi TelescopeBorder guifg=#5eacd')
+    vim.cmd('highlight TelescopeBorder guifg=#5eacd')
 
 elseif theme == 'tokyonight' then
     vim.g.tokyonight_style = 'storm'
