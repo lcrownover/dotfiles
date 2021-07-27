@@ -95,13 +95,6 @@ set laststatus=2
 set cmdheight=2
 
 
-" used for tmux color passing
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-
 "************************************"
 "======== FUNCTIONALITY ============="
 "************************************"
@@ -223,13 +216,17 @@ nnoremap <leader>c :cd %:p:h<cr>
 "======== CUSTOM SHORTCUTS =========="
 "************************************"
 
+nnoremap <leader>d< :diffthis<cr>
+nnoremap <leader>d> :vsplit<cr>:diffthis<cr>:wincmd p<cr>:bprev<cr>
+nnoremap <leader>dq :diffoff<cr>
+
 " visual multi maps
 let g:VM_maps = {}
 let g:VM_maps["Undo"] = 'u'
 let g:VM_maps["Redo"] = '<C-r>'
 
 " easy datetime stamp
-nnoremap <leader>d :exe ':normal a _' . strftime('%c') . '_'<cr>
+nnoremap <leader>da :exe ':normal a _' . strftime('%c') . '_'<cr>
 
 " easier commenting, for some reason C-_ means C-/
 noremap <c-_> :CommentToggle<cr>

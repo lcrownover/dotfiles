@@ -1,7 +1,19 @@
+-- used for tmux color passing
+vim.cmd [[
+    if exists('+termguicolors')
+      let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+      let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+      set termguicolors
+    endif
+]]
+
+vim.cmd('set background=dark')
+
+
 -- Change the colorscheme here and it will change everywhere
 
-local theme = 'onedark'
--- local theme = 'gruvbox'
+-- local theme = 'onedark'
+local theme = 'gruvbox'
 
 
 if theme == 'onedark' then
@@ -10,7 +22,17 @@ if theme == 'onedark' then
 
 elseif theme == 'gruvbox' then
     vim.g.gruvbox_italic = 1
+    vim.g.gruvbox_contrast_dark = 'hard'
+    vim.g.gruvbox_invert_selection = '0'
     vim.cmd('colorscheme gruvbox')
+    vim.cmd('highlight ColorColumn ctermbg=0 guibg=grey')
+    vim.cmd('hi SignColumn guibg=none')
+    vim.cmd('hi CursorLineNR guibg=None')
+    vim.cmd('highlight Normal guibg=none')
+    vim.cmd('highlight LineNr guifg=#5eacd3')
+    vim.cmd('highlight netrwDir guifg=#5eacd3')
+    vim.cmd('highlight qfFileName guifg=#aed75f')
+    vim.cmd('hi TelescopeBorder guifg=#5eacd')
 
 elseif theme == 'tokyonight' then
     vim.g.tokyonight_style = 'storm'

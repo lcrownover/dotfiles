@@ -62,6 +62,18 @@ function puppet_git_status_all() {
 	echo > $tmp
 }
 
+# shows each repo and its currently checked-out branch
+function puppet_git_branch_all() {
+	cwd=$(pwd)
+	puppet_navigate_to_basedir
+	for pdir in $(puppet_list_puppet_directories); do
+		cd $pdir
+        echo "[$(git rev-parse --abbrev-ref HEAD)] $pdir"
+		cd ..
+	done
+	cd $cwd
+}
+
 # writes all pending changes to a tempfile and opens an editor at that file
 function puppet_git_status_all_long() {
 	puppet_git_status_all long
@@ -159,6 +171,7 @@ alias gpa='puppet_pull_all'
 alias gsa='puppet_git_status_all'
 alias gsal='puppet_git_status_all_long'
 alias gca='puppet_git_commit_all'
+alias gba='puppet_git_branch_all'
 alias gcap='puppet_git_commit_and_push_all'
 
 alias gprs='ssh is-puppetmaster.uoregon.edu "cd /etc/puppetlabs/fileserver-repos/puppet-systems; sudo git pull"'
