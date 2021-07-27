@@ -54,14 +54,14 @@ Plug 'rodjek/vim-puppet'
 call plug#end()
 
 " Get those settings
-lua require('config.theme')
-lua require('config.lualine')
-lua require('config.telescope')
-lua require('config.treesitter')
-lua require('config.devicons')
-lua require('config.lspconfig')
-lua require('config.compe')
-lua require('config.nvim-comment')
+lua require('lcrown.theme')
+lua require('lcrown.lualine')
+lua require('lcrown.telescope')
+lua require('lcrown.treesitter')
+lua require('lcrown.devicons')
+lua require('lcrown.lspconfig')
+lua require('lcrown.compe')
+lua require('lcrown.nvim-comment')
 
 
 "************************************"
