@@ -88,6 +88,9 @@ set signcolumn=yes
 set cursorline
 set clipboard=unnamed
 set iskeyword-=_
+set list
+" set listchars=tab:├─,trail:·,space:·,eol:¬
+set listchars=tab:├─,trail:·
 
 " needed for lightline
 set laststatus=2
@@ -122,8 +125,10 @@ nnoremap <c-l> :bnext<CR>
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({follow = true})<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fp <cmd>lua require('telescope.builtin').file_browser()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>fm <cmd>lua require('telescope.builtin').marks()<cr>
+nnoremap <leader>fv <cmd>lua require('telescope.builtin').find_files { cwd = '~/.config/nvim', follow = true}<cr>
 
 " custom navigation
 nnoremap <leader>p <cmd>lua require('telescope.builtin').find_files({follow = true})<cr>
