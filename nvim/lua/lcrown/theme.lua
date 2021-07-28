@@ -7,8 +7,6 @@ vim.cmd [[
     endif
 ]]
 
-vim.cmd('set background=dark')
-
 
 -- Change the colorscheme here and it will change everywhere
 

@@ -80,7 +80,6 @@ set smartindent
 set number
 set nowrap
 set undofile
-set incsearch
 set termguicolors
 set scrolloff=10
 set colorcolumn=80,120
@@ -88,12 +87,9 @@ set signcolumn=yes
 set cursorline
 set clipboard=unnamed
 set iskeyword-=_
-set list
-" set listchars=tab:├─,trail:·,space:·,eol:¬
-set listchars=tab:├─,trail:·
 
-" needed for lightline
-set laststatus=2
+set list
+set listchars=tab:├─,trail:·
 
 " Extra space for messages
 set cmdheight=2
