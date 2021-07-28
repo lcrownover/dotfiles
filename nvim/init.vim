@@ -12,7 +12,6 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " lsp
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
 Plug 'hrsh7th/nvim-compe'
 Plug 'hrsh7th/vim-vsnip'
 
@@ -88,17 +87,13 @@ set signcolumn=yes
 set cursorline
 set clipboard=unnamed
 set iskeyword-=_
+
 set list
 set listchars=tab:├─,trail:·
 
-" Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
-
-" Avoid showing message extra message when using completion
-set shortmess+=c
-
 " Extra space for messages
 set cmdheight=2
+
 
 "************************************"
 "======== FUNCTIONALITY ============="
@@ -139,6 +134,7 @@ nnoremap <c-f> <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <c-p> <cmd>lua require('telescope.builtin').find_files()<cr>
 
 " compe
+set completeopt=menuone,noselect
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
@@ -151,6 +147,12 @@ nnoremap <silent> <C-]> <cmd>lua vim.lsp.buf.definition()<cr>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<cr>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<cr>
 nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<cr>
+
+" fzf yay
+"nnoremap <leader>ff :Files<cr>
+"nnoremap <leader>fg :Ag<cr>
+"nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+"nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 
 "************************************"
