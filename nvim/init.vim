@@ -218,6 +218,10 @@ nnoremap <leader>c :cd %:p:h<cr>
 "======== CUSTOM SHORTCUTS =========="
 "************************************"
 
+nnoremap <leader>nn :enew<cr>
+nnoremap <leader>nv :vnew<cr>
+nnoremap <leader>nh :new<cr>
+
 nnoremap <leader>d< :diffthis<cr>
 nnoremap <leader>d> :vsplit<cr>:diffthis<cr>:wincmd p<cr>:bprev<cr>
 nnoremap <leader>dq :diffoff<cr>
