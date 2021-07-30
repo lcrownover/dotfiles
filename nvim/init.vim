@@ -117,6 +117,26 @@ nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <c-h> :bprev<CR>
 nnoremap <c-l> :bnext<CR>
 
+" convenience
+nnoremap Y y$
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+" break points!
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
+" moving lines of text
+vnoremap J :m '>+1<cr>gv=gv
+vnoremap K :m '<-2<cr>gv=gv
+inoremap <c-j> <esc>:m .+1<cr>==a
+inoremap <c-k> <esc>:m .-2<cr>==a
+nnoremap <leader>j :m .+1<cr>==
+nnoremap <leader>k :m .-2<cr>==
+
 " telescope!
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({follow = true})<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
