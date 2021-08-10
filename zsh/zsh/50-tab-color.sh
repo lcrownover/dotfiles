@@ -25,7 +25,7 @@ color-ssh() {
             tab-color 255 0 0
         elif [[ "$*" =~ "is-lc-forge*" ]]; then
             tab-color 255 162 0
-        elif [[ "$*" =~ "eitri*" ]]; then
+        elif [[ "$*" =~ "eitri" ]]; then
             tab-color 255 162 0
         else
             tab-reset

@@ -1,6 +1,9 @@
 # openfortivpn
 alias vpn="tab-color 250 100 250; sudo openfortivpn -c $HOME/dotfiles/openfortivpn/my-conf"
 
+# eitri
+alias eitri="tab-color 255 162 0; ssh eitri"
+
 # todo
 alias todo="vim ~/.todo.md"
 
