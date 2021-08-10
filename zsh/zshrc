@@ -15,7 +15,11 @@ plugins=(
     tmux
 )
 
-ZSH_TMUX_AUTOSTART=true
+
+if [[ "$(hostname)" = "is-lc-forge" ]]; then
+    eval `ssh-agent -s`
+    ZSH_TMUX_AUTOSTART=true
+fi
 
 source $ZSH/oh-my-zsh.sh
 unsetopt AUTO_CD
@@ -23,8 +27,6 @@ unsetopt AUTO_CD
 GEM_HOME="$HOME/.gem"
 export PATH="$GEM_HOME/bin:$PATH"
 eval "$(rbenv init -)"
-
-[[ "$(hostname)" = "is-lc-forge" ]] && eval `ssh-agent -s`
 
 # custom prompt
 setopt prompt_subst
