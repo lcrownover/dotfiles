@@ -11,18 +11,22 @@ color-ssh() {
         trap "tab-reset" INT EXIT
         if [[ "$*" =~ "is-puppetca1" ]]; then
             tab-color 0 255 255
-	elif [[ "$*" =~ "is-puppet?" ]]; then
-	    tab-color 0 0 255
-	elif [[ "$*" =~ "tape" ]]; then
-	    tab-color 255 128 0
-	elif [[ "$*" =~ "is-nagios1" ]]; then
-	    tab-color 255 0 255
-	elif [[ "$*" =~ "is-foreman-prod1" ]]; then
-	    tab-color 255 255 0
-	elif [[ "$*" =~ "is-rhn*" ]]; then
-	    tab-color 255 0 0
-	elif [[ "$*" =~ "satellite*" ]]; then
-	    tab-color 255 0 0
+        elif [[ "$*" =~ "is-puppet?" ]]; then
+            tab-color 0 0 255
+        elif [[ "$*" =~ "tape" ]]; then
+            tab-color 255 128 0
+        elif [[ "$*" =~ "is-nagios1" ]]; then
+            tab-color 255 0 255
+        elif [[ "$*" =~ "is-foreman-prod1" ]]; then
+            tab-color 255 255 0
+        elif [[ "$*" =~ "is-rhn*" ]]; then
+            tab-color 255 0 0
+        elif [[ "$*" =~ "satellite*" ]]; then
+            tab-color 255 0 0
+        elif [[ "$*" =~ "is-lc-forge*" ]]; then
+            tab-color 255 162 0
+        elif [[ "$*" =~ "eitri*" ]]; then
+            tab-color 255 162 0
         else
             tab-reset
         fi
