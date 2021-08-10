@@ -1,9 +1,9 @@
 require('telescope').setup{
     extensions = {
-        fuzzy = true,                    -- false will only do exact matching
-        override_generic_sorter = false, -- override the generic sorter
-        override_file_sorter = true,     -- override the file sorter
-        case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+        fzy_native = {
+            override_generic_sorter = false, -- override the generic sorter
+            override_file_sorter = true,     -- override the file sorter
+        }
     },
     defaults = {
         vimgrep_arguments = {
@@ -16,7 +16,6 @@ require('telescope').setup{
             '--smart-case',
             '--follow',
         },
-        prompt_position = "bottom",
         prompt_prefix = "> ",
         selection_caret = "> ",
         entry_prefix = "    ",
@@ -24,14 +23,6 @@ require('telescope').setup{
         selection_strategy = "reset",
         sorting_strategy = "descending",
         layout_strategy = "horizontal",
-        layout_defaults = {
-            horizontal = {
-                mirror = false,
-            },
-            vertical = {
-                mirror = false,
-            },
-        },
         file_sorter = require'telescope.sorters'.get_fuzzy_file,
         file_ignore_patterns = {
             "node_modules",
@@ -40,12 +31,7 @@ require('telescope').setup{
             "venv",
         },
         generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
-        shorten_path = true,
         winblend = 0,
-        width = 0.75,
-        preview_cutoff = 120,
-        results_height = 1,
-        results_width = 0.8,
         border = {},
         borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
         color_devicons = true,
@@ -73,7 +59,7 @@ require('telescope').setup{
     }
 }
 
-require('telescope').load_extension('fzf')
+require('telescope').load_extension('fzy_native')
 
 local M = {}
 
