@@ -146,6 +146,8 @@ nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>fm <cmd>lua require('telescope.builtin').marks()<cr>
 nnoremap <leader>fv <cmd>lua require('telescope.builtin').find_files { cwd = '~/.config/nvim', follow = true}<cr>
 
+nnoremap <leader>fn <cmd>lua require('lcrown.telescope').grep_notes()<cr>
+
 " custom navigation
 nnoremap <leader>p <cmd>lua require('telescope.builtin').find_files({follow = true})<cr>
 nnoremap <leader>f <cmd>lua require('telescope.builtin').live_grep()<cr>

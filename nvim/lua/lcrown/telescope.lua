@@ -74,3 +74,15 @@ require('telescope').setup{
 }
 
 require('telescope').load_extension('fzf')
+
+local M = {}
+
+M.grep_notes = function()
+    require('telescope.builtin').live_grep({
+        prompt_title = "< Grep Notes >",
+        shorten_path = true,
+        search_dirs = {"~/GoogleDrive/notes"},
+    })
+end
+
+return M

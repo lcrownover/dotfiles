@@ -17,6 +17,14 @@ function navigate_and_edit_nvim_config() {
     cd $cwd
 }
 alias vimc='navigate_and_edit_nvim_config'
+# edit dotfiles
+function navigate_and_edit_dotfiles() {
+    pushd . > /dev/null
+    cd $HOME/dotfiles
+    nvim .
+    popd > /dev/null
+}
+alias vimd='navigate_and_edit_dotfiles'
 
 # vim
 function vim_puppet() {

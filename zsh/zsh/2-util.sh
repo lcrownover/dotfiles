@@ -7,6 +7,12 @@ alias todo="vim ~/.todo.md"
 # hostfmt
 alias hostfmt="$GDRIVEDIR/code/projects/hostfmt.py"
 
+# clangd
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+function spushd() { pushd "$1" > /dev/null }
+function spopd() { popd > /dev/null }
+
 # known_hosts_quick
 function known_hosts_remove() {
 	if ! [[ $1 =~ "[0-9]+" ]]; then
