@@ -11,3 +11,4 @@ for f in $ZSH_CONF_DIR/*.sh; do
     source $f
 done
 
+. "$HOME/.cargo/env"

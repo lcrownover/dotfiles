@@ -4,6 +4,7 @@ CWD="$(pwd)"
 
 [[ -L "$HOME/dotfiles" ]] || ln -s "$(pwd)" $HOME/dotfiles
 cd ~/dotfiles
+mkdir -p ~/.config
 
 for d in `find . -type d -maxdepth 1 -not -path ./.git`; do
     if [[ -f $d/link ]]; then
