@@ -255,6 +255,8 @@ nnoremap <leader>d< :diffthis<cr>
 nnoremap <leader>d> :vsplit<cr>:diffthis<cr>:wincmd p<cr>:bprev<cr>
 nnoremap <leader>dq :diffoff<cr>
 
+nnoremap <leader>nu :set invnu<cr>:set invrnu<cr>
+
 " visual multi maps
 let g:VM_maps = {}
 let g:VM_maps["Undo"] = 'u'
