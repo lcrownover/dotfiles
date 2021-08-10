@@ -7,6 +7,9 @@ alias todo="vim ~/.todo.md"
 # hostfmt
 alias hostfmt="$GDRIVEDIR/code/projects/hostfmt.py"
 
+# shorter clear
+alias cl="clear"
+
 # clangd
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 
