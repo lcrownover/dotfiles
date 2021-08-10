@@ -76,7 +76,6 @@ lua require('lcrown.nvim-comment')
 "========   SET ME BABY  ============"
 "************************************"
 
-set relativenumber
 set nohlsearch
 set hidden
 set noerrorbells
@@ -85,6 +84,7 @@ set shiftwidth=4
 set expandtab
 set smartindent
 set number
+set relativenumber
 set nowrap
 set undofile
 set termguicolors
@@ -119,6 +119,17 @@ augroup lcrown
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
 augroup END
+
+" Toggle signcolumn.
+function! ToggleSignColumn()
+    if !exists("b:signcolumn_on") || b:signcolumn_on
+        set signcolumn=no
+        let b:signcolumn_on=0
+    else
+        set signcolumn=yes
+        let b:signcolumn_on=1
+    endif
+endfunction
 
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <c-h> :bprev<CR>
@@ -255,7 +266,7 @@ nnoremap <leader>d< :diffthis<cr>
 nnoremap <leader>d> :vsplit<cr>:diffthis<cr>:wincmd p<cr>:bprev<cr>
 nnoremap <leader>dq :diffoff<cr>
 
-nnoremap <leader>nu :set invnu<cr>:set invrnu<cr>
+nnoremap <leader>nu :set invnu<cr>:set invrnu<cr>:call ToggleSignColumn()<cr>
 
 " visual multi maps
 let g:VM_maps = {}
