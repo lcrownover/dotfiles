@@ -24,6 +24,8 @@ GEM_HOME="$HOME/.gem"
 export PATH="$GEM_HOME/bin:$PATH"
 eval "$(rbenv init -)"
 
+[[ "$(hostname)" = "is-lc-forge" ]] && eval `ssh-agent -s`
+
 # custom prompt
 setopt prompt_subst
 if [[ "$(hostname)" = "is-lc-forge" ]]; then

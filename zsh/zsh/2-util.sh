@@ -25,6 +25,13 @@ function known_hosts_remove() {
 	fi
 }
 
+# load keys
+function ssh_load_keys() {
+    eval `ssh-agent -s`
+    ssh-add ~/.ssh/uoregon/id_rsa
+    ssh-add ~/.ssh/github/id_rsa
+}
+
 # rexpand tool
 REXPANDPATH="$GDRIVEDIR/code/scripts/rexpand/dist/rexpand/"
 [ -d $REXPANDPATH ] && export PATH="$REXPANDPATH:$PATH" && alias rex='rexpand'
