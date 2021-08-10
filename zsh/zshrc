@@ -12,7 +12,10 @@ plugins=(
 	zsh-syntax-highlighting
 	zsh-autosuggestions
 	docker
+    tmux
 )
+
+ZSH_TMUX_AUTOSTART=true
 
 source $ZSH/oh-my-zsh.sh
 unsetopt AUTO_CD
@@ -22,12 +25,13 @@ export PATH="$GEM_HOME/bin:$PATH"
 eval "$(rbenv init -)"
 
 # custom prompt
+setopt prompt_subst
 if [[ "$(hostname)" = "is-lc-forge" ]]; then
     PROMPT_HOSTNAME='eitri'
 else
     PROMPT_HOSTNAME="$(hostname)"
 fi
-PROMPT="%{$fg[red]%}[%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[blue]%}$PROMPT_HOSTNAME:%{$fg[magenta]%}%1~%{$fg[red]%}] $(git_prompt_info)% %{$reset_color%}"
+PROMPT='%{$fg[red]%}[%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[blue]%}$PROMPT_HOSTNAME:%{$fg[magenta]%}%1~%{$fg[red]%}] $(git_prompt_info)% %{$reset_color%}'
 
 # everything else can be loaded by zshenv as this file is loaded in a non-interactive session
 
