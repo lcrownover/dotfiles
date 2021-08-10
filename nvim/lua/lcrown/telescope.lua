@@ -1,6 +1,6 @@
 require('telescope').setup{
     extensions = {
-        fzy_native = {
+        fzy = {
             override_generic_sorter = false, -- override the generic sorter
             override_file_sorter = true,     -- override the file sorter
         }
@@ -59,7 +59,7 @@ require('telescope').setup{
     }
 }
 
-require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('fzf')
 
 local M = {}
 
