@@ -99,7 +99,7 @@ set list
 set listchars=tab:├─,trail:·
 
 " Extra space for messages
-set cmdheight=2
+" set cmdheight=2
 
 
 "************************************"
@@ -208,6 +208,8 @@ au BufNewFile,BufRead *.rb,*.pp setlocal expandtab ts=2 sw=2 sts=2
 " better split settings
 nnoremap <c-w>- <c-w>s
 nnoremap <c-w>\ <c-w>v
+nnoremap <c-s-left> :vertical resize +1<cr>
+nnoremap <c-s-right> :vertical resize -1<cr>
 set splitbelow
 set splitright
 
