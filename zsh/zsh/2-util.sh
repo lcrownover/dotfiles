@@ -22,9 +22,9 @@ alias cl="clear"
 
 # ssh function that will do window naming
 function ssh() {
-    set_tmux_window_name() "$1"
+    set_tmux_window_name "$1"
     command ssh "$@"
-    set_tmux_window_name() "zsh"
+    set_tmux_window_name "zsh"
 }
 
 # clangd
