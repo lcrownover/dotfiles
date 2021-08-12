@@ -1,17 +1,31 @@
 # openfortivpn
-alias vpn="tab-color 250 100 250; sudo openfortivpn -c $HOME/dotfiles/openfortivpn/my-conf"
+function vpn() {
+    set_tmux_window_name "openfortivpn"
+    tab-color 250 100 250
+    sudo openfortivpn -c $HOME/dotfiles/openfortivpn/my-conf
+}
 
 # eitri
 alias eitri="tab-color 255 162 0; ssh eitri"
 
 # todo
-alias todo="vim ~/.todo.md"
+function todo() {
+    set_tmux_window_name "todo"
+    vim ~/.todo.md
+}
 
 # hostfmt
 alias hostfmt="$GDRIVEDIR/code/projects/hostfmt.py"
 
 # shorter clear
 alias cl="clear"
+
+# ssh function that will do window naming
+function ssh() {
+    set_tmux_window_name() "$1"
+    command ssh "$@"
+    set_tmux_window_name() "zsh"
+}
 
 # clangd
 export PATH="/usr/local/opt/llvm/bin:$PATH"
