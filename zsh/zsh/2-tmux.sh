@@ -14,5 +14,5 @@ function work() {
 
     tmux new-window -t $session:3 -n "zsh"
 
-    tmux attach -t "zsh"
+    tmux attach -t "$session:zsh"
 }
