@@ -1,19 +1,21 @@
 #!/usr/bin/env bash
 
-pushd
+pushd . >/dev/null
 
-if [[ -L "$HOME/dotfiles" ]] || [[ -d "$HOME/dotfiles" ]]; then
+if [[ ! -L "$HOME/dotfiles" ]] && [[ ! -d "$HOME/dotfiles" ]]; then
     ln -s "$(pwd)" $HOME/dotfiles
 fi
+
 cd ~/dotfiles
 mkdir -p ~/.config
 
-for d in `find . -type d -maxdepth 1 -not -path ./.git`; do
+for d in `find * -maxdepth 1 -type d -not -path ./.git`; do
     if [[ -f $d/link ]]; then
         cd $d
+        echo "linking: $d"
         bash link
         cd ..
     fi
 done
 
-popd
+popd >/dev/null
