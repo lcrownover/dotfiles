@@ -19,5 +19,5 @@ function eitri() {
         return
     fi
     source ~/dotfiles/eitri/eitri.env
-    ssh "$(curl -k https://sas-api.uoregon.edu/api/v1/lcrown/eitri -X GET -u "$EITRI_API_USERNAME:$EITRI_API_PASSWORD" | ~/dotfiles/eitri/ip_decode.py)"
+    ssh -o StrictHostKeyChecking=no "$(curl -s -k https://sas-api.uoregon.edu/api/v1/lcrown/eitri -X GET -u "$EITRI_API_USERNAME:$EITRI_API_PASSWORD" | ~/dotfiles/eitri/ip_decode.py)" -q 2>/dev/null
 }
