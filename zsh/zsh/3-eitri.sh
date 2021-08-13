@@ -1,4 +1,6 @@
-if [[ "$(hostname)" = "is-lc-forge" ]]; then
+EITRI_HOSTNAME="is-lc-forge"
+
+if [[ "$(hostname)" = "$EITRI_HOSTNAME" ]]; then
     if [[ ! -n "$TMUX" ]]; then work; fi
     eval `keychain --eval --quiet`
     if [[ -n "$TMUX" ]]; then
@@ -8,6 +10,14 @@ if [[ "$(hostname)" = "is-lc-forge" ]]; then
 fi
 
 function eitri() {
+    if [[ -n "$TMUX" ]]; then
+        echo "Nuh uh, not gonna nest tmux sessions. Detach from tmux first."
+        return
+    fi
+    if [ "$(hostname)" = "$EITRI_HOSTNAME" ]; then
+        echo "You're already on eitri."
+        return
+    fi
     source ~/dotfiles/eitri/eitri.env
     ssh "$(curl -k https://sas-api.uoregon.edu/api/v1/lcrown/eitri -X GET -u "$EITRI_API_USERNAME:$EITRI_API_PASSWORD" | ~/dotfiles/eitri/ip_decode.py)"
 }
