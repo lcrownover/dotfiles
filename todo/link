@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+rm -f ~/.todo.md
+ln -s "$(pwd)/todo.md" ~/.todo.md
