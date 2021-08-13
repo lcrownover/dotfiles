@@ -8,7 +8,6 @@ if [[ "$(hostname)" = "is-lc-forge" ]]; then
 fi
 
 function eitri() {
-    source ~/dotfiles/zsh/eitri.env
-    curl -k https://sas-api.uoregon.edu/api/v1/lcrown/eitri -X GET -u $EITRI_API_USERNAME:$EITRI_API_PASSWORD | sed -e 's/.*\([0-9]{1,3}\.){3}[0-9]{1,3}\).*/\1/'
-
+    source ~/dotfiles/eitri/eitri.env
+    ssh "$(curl -k https://sas-api.uoregon.edu/api/v1/lcrown/eitri -X GET -u "$EITRI_API_USERNAME:$EITRI_API_PASSWORD" | ~/dotfiles/eitri/ip_decode.py)"
 }

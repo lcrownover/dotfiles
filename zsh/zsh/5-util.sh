@@ -5,9 +5,6 @@ function vpn() {
     sudo openfortivpn -c $HOME/dotfiles/openfortivpn/my-conf
 }
 
-# eitri
-alias eitri="tab-color 255 162 0; ssh eitri"
-
 # todo
 function todo() {
     vim ~/.todo.md
