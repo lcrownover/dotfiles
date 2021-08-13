@@ -4,15 +4,21 @@ function set_tmux_window_name() {
 
 function work() {
     session="work"
-    tmux new-session -d -s $session
 
-    tmux rename-window -t $session:1 "todo"
-    tmux send-keys -t "todo" "todo" C-m
+    if $(tmux ls | grep -q work); then
+        tmux a -t work
 
-    tmux new-window -t $session:2 -n "puppet"
-    tmux send-keys -t "puppet" "vip" C-m
+    else
+        tmux new-session -d -s $session
 
-    tmux new-window -t $session:3 -n "zsh"
+        tmux rename-window -t $session:1 "todo"
+        tmux send-keys -t "todo" "todo" C-m
 
-    tmux attach -t "$session:zsh"
+        tmux new-window -t $session:2 -n "puppet"
+        tmux send-keys -t "puppet" "vip" C-m
+
+        tmux new-window -t $session:3 -n "zsh"
+
+        tmux attach -t "$session:zsh"
+    fi
 }
