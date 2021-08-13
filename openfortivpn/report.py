@@ -10,13 +10,14 @@ import json
 import subprocess
 
 def runner(command):
-    return subprocess.run(command, shell=True, stdout=subprocess.PIPE).stdout.strip()
+    return subprocess.run(command, shell=True, stdout=subprocess.PIPE).stdout.decode().strip()
 
 primary_ip = "184.171.107.143"
 
 num_nics = runner("ip addr | grep UP | wc -l")
 
-if str(num_nics) == "3":
+
+if num_nics == "3":
     # vpn is active
     ip_addr = runner("ip addr show dev ppp0 | grep 'inet ' | awk '{print $2}' | cut -d'/' -f1")
 else:
