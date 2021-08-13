@@ -28,14 +28,14 @@ alias vimd='navigate_and_edit_dotfiles'
 
 # vim
 function vim_puppet() {
-    set_tmux_window_name "vip"
+    # set_tmux_window_name "vip"
     cwd="$(pwd)"
     cdp
     tab-color 250 173 33
     vim puppet-control-repo/inventory.yaml
     tab-reset
     cd $cwd
-    set_tmux_window_name "zsh"
+    # set_tmux_window_name "zsh"
 }
 function vim_nagios() { cdnag; vim }
 

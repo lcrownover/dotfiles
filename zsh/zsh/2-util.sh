@@ -10,7 +10,6 @@ alias eitri="tab-color 255 162 0; ssh eitri"
 
 # todo
 function todo() {
-    set_tmux_window_name "todo"
     vim ~/.todo.md
 }
 

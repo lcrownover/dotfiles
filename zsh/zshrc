@@ -12,7 +12,6 @@ plugins=(
 	zsh-syntax-highlighting
 	zsh-autosuggestions
 	docker
-    tmux
 )
 
 
@@ -20,8 +19,6 @@ if [[ "$(hostname)" = "is-lc-forge" ]]; then
     eval `ssh-agent -s`
     ZSH_TMUX_AUTOSTART=true
 fi
-
-[[ -n "$TMUX" ]] && tmux rename-session "lcrown"
 
 source $ZSH/oh-my-zsh.sh
 unsetopt AUTO_CD
