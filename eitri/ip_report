@@ -1,0 +1,3 @@
+# report my IP to sas-api every minute
+MAILTO=lcrown@uoregon.edu
+* * * * * root PATH

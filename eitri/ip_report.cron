@@ -1,2 +1,0 @@
-# report my IP to sas-api every minute
-* * * * * root /home8/lcrown/dotfiles/openfortivpn/report.py

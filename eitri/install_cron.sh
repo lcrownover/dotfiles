@@ -9,5 +9,9 @@ fi
 
 test -f report.py || (echo "You must run this script from where report.py is saved"; exit 1)
 
-sed -i "s|PATH|$(pwd)/report.py|g" ip_report.cron
-cp -f ip_report.cron /etc/cron.d/ip_report.cron
+CRONFILE="ip_report"
+
+cp -f $CRONFILE /etc/cron.d/$CRONFILE
+sed -i "s|PATH|$(pwd)/report.py|g" /etc/cron.d/$CRONFILE
+chmod 644 /etc/cron.d/$CRONFILE
+chown root:root /etc/cron.d/$CRONFILE
