@@ -1,8 +1,8 @@
 # openfortivpn
 function vpn() {
-    set_tmux_window_name "openfortivpn"
-    tab-color 250 100 250
-    sudo openfortivpn -c $HOME/dotfiles/openfortivpn/my-conf
+    tmux new-session -s "openfortivpn" -n "vpn" -d
+    tmux send-keys -t "openfortivpn:vpn" "sudo openfortivpn -c $HOME/dotfiles/openfortivpn/my-conf" C-m
+    tmux switch -t "openfortivpn:vpn"
 }
 
 # todo
