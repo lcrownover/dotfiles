@@ -4,21 +4,22 @@ alias code='code -n .'
 
 # vscode
 function vscode_puppet() {
+	spushd
 	CWD=$(pwd)
 	cdp
 	code .
-	cd $CWD
+	spopd
 	tab-reset
 	exit
 }
 function vscode_nagios() {
-	CWD=$(pwd)
+	spushd
 	cdnag
 	code .
-	cd $CWD
+	spopd
 }
 function vscode_notes() {
-	CWD=$(pwd)
+	spushd
 	cd ~/GoogleDrive/notes
 	code .
 	exit
