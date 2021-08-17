@@ -7,7 +7,9 @@ function vpn() {
 
 # todo
 function todo() {
+    tab-color 255 0 255
     vim ~/.todo.md
+    tab-reset
 }
 
 # hostfmt
