@@ -85,7 +85,6 @@ set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
-set smartindent
 set number
 set relativenumber
 set nowrap
@@ -100,9 +99,6 @@ set iskeyword-=_
 
 set list
 set listchars=tab:├─,trail:·
-
-" Extra space for messages
-" set cmdheight=2
 
 
 "************************************"
