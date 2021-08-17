@@ -21,6 +21,7 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'hrsh7th/vim-vsnip'
+Plug 'windwp/nvim-autopairs'
 
 " fancy highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -69,6 +70,7 @@ lua require('lcrown.treesitter')
 lua require('lcrown.devicons')
 lua require('lcrown.lspconfig')
 lua require('lcrown.compe')
+lua require('lcrown.nvim-autopairs')
 lua require('lcrown.nvim-comment')
 
 
@@ -82,6 +84,7 @@ set noerrorbells
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
+set autoindent
 set smartindent
 set number
 set relativenumber

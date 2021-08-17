@@ -2,6 +2,14 @@
 
 --------------------------------------------------------------------------------
 
+# _Tue 17 Aug 2021 06:46:14 AM PDT_ add job check to pre-flight scripts for satellite
+
+- run a simple job against a known-good host
+- wait for complete
+- validate output
+
+--------------------------------------------------------------------------------
+
 # [ ] _Mon Jul 26 09:26:57 2021_ jupyterhub
 
 - provide class name, make hostname classname date
