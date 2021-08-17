@@ -30,9 +30,7 @@ else
 fi
 PROMPT='%{$fg[red]%}[%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[blue]%}$PROMPT_HOSTNAME:%{$fg[magenta]%}%1~%{$fg[red]%}] $(git_prompt_info)% %{$reset_color%}'
 
-# everything else can be loaded by zshenv as this file is loaded in a non-interactive session
-
-source ~/.zshenv
+# everything else will be loaded by zshenv (autoload) as this file is loaded in a non-interactive session
 
 # uncomment this line to display measured performance
 #zprof

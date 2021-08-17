@@ -7,7 +7,7 @@ function vpn() {
 
 # todo
 function todo() {
-    tab-color 255 0 255
+    tab-color 0 170 170
     vim ~/.todo.md
     tab-reset
 }
