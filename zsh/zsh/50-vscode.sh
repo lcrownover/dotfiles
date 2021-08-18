@@ -5,9 +5,8 @@ alias code='code -n .'
 # vscode
 function vscode_puppet() {
 	spushd
-	CWD=$(pwd)
 	cdp
-	code .
+	code puppet-control-repo/inventory.yaml
 	spopd
 	tab-reset
 	exit

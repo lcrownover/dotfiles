@@ -114,6 +114,9 @@ fun! TrimWhitespace()
 endfun
 nnoremap <leader><c-f> :call TrimWhitespace()<cr>
 
+" format python using black
+nnoremap <silent> <leader>pf :silent exec "!black %:p" <cr>
+
 augroup lcrown
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()

@@ -2,7 +2,7 @@
 
 --------------------------------------------------------------------------------
 
-# _Tue 17 Aug 2021 06:46:14 AM PDT_ add job check to pre-flight scripts for satellite
+# [ ] _Tue 17 Aug 2021 06:46:14 AM PDT_ add job check to pre-flight scripts for satellite
 
 - run a simple job against a known-good host
 - wait for complete
