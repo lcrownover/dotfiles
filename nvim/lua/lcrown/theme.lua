@@ -10,13 +10,19 @@ vim.cmd [[
 
 -- Change the colorscheme here and it will change everywhere
 
--- local theme = 'onedark'
-local theme = 'gruvbox'
+local theme = 'onedark'
+-- local theme = 'gruvbox'
 
 
 if theme == 'onedark' then
     vim.g.onedark_terminal_italics = 1
     vim.cmd('colorscheme onedark')
+    vim.cmd('highlight CursorLineNR guibg=none guifg=#eabe6f')
+    vim.cmd('highlight Normal guibg=none guifg=#b9bfca')
+    vim.cmd('highlight LineNr guifg=#44adf1')
+    vim.cmd('highlight netrwDir guifg=#44adf1')
+    vim.cmd('highlight qfFileName guifg=#86bf6d')
+    vim.cmd('highlight TelescopeBorder guifg=#44adf1')
 
 elseif theme == 'gruvbox' then
     vim.g.gruvbox_italic = 1
@@ -30,7 +36,7 @@ elseif theme == 'gruvbox' then
     vim.cmd('highlight LineNr guifg=#5eacd3')
     vim.cmd('highlight netrwDir guifg=#5eacd3')
     vim.cmd('highlight qfFileName guifg=#aed75f')
-    vim.cmd('highlight TelescopeBorder guifg=#5eacd')
+    vim.cmd('highlight TelescopeBorder guifg=#5eacd3')
 
 elseif theme == 'tokyonight' then
     vim.g.tokyonight_style = 'storm'
