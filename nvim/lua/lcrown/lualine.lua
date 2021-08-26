@@ -2,9 +2,9 @@ local theme = vim.g.theme
 
 function lsp_status()
     if #vim.lsp.buf_get_clients() == 0 then
-        return 'LSP Inactive'
+        return '⚠'
     else
-        return 'LSP Active'
+        return '✓'
     end
 end
 

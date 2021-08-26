@@ -19,9 +19,13 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " lsp
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'windwp/nvim-autopairs'
+
+" code completion
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-nvim-lua'
 
 " fancy highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -69,7 +73,7 @@ lua require('lcrown.telescope')
 lua require('lcrown.treesitter')
 lua require('lcrown.devicons')
 lua require('lcrown.lspconfig')
-lua require('lcrown.compe')
+lua require('lcrown.nvim-cmp')
 lua require('lcrown.nvim-autopairs')
 lua require('lcrown.nvim-comment')
 
@@ -85,6 +89,7 @@ set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
+set smartindent
 set number
 set relativenumber
 set nowrap
@@ -174,14 +179,6 @@ nnoremap <leader>f <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>l <cmd>lua require('telescope.builtin').git_commits()<cr>
 nnoremap <c-f> <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <c-p> <cmd>lua require('telescope.builtin').find_files()<cr>
-
-" compe
-set completeopt=menuone,noselect
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
 " lsp remaps
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<cr>
