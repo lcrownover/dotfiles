@@ -29,6 +29,7 @@ Plug 'hrsh7th/cmp-nvim-lua'
 
 " fancy highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
 
 " stylish!
 Plug 'hoob3rt/lualine.nvim'
