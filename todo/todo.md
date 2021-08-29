@@ -2,6 +2,15 @@
 
 --------------------------------------------------------------------------------
 
+# [ ] _Thu Aug 26 13:17:32 2021_ nms todo
+
+- test sending texts with sendpage
+- [check erorrs](https://is-nms.uoregon.edu/uoregon/thruk/#cgi-bin/status.cgi?host=all&type=detail&servicestatustypes=16&hoststatustypes=3&serviceprops=10)
+- check old netdot for monitored? column in devices
+    - https://nsdb.uoregon.edu/management/device.html?id=951&view=Interfaces&ifsort=number&editints=1
+
+--------------------------------------------------------------------------------
+
 # [ ] _Tue 17 Aug 2021 06:46:14 AM PDT_ add job check to pre-flight scripts for satellite
 
 - run a simple job against a known-good host

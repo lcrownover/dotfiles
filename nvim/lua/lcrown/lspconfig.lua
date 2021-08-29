@@ -46,6 +46,7 @@ local servers = {
     "puppet",       -- puppet
     "clangd",       -- c
     "cssls",        -- css
+    "perlls",       -- perl
 }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
