@@ -19,13 +19,16 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " lsp
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/vim-vsnip'
 Plug 'windwp/nvim-autopairs'
+Plug 'ray-x/lsp_signature.nvim'
 
 " code completion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'onsails/lspkind-nvim'
 
 " fancy highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -74,9 +77,10 @@ lua require('lcrown.telescope')
 lua require('lcrown.treesitter')
 lua require('lcrown.devicons')
 lua require('lcrown.lspconfig')
-lua require('lcrown.nvim-cmp')
 lua require('lcrown.nvim-autopairs')
 lua require('lcrown.nvim-comment')
+lua require('lcrown.lspkind')
+lua require('lcrown.nvim-cmp')
 
 
 "************************************"

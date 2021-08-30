@@ -60,7 +60,10 @@ export S='~/.servers.txt'
 function cred() { /usr/bin/env python3 $GDRIVEDIR/code/scripts/workflows/cred.py $1 | pbcopy }
 
 # python
-alias venv='source ./venv/bin/activate'
+function venv() {
+    if [ "$1" = "new" ]; then python3 -m venv venv; fi
+    source ./venv/bin/activate
+}
 
 function pyclean () {
         find . -type f -name "*.py[co]" -delete

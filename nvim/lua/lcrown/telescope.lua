@@ -28,7 +28,6 @@ require('telescope').setup{
             "node_modules",
             "Music",
             "Library",
-            "venv",
         },
         generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
         winblend = 0,
