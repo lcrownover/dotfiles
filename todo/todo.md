@@ -2,6 +2,13 @@
 
 --------------------------------------------------------------------------------
 
+# [ ] _Sun Aug 29 15:03:10 2021_ ansible for nvim setup (languageservers)
+
+- create ansible task for each language server
+- assemble tasks into lsp playbook
+
+--------------------------------------------------------------------------------
+
 # [ ] _Thu Aug 26 13:17:32 2021_ nms todo
 
 - test sending texts with sendpage
