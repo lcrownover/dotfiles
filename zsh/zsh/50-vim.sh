@@ -40,12 +40,12 @@ function vim_puppet() {
 function vim_nagios() { cdnag; vim }
 
 function vim_notes() {
-    cwd="$(pwd)"
+    spushd .
 	cd ~/GoogleDrive/notes
-	tab-color 255 0 255
+    tab-color 0 170 170
 	vim README.md
     tab-reset
-    cd $cwd
+    spopd
 }
 
 alias vip='vim_puppet'

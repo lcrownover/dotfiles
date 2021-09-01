@@ -7,9 +7,12 @@ function vpn() {
 
 # todo
 function todo() {
+    spushd .
+	cd ~/GoogleDrive/notes
     tab-color 0 170 170
-    nvim ~/.todo.md
+	nvim __todo.md
     tab-reset
+    spopd
 }
 
 # hostfmt

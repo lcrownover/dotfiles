@@ -19,16 +19,17 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " lsp
 Plug 'neovim/nvim-lspconfig'
-Plug 'windwp/nvim-autopairs'
-Plug 'ray-x/lsp_signature.nvim'
+Plug 'kabouzeid/nvim-lspinstall'
 
 " code completion
 Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'onsails/lspkind-nvim'
+Plug 'windwp/nvim-autopairs'
+Plug 'ray-x/lsp_signature.nvim'
 
 " fancy highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -76,11 +77,11 @@ lua require('lcrown.lualine')
 lua require('lcrown.telescope')
 lua require('lcrown.treesitter')
 lua require('lcrown.devicons')
-lua require('lcrown.lspconfig')
 lua require('lcrown.nvim-autopairs')
+lua require('lcrown.lsp')
 lua require('lcrown.nvim-comment')
-lua require('lcrown.lspkind')
-lua require('lcrown.nvim-cmp')
+lua require('lcrown.completion')
+lua require('lcrown.custom')
 
 
 "************************************"
@@ -124,8 +125,7 @@ fun! TrimWhitespace()
 endfun
 nnoremap <leader><c-f> :call TrimWhitespace()<cr>
 
-" format python using black
-nnoremap <silent> <leader>pf :silent exec "!black %:p" <cr>
+nnoremap <silent> <leader>fs :lua format()<cr>
 
 augroup lcrown
     autocmd!
@@ -199,11 +199,12 @@ nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<cr>
 "nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 
-"************************************"
-"======== GO GO PUPPET =============="
-"************************************"
-au BufNewFile,BufRead *.rb,*.pp setlocal expandtab ts=2 sw=2 sts=2
+"**************************************"
+"======== LANGUAGE STUFF =============="
+"**************************************"
+au BufNewFile,BufRead *.rb,*.pp,*.lua setlocal expandtab ts=2 sw=2 sts=2
 
+au BufNewFile,BufRead *.md setlocal textwidth=80 wrap
 
 "************************************"
 "======== SPLITTING IS COOL ========="
