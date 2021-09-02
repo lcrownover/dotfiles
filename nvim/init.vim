@@ -88,6 +88,7 @@ lua require('lcrown.custom')
 "========   SET ME BABY  ============"
 "************************************"
 
+" set mouse=a
 set nohlsearch
 set hidden
 set noerrorbells

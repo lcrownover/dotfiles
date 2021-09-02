@@ -1,6 +1,6 @@
 # vscode
-alias vs='code .'
-alias code='code -n .'
+alias vs='code -n'
+alias code='code -n'
 
 # vscode
 function vscode_puppet() {
