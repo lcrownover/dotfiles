@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+rm -rf ~/.config/efm-langserver
+
+mkdir -p ~/.config/efm-langserver
+ln -s ~/dotfiles/efm-langserver/config.yaml ~/.config/efm-langserver/config.yaml

@@ -126,7 +126,10 @@ fun! TrimWhitespace()
 endfun
 nnoremap <leader><c-f> :call TrimWhitespace()<cr>
 
-nnoremap <silent> <leader>fs :lua format()<cr>
+nnoremap <silent> <leader>fs :lua vim.lsp.buf.formatting()<cr>
+
+" format files before saving
+" autocmd BufWritePre *.lua,*.py :lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 augroup lcrown
     autocmd!
