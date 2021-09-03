@@ -19,12 +19,12 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " lsp
 Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall'
 
 " code completion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'onsails/lspkind-nvim'
@@ -68,6 +68,7 @@ Plug 'tpope/vim-surround'
 
 " linting and language
 Plug 'rodjek/vim-puppet'
+Plug 'simrat39/rust-tools.nvim'
 
 call plug#end()
 
@@ -278,6 +279,8 @@ nnoremap <leader>d> :vsplit<cr>:diffthis<cr>:wincmd p<cr>:bprev<cr>
 nnoremap <leader>dq :diffoff<cr>
 
 nnoremap <leader>nu :set invnu<cr>:set invrnu<cr>:call ToggleSignColumn()<cr>
+
+nnoremap <leader>; :norm A;<cr>
 
 " visual multi maps
 let g:VM_maps = {}

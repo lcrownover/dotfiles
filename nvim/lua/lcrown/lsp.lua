@@ -1,28 +1,9 @@
 ---------------------------------------
--- lspinstall
----------------------------------------
-
--- Configuration for lspinstall
-local function setup_servers()
-  require'lspinstall'.setup()
-  local servers = require'lspinstall'.installed_servers()
-  for _, server in pairs(servers) do
-    require'lspconfig'[server].setup{}
-  end
-end
-
-setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-  setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
-
-
----------------------------------------
 -- lspconfig
 ---------------------------------------
+
+vim.o.completeopt = "menuone,noinsert,noselect"
+vim.o.shortmess = vim.o.shortmess .. "c"
 
 local lsp = require('lspconfig')
 
@@ -72,7 +53,7 @@ local basic_servers = {
     "perlls",       -- perl
 }
 for _, server in ipairs(basic_servers) do
-  lsp[server].setup { on_attach = custom_attach, flags = flags }
+  lsp[server].setup { on_attach = custom_attach }
 end
 
 
@@ -145,6 +126,24 @@ lsp['sumneko_lua'].setup {
 
 
 ---------------------------------------
+-- rust
+---------------------------------------
+
+require('rust-tools').setup({
+  tools = {
+    autoSetHints = true,
+    hover_with_actions = true,
+    inlay_hints = {
+      show_parameter_hints = false,
+      parameter_hints_prefix = "",
+      other_hints_prefix = "",
+    },
+  },
+  server = {on_attach = custom_attach},
+})
+
+
+---------------------------------------
 -- lspkind
 ---------------------------------------
 
@@ -164,6 +163,7 @@ lsp['efm'].setup {
       json = {{ formatCommand = "jq .", formatStdin = true }},
       go = {{ formatCommand = "gofmt", formatStdin = true }},
       -- ruby: formatting is handled by solargraph
+      -- rust: formatting is handled by rust_analyzer
     }
   }
 }
