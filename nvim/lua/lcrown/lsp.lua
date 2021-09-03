@@ -153,7 +153,6 @@ lsp['efm'].setup {
   filetypes = {
     "lua",
     "python",
-    "ruby",
     "go",
     "json",
   },
@@ -164,6 +163,7 @@ lsp['efm'].setup {
       python = {{ formatCommand = "black --quiet -", formatStdin = true }},
       json = {{ formatCommand = "jq .", formatStdin = true }},
       go = {{ formatCommand = "gofmt", formatStdin = true }},
+      -- ruby: formatting is handled by solargraph
     }
   }
 }
