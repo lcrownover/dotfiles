@@ -36,8 +36,9 @@ local custom_attach = function(client, bufnr)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  -- buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
+
 
 -- Any server that doesn't have specific configuration can go here
 local basic_servers = {
@@ -216,4 +217,4 @@ require('lspkind').init({
     },
 })
 
-require "lsp_signature".setup()
+-- require "lsp_signature".setup()

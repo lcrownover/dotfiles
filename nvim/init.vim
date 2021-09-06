@@ -29,7 +29,7 @@ Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'onsails/lspkind-nvim'
 Plug 'windwp/nvim-autopairs'
-Plug 'ray-x/lsp_signature.nvim'
+" Plug 'ray-x/lsp_signature.nvim'
 
 " fancy highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -41,6 +41,7 @@ Plug 'hoob3rt/lualine.nvim'
 " all the colors
 Plug 'joshdick/onedark.vim'
 Plug 'gruvbox-community/gruvbox'
+Plug 'arcticicestudio/nord-vim'
 
 " ctrl+c to comment
 Plug 'terrortylor/nvim-comment'
