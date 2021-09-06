@@ -1,7 +1,7 @@
 # openfortivpn
 function vpn() {
-    tmux new-session -s "openfortivpn" -n "vpn" -d
-    tmux send-keys -t "openfortivpn:vpn" "sudo openfortivpn -c $HOME/dotfiles/openfortivpn/my-conf" C-m
+    tmux list-sessions | grep openfortivpn >/dev/null      || tmux new-session -s "openfortivpn" -n "vpn" -d
+    ps aux | grep -v grep | grep -s 'sudo openfortivpn -c' || tmux send-keys -t "openfortivpn:vpn" "sudo openfortivpn -c $HOME/dotfiles/openfortivpn/my-conf" C-m
     tmux attach -t "openfortivpn:vpn"
 }
 
