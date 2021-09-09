@@ -1,15 +1,16 @@
 # vscode
 alias vs='code -n'
 alias code='code -n'
+alias c='code -n'
 
 # vscode
 function vscode_puppet() {
 	spushd
 	cdp
-	code puppet-control-repo/inventory.yaml
+    code -n .
+	code -r puppet-control-repo/inventory.yaml
 	spopd
 	tab-reset
-	exit
 }
 function vscode_nagios() {
 	spushd
@@ -21,7 +22,6 @@ function vscode_notes() {
 	spushd
 	cd ~/GoogleDrive/notes
 	code .
-	exit
 }
 
 alias vsp='vscode_puppet'

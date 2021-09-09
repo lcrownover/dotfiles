@@ -198,12 +198,6 @@ nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<cr>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<cr>
 nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<cr>
 
-" fzf yay
-"nnoremap <leader>ff :Files<cr>
-"nnoremap <leader>fg :Ag<cr>
-"nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-"nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
 
 "**************************************"
 "======== LANGUAGE STUFF =============="
@@ -282,6 +276,8 @@ nnoremap <leader>dq :diffoff<cr>
 nnoremap <leader>nu :set invnu<cr>:set invrnu<cr>:call ToggleSignColumn()<cr>
 
 nnoremap <leader>; :norm A;<cr>
+
+nnoremap <leader>vs <cmd>lua VSCode()<cr>
 
 " visual multi maps
 let g:VM_maps = {}

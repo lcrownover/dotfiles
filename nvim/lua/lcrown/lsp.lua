@@ -79,6 +79,9 @@ lsp['pyright'].setup {
 
 lsp['solargraph'].setup {
   on_attach = custom_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
   settings = {
     solargraph = {
       formatting = true,
