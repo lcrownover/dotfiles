@@ -10,6 +10,9 @@ call plug#begin('~/.config/nvim/plugged')
 " testing my own plugin
 " Plug 'lcrownover/funzy.nvim'
 
+" temp
+" Plug 'kabouzeid/nvim-lspinstall'
+
 " telescope
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -197,14 +200,13 @@ nnoremap <silent> <C-]> <cmd>lua vim.lsp.buf.definition()<cr>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<cr>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<cr>
 nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<cr>
+nnoremap <silent> <F2>  <cmd>lua vim.lsp.buf.rename()<cr>
 
 
 "**************************************"
 "======== LANGUAGE STUFF =============="
 "**************************************"
 au BufNewFile,BufRead *.rb,*.pp,*.lua setlocal expandtab ts=2 sw=2 sts=2
-
-au BufNewFile,BufRead *.md setlocal textwidth=80 wrap
 
 "************************************"
 "======== SPLITTING IS COOL ========="
@@ -230,6 +232,7 @@ let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeQuitOnOpen = 1
+let NERDTreeWinPos = "right"
 " open current buffer in NERDTree
 map <leader>b :NERDTreeFind<cr>
 

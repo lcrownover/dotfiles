@@ -148,7 +148,7 @@ require('rust-tools').setup({
 
 
 ---------------------------------------
--- lspkind
+-- efm
 ---------------------------------------
 
 lsp['efm'].setup {
@@ -162,10 +162,10 @@ lsp['efm'].setup {
   settings = {
     rootMarkers = {".git/"},
     languages = {
-      lua = {{ formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb", formatStdin = true }},
-      python = {{ formatCommand = "black --quiet -", formatStdin = true }},
-      json = {{ formatCommand = "jq .", formatStdin = true }},
-      go = {{ formatCommand = "gofmt", formatStdin = true }},
+      python = { {formatCommand = "black --quiet -", formatStdin = true} },
+      lua = { {formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb", formatStdin = true} },
+      json = { {formatCommand = "jq .", formatStdin = true} },
+      go = { {formatCommand = "gofmt", formatStdin = true} },
       -- ruby: formatting is handled by solargraph
       -- rust: formatting is handled by rust_analyzer
     }

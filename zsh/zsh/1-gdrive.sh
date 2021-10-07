@@ -3,3 +3,5 @@ if [ -d $HOME/GoogleDrive ]; then
 elif [ -d $HOME/Google\ Drive ]; then
 	export GDRIVEDIR="Google\ Drive"
 fi
+
+alias cdgd="cd $GDRIVEDIR"

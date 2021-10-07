@@ -34,7 +34,7 @@ function puppet_navigate_to_filesystem_repos() {
 
 # outputs a list of all the dirs in the PUPPET_BASE_DIR
 function puppet_list_puppet_directories() {
-    for f in $(find $PUPPET_BASE_DIR/* -type d -maxdepth 0 -not -path ./.vscode); do
+    for f in $(find $PUPPET_BASE_DIR/* -type d -maxdepth 0 | grep -v vscode | grep -v _mass_scripts); do
         echo "$(basename $f)"
     done
 }

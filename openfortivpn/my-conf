@@ -5,3 +5,6 @@ realm = admin_split
 username = lcrown
 password = PASSWORD
 otp = push
+set-dns = 1
+pppd-use-peerdns = 1
+

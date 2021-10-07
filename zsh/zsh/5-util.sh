@@ -26,6 +26,12 @@ alias hostfmt="$GDRIVEDIR/code/projects/hostfmt.py"
 # shorter clear
 alias cl="clear"
 
+
+function firefox() {
+    FF="/Applications/Firefox.app/Contents/MacOS/firefox"
+    $FF file://"$(pwd)"/"$1"
+}
+
 # ssh function that will do window naming
 function ssh() {
     set_tmux_window_name "$1"
