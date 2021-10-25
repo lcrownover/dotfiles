@@ -3,11 +3,24 @@ function vpn() {
     VPNCONF="$HOME/.openfortivpn"
     VPNCMD="sudo openfortivpn -c $VPNCONF"
 
-    [ "$1" = "push" ] && VPNCMD="$VPNCMD --otp push"
+    if [ "$1" = "push" ]; then
+        VPNCMD="$VPNCMD --otp push"
+        VPNMODE="PUSH"
+    else
+        VPNMODE="OTP"
+    fi
 
-    tmux list-sessions | grep openfortivpn >/dev/null      || tmux new-session -s "openfortivpn" -n "vpn" -d
-    ps aux | grep -v grep | grep -s 'sudo openfortivpn -c' || tmux send-keys -t "openfortivpn:vpn" "$VPNCMD" C-m
-    tmux attach -t "openfortivpn:vpn"
+    tmux list-sessions | grep openfortivpn >/dev/null     || tmux new-session -s "openfortivpn" -n "vpn" -d
+    ps ax | grep -v grep | grep -s 'sudo openfortivpn -c'
+    if [ $? -eq 1 ]; then
+        tmux send-keys -t "openfortivpn:vpn" "$VPNCMD" C-m
+        if [ "$VPNMODE" = "OTP" ]; then
+            echo -n "Ubikey OTP: "
+            read OTP
+            tmux send-keys -t "openfortivpn:vpn" "$OTP" C-m
+            clear
+        fi
+    fi
 }
 
 # todo

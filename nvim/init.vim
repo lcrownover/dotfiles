@@ -119,6 +119,9 @@ set iskeyword-=_
 set list
 set listchars=tab:├─,trail:·
 
+" fix background color in tmux
+set t_ut=
+
 
 "************************************"
 "======== FUNCTIONALITY ============="
