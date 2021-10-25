@@ -57,6 +57,7 @@ Plug 'godlygeek/tabular'
 
 " scrub file navigation
 Plug 'scrooloose/nerdtree'
+" Plug 'kyazdani42/nvim-tree.lua'
 
 " leader u
 Plug 'mbbill/undotree'
@@ -84,6 +85,7 @@ lua require('lcrown.treesitter')
 lua require('lcrown.devicons')
 lua require('lcrown.nvim-autopairs')
 lua require('lcrown.lsp')
+" lua require('lcrown.nvim-tree')
 lua require('lcrown.nvim-comment')
 lua require('lcrown.completion')
 lua require('lcrown.custom')
@@ -183,6 +185,7 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fp <cmd>lua require('telescope.builtin').file_browser()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>fm <cmd>lua require('telescope.builtin').marks()<cr>
+nnoremap <leader>fr <cmd>lua require('telescope.builtin').resume()<cr>
 nnoremap <leader>fv <cmd>lua require('telescope.builtin').find_files { cwd = '~/.config/nvim', follow = true}<cr>
 
 nnoremap <leader>fn <cmd>lua require('lcrown.telescope').grep_notes()<cr>
@@ -225,16 +228,21 @@ set splitright
 "======== NERD TREE SETTINGS ========"
 "************************************"
 
-" open nerdtree with ctrl d
-map <c-b> :NERDTreeToggle<CR>
-" nerdtree settings
+noremap <c-b> :NERDTreeToggle<CR>
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeWinPos = "right"
-" open current buffer in NERDTree
-map <leader>b :NERDTreeFind<cr>
+nnoremap <leader>b :NERDTreeFind<cr>
+" nvim-tree doesnt work with my symlink setup...
+" let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
+" let g:nvim_tree_quit_on_open = 1
+" let g:nvim_tree_git_hl = 1
+" let g:nvim_tree_add_trailing = 1
+" nnoremap <C-b> :NvimTreeToggle<CR>
+" nnoremap <leader>r :NvimTreeRefresh<CR>
+" nnoremap <leader>b :NvimTreeFindFile<CR>
 
 
 "************************************"

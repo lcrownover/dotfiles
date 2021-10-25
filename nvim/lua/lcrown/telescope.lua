@@ -56,6 +56,9 @@ require('telescope').setup{
                 }
             }
         },
+        cache_picker = {
+          num_pickers = 20,
+        },
     }
 }
 
