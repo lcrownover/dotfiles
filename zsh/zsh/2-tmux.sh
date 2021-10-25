@@ -62,6 +62,7 @@ function project_switch() {
             if ! $(tmux ls | grep -q "$session"); then
                 tmux new-session -s "$session" -d
                 tmux send-keys -t "$session:1" "cd $ppath" C-m
+                tmux send-keys -t "$session:1" "export PROJ=$ppath" C-m
                 tmux send-keys -t "$session:1" "clear" C-m
             fi
             tmux $OP -t "$session"
