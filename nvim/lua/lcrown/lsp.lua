@@ -146,6 +146,11 @@ require('rust-tools').setup({
   server = {on_attach = custom_attach},
 })
 
+---------------------------------------
+-- terraform
+---------------------------------------
+
+lsp['terraformls'].setup{}
 
 ---------------------------------------
 -- efm

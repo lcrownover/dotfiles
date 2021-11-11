@@ -212,7 +212,7 @@ nnoremap <silent> <F2>  <cmd>lua vim.lsp.buf.rename()<cr>
 "**************************************"
 "======== LANGUAGE STUFF =============="
 "**************************************"
-au BufNewFile,BufRead *.rb,*.pp,*.lua setlocal expandtab ts=2 sw=2 sts=2
+au BufNewFile,BufRead *.rb,*.pp,*.lua,*.tf setlocal expandtab ts=2 sw=2 sts=2
 
 "************************************"
 "======== SPLITTING IS COOL ========="

@@ -70,7 +70,7 @@ M.grep_notes = function()
     require('telescope.builtin').live_grep({
         prompt_title = "< Grep Notes >",
         shorten_path = true,
-        search_dirs = {"~/GoogleDrive/notes"},
+        search_dirs = {"~/Google Drive/My Drive/notes"},
     })
 end
 

@@ -41,7 +41,7 @@ function vim_nagios() { cdnag; vim }
 
 function vim_notes() {
     spushd .
-	cd ~/GoogleDrive/notes
+	cd ~/$GDRIVEDIR/notes
     tab-color 0 170 170
 	vim README.md
     tab-reset

@@ -56,6 +56,10 @@ function project_switch() {
             fi
             ;;
         *)
+            if [[ "$(grep "$1" $PROJ_FILE)" = "" ]]; then
+                echo "no project: $1"
+                return
+            fi
             session="$1"
             ppath="$(grep "$session" $PROJ_FILE)"
             [[ -n $TMUX ]] && OP="switch" || OP="attach"

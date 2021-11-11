@@ -20,7 +20,7 @@ function vscode_nagios() {
 }
 function vscode_notes() {
 	spushd
-	cd ~/GoogleDrive/notes
+	cd ~/$GDRIVEDIR/notes
 	code .
 }
 
