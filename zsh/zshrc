@@ -47,3 +47,5 @@ PROMPT='%{$fg[red]%}[%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[blue]%}$PROMPT_HOSTNA
 # If there's anything below this comment,
 # it probably needs to be sorted into a file or somehow organized.
 #
+
+alias luamake=/home/lcrown/repos/lua-language-server/3rd/luamake/luamake

@@ -128,7 +128,7 @@ function rcode(){
 	fi
 	REMOTEPASS=$(rpw $RHOST)
 	RDIR=$(echo $RPATH | sed 's/\//\_/g')
-	LOCALMNTDIR="/Users/$(whoami)/mnt/$RHOST---$RDIR"
+	LOCALMNTDIR="$HOME/mnt/$RHOST---$RDIR"
 	mkdir -p $LOCALMNTDIR
 	umount $LOCALMNTDIR 2>/dev/null
 	sshfs -o ServerAliveInterval=15,ServerAliveCountMax=3,password_stdin root@$RHOST:$RPATH $LOCALMNTDIR <<< $REMOTEPASS
