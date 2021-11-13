@@ -1,12 +1,5 @@
 ---
-- name: check sudo
-  hosts: localhost
-  tasks:
-    - fail: msg="You must run this playbook with sudo"
-      when: ansible_env.SUDO_USER is undefined
-
 - name: configure base
-
   hosts: localhost
   tasks:
       - name: ensure repos dir
@@ -81,24 +74,21 @@
   hosts: localhost
   vars:
       nvim_src_dir: '{{ ansible_env.HOME }}/repos/neovim'
-      lcrown: '{{ ansible_env.SUDO_USER }}'
   tasks:
       - name: install neovim build dependencies - Ubuntu
         when: ansible_distribution == 'Ubuntu'
+        become: yes
         ansible.builtin.apt:
             pkg: ['ninja-build', 'gettext', 'libtool', 'libtool-bin', 'autoconf', 'automake', 'cmake', 'g++', 'pkg-config', 'unzip', 'curl', 'doxygen' ]
 
       - name: install neovim build dependencies - MacOSX
         when: ansible_distribution == 'MacOSX'
         become: yes
-        become_user: '{{ ansible_env.SUDO_USER }}'
         community.general.homebrew:
           name: ['ninja', 'libtool', 'automake', 'cmake', 'pkg-config', 'gettext', 'curl']
           state: present
 
       - name: clone neovim
-        become: yes
-        become_user: '{{ ansible_env.SUDO_USER }}'
         ansible.builtin.git:
             repo: https://github.com/neovim/neovim
             dest: '{{ nvim_src_dir }}'
@@ -109,11 +99,22 @@
         ansible.builtin.command:
             cmd: '/usr/bin/env make CMAKE_BUILD_TYPE=RelWithDebInfo'
             chdir: '{{ nvim_src_dir }}'
+            creates: '{{ nvim_src_dir }}/build'
 
       - name: install neovim
+        become: yes
         ansible.builtin.command:
             cmd: 'make install'
             chdir: '{{ nvim_src_dir }}'
+            creates: '/usr/local/bin/nvim'
+
+      - name: link nvim
+        become: yes
+        ansible.builtin.file:
+            src: '/usr/local/bin/nvim'
+            dest: '/usr/bin/nvim'
+            state: link
+            force: yes
 
       - name: create nvim configdir
         ansible.builtin.file:
@@ -141,7 +142,7 @@
       - name: backup nvim lua dir if exists
         ansible.builtin.command:
             cmd: 'mv ~/.config/nvim/lua ~/.config/nvim/lua.bak'
-        when: nvim_lua_dir.stat.exists
+        when: nvim_lua_dir.stat.isdir
 
       - name: link lua
         ansible.builtin.file:
@@ -166,3 +167,7 @@
             dest: '{{ ansible_env.HOME }}/.config/efm-langserver/config.yaml'
             state: link
 
+      - name: install nvim plugins
+        ansible.builtin.command:
+            cmd: 'nvim -c PlugInstall -c q -c q'
+            creates: '{{ ansible_env.HOME }}/.config/nvim/plugged'
