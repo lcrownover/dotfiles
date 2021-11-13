@@ -23,9 +23,11 @@ GEM_HOME="$HOME/.gem"
 export PATH="$GEM_HOME/bin:$PATH"
 eval "$(rbenv init -)"
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/shims:$PATH"
-eval "$(pyenv init -)"
+if [ $(test -f "$HOME/.pyenv") ]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/shims:$PATH"
+    eval "$(pyenv init -)"
+fi
 
 # custom prompt
 setopt prompt_subst
