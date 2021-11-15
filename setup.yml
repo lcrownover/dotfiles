@@ -1,0 +1,273 @@
+---
+- name: configure base
+  vars_prompt:
+  - name: "ansible_become_pass"
+    prompt: "[sudo] password for user"
+    private: yes
+  hosts: localhost
+  tasks:
+
+  - name: ensure repos dir
+    ansible.builtin.file:
+      path: '{{ ansible_env.HOME }}/repos'
+      state: directory
+
+
+- name: configure nodejs
+  hosts: localhost
+  tasks:
+
+  - name: add node repo
+    when: ansible_distribution == 'Ubuntu'
+    ansible.builtin.shell: 'curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -'
+    args:
+      warn: no
+      creates: '/etc/apt/sources.list.d/nodesource.list'
+
+  - name: install nodejs
+    when: ansible_distribution == 'Ubuntu'
+    become: yes
+    ansible.builtin.apt:
+      pkg: ["nodejs"]
+      state: latest
+
+  - name: link .npmrc
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/npm/npmrc'
+      dest: '{{ ansible_env.HOME }}/.npmrc'
+      state: link
+
+
+- name: configure tmux
+  hosts: localhost
+  tasks:
+
+  - name: link .tmux.conf
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/tmux/tmux.conf'
+      dest: '{{ ansible_env.HOME }}/.tmux.conf'
+      state: link
+
+
+- name: configure irb
+  hosts: localhost
+  tasks:
+
+  - name: link .irbrc
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/irb/irbrc'
+      dest: '{{ ansible_env.HOME }}/.irbrc'
+      state: link
+
+
+- name: configure zsh
+  hosts: localhost
+  vars:
+    zsh_plugin_dir: '{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins'
+  tasks:
+
+  - name: install oh-my-zsh
+    ansible.builtin.command:
+      cmd: '/usr/bin/env sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
+      creates: '{{ ansible_env.HOME }}/.oh-my-zsh'
+
+  - name: link .zshrc
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/zsh/zshrc'
+      dest: '{{ ansible_env.HOME }}/.zshrc'
+      state: link
+      force: yes
+
+  - name: link .zshenv
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/zsh/zshenv'
+      dest: '{{ ansible_env.HOME }}/.zshenv'
+      state: link
+      force: yes
+
+  - name: link .config/zsh
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/zsh/zsh'
+      dest: '{{ ansible_env.HOME }}/.config/zsh'
+      state: link
+      force: yes
+
+  - name: install syntax highlighting
+    ansible.builtin.git:
+      repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+      dest: '{{ zsh_plugin_dir }}/zsh-syntax-highlighting'
+      clone: yes
+      update: yes
+
+  - name: install autosuggestions
+    ansible.builtin.git:
+      repo: https://github.com/zsh-users/zsh-autosuggestions
+      dest: '{{ zsh_plugin_dir }}/zsh-autosuggestions'
+      clone: yes
+      update: yes
+
+
+- name: configure nvim
+  hosts: localhost
+  vars:
+    nvim_src_dir: '{{ ansible_env.HOME }}/repos/neovim'
+  tasks:
+
+  - name: install neovim build dependencies - Ubuntu
+    when: ansible_distribution == 'Ubuntu'
+    become: yes
+    ansible.builtin.apt:
+      pkg: ['ninja-build', 'gettext', 'libtool', 'libtool-bin', 'autoconf', 'automake', 'cmake', 'g++', 'pkg-config', 'unzip', 'curl', 'doxygen' ]
+
+  - name: install neovim build dependencies - MacOSX
+    when: ansible_distribution == 'MacOSX'
+    become: yes
+    community.general.homebrew:
+      name: ['ninja', 'libtool', 'automake', 'cmake', 'pkg-config', 'gettext', 'curl']
+      state: present
+
+  - name: clone neovim
+    ansible.builtin.git:
+      repo: https://github.com/neovim/neovim
+      dest: '{{ nvim_src_dir }}'
+      clone: yes
+      update: yes
+
+  - name: make neovim
+    ansible.builtin.command:
+      cmd: '/usr/bin/env make CMAKE_BUILD_TYPE=RelWithDebInfo'
+      chdir: '{{ nvim_src_dir }}'
+      creates: '{{ nvim_src_dir }}/build'
+
+  - name: install neovim
+    become: yes
+    ansible.builtin.command:
+      cmd: 'make install'
+      chdir: '{{ nvim_src_dir }}'
+      creates: '/usr/local/bin/nvim'
+
+  - name: link nvim
+    become: yes
+    ansible.builtin.file:
+      src: '/usr/local/bin/nvim'
+      dest: '/usr/bin/nvim'
+      state: link
+      force: yes
+
+  - name: create nvim configdir
+    ansible.builtin.file:
+      path: '{{ ansible_env.HOME }}/.config/nvim'
+      state: directory
+
+  - name: remove .vimrc
+    ansible.builtin.file:
+      path: '{{ ansible_env.HOME }}/.vimrc'
+      state: absent
+      force: yes
+
+  - name: link init.vim
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/nvim/init.vim'
+      dest: '{{ ansible_env.HOME }}/.config/nvim/init.vim'
+      state: link
+      force: yes
+
+  - name: check if lua dir exists
+    ansible.builtin.stat:
+      path: '{{ ansible_env.HOME }}/.config/nvim/lua'
+    register: nvim_lua_dir
+
+  - name: backup nvim lua dir if exists
+    when: nvim_lua_dir.stat.isdir
+    ansible.builtin.command:
+      cmd: 'mv ~/.config/nvim/lua ~/.config/nvim/lua.bak'
+
+  - name: link lua
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/nvim/lua'
+      dest: '{{ ansible_env.HOME }}/.config/nvim/lua'
+      state: link
+      force: yes
+
+  - name: install nvim plugins
+    ansible.builtin.command:
+      cmd: 'nvim -c PlugInstall -c q -c q'
+      creates: '{{ ansible_env.HOME }}/.config/nvim/plugged'
+
+
+- name: configure efm-language-server
+  hosts: localhost
+  tasks:
+
+  - name: install efm-language-server
+    ansible.builtin.command:
+      cmd: go get github.com/mattn/efm-langserver
+      creates: '{{ ansible_env.HOME }}/go/bin/efm-langserver'
+
+  - name: create efm configdir
+    ansible.builtin.file:
+      path: '{{ ansible_env.HOME }}/.config/efm-langserver'
+      state: directory
+
+  - name: link efm config
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/efm-langserver/config.yaml'
+      dest: '{{ ansible_env.HOME }}/.config/efm-langserver/config.yaml'
+      state: link
+
+
+- name: configure lua-language-server
+  hosts: localhost
+  vars:
+    lua_repo_dir: '{{ ansible_env.HOME }}/repos/lua-language-server'
+    lua_build_dir: '{{ lua_repo_dir }}/3rd/luamake'
+  tasks:
+
+  - name: clone lua-language-server
+    ansible.builtin.git:
+      repo: https://github.com/sumneko/lua-language-server
+      dest: '{{ lua_repo_dir }}'
+      clone: yes
+      update: yes
+
+  - name: init submodules
+    ansible.builtin.command:
+      cmd: 'git submodule update --init --recursive'
+      chdir: '{{ lua_repo_dir }}'
+      creates: '{{ lua_build_dir }}'
+
+  - name: compile lua-language-server
+    ansible.builtin.command:
+      cmd: './compile/install.sh'
+      chdir: '{{ lua_build_dir }}'
+      creates: '{{ lua_build_dir }}/build'
+
+  - name: rebuild lua-language-server
+    ansible.builtin.command:
+      cmd: './3rd/luamake/luamake rebuild'
+      chdir: '{{ lua_repo_dir }}'
+      creates: '{{ lua_repo_dir }}/bin/*/lua-language-server'
+
+- name: install easy language servers
+  hosts: localhost
+  tasks:
+
+  - name: pyright
+    community.general.npm:
+      name: pyright
+      global: yes
+
+  - name: vim-language-server
+    community.general.npm:
+      name: vim-language-server
+      global: yes
+
+  - name: bash-language-server
+    community.general.npm:
+      name: bash-language-server
+      global: yes
+
+  - name: ts-server
+    community.general.npm:
+      name: ts-server
+      global: yes
