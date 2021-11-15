@@ -43,7 +43,7 @@ Plug 'hoob3rt/lualine.nvim'
 
 " all the colors
 Plug 'joshdick/onedark.vim'
-Plug 'gruvbox-community/gruvbox'
+" Plug 'gruvbox-community/gruvbox'
 Plug 'arcticicestudio/nord-vim'
 
 " ctrl+c to comment
