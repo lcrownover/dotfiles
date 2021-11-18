@@ -162,6 +162,24 @@ require('rust-tools').setup({
 
 lsp['terraformls'].setup{}
 
+
+---------------------------------------
+-- ansible
+---------------------------------------
+
+lsp['ansiblels'].setup{
+  -- on_attach = custom_attach,
+  filetypes = { "yaml", "yml", "yml.ansible", "yaml.ansible" },
+  settings = {
+    ansible = {
+      python = {
+        interpreterPath = "python3"
+      }
+    }
+  }
+}
+
+
 ---------------------------------------
 -- efm
 ---------------------------------------

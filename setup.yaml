@@ -130,7 +130,7 @@
       repo: https://github.com/neovim/neovim
       dest: '{{ nvim_src_dir }}'
       clone: yes
-      update: yes
+      update: no
 
   - name: make neovim
     ansible.builtin.command:
@@ -267,7 +267,25 @@
       name: bash-language-server
       global: yes
 
+
   - name: ts-server
     community.general.npm:
       name: ts-server
       global: yes
+
+- name: configure ansible language
+  hosts: localhost
+  tasks:
+
+  - name: install ansible dependencies - MacOSX
+    when: ansible_distribution == 'MacOSX'
+    community.general.homebrew:
+      name: ['ansible-lint']
+      state: present
+
+  - name: ansible-language-server
+    community.general.npm:
+      name: '@ansible/ansible-language-server'
+      global: yes
+
+
