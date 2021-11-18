@@ -121,7 +121,6 @@
 
   - name: install neovim build dependencies - MacOSX
     when: ansible_distribution == 'MacOSX'
-    become: yes
     community.general.homebrew:
       name: ['ninja', 'libtool', 'automake', 'cmake', 'pkg-config', 'gettext', 'curl']
       state: present
@@ -146,8 +145,9 @@
       chdir: '{{ nvim_src_dir }}'
       creates: '/usr/local/bin/nvim'
 
-  - name: link nvim
+  - name: link nvim - Ubuntu
     become: yes
+    when: ansible_distribution == 'Ubuntu'
     ansible.builtin.file:
       src: '/usr/local/bin/nvim'
       dest: '/usr/bin/nvim'
