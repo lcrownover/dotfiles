@@ -6,4 +6,4 @@ function go_new_project() {
     go mod init "github.com/lcrownover/$1" 2> /dev/null
 }
 alias gonew='go_new_project'
-export PATH="$PATH:$HOME/go/bin"
+append_path "$HOME/go/bin"

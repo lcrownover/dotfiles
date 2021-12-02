@@ -40,6 +40,7 @@ Plug 'nvim-treesitter/playground'
 
 " stylish!
 Plug 'hoob3rt/lualine.nvim'
+Plug 'akinsho/bufferline.nvim'
 
 " all the colors
 Plug 'joshdick/onedark.vim'
@@ -79,7 +80,7 @@ call plug#end()
 
 " Get those settings
 lua require('lcrown.theme')
-lua require('lcrown.lualine')
+lua require('lcrown.ui')
 lua require('lcrown.telescope')
 lua require('lcrown.treesitter')
 lua require('lcrown.devicons')
@@ -96,32 +97,29 @@ lua require('lcrown.custom')
 "************************************"
 
 " set mouse=a
-set nohlsearch
-set hidden
-set noerrorbells
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-set expandtab
-set autoindent
-set smartindent
-set number
-set relativenumber
-set nowrap
-set undofile
-set termguicolors
-set scrolloff=10
-set colorcolumn=80,120
-set signcolumn=yes
-set cursorline
 set clipboard=unnamed
+set colorcolumn=80,120
+set cursorline
+set indentkeys-=:,<:>
 set iskeyword-=_
-
 set list
 set listchars=tab:├─,trail:·
+set noerrorbells
+set nohlsearch
+set nowrap
+set number
+set relativenumber
+set scrolloff=10
+set shiftwidth=4
+set signcolumn=yes
+set termguicolors
+set undofile
 
 " fix background color in tmux
 set t_ut=
 
+set tabstop=4 softtabstop=4
+set expandtab
 
 "************************************"
 "======== FUNCTIONALITY ============="
@@ -158,11 +156,10 @@ function! ToggleSignColumn()
 endfunction
 
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <c-h> :bprev<CR>
-nnoremap <c-l> :bnext<CR>
+" nnoremap <c-h> :bprev<CR>
+" nnoremap <c-l> :bnext<CR>
 
 " convenience
-nnoremap Y y$
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
@@ -174,12 +171,16 @@ inoremap ! !<c-g>u
 inoremap ? ?<c-g>u
 
 " moving lines of text
-vnoremap J :m '>+1<cr>gv=gv
-vnoremap K :m '<-2<cr>gv=gv
-inoremap <c-j> <esc>:m .+1<cr>==a
-inoremap <c-k> <esc>:m .-2<cr>==a
-nnoremap <leader>j :m .+1<cr>==
-nnoremap <leader>k :m .-2<cr>==
+" vnoremap J :m '>+1<cr>gv=gv
+" vnoremap K :m '<-2<cr>gv=gv
+" inoremap <c-j> <esc>:m .+1<cr>==a
+" inoremap <c-k> <esc>:m .-2<cr>==a
+" nnoremap <leader>j :m .+1<cr>==
+" nnoremap <leader>k :m .-2<cr>==
+
+" bufferline
+nnoremap <silent><c-h> :BufferLineCycleNext<cr>
+nnoremap <silent><c-l> :BufferLineCyclePrev<cr>
 
 " telescope!
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({follow = true})<cr>
@@ -202,7 +203,7 @@ nnoremap <c-p> <cmd>lua require('telescope.builtin').find_files()<cr>
 
 " lsp remaps
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<cr>
-nnoremap <silent> <C-]> <cmd>lua vim.lsp.buf.definition()<cr>
+" nnoremap <silent> <C-]> <cmd>lua vim.lsp.buf.definition()<cr>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<cr>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<cr>
 nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<cr>

@@ -16,7 +16,7 @@ function cbae() {
 
 # go stuff
 alias goinit='mkdir -p bin pkg src/github.com/lcrownover'
-alias gopath='export GOPATH="$(pwd)" && echo GOPATH=$(pwd); export PATH=$GOPATH/bin:$PATH'
+alias gopath='export GOPATH="$(pwd)" && echo GOPATH=$(pwd); insert_path $GOPATH/bin'
 
 function mssh() {
 	if [[ $1 == "s" ]]; then

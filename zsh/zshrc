@@ -16,16 +16,17 @@ plugins=(
 	docker
 )
 
+
 source $ZSH/oh-my-zsh.sh
 unsetopt AUTO_CD
 
 GEM_HOME="$HOME/.gem"
-export PATH="$GEM_HOME/bin:$PATH"
+insert_path $GEM_HOME
 eval "$(rbenv init -)"
 
 if [ $(test -f "$HOME/.pyenv") ]; then
     export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/shims:$PATH"
+    insert_path "$PYENV_ROOT/shims"
     eval "$(pyenv init -)"
 fi
 
@@ -48,4 +49,3 @@ PROMPT='%{$fg[red]%}[%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[blue]%}$PROMPT_HOSTNA
 # it probably needs to be sorted into a file or somehow organized.
 #
 
-alias luamake=/home/lcrown/repos/lua-language-server/3rd/luamake/luamake

@@ -6,7 +6,7 @@ if [[ "$(hostname)" = "$EITRI_HOSTNAME" ]]; then
         (keychain -l | grep github >/dev/null 2>&1) || ssh-add ~/.ssh/github/id_rsa
         (keychain -l | grep uoregon >/dev/null 2>&1) || ssh-add ~/.ssh/uoregon/id_rsa
     fi
-    export PATH="$PATH:/opt/node/bin"
+    append_path "/opt/node/bin"
     [[ ! -n "$TMUX" ]] && work
 fi
 

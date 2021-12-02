@@ -287,5 +287,3 @@
     community.general.npm:
       name: '@ansible/ansible-language-server'
       global: yes
-
-

@@ -6,6 +6,9 @@ setopt aliases
 
 export ZSH_CONF_DIR="$HOME/.config/zsh"
 
+function insert_path() { [ $SHLVL -eq 1 ] && export PATH="$1:$PATH" }
+function append_path() { [ $SHLVL -eq 1 ] && export PATH="$PATH:$1" }
+
 # Source all my configs from the conf dir
 for f in $ZSH_CONF_DIR/*.sh; do
     source $f

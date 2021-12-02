@@ -4,8 +4,8 @@
 #
 export BOLT=~/.puppetlabs/bolt
 export PUPPET_BASE_DIR="$HOME/puppet/is"
-export PATH="/opt/puppetlabs/bin/:$PATH"
-export PATH="$HOME/repos/puppet-editor-services/:$PATH"
+insert_path "/opt/puppetlabs/bin/"
+insert_path "$HOME/repos/puppet-editor-services/"
 
 alias boltfile="vim $HOME/.puppetlabs/bolt/Puppetfile"
 alias cdb="cd $HOME/.puppetlabs/bolt"

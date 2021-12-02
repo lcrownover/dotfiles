@@ -40,7 +40,7 @@ function ssh() {
 }
 
 # clangd
-export PATH="/usr/local/opt/llvm/bin:$PATH"
+insert_path "/usr/local/opt/llvm/bin"
 
 function spushd() { pushd "$1" > /dev/null }
 function spopd() { popd > /dev/null }
@@ -63,7 +63,7 @@ function ssh_load_keys() {
 
 # rexpand tool
 REXPANDPATH="$GDRIVEDIR/code/scripts/rexpand/dist/rexpand/"
-[ -d $REXPANDPATH ] && export PATH="$REXPANDPATH:$PATH" && alias rex='rexpand'
+[ -d $REXPANDPATH ] && insert_path "$REXPANDPATH" && alias rex='rexpand'
 
 # locations and files
 function gps() { CWD=$(pwd); cd $HOME/repos/systems; git pull; cd $CWD }

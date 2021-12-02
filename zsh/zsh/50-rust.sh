@@ -1,3 +1,3 @@
-export PATH="$HOME/.cargo/bin:$PATH"
+insert_path "$HOME/.cargo/bin"
 . "$HOME/.cargo/env"
 
