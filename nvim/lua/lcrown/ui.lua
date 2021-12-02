@@ -1,6 +1,6 @@
 local theme = vim.g.theme
 
-function lsp_status()
+local function lsp_status()
     if #vim.lsp.buf_get_clients() == 0 then
         return '⚠'
     else
@@ -41,3 +41,4 @@ require("bufferline").setup{
     diagnostics = "nvim_lsp",
   }
 }
+

@@ -179,8 +179,10 @@ inoremap ? ?<c-g>u
 " nnoremap <leader>k :m .-2<cr>==
 
 " bufferline
-nnoremap <silent><c-h> :BufferLineCycleNext<cr>
-nnoremap <silent><c-l> :BufferLineCyclePrev<cr>
+nnoremap <silent><c-l> :BufferLineCycleNext<cr>
+nnoremap <silent><c-h> :BufferLineCyclePrev<cr>
+
+
 
 " telescope!
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({follow = true})<cr>
