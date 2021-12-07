@@ -182,10 +182,6 @@ inoremap ? ?<c-g>u
 " nnoremap <leader>k :m .-2<cr>==
 
 " bufferline
-" nnoremap <silent><c-h> :BufferLineCycleNext<cr>
-" nnoremap <silent><c-l> :BufferLineCyclePrev<cr>
-
-" bufferline
 nnoremap <silent><c-h> :BufferPrevious<cr>
 nnoremap <silent><c-l> :BufferNext<cr>
 
