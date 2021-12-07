@@ -36,8 +36,3 @@ require'lualine'.setup {
   extensions = {}
 }
 
-require("bufferline").setup{
-  options = {
-    diagnostics = "nvim_lsp",
-  }
-}

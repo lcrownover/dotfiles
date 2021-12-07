@@ -38,9 +38,12 @@ Plug 'windwp/nvim-autopairs'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 
+" ideally i can get rid of this at some point
+Plug 'Vimjas/vim-python-pep8-indent'
+
 " stylish!
 Plug 'hoob3rt/lualine.nvim'
-Plug 'akinsho/bufferline.nvim'
+Plug 'romgrk/barbar.nvim'
 
 " all the colors
 Plug 'joshdick/onedark.vim'
@@ -48,7 +51,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'arcticicestudio/nord-vim'
 
 " ctrl+c to comment
-Plug 'terrortylor/nvim-comment'
+Plug 'numToStr/Comment.nvim'
 
 " yay git
 Plug 'airblade/vim-gitgutter'
@@ -179,8 +182,12 @@ inoremap ? ?<c-g>u
 " nnoremap <leader>k :m .-2<cr>==
 
 " bufferline
-nnoremap <silent><c-h> :BufferLineCycleNext<cr>
-nnoremap <silent><c-l> :BufferLineCyclePrev<cr>
+" nnoremap <silent><c-h> :BufferLineCycleNext<cr>
+" nnoremap <silent><c-l> :BufferLineCyclePrev<cr>
+
+" bufferline
+nnoremap <silent><c-h> :BufferPrevious<cr>
+nnoremap <silent><c-l> :BufferNext<cr>
 
 " telescope!
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({follow = true})<cr>
@@ -303,7 +310,7 @@ let g:VM_maps["Redo"] = '<C-r>'
 nnoremap <leader>da :exe ':normal a _' . strftime('%c') . '_'<cr>
 
 " easier commenting, for some reason C-_ means C-/
-noremap <c-_> :CommentToggle<cr>
+noremap <c-_> :norm gcc<cr>
 
 " close buffer
 nnoremap <leader>w :bd<cr>
