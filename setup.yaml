@@ -117,7 +117,7 @@
     when: ansible_distribution == 'Ubuntu'
     become: yes
     ansible.builtin.apt:
-      pkg: ['ninja-build', 'gettext', 'libtool', 'libtool-bin', 'autoconf', 'automake', 'cmake', 'g++', 'pkg-config', 'unzip', 'curl', 'doxygen', 'ripgrep']
+      pkg: ['ninja-build', 'gettext', 'libtool', 'libtool-bin', 'autoconf', 'automake', 'cmake', 'g++', 'pkg-config', 'unzip', 'curl', 'doxygen', 'ripgrep', 'black']
 
   - name: install neovim build dependencies - MacOSX
     when: ansible_distribution == 'MacOSX'
