@@ -95,8 +95,12 @@ function vv() {
         arg="$1"
         ;;
     esac
-    tmux new-session -d -s $name
-    tmux new-window -d -t $name
+    tmux new-session -s $name -d
+    tmux new-window -t $name -d
     tmux send-keys -t $name:1 "vim $arg" Enter
-    tmux attach -t $name
+    if [ $TMUX ]; then
+        tmux switch-client -t $name
+    else
+        tmux attach -t $name
+    fi
 }

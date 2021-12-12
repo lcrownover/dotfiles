@@ -31,6 +31,10 @@ Plug 'onsails/lspkind-nvim'
 Plug 'windwp/nvim-autopairs'
 " Plug 'ray-x/lsp_signature.nvim'
 
+" debugging
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+
 " fancy highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
@@ -90,6 +94,7 @@ lua require('lcrown.lsp')
 " lua require('lcrown.nvim-tree')
 lua require('lcrown.nvim-comment')
 lua require('lcrown.completion')
+lua require('lcrown.debugging')
 lua require('lcrown.custom')
 
 
@@ -248,6 +253,22 @@ nnoremap <leader>b :NERDTreeFind<cr>
 " nnoremap <C-b> :NvimTreeToggle<CR>
 " nnoremap <leader>r :NvimTreeRefresh<CR>
 " nnoremap <leader>b :NvimTreeFindFile<CR>
+
+"************************************"
+"========     DEBUGGING    =========="
+"************************************"
+
+nnoremap <silent> <leader>db :lua require'dap'.toggle_breakpoint()<cr>
+nnoremap <silent> <leader>dc :lua require'dap'.continue()<cr>
+nnoremap <silent> <leader>di :lua require'dap'.step_into()<cr>
+nnoremap <silent> <leader>du :lua require'dap'.step_out()<cr>
+nnoremap <silent> <leader>do :lua require'dap'.step_over()<cr>
+nnoremap <silent> <leader>dg :lua require'dapui'.toggle()<cr>
+nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
+nnoremap <silent> <F6> :lua require'dapui'.toggle()<CR>
+nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
+nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
+nnoremap <silent> <F12> :lua require'dap'.step_out()<CR>
 
 
 "************************************"
