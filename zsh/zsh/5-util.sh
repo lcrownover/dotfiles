@@ -136,3 +136,5 @@ function rcode(){
 	# umount -l $LOCALMNTDIR
 }
 alias urcode="df -h | grep root@ | awk '{print \$NF}' | xargs umount"
+
+alias a="fc -e -"

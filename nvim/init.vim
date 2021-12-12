@@ -10,9 +10,6 @@ call plug#begin('~/.config/nvim/plugged')
 " testing my own plugin
 " Plug 'lcrownover/funzy.nvim'
 
-" temp
-" Plug 'kabouzeid/nvim-lspinstall'
-
 " telescope
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -47,6 +44,7 @@ Plug 'romgrk/barbar.nvim'
 
 " all the colors
 Plug 'joshdick/onedark.vim'
+Plug 'EdenEast/nightfox.nvim'
 " Plug 'gruvbox-community/gruvbox'
 Plug 'arcticicestudio/nord-vim'
 

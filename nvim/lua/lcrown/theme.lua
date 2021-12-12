@@ -11,6 +11,7 @@ vim.cmd [[
 -- Change the colorscheme here and it will change everywhere
 
 local theme = 'onedark'
+-- local theme = 'nightfox'
 -- local theme = 'nord'
 -- local theme = 'gruvbox'
 

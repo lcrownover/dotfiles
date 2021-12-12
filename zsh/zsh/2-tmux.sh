@@ -32,6 +32,11 @@ function tmux_lcrown() {
     tmux $OP -t lcrown
 }
 
+# split after 80 chars
+function code_split() {
+    tmux split-window -h -l $(echo "$(tput cols) 80 - p" | dc)
+}
+
 # projects
 function project_switch() {
     PROJ_FILE="$HOME/.proj-list"
@@ -74,3 +79,24 @@ function project_switch() {
     esac
 }
 alias pj="project_switch"
+
+function vv() {
+    case "$1" in
+        "")
+        name=$(basename $(pwd))
+        arg="."
+        ;;
+        ".")
+        name=$(basename $(pwd))
+        arg="."
+        ;;
+        *)
+        name=$(basename $1)
+        arg="$1"
+        ;;
+    esac
+    tmux new-session -d -s $name
+    tmux new-window -d -t $name
+    tmux send-keys -t $name:1 "vim $arg" Enter
+    tmux attach -t $name
+}
