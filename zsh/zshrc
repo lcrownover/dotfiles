@@ -20,13 +20,15 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 unsetopt AUTO_CD
 
-GEM_HOME="$HOME/.gem"
-insert_path $GEM_HOME
-eval "$(rbenv init -)"
+if [[ -d $HOME/.rbenv ]]; then
+    GEM_HOME="$HOME/.gem"
+    export PATH="$GEM_HOME:$PATH"
+    eval "$(rbenv init -)"
+fi
 
-if [ $(test -f "$HOME/.pyenv") ]; then
+if [[ -d $HOME/.pyenv ]]; then
     export PYENV_ROOT="$HOME/.pyenv"
-    insert_path "$PYENV_ROOT/shims"
+    export PATH="$PYENV_ROOT/shims:$PATH"
     eval "$(pyenv init -)"
 fi
 

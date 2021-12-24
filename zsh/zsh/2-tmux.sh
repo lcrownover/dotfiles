@@ -78,7 +78,7 @@ function project_switch() {
             ;;
     esac
 }
-alias pj="project_switch"
+# alias pj="project_switch"
 
 function vv() {
     case "$1" in

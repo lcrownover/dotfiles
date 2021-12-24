@@ -24,6 +24,9 @@ function todo() {
 # hostfmt
 alias hostfmt="$GDRIVEDIR/code/projects/hostfmt.py"
 
+# pj
+insert_path "$HOME/repos/pj/bin"
+
 # shorter clear
 alias cl="clear"
 

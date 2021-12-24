@@ -49,7 +49,7 @@ Plug 'romgrk/barbar.nvim'
 " all the colors
 Plug 'joshdick/onedark.vim'
 Plug 'EdenEast/nightfox.nvim'
-" Plug 'gruvbox-community/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'arcticicestudio/nord-vim'
 
 " ctrl+c to comment
@@ -95,7 +95,7 @@ lua require('lcrown.lsp')
 lua require('lcrown.nvim-comment')
 lua require('lcrown.completion')
 lua require('lcrown.debugging')
-lua require('lcrown.custom')
+" lua require('lcrown.custom')
 
 
 "************************************"
