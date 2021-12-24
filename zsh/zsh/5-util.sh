@@ -1,13 +1,14 @@
 # openfortivpn
 function vpn() {
-    [ -z $1 ] && return
-    VPNCONF="$HOME/.openfortivpn"
-    VPNCMD="sudo openfortivpn -c $VPNCONF --otp $1"
-    tmux list-sessions | grep openfortivpn >/dev/null     || tmux new-session -s "openfortivpn" -n "vpn" -d
-    ps ax | grep -v grep | grep -s 'sudo openfortivpn -c'
-    if [ $? -eq 1 ]; then
-        tmux send-keys -t "openfortivpn:vpn" "$VPNCMD" C-m
-    fi
+    # [ -z $1 ] && return
+    # VPNCONF="$HOME/.openfortivpn"
+    # VPNCMD="sudo openfortivpn -c $VPNCONF --otp $1"
+    # tmux list-sessions | grep openfortivpn >/dev/null     || tmux new-session -s "openfortivpn" -n "vpn" -d
+    # ps ax | grep -v grep | grep -s 'sudo openfortivpn -c'
+    # if [ $? -eq 1 ]; then
+        # tmux send-keys -t "openfortivpn:vpn" "$VPNCMD" C-m
+    # fi
+    sudo openfortivpn -c $HOME/.openfortivpn --otp push
 }
 
 # todo
