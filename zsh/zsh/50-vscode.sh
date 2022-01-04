@@ -8,7 +8,7 @@ function vscode_puppet() {
 	spushd
 	cdp
     code -n .
-	code -r puppet-control-repo/inventory.yaml
+	# code -r puppet-control-repo/inventory.yaml
 	spopd
 	tab-reset
 }
