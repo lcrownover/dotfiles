@@ -11,7 +11,8 @@ function vpn() {
 }
 
 # todo
-function todo() {
+alias todo="code -n ~/$GDRIVEDIR/notes/__todo.md"
+function vim_todo() {
     spushd .
 	cd ~/$GDRIVEDIR/notes
     tab-color 0 170 170

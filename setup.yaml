@@ -287,3 +287,14 @@
     community.general.npm:
       name: '@ansible/ansible-language-server'
       global: yes
+
+- name: configure vs code
+  hosts: localhost
+  tasks:
+
+    - name: apply background image
+      when: ansible_distribution == 'MacOSX'
+      ansible.builtin.lineinfile:
+        path: '/Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.css'
+        search_string: 'body{ background-size: cover'
+        line: "body{ background-size: cover !important; background-repeat: no-repeat; opacity: 0.95 !important; z-index: 999; background-image: url('/Users/lcrown/.gdrive/Pictures/Wallpapers/ghibli/XXLqSoQ.jpeg'); }"

@@ -25,5 +25,6 @@ function vscode_notes() {
 }
 
 alias vsp='vscode_puppet'
+alias vp='vscode_puppet'
 alias vsn='vscode_nagios'
 alias vsnotes='vscode_notes'
