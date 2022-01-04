@@ -7,7 +7,7 @@ alias c='code -n'
 function vscode_puppet() {
 	spushd
 	cdp
-    code -n .
+	code -n .
 	# code -r puppet-control-repo/inventory.yaml
 	spopd
 	tab-reset
@@ -23,8 +23,15 @@ function vscode_notes() {
 	cd ~/$GDRIVEDIR/notes
 	code .
 }
+function vscode_dotfiles() {
+	spushd
+	cd ~/dotfiles
+	code .
+	spopd
+}
 
 alias vsp='vscode_puppet'
 alias vp='vscode_puppet'
 alias vsn='vscode_nagios'
 alias vsnotes='vscode_notes'
+alias vd='vscode_dotfiles'

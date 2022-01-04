@@ -5,6 +5,8 @@
     prompt: "[sudo] password for user"
     private: yes
   hosts: localhost
+  tags:
+    - base
   tasks:
 
   - name: ensure repos dir
@@ -15,6 +17,8 @@
 
 - name: configure nodejs
   hosts: localhost
+  tags:
+    - nodejs
   tasks:
 
   - name: add node repo
@@ -40,6 +44,8 @@
 
 - name: configure tmux
   hosts: localhost
+  tags:
+    - tmux
   tasks:
 
   - name: link .tmux.conf
@@ -51,6 +57,8 @@
 
 - name: configure irb
   hosts: localhost
+  tags:
+    - irb
   tasks:
 
   - name: link .irbrc
@@ -62,6 +70,8 @@
 
 - name: configure zsh
   hosts: localhost
+  tags:
+    - zsh
   vars:
     zsh_plugin_dir: '{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins'
   tasks:
@@ -111,6 +121,8 @@
   hosts: localhost
   vars:
     nvim_src_dir: '{{ ansible_env.HOME }}/repos/neovim'
+  tags:
+    - neovim
   tasks:
 
   - name: install neovim build dependencies - Ubuntu
@@ -197,6 +209,8 @@
 
 - name: configure efm-language-server
   hosts: localhost
+  tags:
+    - neovim
   tasks:
 
   - name: install efm-language-server
@@ -218,6 +232,8 @@
 
 - name: configure lua-language-server
   hosts: localhost
+  tags:
+    - neovim
   vars:
     lua_repo_dir: '{{ ansible_env.HOME }}/repos/lua-language-server'
     lua_build_dir: '{{ lua_repo_dir }}/3rd/luamake'
@@ -250,6 +266,8 @@
 
 - name: install easy language servers
   hosts: localhost
+  tags:
+    - neovim
   tasks:
 
   - name: pyright
@@ -275,6 +293,8 @@
 
 - name: configure ansible language
   hosts: localhost
+  tags:
+    - neovim
   tasks:
 
   - name: install ansible dependencies - MacOSX
@@ -290,6 +310,8 @@
 
 - name: configure vs code
   hosts: localhost
+  tags:
+    - vscode
   tasks:
 
     - name: apply background image
@@ -298,3 +320,5 @@
         path: '/Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.css'
         search_string: 'body{ background-size: cover'
         line: "body{ background-size: cover !important; background-repeat: no-repeat; opacity: 0.95 !important; z-index: 999; background-image: url('/Users/lcrown/.gdrive/Pictures/Wallpapers/ghibli/XXLqSoQ.jpeg'); }"
+    - debug:
+        msg: "Run 'Fix Checksums: Apply' from the VS Code Command Palette and restart to fix Unsupported error"
