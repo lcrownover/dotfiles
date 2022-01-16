@@ -12,7 +12,7 @@ function vpn() {
 }
 
 # todo
-alias todo="code -n ~/$GDRIVEDIR/notes/__todo.md"
+alias todo="code -n $HOME/$GDRIVEDIR/notes; code -r $HOME/$GDRIVEDIR/notes/__todo.md"
 function vim_todo() {
     spushd .
 	cd ~/$GDRIVEDIR/notes
