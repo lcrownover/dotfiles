@@ -24,7 +24,7 @@ function vscode_notes() {
 }
 function vscode_dotfiles() {
 	spushd
-	cd ~/dotfiles
+	cd $DOTFILES
 	code .
 	spopd
 }

@@ -20,7 +20,7 @@ alias vimc='navigate_and_edit_nvim_config'
 # edit dotfiles
 function navigate_and_edit_dotfiles() {
     pushd . > /dev/null
-    cd $HOME/dotfiles
+    cd $DOTFILES
     nvim .
     popd > /dev/null
 }
