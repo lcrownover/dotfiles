@@ -134,7 +134,7 @@
   - name: install neovim build dependencies - MacOSX
     when: ansible_distribution == 'MacOSX'
     community.general.homebrew:
-      name: ['ninja', 'libtool', 'automake', 'cmake', 'pkg-config', 'gettext', 'curl', 'ripgrep']
+      name: ['ninja', 'libtool', 'automake', 'cmake', 'pkg-config', 'gettext', 'curl', 'ripgrep', 'openfortivpn']
       state: present
 
   - name: clone neovim
