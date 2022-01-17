@@ -1,5 +1,5 @@
 # dotfiles
 
-Each subdirectory contains a `link` script that's used to set itself up.
+`setup.yaml` is an ansible playbook, run it!
 
-The `link-all` script should traverse to any subdirectory that contains a `link` script and run that script.
+`ansible-playbook setup.yaml`
