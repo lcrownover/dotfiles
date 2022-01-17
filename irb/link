@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-rm -f ~/.irbrc
-ln -s "$(pwd)/irbrc" ~/.irbrc
