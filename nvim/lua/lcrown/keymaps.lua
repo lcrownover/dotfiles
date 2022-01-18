@@ -82,6 +82,11 @@ map('n', '<leader>fs',  ':lua vim.lsp.buf.formatting()<cr>',                    
 map('n', '[d',          ':lua vim.lsp.diagnostic.goto_prev()<CR>',              {silent = true})
 map('n', ']d',          ':lua vim.lsp.diagnostic.goto_next()<CR>',              {silent = true})
 
+-- fugitive
+map('n', '<leader>gs',  ':Git<cr>')
+map('n', '<leader>gc',  ':Git commit<cr>')
+map('n', '<leader>gp',  ':Git push<cr>')
+
 
 
 -- debugging
