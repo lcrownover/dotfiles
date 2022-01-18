@@ -325,6 +325,38 @@
         dest: '{{ ansible_env.HOME }}/.config/karabiner/karabiner.json'
         state: link
 
+- name: configure openfortivpn
+  hosts: localhost
+  tags:
+    - openfortivpn
+  vars_prompt:
+  - name: "vpn_password"
+    prompt: "VPN Password"
+    private: yes
+  tasks:
+    - name: install openfortivpn - MacOSX
+      when: ansible_distribution == 'MacOSX'
+      community.general.homebrew:
+        name: openfortivpn
+        state: present
+    - name: configure openfortivpn - configdir - MacOSX
+      ansible.builtin.file:
+        path: '{{ ansible_env.HOME }}/.config/openfortivpn'
+        state: directory
+    - name: configure openfortivpn - copy conf - MacOSX
+      when: ansible_distribution == 'MacOSX'
+      ansible.builtin.copy:
+        src: '{{ ansible_env.PWD }}/openfortivpn/openfortivpn.conf'
+        dest: '{{ ansible_env.HOME }}/.config/openfortivpn/openfortivpn.conf'
+        owner: lcrown
+        mode: '0600'
+    - name: configure openfortivpn - set password - MacOSX
+      when: ansible_distribution == 'MacOSX'
+      ansible.builtin.lineinfile:
+        path: '{{ ansible_env.HOME }}/.config/openfortivpn/openfortivpn.conf'
+        search_string: 'password = PASSWORD'
+        line: "password = {{ vpn_password }}"
+
 # - name: configure vs code
   # hosts: localhost
   # tags:
