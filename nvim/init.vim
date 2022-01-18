@@ -37,6 +37,7 @@ Plug 'mg979/vim-visual-multi' " C-n add cursor on match
 Plug 'tpope/vim-eunuch' " fancy commands like :ChMod, :Find
 Plug 'tpope/vim-surround' " cs{[ to change { to [
 Plug 'godlygeek/tabular'
+Plug 'tpope/vim-fugitive'
 
 " linting and language
 Plug 'rodjek/vim-puppet'
