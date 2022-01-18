@@ -308,6 +308,29 @@
       name: '@ansible/ansible-language-server'
       global: yes
 
+- name: configure karabiner-elements - MacOSX
+  hosts: localhost
+  tags:
+    - karabiner
+  tasks:
+    - name: install karabiner - MacOSX
+      when: ansible_distribution == 'MacOSX'
+      community.general.homebrew_cask:
+        name: karabiner-elements
+        state: present
+    - name: configure karabiner - assets - MacOSX
+      when: ansible_distribution == 'MacOSX'
+      ansible.builtin.file:
+        src: '{{ ansible_env.PWD }}/karabiner/assets'
+        dest: '{{ ansible_env.HOME }}/.config/karabiner/assets'
+        state: link
+    - name: configure karabiner - config - MacOSX
+      when: ansible_distribution == 'MacOSX'
+      ansible.builtin.file:
+        src: '{{ ansible_env.PWD }}/karabiner/karabiner.json'
+        dest: '{{ ansible_env.HOME }}/.config/karabiner/karabiner.json'
+        state: link
+
 # - name: configure vs code
   # hosts: localhost
   # tags:
