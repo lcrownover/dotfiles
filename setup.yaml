@@ -318,13 +318,7 @@
       community.general.homebrew_cask:
         name: karabiner-elements
         state: present
-    - name: configure karabiner - assets - MacOSX
-      when: ansible_distribution == 'MacOSX'
-      ansible.builtin.file:
-        src: '{{ ansible_env.PWD }}/karabiner/assets'
-        dest: '{{ ansible_env.HOME }}/.config/karabiner/assets'
-        state: link
-    - name: configure karabiner - config - MacOSX
+    - name: configure karabiner - MacOSX
       when: ansible_distribution == 'MacOSX'
       ansible.builtin.file:
         src: '{{ ansible_env.PWD }}/karabiner/karabiner.json'
