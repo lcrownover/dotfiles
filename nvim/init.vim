@@ -74,7 +74,7 @@ set undofile
 " fix background color in tmux
 set t_ut=
 
-set ts=4 sts=4 sw=2
+set ts=4 sts=4 sw=4
 set expandtab
 
 set splitbelow
