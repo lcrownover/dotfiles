@@ -83,6 +83,8 @@ map('n', '<leader>gc', ':Git commit<cr>')
 map('n', '<leader>gp', ':Git push<cr>')
 map('n', '<leader>gd', ':Gitvdiffsplit<cr>')
 map('n', '<leader>gb', ':Git blame<cr>')
+map('n', '<leader>gh', ':diffget //2<cr>')
+map('n', '<leader>gl', ':diffget //3<cr>')
 
 -- debugging
 map('n', '<leader>db', ":lua require'dap'.toggle_breakpoint()<cr>", {silent = true})

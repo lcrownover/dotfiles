@@ -13,13 +13,14 @@ function vpn() {
 . /usr/local/etc/profile.d/z.sh
 
 # todo
-alias todo="code -n $HOME/$GDRIVEDIR/notes; code -r $HOME/$GDRIVEDIR/notes/__todo.md"
+# alias todo="code -n $HOME/$GDRIVEDIR/notes; code -r $HOME/$GDRIVEDIR/notes/__todo.md"
+alias todo="vim_todo"
 function vim_todo() {
     spushd .
-	cd ~/$GDRIVEDIR/notes
-    tab-color 0 170 170
+	cd "$HOME/$GDRIVEDIR/notes"
+    # tab-color 0 170 170
 	nvim __todo.md
-    tab-reset
+    # tab-reset
     spopd
 }
 
