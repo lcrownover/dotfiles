@@ -349,9 +349,9 @@
     - name: configure keepassxc - set password - MacOSX
       when: ansible_distribution == 'MacOSX'
       ansible.builtin.lineinfile:
-        path: '{{ ansible_env.HOME }}/.config/zsh/0-env-keepassxc.conf'
-        search_string: 'export KEEPASSDBPW=PASSWORD'
-        line: "export KEEPASSDBPW={{ keepassxc_password }}"
+        path: '{{ ansible_env.HOME }}/.config/zsh/0-env-keepassxc.sh'
+        search_string: "export KEEPASSDBPW='PASSWORD'"
+        line: "export KEEPASSDBPW='{{ keepassxc_password }}'"
 
 - name: configure openfortivpn
   hosts: localhost
