@@ -21,14 +21,9 @@ map('i', '!', '!<c-g>u')
 map('i', '?', '?<c-g>u')
 
 -- splits
-map('n', 's-', ':split<cr>', {silent = true})
-map('n', 'sv', ':vsplit<cr>', {silent = true})
-map('n', 's\\', ':vsplit<cr>', {silent = true})
-map('n', 'sw', ':close<cr>', {silent = true})
-map('n', 'sh', '<c-w>h', {silent = true})
-map('n', 'sj', '<c-w>j', {silent = true})
-map('n', 'sk', '<c-w>k', {silent = true})
-map('n', 'sl', '<c-w>l', {silent = true})
+map('n', '<c-w>-', ':split<cr>', {silent = true})
+map('n', '<c-w>\\', ':vsplit<cr>', {silent = true})
+map('n', '<c-w>w', ':close<cr>', {silent = true})
 
 -- nerdtree
 map('n', '<leader>b', ':NERDTreeFind<cr>')

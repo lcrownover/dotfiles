@@ -325,6 +325,17 @@
         dest: '{{ ansible_env.HOME }}/.config/karabiner/karabiner.json'
         state: link
 
+- name: configure keepassxc - MacOSX
+  hosts: localhost
+  tags:
+    - keepassxc
+  tasks:
+    - name: install keepassxc - MacOSX
+      when: ansible_distribution == 'MacOSX'
+      community.general.homebrew_cask:
+        name: keepassxc
+        state: present
+
 - name: configure openfortivpn
   hosts: localhost
   tags:
