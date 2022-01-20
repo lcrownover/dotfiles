@@ -329,12 +329,29 @@
   hosts: localhost
   tags:
     - keepassxc
+  vars_prompt:
+  - name: "keepassxc_password"
+    prompt: "KeepassXC Database Password"
+    private: yes
   tasks:
     - name: install keepassxc - MacOSX
       when: ansible_distribution == 'MacOSX'
       community.general.homebrew_cask:
         name: keepassxc
         state: present
+    - name: configure keepassxc - copy conf - MacOSX
+      when: ansible_distribution == 'MacOSX'
+      ansible.builtin.copy:
+        src: '{{ ansible_env.PWD }}/keepassxc/0-env-keepassxc.sh'
+        dest: '{{ ansible_env.HOME }}/.config/zsh/0-env-keepassxc.sh'
+        owner: lcrown
+        mode: '0600'
+    - name: configure keepassxc - set password - MacOSX
+      when: ansible_distribution == 'MacOSX'
+      ansible.builtin.lineinfile:
+        path: '{{ ansible_env.HOME }}/.config/zsh/0-env-keepassxc.conf'
+        search_string: 'export KEEPASSDBPW=PASSWORD'
+        line: "export KEEPASSDBPW={{ keepassxc_password }}"
 
 - name: configure openfortivpn
   hosts: localhost
