@@ -342,14 +342,14 @@
     - name: configure keepassxc - copy conf - MacOSX
       when: ansible_distribution == 'MacOSX'
       ansible.builtin.copy:
-        src: '{{ ansible_env.PWD }}/keepassxc/0-env-keepassxc.sh'
-        dest: '{{ ansible_env.HOME }}/.config/zsh/0-env-keepassxc.sh'
+        src: '{{ ansible_env.PWD }}/keepassxc/01-env-keepassxc.sh'
+        dest: '{{ ansible_env.HOME }}/.config/zsh/01-env-keepassxc.sh'
         owner: lcrown
         mode: '0600'
     - name: configure keepassxc - set password - MacOSX
       when: ansible_distribution == 'MacOSX'
       ansible.builtin.lineinfile:
-        path: '{{ ansible_env.HOME }}/.config/zsh/0-env-keepassxc.sh'
+        path: '{{ ansible_env.HOME }}/.config/zsh/01-env-keepassxc.sh'
         search_string: "export KEEPASSDBPW='PASSWORD'"
         line: "export KEEPASSDBPW='{{ keepassxc_password }}'"
 
