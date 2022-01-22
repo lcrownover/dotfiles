@@ -1,0 +1,7 @@
+Host github.com
+    UseKeychain yes
+    ServerAliveInterval 120
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/keys/github/id_rsa
+    IdentitiesOnly yes
+

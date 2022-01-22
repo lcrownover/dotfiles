@@ -26,7 +26,8 @@ Plug 'windwp/nvim-autopairs'
 Plug 'hoob3rt/lualine.nvim'
 Plug 'romgrk/barbar.nvim'
 Plug 'joshdick/onedark.vim'
-" Plug 'gruvbox-community/gruvbox'
+Plug 'arcticicestudio/nord-vim'
+Plug 'gruvbox-community/gruvbox'
 " Plug 'overcache/NeoSolarized'
 
 Plug 'numToStr/Comment.nvim' " ctrl+c to comment

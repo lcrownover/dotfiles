@@ -385,6 +385,27 @@
         search_string: 'password = PASSWORD'
         line: "password = {{ vpn_password }}"
 
+- name: configure ssh
+  hosts: localhost
+  tags:
+    - ssh
+  tasks:
+  - name: link .ssh/config
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/ssh/config'
+      dest: '{{ ansible_env.HOME }}/.ssh/config'
+      state: link
+  - name: link .ssh/config.d/
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/ssh/config.d'
+      dest: '{{ ansible_env.HOME }}/.ssh/config.d'
+      state: link
+  - name: ensure ssh keys
+    ansible.builtin.shell:
+      executable: /usr/local/bin/zsh
+      cmd: 'source ~/.zshrc && ensure_ssh_keys'
+      creates: '{{ ansible_env.HOME }}/.ssh/keys'
+
 # - name: configure vs code
   # hosts: localhost
   # tags:

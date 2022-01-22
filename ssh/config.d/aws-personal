@@ -1,0 +1,8 @@
+Host *amazonaws.com
+    UseKeychain yes
+    ServerAliveInterval 120
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/keys/aws-personal/id_rsa
+    IdentitiesOnly yes
+
+
