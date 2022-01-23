@@ -98,6 +98,10 @@ map('n', '<F12>', ":lua require'dap'.step_out()<CR>", {silent = true})
 map('n', '<leader>t', ':terminal<cr>i')
 map('t', '<esc>', '<c-\\><c-n>')
 map('t', '<c-v><esc>', '<esc>')
+-- open fancy split terminal
+map('n', '<c-t>', ':lua toggle_terminal()<CR>', {silent = true})
+map('i', '<c-t>', '<ESC>:lua toggle_terminal()<CR>', {silent = true})
+map('t', '<c-t>', '<c-\\><c-n>:lua toggle_terminal()<CR>', {silent = true})
 
 -- remaps to handle terminal usage and command execution
 map('n', '<leader>xc', ':vnew <bar> :setlocal buftype=nofile <bar> r !<space>')
