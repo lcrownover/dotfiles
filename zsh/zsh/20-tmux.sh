@@ -4,22 +4,14 @@ function set_tmux_window_name() {
     [[ -n "$TMUX" ]] && tmux rename-window "$1"
 }
 
-function work() {
+function main() {
     [[ -n $TMUX ]] && OP="switch" || OP="attach"
-    $(tmux ls | grep -q work) || tmux new-session -d -s work
-    tmux $OP -t work
+    $(tmux ls | grep -q main) || tmux new-session -d -s main
+    tmux $OP -t main
 }
 
-function unwork() {
-    $(tmux ls | grep -q work) && tmux kill-session -t work
-}
-
-function tmux_lcrown() {
-    [[ -n $TMUX ]] && OP="switch" || OP="attach"
-    if ! $(tmux ls | grep -q lcrown); then
-        tmux new-session -d -s lcrown
-    fi
-    tmux $OP -t lcrown
+function unmain() {
+    $(tmux ls | grep -q main) && tmux kill-session -t main
 }
 
 # split after 80 chars

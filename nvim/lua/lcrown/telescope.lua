@@ -1,3 +1,4 @@
+require('telescope').load_extension('fzf')
 require('telescope').setup{
     extensions = {
         fzy = {
@@ -61,8 +62,6 @@ require('telescope').setup{
         },
     }
 }
-
-require('telescope').load_extension('fzf')
 
 local M = {}
 
