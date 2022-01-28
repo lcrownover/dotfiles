@@ -7,21 +7,29 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
+" treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" telescope
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" autocompletion
 Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+
+" LSP
+Plug 'neovim/nvim-lspconfig'
 Plug 'onsails/lspkind-nvim'
-Plug 'windwp/nvim-autopairs'
+
 
 Plug 'hoob3rt/lualine.nvim'
 Plug 'romgrk/barbar.nvim'
@@ -30,6 +38,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'gruvbox-community/gruvbox'
 " Plug 'overcache/NeoSolarized'
 
+Plug 'windwp/nvim-autopairs'
 Plug 'numToStr/Comment.nvim' " ctrl+c to comment
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
@@ -128,14 +137,12 @@ function! ToggleSignColumn()
     endif
 endfunction
 
-
+lua require('lcrown.devicons')
+lua require('lcrown.treesitter')
+lua require('lcrown.lsp')
 lua require('lcrown.theme')
 lua require('lcrown.telescope')
-lua require('lcrown.treesitter')
-lua require('lcrown.devicons')
-lua require('lcrown.lsp')
 lua require('lcrown.nvim-comment')
-lua require('lcrown.completion')
 lua require('lcrown.keymaps')
 lua require('lcrown.terminal')
 " lua require('lcrown.debugging')

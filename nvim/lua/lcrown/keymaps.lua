@@ -58,20 +58,6 @@ map('n', '<leader>l', "<cmd>lua require('telescope.builtin').git_commits()<cr>",
 map('n', '<c-f>', "<cmd>lua require('telescope.builtin').live_grep()<cr>", {silent = true})
 map('n', '<c-p>', "<cmd>lua require('telescope.builtin').find_files()<cr>", {silent = true})
 
--- lsp remaps
-map('n', 'gd', ':lua vim.lsp.buf.definition()<cr>', {silent = true})
-map('n', 'gD', ':lua vim.lsp.buf.declaration()<cr>', {silent = true})
-map('n', 'gr', ':lua vim.lsp.buf.references()<cr>', {silent = true})
-map('n', 'gi', ':lua vim.lsp.buf.implementation()<cr>', {silent = true})
-map('n', 'gn', ':lua vim.lsp.buf.rename()<cr>', {silent = true})
-map('n', 'K', ':lua vim.lsp.buf.hover()<CR>', {silent = true})
-map('n', '<C-k>', ':lua vim.lsp.buf.signature_help()<CR>', {silent = true})
-map('n', 'ga', ':lua vim.lsp.buf.code_action()<CR>', {silent = true})
-map('n', '<leader>e', ':lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', {silent = true})
-map('n', '<leader>fs', ':lua vim.lsp.buf.formatting()<cr>', {silent = true})
-map('n', '[d', ':lua vim.lsp.diagnostic.goto_prev()<CR>', {silent = true})
-map('n', ']d', ':lua vim.lsp.diagnostic.goto_next()<CR>', {silent = true})
-
 -- fugitive
 map('n', '<leader>gs', ':Git<cr>')
 map('n', '<leader>gc', ':Git commit<cr>')

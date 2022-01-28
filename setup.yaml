@@ -8,11 +8,15 @@
   tags:
     - base
   tasks:
-
   - name: ensure repos dir
     ansible.builtin.file:
       path: '{{ ansible_env.HOME }}/repos'
       state: directory
+  - name: install tools - MacOSX
+    when: ansible_distribution == 'MacOSX'
+    community.general.homebrew:
+      name: ['go']
+      state: present
 
 
 - name: configure nodejs
@@ -46,7 +50,20 @@
   hosts: localhost
   tags:
     - tmux
+  vars:
+    tmux_plugin_dir: '{{ ansible_env.HOME }}/.config/tmux'
   tasks:
+  # - name: ensure tmux plugin dir
+    # ansible.builtin.file:
+      # path: '{{ tmux_plugin_dir }}'
+      # state: directory
+#
+  # - name: install tmux powerline
+    # ansible.builtin.git:
+      # repo: https://github.com/erikw/tmux-powerline.git
+      # dest: '{{ tmux_plugin_dir }}/tmux-powerline'
+      # clone: yes
+      # update: yes
 
   - name: link .tmux.conf
     ansible.builtin.file:
@@ -116,6 +133,12 @@
       clone: yes
       update: yes
 
+  # - name: install zsh vi mode
+    # ansible.builtin.git:
+      # repo: https://github.com/jeffreytse/zsh-vi-mode
+      # dest: '{{ zsh_plugin_dir }}/zsh-vi-mode'
+      # clone: yes
+      # update: yes
 
 - name: configure nvim
   hosts: localhost
@@ -212,6 +235,10 @@
   tags:
     - neovim
   tasks:
+  - name: install gopls
+    ansible.builtin.command:
+      cmd: go install golang.org/x/tools/gopls@latest
+      creates: '{{ ansible_env.HOME }}/go/bin/gopls'
 
   - name: install efm-language-server
     ansible.builtin.command:

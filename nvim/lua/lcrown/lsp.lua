@@ -1,24 +1,80 @@
+-- lspkind shows icons for sources
+local lspkind = require('lspkind')
+
+---------------------------------------
+-- nvim-cmp (completion)
+---------------------------------------
+
+vim.opt.completeopt = {"menuone","noinsert","noselect"}
+
+local cmp = require("cmp")
+cmp.setup {
+  formatting = {
+    format = lspkind.cmp_format({
+      with_text = false,
+      maxwidth = 50,
+    })
+  },
+  snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body)
+      end,
+    },
+  min_length = 0, -- allow for `from package import _` in Python
+  mapping = {
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
+    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.close(),
+    ["<CR>"] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true
+    }
+  },
+  sources = {
+    {name = "nvim_lsp"},
+    {name = "luasnip"},
+    {name = "nvim_lua"},
+    {name = "buffer"},
+    {name = "path"},
+  }
+}
+
+-- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 
 ---------------------------------------
 -- lspconfig
 ---------------------------------------
 
-vim.o.completeopt = "menuone,noinsert,noselect"
 vim.o.shortmess = vim.o.shortmess .. "c"
 
 local lsp = require('lspconfig')
 
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local custom_attach = function(_, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
+local on_attach = function(client, bufnr)
   --Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  local opts = { noremap=true, silent=true }
+  -- lsp remaps
+  vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+  vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
+  vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+  vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+  vim.keymap.set('n', 'gn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+  vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.keymap.set('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.keymap.set('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  vim.keymap.set('n', '<leader>fs', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
+  vim.keymap.set('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  vim.keymap.set('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 
   -- Mappings.
-  local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   -- buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -53,7 +109,13 @@ local basic_servers = {
     "perlls",       -- perl
 }
 for _, server in ipairs(basic_servers) do
-  lsp[server].setup { on_attach = custom_attach }
+  lsp[server].setup {
+    on_attach = on_attach,
+    flags = {
+        -- This will be the default in neovim 0.7+
+        debounce_text_changes = 150,
+    },
+  }
 end
 
 
@@ -62,7 +124,7 @@ end
 ---------------------------------------
 
 lsp['pyright'].setup {
-  on_attach = custom_attach,
+  on_attach = on_attach,
   settings = {
     python = {
       analysis = {
@@ -77,7 +139,7 @@ lsp['pyright'].setup {
 ---------------------------------------
 
 lsp['solargraph'].setup {
-  on_attach = custom_attach,
+  on_attach = on_attach,
   flags = {
     debounce_text_changes = 150,
   },
@@ -111,7 +173,7 @@ table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 lsp['sumneko_lua'].setup {
-  on_attach = custom_attach,
+  on_attach = on_attach,
   cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
   settings = {
     Lua = {
@@ -152,14 +214,16 @@ require('rust-tools').setup({
       other_hints_prefix = "",
     },
   },
-  server = {on_attach = custom_attach},
+  server = {on_attach = on_attach},
 })
 
 ---------------------------------------
 -- terraform
 ---------------------------------------
 
-lsp['terraformls'].setup{}
+lsp['terraformls'].setup{
+  on_attach = on_attach
+}
 
 
 ---------------------------------------
@@ -167,7 +231,7 @@ lsp['terraformls'].setup{}
 ---------------------------------------
 
 lsp['ansiblels'].setup{
-  -- on_attach = custom_attach,
+  on_attach = on_attach,
   filetypes = { "yaml", "yml", "yml.ansible", "yaml.ansible" },
   settings = {
     ansible = {
@@ -184,7 +248,10 @@ lsp['ansiblels'].setup{
 ---------------------------------------
 
 lsp['efm'].setup {
-  init_options = {documentFormatting = true},
+  init_options = {
+    documentFormatting = true
+  },
+  on_attach = on_attach,
   filetypes = {
     "lua",
     "python",
@@ -201,7 +268,7 @@ lsp['efm'].setup {
       -- ruby: formatting is handled by solargraph
       -- rust: formatting is handled by rust_analyzer
     }
-  }
+  },
 }
 
 ---------------------------------------
@@ -212,13 +279,6 @@ lsp['efm'].setup {
 require('lspkind').init({
     -- enables text annotations
     with_text = true,
-
-    -- default symbol map
-    -- can be either 'default' (requires nerd-fonts font) or
-    -- 'codicons' for codicon preset (requires vscode-codicons font)
-    --
-    -- default: 'default'
-    -- preset = 'codicons',
     preset = 'default',
 
     -- override preset symbols
@@ -252,6 +312,11 @@ require('lspkind').init({
     },
 })
 
+
+-- autopairs config
+require('nvim-autopairs').setup({
+  disable_filetype = { "TelescopePrompt" , "vim" },
+})
 ---------------------------------------
 -- lspsaga
 ---------------------------------------

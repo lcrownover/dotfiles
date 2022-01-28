@@ -23,6 +23,13 @@ function vim_todo() {
     # tab-reset
     spopd
 }
+function tmux_todo() {
+    session="todo"
+    [[ -n $TMUX ]] && OP="switch" || OP="attach"
+    $(tmux ls | grep -q $session) || tmux new-session -d -s $session
+    tmux $OP -t $session
+    # tmux send-keys -t "$session:1" "vim_todo" C-m
+}
 
 # hostfmt
 alias hostfmt="$GDRIVEDIR/code/projects/hostfmt.py"
