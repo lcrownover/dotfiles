@@ -19,7 +19,7 @@ function vscode_nagios() {
 }
 function vscode_notes() {
 	spushd
-	cd ~/$GDRIVEDIR/notes
+	cd ~/$ONEDRIVEDIR/notes
 	code .
 }
 function vscode_dotfiles() {
