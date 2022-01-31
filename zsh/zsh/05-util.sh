@@ -17,7 +17,7 @@ function vpn() {
 alias todo="vim_todo"
 function vim_todo() {
     spushd .
-	cd "$HOME/$ONEDRIVEDIR/notes"
+	cd "$NOTESDIR"
     # tab-color 0 170 170
 	nvim __todo.md
     # tab-reset
@@ -85,7 +85,7 @@ function gps() { CWD=$(pwd); cd $HOME/repos/systems; git pull; cd $CWD }
 export S='~/.servers.txt'
 
 # workflows
-function cred() { /usr/bin/env python3 $GDRIVEDIR/code/scripts/workflows/cred.py $1 | pbcopy }
+# function cred() { /usr/bin/env python3 $GDRIVEDIR/code/scripts/workflows/cred.py $1 | pbcopy }
 
 # python
 function venv() {

@@ -51,7 +51,7 @@ function vim_nagios() { cdnag; vim }
 
 function vim_notes() {
     spushd .
-	cd ~/$ONEDRIVEDIR/notes
+	cd "$NOTESDIR"
     tab-color 0 170 170
 	vim README.md
     tab-reset

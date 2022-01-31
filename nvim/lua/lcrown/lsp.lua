@@ -255,7 +255,7 @@ lsp['efm'].setup {
   filetypes = {
     "lua",
     "python",
-    "go",
+    -- "go",
     "json",
   },
   settings = {
@@ -264,7 +264,7 @@ lsp['efm'].setup {
       python = { {formatCommand = "black --quiet -", formatStdin = true} },
       lua = { {formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb", formatStdin = true} },
       json = { {formatCommand = "jq .", formatStdin = true} },
-      go = { {formatCommand = "gofmt", formatStdin = true} },
+      -- go = { {formatCommand = "gofmt", formatStdin = true} },
       -- ruby: formatting is handled by solargraph
       -- rust: formatting is handled by rust_analyzer
     }

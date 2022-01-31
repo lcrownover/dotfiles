@@ -34,6 +34,8 @@ require('telescope').setup{
             mappings = {
                 i = {
                     ["<leader>w"] = require("telescope.actions").delete_buffer,
+                    ["<c-k>"] = require("telescope.actions").move_selection_previous,
+                    ["<c-j>"] = require("telescope.actions").move_selection_next,
                 },
                 n = {
                     ["<leader>w"] = require("telescope.actions").delete_buffer,
@@ -53,7 +55,7 @@ M.grep_notes = function()
     require('telescope.builtin').live_grep({
         prompt_title = "< Grep Notes >",
         shorten_path = true,
-        search_dirs = {"~/OneDrive - University Of Oregon/notes"},
+        search_dirs = {"~/.gdrive/notes"},
     })
 end
 
