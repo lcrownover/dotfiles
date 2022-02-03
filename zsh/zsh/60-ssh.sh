@@ -6,6 +6,7 @@ function ensure_ssh_keys() {
     d="$HOME/.ssh/keys/uoregon"
     mkdir -p $d
     printf "$(get_from_keepass 'uoregon' 'private_key')" > "$d/id_rsa"
+    printf "$(get_from_keepass 'uoregon' 'public_key')" > "$d/id_rsa.pub"
     chmod 600 "$d/id_rsa"
 
     # github
