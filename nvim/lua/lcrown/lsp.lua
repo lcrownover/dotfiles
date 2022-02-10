@@ -11,7 +11,7 @@ local cmp = require("cmp")
 cmp.setup {
   formatting = {
     format = lspkind.cmp_format({
-      with_text = false,
+      mode = false,
       maxwidth = 50,
     })
   },
@@ -278,7 +278,7 @@ lsp['efm'].setup {
 -- fancy symbols for completion
 require('lspkind').init({
     -- enables text annotations
-    with_text = true,
+    mode = true,
     preset = 'default',
 
     -- override preset symbols

@@ -1,3 +1,5 @@
+Include config.d/*
+
 # uoregon should be the default
 Host *
     UseKeychain yes
@@ -7,5 +9,3 @@ Host *
     IdentitiesOnly yes
     StrictHostKeyChecking accept-new
 
-
-Include config.d/*
