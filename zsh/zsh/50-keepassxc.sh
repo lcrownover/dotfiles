@@ -5,5 +5,5 @@ function get_from_keepass() {
     fi
     entry="$1"
     if [ "$2" = "" ]; then attribute="password"; else attribute="$2"; fi
-    printf "$(echo $KEEPASSDBPW | /usr/local/bin/keepassxc-cli show $HOME/$GDRIVEDIR/lcrown.kdbx "$entry" --attributes "$attribute" -q)"
+    printf "$(echo $KEEPASSDBPW | /opt/homebrew/bin/keepassxc-cli show $HOME/$GDRIVEDIR/lcrown.kdbx "$entry" --attributes "$attribute" -q)"
 }

@@ -10,7 +10,7 @@ function vpn() {
 }
 
 # z navigation
-. /usr/local/etc/profile.d/z.sh
+. /opt/homebrew/etc/profile.d/z.sh
 
 # todo
 # alias todo="code -n $HOME/$ONEDRIVEDIR/notes; code -r $HOME/$ONEDRIVEDIR/notes/__todo.md"

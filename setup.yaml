@@ -95,7 +95,7 @@
 
   - name: install oh-my-zsh
     ansible.builtin.command:
-      cmd: '/usr/bin/env sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
+      cmd: 'curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh'
       creates: '{{ ansible_env.HOME }}/.oh-my-zsh'
 
   - name: link .zshrc
@@ -148,46 +148,46 @@
     - neovim
   tasks:
 
-  - name: install neovim build dependencies - Ubuntu
-    when: ansible_distribution == 'Ubuntu'
-    become: yes
-    ansible.builtin.apt:
-      pkg: ['ninja-build', 'gettext', 'libtool', 'libtool-bin', 'autoconf', 'automake', 'cmake', 'g++', 'pkg-config', 'unzip', 'curl', 'doxygen', 'ripgrep', 'black']
-
-  - name: install neovim build dependencies - MacOSX
-    when: ansible_distribution == 'MacOSX'
-    community.general.homebrew:
-      name: ['ninja', 'libtool', 'automake', 'cmake', 'pkg-config', 'gettext', 'curl', 'ripgrep', 'openfortivpn', 'z']
-      state: present
-
-  - name: clone neovim
-    ansible.builtin.git:
-      repo: https://github.com/neovim/neovim
-      dest: '{{ nvim_src_dir }}'
-      clone: yes
-      update: no
-
-  - name: make neovim
-    ansible.builtin.command:
-      cmd: '/usr/bin/env make CMAKE_BUILD_TYPE=RelWithDebInfo'
-      chdir: '{{ nvim_src_dir }}'
-      creates: '{{ nvim_src_dir }}/build'
-
-  - name: install neovim
-    become: yes
-    ansible.builtin.command:
-      cmd: 'make install'
-      chdir: '{{ nvim_src_dir }}'
-      creates: '/usr/local/bin/nvim'
-
-  - name: link nvim - Ubuntu
-    become: yes
-    when: ansible_distribution == 'Ubuntu'
-    ansible.builtin.file:
-      src: '/usr/local/bin/nvim'
-      dest: '/usr/bin/nvim'
-      state: link
-      force: yes
+  # - name: install neovim build dependencies - Ubuntu
+    # when: ansible_distribution == 'Ubuntu'
+    # become: yes
+    # ansible.builtin.apt:
+      # pkg: ['ninja-build', 'gettext', 'libtool', 'libtool-bin', 'autoconf', 'automake', 'cmake', 'g++', 'pkg-config', 'unzip', 'curl', 'doxygen', 'ripgrep', 'black']
+#
+  # - name: install neovim build dependencies - MacOSX
+    # when: ansible_distribution == 'MacOSX'
+    # community.general.homebrew:
+      # name: ['ninja', 'libtool', 'automake', 'cmake', 'pkg-config', 'gettext', 'curl', 'ripgrep', 'openfortivpn', 'z']
+      # state: present
+#
+  # - name: clone neovim
+    # ansible.builtin.git:
+      # repo: https://github.com/neovim/neovim
+      # dest: '{{ nvim_src_dir }}'
+      # clone: yes
+      # update: no
+#
+  # - name: make neovim
+    # ansible.builtin.command:
+      # cmd: '/usr/bin/env make CMAKE_BUILD_TYPE=RelWithDebInfo'
+      # chdir: '{{ nvim_src_dir }}'
+      # creates: '{{ nvim_src_dir }}/build'
+#
+  # - name: install neovim
+    # become: yes
+    # ansible.builtin.command:
+      # cmd: 'make install'
+      # chdir: '{{ nvim_src_dir }}'
+      # creates: '/usr/local/bin/nvim'
+#
+  # - name: link nvim - Ubuntu
+    # become: yes
+    # when: ansible_distribution == 'Ubuntu'
+    # ansible.builtin.file:
+      # src: '/usr/local/bin/nvim'
+      # dest: '/usr/bin/nvim'
+      # state: link
+      # force: yes
 
   - name: create nvim configdir
     ansible.builtin.file:
@@ -211,11 +211,6 @@
     ansible.builtin.stat:
       path: '{{ ansible_env.HOME }}/.config/nvim/lua'
     register: nvim_lua_dir
-
-  - name: backup nvim lua dir if exists
-    when: nvim_lua_dir.stat.isdir
-    ansible.builtin.command:
-      cmd: 'mv ~/.config/nvim/lua ~/.config/nvim/lua.bak'
 
   - name: link lua
     ansible.builtin.file:
@@ -261,6 +256,7 @@
   hosts: localhost
   tags:
     - neovim
+    - lua-language-server
   vars:
     lua_repo_dir: '{{ ansible_env.HOME }}/repos/lua-language-server'
     lua_build_dir: '{{ lua_repo_dir }}/3rd/luamake'
@@ -361,15 +357,15 @@
     prompt: "KeepassXC Database Password"
     private: yes
   tasks:
-    - name: install keepassxc - MacOSX
-      when: ansible_distribution == 'MacOSX'
-      community.general.homebrew_cask:
-        name: keepassxc
-        state: present
+    # - name: install keepassxc - MacOSX
+      # when: ansible_distribution == 'MacOSX'
+      # community.general.homebrew_cask:
+        # name: keepassxc
+        # state: present
     - name: configure keepassxc - copy conf - MacOSX
       when: ansible_distribution == 'MacOSX'
       ansible.builtin.copy:
-        src: '{{ ansible_env.PWD }}/keepassxc/01-env-keepassxc.sh'
+        src: '{{ ansible_env.PWD }}/keepassxc/01-env-keepassxc.sh.template'
         dest: '{{ ansible_env.HOME }}/.config/zsh/01-env-keepassxc.sh'
         owner: lcrown
         mode: '0600'
@@ -419,18 +415,18 @@
   tasks:
   - name: link .ssh/config
     ansible.builtin.file:
-      src: '{{ ansible_env.PWD }}/ssh/config'
+      src: '{{ ansible_env.HOME }}/.gdrive/config/ssh/config'
       dest: '{{ ansible_env.HOME }}/.ssh/config'
       state: link
   - name: link .ssh/config.d/
     ansible.builtin.file:
-      src: '{{ ansible_env.PWD }}/ssh/config.d'
+      src: '{{ ansible_env.HOME }}/.gdrive/config/ssh/config.d'
       dest: '{{ ansible_env.HOME }}/.ssh/config.d'
       state: link
   - name: ensure ssh keys
     ansible.builtin.shell:
-      executable: /usr/local/bin/zsh
-      cmd: 'source ~/.zshrc && ensure_ssh_keys'
+      executable: zsh
+      cmd: 'source ~/.zshenv && ensure_ssh_keys'
       creates: '{{ ansible_env.HOME }}/.ssh/keys'
 
 # - name: configure vs code

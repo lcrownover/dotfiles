@@ -1,7 +1,0 @@
-Host is-lc-rh8
-  HostName is-lc-rh8
-  User root
-
-Host satellite.uoregon.edu
-  HostName satellite.uoregon.edu
-  User root

@@ -1,4 +1,0 @@
-Host factorio factorio-hellscape.westus2.cloudapp.azure.com
-    HostName factorio-hellscape.westus2.cloudapp.azure.com
-    IdentityFile ~/GoogleDrive/Entertainment/Games/factorio/ssh/id_rsa
-    User factorio

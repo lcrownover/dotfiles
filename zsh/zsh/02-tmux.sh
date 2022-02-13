@@ -5,9 +5,10 @@ function set_tmux_window_name() {
 }
 
 function main() {
-    [[ -n $TMUX ]] && OP="switch" || OP="attach"
-    $(tmux ls | grep -q main) || tmux new-session -d -s main
-    tmux $OP -t main
+    # [[ -n $TMUX ]] && OP="switch" || OP="attach"
+    # $(tmux ls | grep -q main) || tmux new-session -d -s main
+    # tmux $OP -t main
+    tmux new-session -A -s main
 }
 
 function unmain() {
@@ -86,3 +87,17 @@ function vv() {
         tmux attach -t $name
     fi
 }
+
+ts() {
+    case "$1" in
+        "")
+            tmux list-sessions
+            ;;
+        *)
+            [[ -n $TMUX ]] && OP="switch" || OP="attach"
+            $(tmux ls | grep -q "$1") || tmux new-session -d -s "$1"
+            tmux $OP -t "$1"
+            ;;
+    esac
+}
+

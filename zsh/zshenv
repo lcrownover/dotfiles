@@ -9,12 +9,15 @@ export ZSH_CONF_DIR="$HOME/.config/zsh"
 function insert_path() { [ $SHLVL -eq 1 ] && export PATH="$1:$PATH" }
 function append_path() { [ $SHLVL -eq 1 ] && export PATH="$PATH:$1" }
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Source all my configs from the conf dir
 for f in $ZSH_CONF_DIR/*.sh; do
     source $f
 done
 
-. "$HOME/.cargo/env"
+if [ -z $TMUX ]; then
+    main
+fi
 
-# autoload -U +X bashcompinit && bashcompinit
-# complete -o nospace -C /usr/local/bin/terraform terraform
+

@@ -155,18 +155,19 @@ lsp['solargraph'].setup {
 ---------------------------------------
 USER = vim.fn.expand('$USER')
 
-local homedir = os.getenv("HOME")
-local platform
-for i in string.gmatch(homedir, "([^/]+)") do
-  if i == "Users" then
-    platform = "macOS"
-  elseif i == "home" then
-    platform = "Linux"
-  end
-end
+-- local homedir = os.getenv("HOME")
+-- local platform
+-- for i in string.gmatch(homedir, "([^/]+)") do
+  -- if i == "Users" then
+    -- platform = "macOS"
+  -- elseif i == "home" then
+    -- platform = "Linux"
+  -- end
+-- end
 
 local sumneko_root_path = os.getenv("HOME") .. "/repos/lua-language-server"
-local sumneko_binary = os.getenv("HOME") .. "/repos/lua-language-server/bin/" .. platform .. "/lua-language-server"
+--local sumneko_binary = os.getenv("HOME") .. "/repos/lua-language-server/bin/" .. platform .. "/lua-language-server"
+local sumneko_binary = os.getenv("HOME") .. "/repos/lua-language-server/bin/lua-language-server"
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
@@ -232,7 +233,7 @@ lsp['terraformls'].setup{
 
 lsp['ansiblels'].setup{
   on_attach = on_attach,
-  filetypes = { "yaml", "yml", "yml.ansible", "yaml.ansible" },
+  filetypes = { "yml", "yml.ansible", "yaml.ansible" },
   settings = {
     ansible = {
       python = {

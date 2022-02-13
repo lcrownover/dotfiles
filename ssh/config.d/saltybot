@@ -1,4 +1,0 @@
-Host saltybot saltybot.centralus.cloudapp.azure.com
-    HostName saltybot.centralus.cloudapp.azure.com
-    IdentityFile ~/.ssh/id_rsa
-    User lcrown 
