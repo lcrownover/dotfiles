@@ -112,10 +112,6 @@ local basic_servers = {
 for _, server in ipairs(basic_servers) do
   lsp[server].setup {
     on_attach = on_attach,
-    flags = {
-        -- This will be the default in neovim 0.7+
-        debounce_text_changes = 150,
-    },
   }
 end
 

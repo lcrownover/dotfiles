@@ -82,16 +82,13 @@ REXPANDPATH="$GDRIVEDIR/code/scripts/rexpand/dist/rexpand/"
 # locations and files
 function gps() { CWD=$(pwd); cd $HOME/repos/systems; git pull; cd $CWD }
 
-export S='~/.servers.txt'
-
-# workflows
-# function cred() { /usr/bin/env python3 $GDRIVEDIR/code/scripts/workflows/cred.py $1 | pbcopy }
+# export S='~/.servers.txt'
 
 # python
-function venv() {
-    if [ "$1" = "new" ]; then python3 -m venv venv; fi
-    source ./venv/bin/activate
-}
+# function venv() {
+    # if [ "$1" = "new" ]; then python3 -m venv venv; fi
+    # source ./venv/bin/activate
+# }
 
 function pyclean () {
         find . -type f -name "*.py[co]" -delete
@@ -99,34 +96,21 @@ function pyclean () {
 }
 
 # ping everything in servers.txt
-function mping() {
-	for host in $(cat $HOME/.servers.txt); do
-    		ping -c2 "$host" &>/dev/null && printf "success -- " || printf "fail -- "
-		echo "$host"
-	done
-}
+# function mping() {
+	# for host in $(cat $HOME/.servers.txt); do
+    		# ping -c2 "$host" &>/dev/null && printf "success -- " || printf "fail -- "
+		# echo "$host"
+	# done
+# }
 
-function vvssh(){
-	title $1
-	ssh $1 -t 'screen -h 2000 -dRR -S lcrown'
-}
+# function vvssh(){
+	# title $1
+	# ssh $1 -t 'screen -h 2000 -dRR -S lcrown'
+# }
 
 function pushdns(){
 	bolt command run --targets is-nsdb1 "puppet agent --test"
 	bolt command run --targets phloem "puppet agent --test"
-}
-
-function rpw(){
-	SYS_REPO=$HOME/repos/systems
-	CREDF=$HOME/.credentials.yaml
-	HOSTNAME=$1
-	GROUP=$2
-	if [ "$GROUP" = "ids" ]; then
-		KEY=$(grep ids_seed: $CREDF | awk -F"\'" '{print $2}')
-	else
-		KEY=$(grep sys_seed: $CREDF | awk -F"\'" '{print $2}')
-	fi
-	ruby $SYS_REPO/root_password/generator/root_password_generator.rb --hostname $HOSTNAME --key $KEY | tail -n 1 | tr -d '\n'
 }
 
 function rcode(){
