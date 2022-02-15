@@ -1,5 +1,5 @@
 -- Functional wrapper for mapping custom keybindings
-function map(mode, lhs, rhs, opts)
+local function map(mode, lhs, rhs, opts)
     local options = {noremap = true}
     if opts then options = vim.tbl_extend("force", options, opts) end
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
@@ -46,6 +46,7 @@ map('n', '<leader>fp', "<cmd>lua require('telescope.builtin').file_browser()<cr>
 map('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", {silent = true})
 map('n', '<leader>fm', "<cmd>lua require('telescope.builtin').marks()<cr>", {silent = true})
 map('n', '<leader>fr', "<cmd>lua require('telescope.builtin').resume()<cr>", {silent = true})
+map('n', '<leader>f;', "<cmd>lua require('telescope.builtin').resume()<cr>", {silent = true})
 
 -- telescope custom locations
 map('n', '<leader>fv', "<cmd>lua require('telescope.builtin').find_files { cwd = '~/.config/nvim', follow = true}<cr>", {silent = true})

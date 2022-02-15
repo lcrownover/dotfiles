@@ -101,3 +101,14 @@ ts() {
     esac
 }
 
+tn() {
+    case "$1" in
+        "")
+            tmux rename-window "zsh"
+            ;;
+        *)
+            tmux rename-window "$1"
+            ;;
+    esac
+}
+
