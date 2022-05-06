@@ -15,7 +15,9 @@
   - name: install tools - MacOSX
     when: ansible_distribution == 'MacOSX'
     community.general.homebrew:
-      name: ['go']
+      name:
+      - go
+      - rectangle
       state: present
 
 
@@ -237,7 +239,7 @@
 
   - name: install efm-language-server
     ansible.builtin.command:
-      cmd: go get github.com/mattn/efm-langserver
+      cmd: go install github.com/mattn/efm-langserver@latest
       creates: '{{ ansible_env.HOME }}/go/bin/efm-langserver'
 
   - name: create efm configdir

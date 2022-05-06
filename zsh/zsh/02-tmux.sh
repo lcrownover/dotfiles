@@ -1,7 +1,12 @@
 alias t='tmux'
 
-function set_tmux_window_name() {
+set_tmux_window_name() {
     [[ -n "$TMUX" ]] && tmux rename-window "$1"
+}
+
+reset_tmux_window_name() {
+    DEFAULT_TMUX_WINDOW_NAME="zsh"
+    [[ -n "$TMUX" ]] && tmux rename-window $DEFAULT_TMUX_WINDOW_NAME
 }
 
 function main() {
@@ -80,7 +85,7 @@ function vv() {
     esac
     tmux new-session -s $name -d
     tmux new-window -t $name -d
-    tmux send-keys -t $name:1 "vim $arg" Enter
+    tmux send-keys -t $name:1 "nvim $arg" Enter
     if [ $TMUX ]; then
         tmux switch-client -t $name
     else

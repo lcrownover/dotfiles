@@ -12,23 +12,17 @@ function vpn() {
 # z navigation
 . /opt/homebrew/etc/profile.d/z.sh
 
-# todo
+# todo/notes
 # alias todo="code -n $HOME/$ONEDRIVEDIR/notes; code -r $HOME/$ONEDRIVEDIR/notes/__todo.md"
-alias todo="vim_todo"
-function vim_todo() {
+alias todo="vim_notes __todo.md"
+alias notes="vim_notes"
+function vim_notes() {
     spushd .
 	cd "$NOTESDIR"
-    # tab-color 0 170 170
-	nvim __todo.md
-    # tab-reset
+    set_tmux_window_name "notes"
+    nvim "$1"
+    reset_tmux_window_name
     spopd
-}
-function tmux_todo() {
-    session="todo"
-    [[ -n $TMUX ]] && OP="switch" || OP="attach"
-    $(tmux ls | grep -q $session) || tmux new-session -d -s $session
-    tmux $OP -t $session
-    # tmux send-keys -t "$session:1" "vim_todo" C-m
 }
 
 # hostfmt
@@ -47,10 +41,10 @@ function firefox() {
 }
 
 # ssh function that will do window naming
-function ssh() {
+ssh() {
     set_tmux_window_name "$1"
     command ssh "$@"
-    set_tmux_window_name "zsh"
+    reset_tmux_window_name
 }
 
 # clangd

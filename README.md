@@ -1,5 +1,5 @@
 # dotfiles
 
-`setup.yaml` is an ansible playbook, run it!
+`setup.yml` is an ansible playbook, run it!
 
-`ansible-playbook setup.yaml`
+`ansible-playbook setup.yml`

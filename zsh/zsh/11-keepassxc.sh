@@ -6,7 +6,7 @@ get_from_keepass() {
     KEEPASSDBPATH="$HOME/$GDRIVEDIR/lcrown.kdbx"
     entry="$1"
     if [ "$2" = "" ]; then attribute="password"; else attribute="$2"; fi
-    printf "$(echo $KEEPASSDBPW | /opt/homebrew/bin/keepassxc-cli show $KEEPASSDBPATH "$entry" --attributes "$attribute" -q)"
+    printf "%s" "$(echo $KEEPASSDBPW | /opt/homebrew/bin/keepassxc-cli show $KEEPASSDBPATH "$entry" --attributes "$attribute" -q)"
 }
 
 get_from_systems_keepass() {
@@ -18,5 +18,5 @@ get_from_systems_keepass() {
     SYSKEEPASSDBPATH="$HOME/Documents/systems.kdbx"
     entry="$1"
     if [ "$2" = "" ]; then attribute="password"; else attribute="$2"; fi
-    printf "$(echo $SYSKEEPASSDBPW | /opt/homebrew/bin/keepassxc-cli show $SYSKEEPASSDBPATH "$entry" --attributes "$attribute" -q)"
+    printf "%s" "$(echo $SYSKEEPASSDBPW | /opt/homebrew/bin/keepassxc-cli show $SYSKEEPASSDBPATH "$entry" --attributes "$attribute" -q)"
 }

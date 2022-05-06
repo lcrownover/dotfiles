@@ -17,6 +17,7 @@ require'nvim-treesitter.configs'.setup {
     "fish",
     "gomod",
     "graphql",
+    "hcl",
     "hocon",
     "html",
     "http",

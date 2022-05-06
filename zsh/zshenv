@@ -6,8 +6,8 @@ setopt aliases
 
 export ZSH_CONF_DIR="$HOME/.config/zsh"
 
-function insert_path() { [ $SHLVL -eq 1 ] && export PATH="$1:$PATH" }
-function append_path() { [ $SHLVL -eq 1 ] && export PATH="$PATH:$1" }
+insert_path() { [ $SHLVL -eq 1 ] && export PATH="$1:$PATH" }
+append_path() { [ $SHLVL -eq 1 ] && export PATH="$PATH:$1" }
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -16,8 +16,8 @@ for f in $ZSH_CONF_DIR/*.sh; do
     source $f
 done
 
-if [ -z $TMUX ]; then
-    main
-fi
+# if [ -z $TMUX ]; then
+    # main
+# fi
 
 

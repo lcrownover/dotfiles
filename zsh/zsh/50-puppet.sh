@@ -7,7 +7,7 @@ export PUPPET_BASE_DIR="$HOME/puppet/is"
 insert_path "/opt/puppetlabs/bin/"
 insert_path "$HOME/repos/puppet-editor-services/"
 
-alias boltfile="vim $HOME/.puppetlabs/bolt/Puppetfile"
+alias boltfile="nvim $HOME/.puppetlabs/bolt/Puppetfile"
 alias cdb="cd $HOME/.puppetlabs/bolt"
 alias bcr='bolt command run --stream --no-verbose'
 alias cds="cd $HOME/repos/systems"
@@ -42,7 +42,7 @@ function puppet_list_puppet_directories() {
 # returns the status of any puppet repos that have changes pending
 function puppet_git_status_all() {
     tmp=~/temp/.gsapout
-	cwd=$(pwd)
+    spushd .
 	puppet_navigate_to_basedir
 	for pdir in $(puppet_list_puppet_directories); do
 		cd $pdir
@@ -57,21 +57,21 @@ function puppet_git_status_all() {
 		fi
 		cd ..
 	done
-	cd $cwd
+    spopd
 	[ "$1" = "long" ] && vim $tmp
 	echo > $tmp
 }
 
 # shows each repo and its currently checked-out branch
 function puppet_git_branch_all() {
-	cwd=$(pwd)
+    spushd .
 	puppet_navigate_to_basedir
 	for pdir in $(puppet_list_puppet_directories); do
 		cd $pdir
         echo "[$(git rev-parse --abbrev-ref HEAD)] $pdir"
 		cd ..
 	done
-	cd $cwd
+    spopd
 }
 
 # writes all pending changes to a tempfile and opens an editor at that file
@@ -85,7 +85,8 @@ function puppet_git_checkout_branch_all() {
 		echo "gotta give me a branch name matching regex 'feature_.*' as \$1"
 		return 1
 	fi
-	cwd=$(pwd); puppet_navigate_to_basedir
+    spushd .
+    puppet_navigate_to_basedir
 	for pdir in $(puppet_list_puppet_directories); do
 		if [ "$pdir" = "puppet-systems" ]; then
 			continue
@@ -94,7 +95,7 @@ function puppet_git_checkout_branch_all() {
 		git checkout -b "$1"
 		puppet_navigate_to_basedir
 	done
-	cd $cwd
+    spopd
 }
 
 # merges the given branch to master on all puppet modules
@@ -103,7 +104,8 @@ function puppet_git_merge_to_master_all() {
 		echo "gotta give me a branch name matching regex 'feature_.*' as \$1"
 		return 1
 	fi
-	cwd=$(pwd); puppet_navigate_to_basedir
+    spushd .
+    puppet_navigate_to_basedir
 	for pdir in $(puppet_list_puppet_directories); do
 		if [ "$pdir" = "puppet-systems" ]; then
 			continue
@@ -114,12 +116,12 @@ function puppet_git_merge_to_master_all() {
 		git merge --no-edit "$1" && git push && git push origin :$1 && git branch -d $1
 		puppet_navigate_to_basedir
 	done
-	cd $cwd
+    spopd
 }
 
 # provide a commit message and it will commit all changes on all modules with that message
 function puppet_git_commit_all() {
-	cwd=$(pwd)
+    spushd .
 	puppet_navigate_to_basedir
 	for pdir in $(puppet_list_puppet_directories); do
 		if [ "$pdir" = "puppet-systems" ]; then
@@ -136,8 +138,16 @@ function puppet_git_commit_all() {
 		fi
 		cd ..
 	done
-	cd $cwd
+    spopd
 }
+
+function git_log_file() {
+    filename="$1"
+    pdir="$(echo $filename | cut -d'/' -f1)"
+    fpath="$(echo $filename | sed "s/$pdir\///")"
+    git --git-dir "$pdir/.git" log -p --reverse -- "$fpath"
+}
+
 
 # provide a commit message and it will commit and push all changes on all modules with that message
 function puppet_git_commit_and_push_all() {
@@ -176,6 +186,7 @@ alias gcap='puppet_git_commit_and_push_all'
 
 alias gprs='ssh is-puppetmaster.uoregon.edu "cd /etc/puppetlabs/fileserver-repos/puppet-systems; sudo git pull"'
 
+alias glf='git_log_file'
 
 # puppetserver node purge
 function puppet_node_purge() {
@@ -230,3 +241,16 @@ function pat() {
 	[[ ! -z $2 ]] && c+=" --environment $2"
 	bolt command run $c --targets $1 --stream --no-verbose
 }
+
+function vim_puppet() {
+    spushd .
+    cdp
+    set_tmux_window_name "puppet"
+    nvim puppet-control-repo/inventory.yaml
+    reset_tmux_window_name
+    spopd
+}
+function vim_nagios() { cdnag; vim }
+
+alias vip='vim_puppet'
+alias vin='vim_nagios'
