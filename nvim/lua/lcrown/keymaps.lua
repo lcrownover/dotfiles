@@ -15,6 +15,9 @@ map('n', 'N', 'Nzzzv')
 -- better joining
 map('n', 'J', 'mzJ`z')
 
+-- folding
+map('n', '=', 'za')
+
 -- break points
 map('i', ',', ',<c-g>u')
 map('i', '.', '.<c-g>u')

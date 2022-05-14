@@ -13,6 +13,9 @@ vim.cmd [[
 local theme = 'onedark'
 local lualine_theme = theme
 
+-- local theme = 'material'
+-- local lualine_theme = theme
+
 -- local theme = 'nightfox'
 -- local lualine_theme = theme
 
@@ -51,6 +54,11 @@ elseif theme == 'gruvbox' then
   vim.cmd('highlight netrwDir guifg=#5eacd3')
   vim.cmd('highlight qfFileName guifg=#aed75f')
   vim.cmd('highlight TelescopeBorder guifg=#5eacd3')
+
+elseif theme == 'material' then
+  vim.g.material_theme_style = 'default'
+  vim.g.material_terminal_italics = 1
+  vim.cmd('colorscheme material')
 
 elseif theme == 'tokyonight' then
   vim.g.tokyonight_style = 'storm'

@@ -295,6 +295,13 @@
     - neovim
   tasks:
 
+  - name: rust
+    community.general.homebrew:
+      name:
+        - 'rust'
+        - 'rust-analyzer'
+      state: present
+
   - name: pyright
     community.general.npm:
       name: pyright
@@ -309,7 +316,6 @@
     community.general.npm:
       name: bash-language-server
       global: yes
-
 
   - name: ts-server
     community.general.npm:

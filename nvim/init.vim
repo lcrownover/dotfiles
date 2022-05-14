@@ -35,9 +35,11 @@ Plug 'j-hui/fidget.nvim'
 Plug 'hoob3rt/lualine.nvim'
 Plug 'romgrk/barbar.nvim'
 Plug 'joshdick/onedark.vim'
+Plug 'lcrownover/onematerial.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'gruvbox-community/gruvbox'
 " Plug 'overcache/NeoSolarized'
+Plug 'kaicataldo/material.vim'
 
 Plug 'windwp/nvim-autopairs'
 Plug 'numToStr/Comment.nvim' " ctrl+c to comment
@@ -68,7 +70,7 @@ set clipboard=unnamed
 set colorcolumn=80,120
 set cursorline
 set indentkeys-=:,<:>
-set iskeyword-=_
+" set iskeyword-=_
 set list
 set listchars=tab:├─,trail:·
 set noerrorbells
@@ -90,6 +92,10 @@ set expandtab
 
 set splitbelow
 set splitright
+
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()
+" set nofoldenable
 
 let mapleader = " "
 
