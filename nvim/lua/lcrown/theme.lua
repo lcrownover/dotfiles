@@ -50,16 +50,16 @@ if theme == 'onedark' then
   end
 
   -- vim.g.onedark_color_overrides = {
-    -- red = c("red", "#DA7179"),
-    -- dark_red = c("dark_red", "#B8544B"),
-    -- green = c("green", "#98BF7C"),
-    -- yellow = c("yellow", "#DFBE80"),
-    -- dark_yellow = c("dark_yellow", "#CB9A6B"),
-    -- blue = c("blue", "#68AEE7"),
-    -- purple = c("purple", "#C37DD7"),
-    -- cyan = c("cyan", "#5BB1BC"),
-    -- white = c("white", "#ABB2BF"),
-    -- black = c("black", "#282C34"),
+    -- red = c("red", "#D4777E"),
+    -- dark_red = c("dark_red", "#B25951"),
+    -- green = c("green", "#99BB80"),
+    -- yellow = c("yellow", "#DABC85"),
+    -- dark_yellow = c("dark_yellow", "#C69A70"),
+    -- blue = c("blue", "#6FADE0"),
+    -- purple = c("purple", "#C082D2"),
+    -- cyan = c("cyan", "#60ADB7"),
+    -- white = c("white", "#ACB2BD"),
+    -- black = c("black", "#292C32"),
   -- }
   local colors = vim.api.nvim_eval("onedark#GetColors()")
 
