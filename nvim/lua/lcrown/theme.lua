@@ -32,14 +32,48 @@ vim.g.theme = theme
 vim.g.lualine_theme = lualine_theme
 
 if theme == 'onedark' then
+
+  local original_colors = {
+    red = { gui = "#E06C75", cterm = "204", cterm16 = "1" },
+    dark_red = { gui = "#BE5046", cterm = "196", cterm16 = "9" },
+    green = { gui = "#98C379", cterm = "114", cterm16 = "2" },
+    yellow = { gui = "#E5C07B", cterm = "180", cterm16 = "3" },
+    dark_yellow = { gui = "#D19A66", cterm = "173", cterm16 = "11" },
+    blue = { gui = "#61AFEF", cterm = "39", cterm16 = "4" },
+    purple = { gui = "#C678DD", cterm = "170", cterm16 = "5" },
+    cyan = { gui = "#56B6C2", cterm = "38", cterm16 = "6" },
+    white = { gui = "#ABB2BF", cterm = "145", cterm16 = "15" },
+    black = { gui = "#282C34", cterm = "235", cterm16 = "0" },
+  }
+  local function c(color, gui)
+    return { gui = gui, cterm = original_colors[color].cterm, cterm16 = original_colors[color].cterm16 }
+  end
+
+  -- vim.g.onedark_color_overrides = {
+    -- red = c("red", "#DA7179"),
+    -- dark_red = c("dark_red", "#B8544B"),
+    -- green = c("green", "#98BF7C"),
+    -- yellow = c("yellow", "#DFBE80"),
+    -- dark_yellow = c("dark_yellow", "#CB9A6B"),
+    -- blue = c("blue", "#68AEE7"),
+    -- purple = c("purple", "#C37DD7"),
+    -- cyan = c("cyan", "#5BB1BC"),
+    -- white = c("white", "#ABB2BF"),
+    -- black = c("black", "#282C34"),
+  -- }
+  local colors = vim.api.nvim_eval("onedark#GetColors()")
+
+
+
   vim.g.onedark_terminal_italics = 1
   vim.cmd('colorscheme onedark')
-  vim.cmd('highlight CursorLineNR guibg=none guifg=#eabe6f')
-  vim.cmd('highlight Normal guibg=none guifg=#b9bfca')
-  vim.cmd('highlight LineNr guifg=#44adf1')
-  vim.cmd('highlight netrwDir guifg=#44adf1')
-  vim.cmd('highlight qfFileName guifg=#86bf6d')
-  vim.cmd('highlight TelescopeBorder guifg=#44adf1')
+  vim.cmd('highlight Normal guibg=None guifg=' .. colors.white.gui)
+  vim.cmd('highlight Keyword guifg=' .. colors.purple.gui)
+  vim.cmd('highlight CursorLineNR guibg=none guifg=' .. colors.yellow.gui)
+  vim.cmd('highlight LineNr guifg=' .. colors.blue.gui)
+  vim.cmd('highlight netrwDir guifg=' .. colors.blue.gui)
+  vim.cmd('highlight qfFileName guifg=' .. colors.green.gui)
+  vim.cmd('highlight TelescopeBorder guifg=' .. colors.blue.gui)
 
 elseif theme == 'gruvbox' then
   vim.g.gruvbox_italic = 1
