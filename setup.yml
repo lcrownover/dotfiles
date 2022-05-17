@@ -47,6 +47,27 @@
       dest: '{{ ansible_env.HOME }}/.npmrc'
       state: link
 
+- name: configure terminal
+  hosts: localhost
+  tags:
+    - terminal
+  tasks:
+    - name: create .terminfo directory
+      file:
+        path: "{{ ansible_env.HOME }}/.terminfo"
+        state: directory
+
+    - name: install terminal info
+      command:
+        cmd: "tic -x {{ ansible_env.PWD}}/term/tmux-256color.terminfo"
+        creates: "{{ ansible_env.HOME }}/.terminfo/*/tmux-256color"
+
+    - name: install terminal info - italics
+      command:
+        cmd: "tic -x {{ ansible_env.PWD}}/term/xterm-256color-italic.terminfo"
+        creates: "{{ ansible_env.HOME }}/.terminfo/*/xterm-256color-italic"
+
+
 
 - name: configure tmux
   hosts: localhost
