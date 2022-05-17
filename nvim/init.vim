@@ -31,13 +31,14 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'onsails/lspkind-nvim'
 Plug 'j-hui/fidget.nvim'
 
-
+" bars
 Plug 'hoob3rt/lualine.nvim'
 Plug 'romgrk/barbar.nvim'
+
+" theme
 Plug 'joshdick/onedark.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'gruvbox-community/gruvbox'
-Plug 'kaicataldo/material.vim'
 
 Plug 'windwp/nvim-autopairs'
 Plug 'numToStr/Comment.nvim' " ctrl+c to comment
@@ -49,6 +50,7 @@ Plug 'tpope/vim-eunuch' " fancy commands like :ChMod, :Find
 Plug 'tpope/vim-surround' " cs{[ to change { to [
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
+Plug 'norcalli/nvim-colorizer.lua'
 
 " linting and language
 Plug 'rodjek/vim-puppet'
@@ -63,7 +65,7 @@ Plug 'Vimjas/vim-python-pep8-indent' " fix until treesitter python and yaml inde
 
 call plug#end()
 
-" set mouse=a
+set mouse+=a
 set clipboard=unnamed
 set colorcolumn=80,120
 set cursorline
@@ -150,6 +152,7 @@ lua require('lcrown.telescope')
 lua require('lcrown.nvim-comment')
 lua require('lcrown.keymaps')
 lua require('lcrown.terminal')
+lua require('lcrown.misc')
 " lua require('lcrown.debugging')
 " lua require('lcrown.nvim-tree')
 " lua require('lcrown.playground')

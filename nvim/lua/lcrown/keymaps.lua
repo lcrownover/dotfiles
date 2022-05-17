@@ -132,8 +132,9 @@ map('n', '<leader>vs', '<cmd>lua VSCode()<cr>')
 map('n', '<leader>da', ":exe ':normal a _' . strftime('%c') . '_'<cr>")
 
 -- easier commenting, for some reason C-_ means C-/
-map('n', '<C-_>', ':norm gcc<cr>', {silent = true})
-map('x', '<C-_>', ':norm gcc<cr>', {silent = true})
+map('n', '<C-_>', "v:count == 0 ? '<Plug>(comment_toggle_current_linewise)' : '<Plug>(comment_toggle_linewise_count)'", {silent = true})
+map('x', '<C-_>', '<Plug>(comment_toggle_linewise_visual)', {silent = true})
+
 
 -- close buffer
 map('n', '<leader>w', ':bd<cr>', {silent = true})
