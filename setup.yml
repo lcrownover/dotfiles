@@ -18,6 +18,7 @@
       name:
       - go
       - rectangle
+      - geckodriver
       state: present
 
 

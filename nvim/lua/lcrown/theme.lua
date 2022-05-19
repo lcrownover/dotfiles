@@ -95,6 +95,7 @@ elseif theme == 'tokyonight' then
   vim.cmd('colorscheme tokyonight')
 
 elseif theme == 'nord' then
+  -- https://github.com/romgrk/barbar.nvim#highlighting
   vim.g.nord_uniform_diff_background = 1
   vim.g.nord_italic = 1
   vim.g.nord_italic_comments = 1
@@ -107,6 +108,8 @@ elseif theme == 'nord' then
   vim.cmd('highlight TelescopeBorder guifg=#81a1c1')
   vim.cmd('highlight netrwDir guifg=#4c556a')
   vim.cmd('highlight qfFileName guifg=#a3be8b')
+  vim.cmd('highlight TabLineFill guifg=#81a0c0')
+  vim.cmd('highlight WarningMsg guifg=#be6069')
 
 elseif theme == 'NeoSolarized' then
   vim.cmd('colorscheme NeoSolarized')
