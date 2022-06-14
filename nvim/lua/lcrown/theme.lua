@@ -13,14 +13,17 @@ vim.cmd [[
 -- local theme = 'onedark'
 -- local lualine_theme = theme
 
+local theme = 'catppuccin'
+local lualine_theme = theme
+
 -- local theme = 'material'
 -- local lualine_theme = theme
 
 -- local theme = 'nightfox'
 -- local lualine_theme = theme
 
-local theme = 'nord'
-local lualine_theme = theme
+-- local theme = 'nord'
+-- local lualine_theme = theme
 
 -- local theme = 'gruvbox'
 -- local lualine_theme = theme
@@ -33,21 +36,21 @@ vim.g.lualine_theme = lualine_theme
 
 if theme == 'onedark' then
 
-  local original_colors = {
-    red = { gui = "#E06C75", cterm = "204", cterm16 = "1" },
-    dark_red = { gui = "#BE5046", cterm = "196", cterm16 = "9" },
-    green = { gui = "#98C379", cterm = "114", cterm16 = "2" },
-    yellow = { gui = "#E5C07B", cterm = "180", cterm16 = "3" },
-    dark_yellow = { gui = "#D19A66", cterm = "173", cterm16 = "11" },
-    blue = { gui = "#61AFEF", cterm = "39", cterm16 = "4" },
-    purple = { gui = "#C678DD", cterm = "170", cterm16 = "5" },
-    cyan = { gui = "#56B6C2", cterm = "38", cterm16 = "6" },
-    white = { gui = "#ABB2BF", cterm = "145", cterm16 = "15" },
-    black = { gui = "#282C34", cterm = "235", cterm16 = "0" },
-  }
-  local function c(color, gui)
-    return { gui = gui, cterm = original_colors[color].cterm, cterm16 = original_colors[color].cterm16 }
-  end
+  -- local original_colors = {
+  --   red = { gui = "#E06C75", cterm = "204", cterm16 = "1" },
+  --   dark_red = { gui = "#BE5046", cterm = "196", cterm16 = "9" },
+  --   green = { gui = "#98C379", cterm = "114", cterm16 = "2" },
+  --   yellow = { gui = "#E5C07B", cterm = "180", cterm16 = "3" },
+  --   dark_yellow = { gui = "#D19A66", cterm = "173", cterm16 = "11" },
+  --   blue = { gui = "#61AFEF", cterm = "39", cterm16 = "4" },
+  --   purple = { gui = "#C678DD", cterm = "170", cterm16 = "5" },
+  --   cyan = { gui = "#56B6C2", cterm = "38", cterm16 = "6" },
+  --   white = { gui = "#ABB2BF", cterm = "145", cterm16 = "15" },
+  --   black = { gui = "#282C34", cterm = "235", cterm16 = "0" },
+  -- }
+  -- local function c(color, gui)
+  --   return { gui = gui, cterm = original_colors[color].cterm, cterm16 = original_colors[color].cterm16 }
+  -- end
   -- vim.g.onedark_color_overrides = {
     -- red = c("red", "#D4777E"),
     -- dark_red = c("dark_red", "#B25951"),
@@ -61,7 +64,7 @@ if theme == 'onedark' then
     -- black = c("black", "#292C32"),
   -- }
   local colors = vim.api.nvim_eval("onedark#GetColors()")
-  vim.g.onedark_terminal_italics = 1
+  -- vim.g.onedark_terminal_italics = 1
   vim.cmd('colorscheme onedark')
   vim.cmd('highlight Normal guibg=None guifg=' .. colors.white.gui)
   vim.cmd('highlight Keyword guifg=' .. colors.purple.gui)
@@ -71,8 +74,20 @@ if theme == 'onedark' then
   vim.cmd('highlight qfFileName guifg=' .. colors.green.gui)
   vim.cmd('highlight TelescopeBorder guifg=' .. colors.blue.gui)
 
+elseif theme == 'catppuccin' then
+  local catppuccin = require("catppuccin")
+  catppuccin.setup({
+    transparent_background = true,
+    gitgutter = true,
+    barbar = true,
+  })
+  vim.g.catppuccin_flavour = "frappe"
+  vim.cmd('colorscheme catppuccin')
+  vim.cmd('highlight CursorLineNR guifg=#e5c890')
+  vim.cmd('highlight LineNr guifg=#737994')
+
 elseif theme == 'gruvbox' then
-  vim.g.gruvbox_italic = 1
+  -- vim.g.gruvbox_italic = 1
   vim.g.gruvbox_contrast_dark = 'hard'
   vim.g.gruvbox_invert_selection = '0'
   vim.cmd('colorscheme gruvbox')
@@ -87,7 +102,7 @@ elseif theme == 'gruvbox' then
 
 elseif theme == 'material' then
   vim.g.material_theme_style = 'default'
-  vim.g.material_terminal_italics = 1
+  -- vim.g.material_terminal_italics = 1
   vim.cmd('colorscheme material')
 
 elseif theme == 'tokyonight' then
@@ -97,8 +112,8 @@ elseif theme == 'tokyonight' then
 elseif theme == 'nord' then
   -- https://github.com/romgrk/barbar.nvim#highlighting
   vim.g.nord_uniform_diff_background = 1
-  vim.g.nord_italic = 1
-  vim.g.nord_italic_comments = 1
+  -- vim.g.nord_italic = 1
+  -- vim.g.nord_italic_comments = 1
   vim.g.nord_underline = 1
   vim.g.nord_bold_vertical_split_line = 1
   vim.cmd('colorscheme nord')
@@ -118,7 +133,7 @@ elseif theme == 'NeoSolarized' then
   vim.g.neosolarized_vertSplitBgTrans = 0
   vim.g.neosolarized_bold = 1
   vim.g.neosolarized_underline = 1
-  vim.g.neosolarized_italic = 1
+  -- vim.g.neosolarized_italic = 1
   vim.g.neosolarized_termBoldAsBright = 1
   vim.cmd('highlight Normal guibg=none')
   vim.cmd('highlight SignColumn guibg=none')

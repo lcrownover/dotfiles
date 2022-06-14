@@ -19,6 +19,7 @@
       - go
       - rectangle
       - geckodriver
+      - hammerspoon
       state: present
 
 
@@ -48,28 +49,6 @@
       dest: '{{ ansible_env.HOME }}/.npmrc'
       state: link
 
-- name: configure terminal
-  hosts: localhost
-  tags:
-    - terminal
-  tasks:
-    - name: create .terminfo directory
-      file:
-        path: "{{ ansible_env.HOME }}/.terminfo"
-        state: directory
-
-    - name: install terminal info
-      command:
-        cmd: "tic -x {{ ansible_env.PWD}}/term/tmux-256color.terminfo"
-        creates: "{{ ansible_env.HOME }}/.terminfo/*/tmux-256color"
-
-    - name: install terminal info - italics
-      command:
-        cmd: "tic -x {{ ansible_env.PWD}}/term/xterm-256color-italic.terminfo"
-        creates: "{{ ansible_env.HOME }}/.terminfo/*/xterm-256color-italic"
-
-
-
 - name: configure tmux
   hosts: localhost
   tags:
@@ -93,6 +72,18 @@
     ansible.builtin.file:
       src: '{{ ansible_env.PWD }}/tmux/tmux.conf'
       dest: '{{ ansible_env.HOME }}/.tmux.conf'
+      state: link
+
+- name: configure ansible
+  hosts: localhost
+  tags:
+    - ansible
+  tasks:
+
+  - name: link .ansible.cfg
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/ansible/ansible.cfg'
+      dest: '{{ ansible_env.HOME }}/.ansible.cfg'
       state: link
 
 
@@ -395,14 +386,14 @@
     - name: configure keepassxc - copy conf - MacOSX
       when: ansible_distribution == 'MacOSX'
       ansible.builtin.copy:
-        src: '{{ ansible_env.PWD }}/keepassxc/01-env-keepassxc.sh.template'
-        dest: '{{ ansible_env.HOME }}/.config/zsh/01-env-keepassxc.sh'
+        src: '{{ ansible_env.PWD }}/keepassxc/01-secure-env-keepassxc.template'
+        dest: '{{ ansible_env.HOME }}/.config/zsh/01-secure-env-keepassxc'
         owner: lcrown
         mode: '0600'
     - name: configure keepassxc - set password - MacOSX
       when: ansible_distribution == 'MacOSX'
       ansible.builtin.lineinfile:
-        path: '{{ ansible_env.HOME }}/.config/zsh/01-env-keepassxc.sh'
+        path: '{{ ansible_env.HOME }}/.config/zsh/01-secure-env-keepassxc'
         search_string: "export KEEPASSDBPW='PASSWORD'"
         line: "export KEEPASSDBPW='{{ keepassxc_password }}'"
 

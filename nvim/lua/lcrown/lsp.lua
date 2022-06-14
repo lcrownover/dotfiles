@@ -223,7 +223,11 @@ require('rust-tools').setup({
 ---------------------------------------
 
 lsp['terraformls'].setup {
-  on_attach = on_attach
+  on_attach = on_attach,
+  filetypes = {
+    "terraform",
+    "tf",
+  },
 }
 
 
@@ -331,6 +335,8 @@ require('lspkind').init({
     },
 })
 
+-- trouble (quickfix for errors and lsp stuff)
+require("trouble").setup { }
 
 -- autopairs config
 require('nvim-autopairs').setup({

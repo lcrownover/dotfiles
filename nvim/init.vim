@@ -39,6 +39,10 @@ Plug 'romgrk/barbar.nvim'
 Plug 'joshdick/onedark.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'gruvbox-community/gruvbox'
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+
+" markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 Plug 'windwp/nvim-autopairs'
 Plug 'numToStr/Comment.nvim' " ctrl+c to comment
@@ -51,6 +55,7 @@ Plug 'tpope/vim-surround' " cs{[ to change { to [
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'folke/trouble.nvim'
 
 " linting and language
 Plug 'rodjek/vim-puppet'

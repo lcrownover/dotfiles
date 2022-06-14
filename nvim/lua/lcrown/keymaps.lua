@@ -85,14 +85,19 @@ map('n', '<F10>', ":lua require'dap'.step_over()<CR>", {silent = true})
 map('n', '<F11>', ":lua require'dap'.step_into()<CR>", {silent = true})
 map('n', '<F12>', ":lua require'dap'.step_out()<CR>", {silent = true})
 
--- open a new nvim terminal
-map('n', '<leader>t', ':terminal<cr>i')
-map('t', '<esc>', '<c-\\><c-n>')
-map('t', '<c-v><esc>', '<esc>')
--- open fancy split terminal
-map('n', '<c-t>', ':lua toggle_terminal()<CR>', {silent = true})
-map('i', '<c-t>', '<ESC>:lua toggle_terminal()<CR>', {silent = true})
-map('t', '<c-t>', '<c-\\><c-n>:lua toggle_terminal()<CR>', {silent = true})
+-- -- open a new nvim terminal
+-- map('n', '<leader>t', ':terminal<cr>i')
+-- map('t', '<esc>', '<c-\\><c-n>')
+-- map('t', '<c-v><esc>', '<esc>')
+-- -- open fancy split terminal
+-- map('n', '<c-t>', ':lua toggle_terminal()<CR>', {silent = true})
+-- map('i', '<c-t>', '<ESC>:lua toggle_terminal()<CR>', {silent = true})
+-- map('t', '<c-t>', '<c-\\><c-n>:lua toggle_terminal()<CR>', {silent = true})
+
+-- trouble! (quickfix lists for lsp errors)
+map('n', '<leader>tt', ':Trouble<cr>', {silent = true})
+map('n', '<leader>tq', ':TroubleClose<cr>', {silent = true})
+map('n', '<leader>tr', ':TroubleRefresh<cr>', {silent = true})
 
 -- remaps to handle terminal usage and command execution
 map('n', '<leader>xc', ':vnew <bar> :setlocal buftype=nofile <bar> r !<space>')
