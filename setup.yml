@@ -378,24 +378,18 @@
     prompt: "KeepassXC Database Password"
     private: yes
   tasks:
-    # - name: install keepassxc - MacOSX
-      # when: ansible_distribution == 'MacOSX'
-      # community.general.homebrew_cask:
-        # name: keepassxc
-        # state: present
-    - name: configure keepassxc - copy conf - MacOSX
+    - name: install keepassxc - MacOSX
+      when: ansible_distribution == 'MacOSX'
+      community.general.homebrew_cask:
+        name: keepassxc
+        state: present
+    - name: configure keepassxc - MacOSX
       when: ansible_distribution == 'MacOSX'
       ansible.builtin.copy:
-        src: '{{ ansible_env.PWD }}/keepassxc/01-secure-env-keepassxc.template'
-        dest: '{{ ansible_env.HOME }}/.config/zsh/01-secure-env-keepassxc'
+        content: "export KEEPASSDBPW='{{ keepassxc_password }}'"
+        dest: '{{ ansible_env.HOME }}/.config/zsh/01-secure-env-keepassxc.sh'
         owner: lcrown
         mode: '0600'
-    - name: configure keepassxc - set password - MacOSX
-      when: ansible_distribution == 'MacOSX'
-      ansible.builtin.lineinfile:
-        path: '{{ ansible_env.HOME }}/.config/zsh/01-secure-env-keepassxc'
-        search_string: "export KEEPASSDBPW='PASSWORD'"
-        line: "export KEEPASSDBPW='{{ keepassxc_password }}'"
 
 - name: configure openfortivpn
   hosts: localhost
@@ -412,13 +406,14 @@
         name: openfortivpn
         state: present
     - name: configure openfortivpn - configdir - MacOSX
+      when: ansible_distribution == 'MacOSX'
       ansible.builtin.file:
         path: '{{ ansible_env.HOME }}/.config/openfortivpn'
         state: directory
     - name: configure openfortivpn - copy conf - MacOSX
       when: ansible_distribution == 'MacOSX'
       ansible.builtin.copy:
-        src: '{{ ansible_env.PWD }}/openfortivpn/openfortivpn.conf'
+        src: '{{ ansible_env.PWD }}/openfortivpn/openfortivpn.conf.template'
         dest: '{{ ansible_env.HOME }}/.config/openfortivpn/openfortivpn.conf'
         owner: lcrown
         mode: '0600'
