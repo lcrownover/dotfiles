@@ -1,0 +1,16 @@
+---
+- name: preflight
+  hosts: localhost
+
+  vars_prompt:
+  - name: "ansible_become_pass"
+    prompt: "[sudo] password for user"
+    private: yes
+
+  tasks:
+
+    - name: homebrew upgrade all
+      community.general.homebrew:
+        update_homebrew: yes
+        upgrade_all: yes
+

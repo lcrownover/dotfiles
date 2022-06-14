@@ -1,0 +1,11 @@
+---
+- name: vim language server
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+  - name: vim-language-server
+    community.general.npm:
+      name: vim-language-server
+      global: yes

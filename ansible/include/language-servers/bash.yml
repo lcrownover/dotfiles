@@ -1,0 +1,12 @@
+---
+- name: bash language server
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+  - name: bash-language-server
+    community.general.npm:
+      name: bash-language-server
+      global: yes
+

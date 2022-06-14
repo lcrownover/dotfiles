@@ -1,5 +1,5 @@
 # dotfiles
 
-`setup.yml` is an ansible playbook, run it!
+## Setup
 
-`ansible-playbook setup.yml`
+Navigate to the `ansible` directory and run the `setup.yml` playbook.

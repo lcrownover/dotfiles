@@ -1,0 +1,50 @@
+---
+- name: configure zsh
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    zsh_plugin_dir: '{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins'
+
+  tasks:
+
+  - name: install oh-my-zsh
+    ansible.builtin.command:
+      cmd: 'curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh'
+      creates: '{{ ansible_env.HOME }}/.oh-my-zsh'
+
+  - name: link .zshrc
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/../../zsh/zshrc'
+      dest: '{{ ansible_env.HOME }}/.zshrc'
+      state: link
+      force: yes
+
+  - name: link .zshenv
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/../../zsh/zshenv'
+      dest: '{{ ansible_env.HOME }}/.zshenv'
+      state: link
+      force: yes
+
+  - name: link .config/zsh
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/../../zsh/zsh'
+      dest: '{{ ansible_env.HOME }}/.config/zsh'
+      state: link
+      force: yes
+
+  - name: install syntax highlighting
+    ansible.builtin.git:
+      repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+      dest: '{{ zsh_plugin_dir }}/zsh-syntax-highlighting'
+      clone: yes
+      update: yes
+
+  - name: install autosuggestions
+    ansible.builtin.git:
+      repo: https://github.com/zsh-users/zsh-autosuggestions
+      dest: '{{ zsh_plugin_dir }}/zsh-autosuggestions'
+      clone: yes
+      update: yes
+

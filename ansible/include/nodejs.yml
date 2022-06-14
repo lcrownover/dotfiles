@@ -1,0 +1,28 @@
+---
+- name: configure nodejs
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+  - name: add node repo
+    when: ansible_distribution == 'Ubuntu'
+    ansible.builtin.shell: 'curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -'
+    args:
+      warn: no
+      creates: '/etc/apt/sources.list.d/nodesource.list'
+
+  - name: install nodejs
+    when: ansible_distribution == 'Ubuntu'
+    become: yes
+    ansible.builtin.apt:
+      pkg: ["nodejs"]
+      state: latest
+
+  - name: link .npmrc
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/../../npm/npmrc'
+      dest: '{{ ansible_env.HOME }}/.npmrc'
+      state: link
+
+

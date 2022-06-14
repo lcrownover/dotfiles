@@ -1,0 +1,24 @@
+---
+- name: configure base
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+  - name: ensure repos dir
+    ansible.builtin.file:
+      path: '{{ ansible_env.HOME }}/repos'
+      state: directory
+
+  - name: macOS => install homebrew packages
+    when: ansible_distribution == 'MacOSX'
+    community.general.homebrew:
+      name:
+      - go
+      - geckodriver
+
+  - name: macOS => install homebrew casks
+    when: ansible_distribution == 'MacOSX'
+    community.general.homebrew_cask:
+      name:
+      - rectangle

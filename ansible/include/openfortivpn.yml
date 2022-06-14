@@ -1,0 +1,32 @@
+---
+- name: configure openfortivpn
+  hosts: localhost
+  gather_facts: no
+
+  vars_prompt:
+  - name: "vpn_password"
+    prompt: "VPN Password"
+    private: yes
+
+  tasks:
+
+    - name: macOS => install openfortivpn
+      when: ansible_distribution == 'MacOSX'
+      community.general.homebrew:
+        name: openfortivpn
+        state: present
+
+    - name: macOS => configure openfortivpn - configdir
+      when: ansible_distribution == 'MacOSX'
+      ansible.builtin.file:
+        path: '{{ ansible_env.HOME }}/.config/openfortivpn'
+        state: directory
+
+    - name: macOS => configure openfortivpn - write from template
+      when: ansible_distribution == 'MacOSX'
+      ansible.builtin.template:
+        src: '{{ ansible_env.PWD }}/../templates/openfortivpn.conf.j2'
+        dest: '{{ ansible_env.HOME }}/.config/openfortivpn/openfortivpn.conf'
+        owner: lcrown
+        mode: '0600'
+

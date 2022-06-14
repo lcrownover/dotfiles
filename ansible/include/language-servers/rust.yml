@@ -1,0 +1,13 @@
+---
+- name: rust language server
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+  - name: rust
+    community.general.homebrew:
+      state: latest
+      name:
+        - 'rust'
+        - 'rust-analyzer'

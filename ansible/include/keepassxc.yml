@@ -1,0 +1,26 @@
+---
+- name: macOS => configure keepassxc
+  hosts: localhost
+  gather_facts: no
+
+  vars_prompt:
+  - name: "keepassxc_password"
+    prompt: "KeepassXC Database Password"
+    private: yes
+
+  tasks:
+
+    - name: macOS => install keepassxc
+      when: ansible_distribution == 'MacOSX'
+      community.general.homebrew_cask:
+        name: keepassxc
+        state: present
+
+    - name: macOS => configure keepassxc
+      when: ansible_distribution == 'MacOSX'
+      ansible.builtin.copy:
+        content: "export KEEPASSDBPW='{{ keepassxc_password }}'"
+        dest: '{{ ansible_env.HOME }}/.config/zsh/01-secure-env-keepassxc.sh'
+        owner: lcrown
+        mode: '0600'
+

@@ -1,0 +1,24 @@
+---
+- name: ansible language server
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+  - name: macOS => install ansible dependencies
+    when: ansible_distribution == 'MacOSX'
+    community.general.homebrew:
+      name: ['ansible-lint']
+      state: present
+
+  - name: Ubuntu => install ansible dependencies
+    when: ansible_distribution == 'Ubuntu'
+    package:
+      name: ['ansible-lint']
+      state: present
+
+  - name: ansible-language-server
+    community.general.npm:
+      name: '@ansible/ansible-language-server'
+      global: yes
+

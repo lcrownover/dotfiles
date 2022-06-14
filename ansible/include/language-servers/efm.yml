@@ -1,0 +1,27 @@
+---
+- name: configure efm-language-server
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+  - name: install gopls
+    ansible.builtin.command:
+      cmd: go install golang.org/x/tools/gopls@latest
+      creates: '{{ ansible_env.HOME }}/go/bin/gopls'
+
+  - name: install efm-language-server
+    ansible.builtin.command:
+      cmd: go install github.com/mattn/efm-langserver@latest
+      creates: '{{ ansible_env.HOME }}/go/bin/efm-langserver'
+
+  - name: create efm configdir
+    ansible.builtin.file:
+      path: '{{ ansible_env.HOME }}/.config/efm-langserver'
+      state: directory
+
+  - name: link efm config
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/../../efm-langserver/config.yaml'
+      dest: '{{ ansible_env.HOME }}/.config/efm-langserver/config.yaml'
+      state: link

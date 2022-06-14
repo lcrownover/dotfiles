@@ -1,0 +1,11 @@
+---
+- name: typescript language server
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+  - name: ts-server
+    community.general.npm:
+      name: ts-server
+      global: yes

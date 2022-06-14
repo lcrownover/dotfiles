@@ -1,0 +1,89 @@
+---
+- name: configure nvim
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    nvim_src_dir: '{{ ansible_env.HOME }}/repos/neovim'
+
+  tasks:
+
+  - name: Ubuntu => install neovim build dependencies
+    when: ansible_distribution == 'Ubuntu'
+    become: yes
+    ansible.builtin.apt:
+      pkg: ['ninja-build', 'gettext', 'libtool', 'libtool-bin', 'autoconf', 'automake', 'cmake', 'g++', 'pkg-config', 'unzip', 'curl', 'doxygen', 'ripgrep', 'black']
+
+  - name: Ubuntu => clone neovim
+    when: ansible_distribution == 'Ubuntu'
+    ansible.builtin.git:
+      repo: https://github.com/neovim/neovim
+      dest: '{{ nvim_src_dir }}'
+      clone: yes
+      update: no
+
+  - name: Ubuntu => make neovim
+    when: ansible_distribution == 'Ubuntu'
+    ansible.builtin.command:
+      cmd: '/usr/bin/env make CMAKE_BUILD_TYPE=RelWithDebInfo'
+      chdir: '{{ nvim_src_dir }}'
+      creates: '{{ nvim_src_dir }}/build'
+
+  - name: Ubuntu => install neovim
+    when: ansible_distribution == 'Ubuntu'
+    become: yes
+    ansible.builtin.command:
+      cmd: 'make install'
+      chdir: '{{ nvim_src_dir }}'
+      creates: '/usr/local/bin/nvim'
+
+  - name: Ubuntu => link nvim
+    when: ansible_distribution == 'Ubuntu'
+    become: yes
+    ansible.builtin.file:
+      src: '/usr/local/bin/nvim'
+      dest: '/usr/bin/nvim'
+      state: link
+      force: yes
+
+  - name: macOS => install neovim
+    when: ansible_distribution == 'MacOSX'
+    community.general.homebrew:
+      name: neovim
+      state: head
+
+  - name: create nvim configdir
+    ansible.builtin.file:
+      path: '{{ ansible_env.HOME }}/.config/nvim'
+      state: directory
+
+  - name: remove .vimrc
+    ansible.builtin.file:
+      path: '{{ ansible_env.HOME }}/.vimrc'
+      state: absent
+      force: yes
+
+  - name: link init.vim
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/../../nvim/init.vim'
+      dest: '{{ ansible_env.HOME }}/.config/nvim/init.vim'
+      state: link
+      force: yes
+
+  - name: check if lua dir exists
+    ansible.builtin.stat:
+      path: '{{ ansible_env.HOME }}/.config/nvim/lua'
+    register: nvim_lua_dir
+
+  - name: link lua
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/../../nvim/lua'
+      dest: '{{ ansible_env.HOME }}/.config/nvim/lua'
+      state: link
+      force: yes
+
+  - name: install nvim plugins
+    ansible.builtin.command:
+      cmd: 'nvim -c PlugInstall -c q -c q'
+      creates: '{{ ansible_env.HOME }}/.config/nvim/plugged'
+

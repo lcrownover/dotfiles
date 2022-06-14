@@ -1,0 +1,11 @@
+---
+- name: python language server
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+  - name: pyright
+    community.general.npm:
+      name: pyright
+      global: yes

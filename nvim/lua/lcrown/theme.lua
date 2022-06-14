@@ -10,11 +10,11 @@ vim.cmd [[
 
 -- Change the colorscheme here and it will change everywhere
 
--- local theme = 'onedark'
--- local lualine_theme = theme
-
-local theme = 'catppuccin'
+local theme = 'onedark'
 local lualine_theme = theme
+
+-- local theme = 'catppuccin'
+-- local lualine_theme = theme
 
 -- local theme = 'material'
 -- local lualine_theme = theme
@@ -64,7 +64,7 @@ if theme == 'onedark' then
     -- black = c("black", "#292C32"),
   -- }
   local colors = vim.api.nvim_eval("onedark#GetColors()")
-  -- vim.g.onedark_terminal_italics = 1
+  vim.g.onedark_terminal_italics = 1
   vim.cmd('colorscheme onedark')
   vim.cmd('highlight Normal guibg=None guifg=' .. colors.white.gui)
   vim.cmd('highlight Keyword guifg=' .. colors.purple.gui)
