@@ -48,11 +48,14 @@
   tags: [nvim, ansible]
 
 - import_playbook: include/keepassxc.yml
+  when: ansible_distribution == 'MacOSX'
   tags: [keepassxc]
 
 - import_playbook: include/openfortivpn.yml
+  when: ansible_distribution == 'MacOSX'
   tags: [openfortivpn]
 
 - import_playbook: include/ssh.yml
+  when: ansible_distribution == 'MacOSX'
   tags: [ssh]
 

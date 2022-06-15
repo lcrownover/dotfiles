@@ -5,9 +5,23 @@
 
   tasks:
 
-  - name: rust
+  - name: macOS => install rust
+    when: ansible_distribution == 'MacOSX'
     community.general.homebrew:
       state: latest
       name:
         - 'rust'
         - 'rust-analyzer'
+
+  - name: Ubuntu => install rust
+    when: ansible_distribution == 'Ubuntu'
+    shell:
+      cmd: 'curl https://sh.rustup.rs -sSf | sh -s -- -y'
+      creates: '{{ ansible_env.HOME }}/.cargo/env'
+
+  - name: Ubuntu => install rust-analyzer
+    when: ansible_distribution == 'Ubuntu'
+    shell:
+      cmd: 'mkdir -p ~/.local/bin; curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/.local/bin/rust-analyzer ; chmod +x ~/.local/bin/rust-analyzer'
+      creates: '{{ ansible_env.HOME }}/.local/bin/rust-analyzer'
+
