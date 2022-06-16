@@ -16,6 +16,7 @@
       name:
       - go
       - geckodriver
+      - gsed
 
   - name: macOS => install homebrew casks
     when: ansible_distribution == 'MacOSX'

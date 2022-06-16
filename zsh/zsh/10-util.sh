@@ -34,6 +34,11 @@ insert_path "$HOME/repos/pj/bin"
 # shorter clear
 alias cl="clear"
 
+# gnu sed for MacOS
+if [[ -f /opt/homebrew/bin/gsed ]]; then
+    alias sed="gsed"
+fi
+
 
 function firefox() {
     FF="/Applications/Firefox.app/Contents/MacOS/firefox"
