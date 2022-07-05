@@ -46,11 +46,11 @@ function firefox() {
 }
 
 # ssh function that will do window naming
-ssh() {
-    set_tmux_window_name "$1"
-    command ssh "$@"
-    reset_tmux_window_name
-}
+# ssh() {
+#     set_tmux_window_name "$1"
+#     command ssh "$@"
+#     reset_tmux_window_name
+# }
 
 # clangd
 insert_path "/usr/local/opt/llvm/bin"
