@@ -6,13 +6,13 @@
 
   - name: link .ssh/config
     ansible.builtin.file:
-      src: "{{ ansible_env.HOME }}/{{ lookup('env', 'GDRIVEDIR') }}/config/ssh/config"
+      src: "{{ lookup('env', 'GDRIVEDIR') }}/config/ssh/config"
       dest: '{{ ansible_env.HOME }}/.ssh/config'
       state: link
 
   - name: link .ssh/config.d/
     ansible.builtin.file:
-      src: "{{ ansible_env.HOME }}/{{ lookup('env', 'GDRIVEDIR') }}/config/ssh/config.d"
+      src: "{{ lookup('env', 'GDRIVEDIR') }}/config/ssh/config.d"
       dest: '{{ ansible_env.HOME }}/.ssh/config.d'
       state: link
 

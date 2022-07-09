@@ -10,7 +10,9 @@ function vpn() {
 }
 
 # z navigation
-. /opt/homebrew/etc/profile.d/z.sh
+if [ "$OS" = "mac" ]; then
+    . /opt/homebrew/etc/profile.d/z.sh
+fi
 
 # todo/notes
 # alias todo="code -n $HOME/$ONEDRIVEDIR/notes; code -r $HOME/$ONEDRIVEDIR/notes/__todo.md"

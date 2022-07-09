@@ -3,7 +3,7 @@ get_from_keepass() {
         echo "usage: $0 entry [attribute]"
         return
     fi
-    KEEPASSDBPATH="$HOME/$GDRIVEDIR/lcrown.kdbx"
+    KEEPASSDBPATH="$GDRIVEDIR/lcrown.kdbx"
     entry="$1"
     if [ "$2" = "" ]; then attribute="password"; else attribute="$2"; fi
     printf "%s" "$(echo $KEEPASSDBPW | /opt/homebrew/bin/keepassxc-cli show $KEEPASSDBPATH "$entry" --attributes "$attribute" -q)"
