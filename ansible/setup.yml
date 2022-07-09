@@ -20,6 +20,9 @@
 - import_playbook: include/zsh.yml
   tags: [zsh]
 
+- import_playbook: include/pyenv.yml
+  tags: [pyenv]
+
 - import_playbook: include/nvim.yml
   tags: [nvim]
 

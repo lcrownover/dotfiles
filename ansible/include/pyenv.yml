@@ -1,0 +1,29 @@
+---
+- name: configure pyenv
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    pyenv_root: '{{ ansible_env.HOME }}/.pyenv'
+
+  tasks:
+
+  - name: clone pyenv
+    ansible.builtin.git:
+      repo:  https://github.com/pyenv/pyenv.git
+      dest: '{{ pyenv_root }}'
+      clone: yes
+      update: yes
+
+  - name: compile pyenv
+    ansible.builtin.shell:
+      executable: zsh
+      cmd: 'cd ~/.pyenv && src/configure && make -C src'
+      creates: '{{ pyenv_root }}/bin/pyenv'
+
+  - name: clone pyenv-virtualenv
+    ansible.builtin.git:
+      repo: https://github.com/pyenv/pyenv-virtualenv.git
+      dest: '{{ pyenv_root }}/plugins/pyenv-virtualenv'
+      clone: yes
+      update: yes
