@@ -27,7 +27,7 @@ fi
 
 if [[ -d $HOME/.pyenv ]]; then
     export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/shims:$PATH"
+    export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
     export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
