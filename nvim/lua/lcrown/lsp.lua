@@ -246,9 +246,6 @@ lsp['ansiblels'].setup {
   settings = {
     rootMarkers = { ".git/" },
     ansible = {
-      ansibleLint = {
-        path = "~/.ansible-lint"
-      },
       python = {
         interpreterPath = "python3"
       }

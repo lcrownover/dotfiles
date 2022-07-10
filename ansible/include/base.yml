@@ -10,13 +10,23 @@
       path: '{{ ansible_env.HOME }}/repos'
       state: directory
 
-  - name: macOS => install homebrew packages
+  - name: macOS => install base packages
     when: ansible_distribution == 'MacOSX'
     community.general.homebrew:
       name:
       - go
       - geckodriver
       - gsed
+      - kubernetes
+
+  - name: Ubuntu => install base packages
+    when: ansible_distribution == 'Ubuntu'
+    apt:
+      update_cache: yes
+      name:
+      - go
+      - geckodriver
+      - kubernetes
 
   - name: macOS => install homebrew casks
     when: ansible_distribution == 'MacOSX'
