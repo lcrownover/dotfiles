@@ -5,7 +5,7 @@
 
   tasks:
 
-  - name: ts-server
+  - name: typescript-language-server
     community.general.npm:
-      name: ts-server
+      name: typescript-language-server
       global: yes
