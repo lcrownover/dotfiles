@@ -1,0 +1,11 @@
+---
+- name: configure vscode-http-language-server
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+  - name: install vscode-http-language-server
+    community.general.npm:
+      name: vscode-http-language-server
+      global: yes

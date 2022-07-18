@@ -101,21 +101,22 @@ end
 
 -- Any server that doesn't have specific configuration can go here
 local basic_servers = {
-    "gopls", -- golang
-    "solargraph", -- ruby
-    "rust_analyzer", -- rust
-    "tsserver", -- typescript
-    "bashls", -- bash
-    "vimls", -- vim
-    "puppet", -- puppet
-    "clangd", -- c
-    "cssls", -- css
-    "perlls", -- perl
+  "gopls", -- golang
+  "solargraph", -- ruby
+  "rust_analyzer", -- rust
+  "tsserver", -- typescript
+  "bashls", -- bash
+  "vimls", -- vim
+  "puppet", -- puppet
+  "clangd", -- c
+  "cssls", -- css
+  "perlls", -- perl
+  "html",
 }
 for _, server in ipairs(basic_servers) do
-    lsp[server].setup {
+  lsp[server].setup {
     on_attach = on_attach,
-    }
+  }
 end
 
 
@@ -275,6 +276,7 @@ lsp['efm'].setup {
   filetypes = {
     "lua",
     "python",
+    "html",
     -- "go",
     "json",
   },

@@ -1,3 +1,2 @@
-tmp = ${HOME}/.npm/tmp
 cache = ${HOME}/.npm/cache
 prefix = ${HOME}/.npm

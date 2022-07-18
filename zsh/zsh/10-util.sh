@@ -33,8 +33,10 @@ alias hostfmt="$GDRIVEDIR/code/projects/hostfmt.py"
 # pj
 insert_path "$HOME/repos/pj/bin"
 
-# shorter clear
-alias cl="clear"
+# copy file contents to clipboard
+function cl() {
+    cat $1 | pbcopy
+}
 
 # gnu sed for MacOS
 if [[ -f /opt/homebrew/bin/gsed ]]; then
