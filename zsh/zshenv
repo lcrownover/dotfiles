@@ -10,10 +10,10 @@ insert_path() { [ $SHLVL -eq 1 ] && export PATH="$1:$PATH" }
 append_path() { [ $SHLVL -eq 1 ] && export PATH="$PATH:$1" }
 
 case "$(uname -a)" in
-    "Darwin*")
+    Darwin*)
         export OS="mac"
         ;;
-    "*WSL*")
+    *WSL*)
         export OS="wsl"
         ;;
     *)
