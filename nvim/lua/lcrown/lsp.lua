@@ -254,6 +254,24 @@ lsp['ansiblels'].setup {
   }
 }
 
+---------------------------------------
+-- null-ls
+---------------------------------------
+local null_ls = require'null-ls'
+null_ls.setup({
+    sources = {
+      null_ls.builtins.formatting.black,
+      null_ls.builtins.formatting.gofmt,
+      null_ls.builtins.formatting.stylua,
+      null_ls.builtins.diagnostics.tidy,
+      null_ls.builtins.formatting.rubocop,
+      null_ls.builtins.formatting.rustfmt,
+      null_ls.builtins.code_actions.xo,
+      null_ls.builtins.diagnostics.ansiblelint,
+      null_ls.builtins.diagnostics.markdownlint,
+    },
+})
+
 
 ---------------------------------------
 -- efm
@@ -268,30 +286,30 @@ lsp['ansiblels'].setup {
 -- and in most cases, it means that black isn't installed.
 --
 
-lsp['efm'].setup {
-  init_options = {
-    documentFormatting = true
-  },
-  on_attach = on_attach,
-  filetypes = {
-    "lua",
-    "python",
-    "html",
-    -- "go",
-    "json",
-  },
-  settings = {
-    rootMarkers = { ".git/" },
-    languages = {
-      python = { { formatCommand = "/Users/lcrown/.pyenv/shims/black --quiet -", formatStdin = true } },
-      lua = { { formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb", formatStdin = true } },
-      json = { { formatCommand = "jq .", formatStdin = true } },
-      -- go = { {formatCommand = "gofmt", formatStdin = true} },
-      -- ruby: formatting is handled by solargraph
-      -- rust: formatting is handled by rust_analyzer
-    }
-  },
-}
+-- lsp['efm'].setup {
+--   init_options = {
+--     documentFormatting = true
+--   },
+--   on_attach = on_attach,
+--   filetypes = {
+--     "lua",
+--     "python",
+--     "html",
+--     -- "go",
+--     "json",
+--   },
+--   settings = {
+--     rootMarkers = { ".git/" },
+--     languages = {
+--       python = { { formatCommand = "/Users/lcrown/.pyenv/shims/black --quiet -", formatStdin = true } },
+--       lua = { { formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb", formatStdin = true } },
+--       json = { { formatCommand = "jq .", formatStdin = true } },
+--       -- go = { {formatCommand = "gofmt", formatStdin = true} },
+--       -- ruby: formatting is handled by solargraph
+--       -- rust: formatting is handled by rust_analyzer
+--     }
+--   },
+-- }
 
 ---------------------------------------
 -- lspkind

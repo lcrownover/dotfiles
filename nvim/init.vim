@@ -29,6 +29,7 @@ Plug 'saadparwaiz1/cmp_luasnip'
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'onsails/lspkind-nvim'
+Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'j-hui/fidget.nvim'
 
 " bars

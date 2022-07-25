@@ -7,6 +7,5 @@
     - name: macOS => homebrew upgrade all
       when: ansible_distribution == 'MacOSX'
       community.general.homebrew:
-        update_homebrew: yes
-        upgrade_all: yes
-
+        update_homebrew: true
+        upgrade_all: true

@@ -26,8 +26,8 @@
 - import_playbook: include/nvim.yml
   tags: [nvim]
 
-- import_playbook: include/language-servers/efm.yml
-  tags: [nvim, efm]
+- import_playbook: include/language-servers/markdown.yml
+  tags: [nvim, markdown]
 
 - import_playbook: include/language-servers/lua.yml
   tags: [nvim, lua]
@@ -61,4 +61,3 @@
 - import_playbook: include/ssh.yml
   when: ansible_distribution == 'MacOSX'
   tags: [ssh]
-

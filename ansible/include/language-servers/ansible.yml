@@ -1,7 +1,7 @@
 ---
 - name: ansible language server
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
 
   tasks:
 
@@ -13,12 +13,11 @@
 
   - name: Ubuntu => install ansible dependencies
     when: ansible_distribution == 'Ubuntu'
-    package:
+    ansible.builtin.package:
       name: ['ansible-lint']
       state: present
 
   - name: ansible-language-server
     community.general.npm:
       name: '@ansible/ansible-language-server'
-      global: yes
-
+      global: true

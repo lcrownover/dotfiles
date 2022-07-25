@@ -13,8 +13,8 @@
     ansible.builtin.git:
       repo: https://github.com/sumneko/lua-language-server
       dest: '{{ lua_repo_dir }}'
-      clone: yes
-      update: yes
+      clone: true
+      update: true
 
   - name: init submodules
     ansible.builtin.command:
