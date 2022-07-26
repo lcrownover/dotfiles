@@ -1,13 +1,12 @@
 ---
 - name: configure ansible
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
 
   tasks:
 
-  - name: link .ansible.cfg
-    ansible.builtin.file:
-      src: '{{ ansible_env.PWD }}/../ansible.cfg'
-      dest: '{{ ansible_env.HOME }}/.ansible.cfg'
-      state: link
-
+    - name: link .ansible.cfg
+      ansible.builtin.file:
+        src: '{{ ansible_env.PWD }}/../ansible.cfg'
+        dest: '{{ ansible_env.HOME }}/.ansible.cfg'
+        state: link

@@ -1,15 +1,15 @@
 ---
 - name: configure tmux
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
 
   vars:
     tmux_plugin_dir: '{{ ansible_env.HOME }}/.config/tmux'
 
   tasks:
-  - name: link .tmux.conf
-    ansible.builtin.file:
-      src: '{{ ansible_env.PWD }}/../../tmux/tmux.conf'
-      dest: '{{ ansible_env.HOME }}/.tmux.conf'
-      state: link
 
+    - name: link .tmux.conf
+      ansible.builtin.file:
+        src: '{{ ansible_env.PWD }}/../../tmux/tmux.conf'
+        dest: '{{ ansible_env.HOME }}/.tmux.conf'
+        state: link

@@ -6,10 +6,10 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 " load the other init file if it's vscode
-if exists('g:vscode')
-    source ~/.config/nvim/init-vscode.vim
-    finish
-endif
+" if exists('g:vscode')
+"     source ~/.config/nvim/init-vscode.vim
+"     finish
+" endif
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -168,4 +168,3 @@ lua require('lcrown.misc')
 " lua require('lcrown.nvim-tree')
 " lua require('lcrown.playground')
 "
-echo "Loaded Neovim init"
