@@ -1,7 +1,7 @@
 ---
 - name: configure lua-language-server
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
 
   vars:
     lua_repo_dir: '{{ ansible_env.HOME }}/repos/lua-language-server'
@@ -9,27 +9,32 @@
 
   tasks:
 
-  - name: clone lua-language-server
-    ansible.builtin.git:
-      repo: https://github.com/sumneko/lua-language-server
-      dest: '{{ lua_repo_dir }}'
-      clone: true
-      update: true
+    - name: clone lua-language-server
+      ansible.builtin.git:
+        repo: https://github.com/sumneko/lua-language-server
+        dest: '{{ lua_repo_dir }}'
+        version: HEAD
+        clone: true
+        update: true
 
-  - name: init submodules
-    ansible.builtin.command:
-      cmd: 'git submodule update --init --recursive'
-      chdir: '{{ lua_repo_dir }}'
-      creates: '{{ lua_build_dir }}'
+    - name: init submodules
+      ansible.builtin.command:
+        cmd: 'git submodule update --init --recursive'
+        chdir: '{{ lua_repo_dir }}'
+        creates: '{{ lua_build_dir }}'
 
-  - name: compile lua-language-server
-    ansible.builtin.command:
-      cmd: './compile/install.sh'
-      chdir: '{{ lua_build_dir }}'
-      creates: '{{ lua_build_dir }}/build'
+    - name: compile lua-language-server
+      ansible.builtin.command:
+        cmd: './compile/install.sh'
+        chdir: '{{ lua_build_dir }}'
+        creates: '{{ lua_build_dir }}/build'
 
-  - name: rebuild lua-language-server
-    ansible.builtin.command:
-      cmd: './3rd/luamake/luamake rebuild'
-      chdir: '{{ lua_repo_dir }}'
-      creates: '{{ lua_repo_dir }}/bin/*/lua-language-server'
+    - name: rebuild lua-language-server
+      ansible.builtin.command:
+        cmd: './3rd/luamake/luamake rebuild'
+        chdir: '{{ lua_repo_dir }}'
+        creates: '{{ lua_repo_dir }}/bin/*/lua-language-server'
+
+    - name: install stylua
+      community.general.cargo:
+        name: stylua

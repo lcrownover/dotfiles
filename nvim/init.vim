@@ -5,6 +5,12 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall
 endif
 
+" load the other init file if it's vscode
+if exists('g:vscode')
+    source ~/.config/nvim/init-vscode.vim
+    finish
+endif
+
 call plug#begin('~/.config/nvim/plugged')
 
 " treesitter
@@ -38,9 +44,9 @@ Plug 'romgrk/barbar.nvim'
 
 " theme
 Plug 'joshdick/onedark.vim'
-Plug 'arcticicestudio/nord-vim'
-Plug 'gruvbox-community/gruvbox'
-Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+" Plug 'arcticicestudio/nord-vim'
+" Plug 'gruvbox-community/gruvbox'
+" Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 
 " markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -51,12 +57,12 @@ Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'mbbill/undotree' " leader u
 Plug 'mg979/vim-visual-multi' " C-n add cursor on match
-Plug 'tpope/vim-eunuch' " fancy commands like :ChMod, :Find
-Plug 'tpope/vim-surround' " cs{[ to change { to [
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'folke/trouble.nvim'
+Plug 'tpope/vim-eunuch' " fancy commands like :ChMod, :Find
+Plug 'tpope/vim-surround' " cs{[ to change { to [
 
 " linting and language
 Plug 'rodjek/vim-puppet'
@@ -76,7 +82,6 @@ set clipboard=unnamed
 set colorcolumn=80,120
 set cursorline
 set indentkeys-=:,<:>
-" set iskeyword-=_
 set list
 set listchars=tab:├─,trail:·
 set noerrorbells
@@ -162,3 +167,5 @@ lua require('lcrown.misc')
 " lua require('lcrown.debugging')
 " lua require('lcrown.nvim-tree')
 " lua require('lcrown.playground')
+"
+echo "Loaded Neovim init"
