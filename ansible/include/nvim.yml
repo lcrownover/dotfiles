@@ -107,5 +107,5 @@
 
     - name: install nvim plugins
       ansible.builtin.command:
-        cmd: "nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync"
+        cmd: "nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
         creates: '{{ ansible_env.HOME }}/.local/share/nvim/site/pack/packer/start/plenary.nvim'
