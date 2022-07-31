@@ -58,7 +58,7 @@ local lsp = require('lspconfig')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
     --Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -68,15 +68,35 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
     vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
     vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-    vim.keymap.set('n', 'gn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-    vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-    vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     vim.keymap.set('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
     vim.keymap.set('n', '<leader>fs', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
     vim.keymap.set('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
     vim.keymap.set('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+
+    -- lspsaga remaps
+    local action = require("lspsaga.action")
+    -- Scrolling inside the hover doc is done with Ctrl+f/b
+    vim.keymap.set("n", "<C-f>", function() action.smart_scroll_with_saga(1) end, { silent = true })
+    vim.keymap.set("n", "<C-b>", function() action.smart_scroll_with_saga(-1) end, { silent = true })
+
+    -- You can do various actions inside the finder window
+    -- open = "o",
+    -- vsplit = "s",
+    -- split = "i",
+    vim.keymap.set("n", "gh", require("lspsaga.finder").lsp_finder, opts)
+    vim.keymap.set("n", "K", require("lspsaga.hover").render_hover_doc, { silent = true })
+    vim.keymap.set("n", "gn", require("lspsaga.rename").lsp_rename, { silent = true, noremap = true })
+    vim.keymap.set("n", "<F2>", require("lspsaga.rename").lsp_rename, { silent = true, noremap = true })
+    vim.keymap.set("n", "gs", require("lspsaga.definition").preview_definition, { silent = true, noremap = true })
+
+    -- jump diagnostic
+    vim.keymap.set("n", "[e", require("lspsaga.diagnostic").goto_prev, { silent = true, noremap = true })
+    vim.keymap.set("n", "]e", require("lspsaga.diagnostic").goto_next, { silent = true, noremap = true })
+    -- or jump to error
+    vim.keymap.set("n", "[E", function() require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, { silent = true, noremap = true })
+    vim.keymap.set("n", "]E", function() require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR }) end, { silent = true, noremap = true })
 end
 
 
@@ -155,7 +175,7 @@ lsp['sumneko_lua'].setup {
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
+        globals = { 'vim', 'require' },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
@@ -229,16 +249,16 @@ local null_ls = require 'null-ls'
 null_ls.setup({
     sources = {
       null_ls.builtins.formatting.black,
-      null_ls.builtins.formatting.gofmt,
+      -- null_ls.builtins.formatting.gofmt,
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.diagnostics.tidy,
       null_ls.builtins.formatting.rubocop,
       null_ls.builtins.formatting.rustfmt,
       null_ls.builtins.code_actions.xo,
       null_ls.builtins.diagnostics.markdownlint,
-      null_ls.builtins.diagnostics.ansiblelint.with({
-        filetypes = {"yaml","yml","yaml.ansible","yml.ansible"},
-      }),
+      -- null_ls.builtins.diagnostics.ansiblelint.with({
+      --   filetypes = {"yaml","yml","yaml.ansible","yml.ansible"},
+      -- }),
     },
 })
 
@@ -283,6 +303,9 @@ require('lspkind').init({
       TypeParameter = ""
     },
 })
+
+local lspsaga = require("lspsaga")
+lspsaga.init_lsp_saga()
 
 -- trouble (quickfix for errors and lsp stuff)
 require("trouble").setup {}

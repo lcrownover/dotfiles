@@ -65,7 +65,7 @@
       when: ansible_distribution == 'MacOSX'
       community.general.homebrew:
         name: neovim
-        state: present
+        state: head
 
     - name: create nvim configdir
       ansible.builtin.file:
@@ -78,17 +78,10 @@
         state: absent
         force: true
 
-    - name: link init.vim
+    - name: link init.lua
       ansible.builtin.file:
-        src: '{{ ansible_env.PWD }}/../../nvim/init.vim'
-        dest: '{{ ansible_env.HOME }}/.config/nvim/init.vim'
-        state: link
-        force: true
-
-    - name: link init-vscode.vim
-      ansible.builtin.file:
-        src: '{{ ansible_env.PWD }}/../../nvim/init-vscode.vim'
-        dest: '{{ ansible_env.HOME }}/.config/nvim/init-vscode.vim'
+        src: '{{ ansible_env.PWD }}/../../nvim/init.lua'
+        dest: '{{ ansible_env.HOME }}/.config/nvim/init.lua'
         state: link
         force: true
 
@@ -104,7 +97,15 @@
         state: link
         force: true
 
+    - name: install packer
+      ansible.builtin.git:
+        repo:  https://github.com/wbthomason/packer.nvim
+        dest: '{{ ansible_env.HOME }}/.local/share/nvim/site/pack/packer/start/packer.nvim'
+        clone: true
+        update: true
+        depth: 1
+
     - name: install nvim plugins
       ansible.builtin.command:
-        cmd: 'nvim -c PlugInstall -c q -c q'
-        creates: '{{ ansible_env.HOME }}/.config/nvim/plugged'
+        cmd: "nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync"
+        creates: '{{ ansible_env.HOME }}/.local/share/nvim/site/pack/packer/start/plenary.nvim'

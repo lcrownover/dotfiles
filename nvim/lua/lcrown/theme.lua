@@ -11,7 +11,9 @@ vim.cmd [[
 -- Change the colorscheme here and it will change everywhere
 
 local theme = 'onedark'
-local lualine_theme = theme
+
+-- local theme = 'zephyr'
+-- local lualine_theme = theme
 
 -- local theme = 'catppuccin'
 -- local lualine_theme = theme
@@ -31,50 +33,40 @@ local lualine_theme = theme
 -- local theme = 'NeoSolarized'
 -- local lualine_theme = 'solarized_dark'
 
-vim.g.theme = theme
-vim.g.lualine_theme = lualine_theme
+-- vim.g.theme = theme
+-- vim.g.lualine_theme = lualine_theme
+
+-- if theme == 'onedark' then
+--   local colors = vim.api.nvim_eval("onedark#GetColors()")
+--   vim.g.onedark_terminal_italics = 1
+--   vim.cmd('colorscheme onedark')
+--   vim.cmd('highlight Normal guibg=None guifg=' .. colors.white.gui)
+--   vim.cmd('highlight Keyword guifg=' .. colors.purple.gui)
+--   vim.cmd('highlight CursorLineNR guibg=none guifg=' .. colors.yellow.gui)
+--   vim.cmd('highlight LineNr guifg=' .. colors.blue.gui)
+--   vim.cmd('highlight netrwDir guifg=' .. colors.blue.gui)
+--   vim.cmd('highlight qfFileName guifg=' .. colors.green.gui)
+--   vim.cmd('highlight TelescopeBorder guifg=' .. colors.blue.gui)
 
 if theme == 'onedark' then
+  vim.g.lualine_theme = 'onedark'
+  local onedark = require('onedark')
+  onedark.setup {
+    style = 'cool',
+    transparent = true,
+  }
+  onedark.load()
 
-  -- local original_colors = {
-  --   red = { gui = "#E06C75", cterm = "204", cterm16 = "1" },
-  --   dark_red = { gui = "#BE5046", cterm = "196", cterm16 = "9" },
-  --   green = { gui = "#98C379", cterm = "114", cterm16 = "2" },
-  --   yellow = { gui = "#E5C07B", cterm = "180", cterm16 = "3" },
-  --   dark_yellow = { gui = "#D19A66", cterm = "173", cterm16 = "11" },
-  --   blue = { gui = "#61AFEF", cterm = "39", cterm16 = "4" },
-  --   purple = { gui = "#C678DD", cterm = "170", cterm16 = "5" },
-  --   cyan = { gui = "#56B6C2", cterm = "38", cterm16 = "6" },
-  --   white = { gui = "#ABB2BF", cterm = "145", cterm16 = "15" },
-  --   black = { gui = "#282C34", cterm = "235", cterm16 = "0" },
-  -- }
-  -- local function c(color, gui)
-  --   return { gui = gui, cterm = original_colors[color].cterm, cterm16 = original_colors[color].cterm16 }
-  -- end
-  -- vim.g.onedark_color_overrides = {
-    -- red = c("red", "#D4777E"),
-    -- dark_red = c("dark_red", "#B25951"),
-    -- green = c("green", "#99BB80"),
-    -- yellow = c("yellow", "#DABC85"),
-    -- dark_yellow = c("dark_yellow", "#C69A70"),
-    -- blue = c("blue", "#6FADE0"),
-    -- purple = c("purple", "#C082D2"),
-    -- cyan = c("cyan", "#60ADB7"),
-    -- white = c("white", "#ACB2BD"),
-    -- black = c("black", "#292C32"),
-  -- }
-  local colors = vim.api.nvim_eval("onedark#GetColors()")
-  vim.g.onedark_terminal_italics = 1
-  vim.cmd('colorscheme onedark')
-  vim.cmd('highlight Normal guibg=None guifg=' .. colors.white.gui)
-  vim.cmd('highlight Keyword guifg=' .. colors.purple.gui)
-  vim.cmd('highlight CursorLineNR guibg=none guifg=' .. colors.yellow.gui)
-  vim.cmd('highlight LineNr guifg=' .. colors.blue.gui)
-  vim.cmd('highlight netrwDir guifg=' .. colors.blue.gui)
-  vim.cmd('highlight qfFileName guifg=' .. colors.green.gui)
-  vim.cmd('highlight TelescopeBorder guifg=' .. colors.blue.gui)
+elseif theme == 'zephyr' then
+  vim.g.lualine_theme = 'onedark'
+  local zephyr = require('zephyr')
+  vim.cmd('highlight Normal guibg=none')
+  vim.cmd('highlight SignColumn guibg=none')
+  -- vim.cmd('highlight CursorLineNR guifg=' .. zephyr.yellow)
+  vim.cmd('highlight LineNr guifg=' .. zephyr.bg)
 
 elseif theme == 'catppuccin' then
+  vim.g.lualine_theme = 'catppuccin'
   local catppuccin = require("catppuccin")
   catppuccin.setup({
     transparent_background = true,
@@ -87,6 +79,7 @@ elseif theme == 'catppuccin' then
   vim.cmd('highlight LineNr guifg=#737994')
 
 elseif theme == 'gruvbox' then
+  vim.g.lualine_theme = 'gruvbox'
   -- vim.g.gruvbox_italic = 1
   vim.g.gruvbox_contrast_dark = 'hard'
   vim.g.gruvbox_invert_selection = '0'
@@ -101,15 +94,18 @@ elseif theme == 'gruvbox' then
   vim.cmd('highlight TelescopeBorder guifg=#5eacd3')
 
 elseif theme == 'material' then
+  vim.g.lualine_theme = 'material'
   vim.g.material_theme_style = 'default'
   -- vim.g.material_terminal_italics = 1
   vim.cmd('colorscheme material')
 
 elseif theme == 'tokyonight' then
+  vim.g.lualine_theme = 'tokyonight'
   vim.g.tokyonight_style = 'storm'
   vim.cmd('colorscheme tokyonight')
 
 elseif theme == 'nord' then
+  vim.g.lualine_theme = 'nord'
   -- https://github.com/romgrk/barbar.nvim#highlighting
   vim.g.nord_uniform_diff_background = 1
   -- vim.g.nord_italic = 1
@@ -127,6 +123,7 @@ elseif theme == 'nord' then
   vim.cmd('highlight WarningMsg guifg=#be6069')
 
 elseif theme == 'NeoSolarized' then
+  vim.g.lualine_theme = 'NeoSolarized'
   vim.cmd('colorscheme NeoSolarized')
   vim.g.neosolarized_contrast = "normal"
   vim.g.neosolarized_visibility = "normal"
@@ -156,7 +153,7 @@ end
 require'lualine'.setup {
   options = {
     icons_enabled = true,
-    theme = theme,
+    theme = vim.g.lualine_theme,
     component_separators = {'', ''},
     section_separators = {'', ''},
     disabled_filetypes = {}
