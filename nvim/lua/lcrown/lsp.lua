@@ -76,10 +76,10 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 
     -- lspsaga remaps
-    local action = require("lspsaga.action")
+    -- local action = require("lspsaga.action")
     -- Scrolling inside the hover doc is done with Ctrl+f/b
-    vim.keymap.set("n", "<C-f>", function() action.smart_scroll_with_saga(1) end, { silent = true })
-    vim.keymap.set("n", "<C-b>", function() action.smart_scroll_with_saga(-1) end, { silent = true })
+    -- vim.keymap.set("n", "<C-f>", function() action.smart_scroll_with_saga(1) end, { silent = true })
+    -- vim.keymap.set("n", "<C-b>", function() action.smart_scroll_with_saga(-1) end, { silent = true })
 
     -- You can do various actions inside the finder window
     -- open = "o",
@@ -249,16 +249,11 @@ local null_ls = require 'null-ls'
 null_ls.setup({
     sources = {
       null_ls.builtins.formatting.black,
-      -- null_ls.builtins.formatting.gofmt,
-      null_ls.builtins.formatting.stylua,
       null_ls.builtins.diagnostics.tidy,
       null_ls.builtins.formatting.rubocop,
-      null_ls.builtins.formatting.rustfmt,
+      -- null_ls.builtins.formatting.rustfmt,
       null_ls.builtins.code_actions.xo,
       null_ls.builtins.diagnostics.markdownlint,
-      -- null_ls.builtins.diagnostics.ansiblelint.with({
-      --   filetypes = {"yaml","yml","yaml.ansible","yml.ansible"},
-      -- }),
     },
 })
 
