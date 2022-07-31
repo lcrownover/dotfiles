@@ -19,5 +19,6 @@
 
   - name: ansible-language-server
     community.general.npm:
+      state: latest
       name: '@ansible/ansible-language-server'
       global: true

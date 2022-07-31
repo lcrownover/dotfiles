@@ -7,6 +7,6 @@
 
   - name: bash-language-server
     community.general.npm:
+      state: latest
       name: bash-language-server
       global: yes
-

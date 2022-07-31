@@ -16,4 +16,3 @@ require('lcrown.misc')
 -- require('lcrown.debugging')
 -- require('lcrown.nvim-tree')
 -- require('lcrown.playground')
-
