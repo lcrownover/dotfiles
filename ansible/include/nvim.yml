@@ -78,17 +78,18 @@
         state: absent
         force: true
 
+    - name: remove init.vim
+      ansible.builtin.file:
+        path: '{{ ansible_env.HOME }}/.config/nvim/init.vim'
+        state: absent
+        force: true
+
     - name: link init.lua
       ansible.builtin.file:
         src: '{{ ansible_env.PWD }}/../../nvim/init.lua'
         dest: '{{ ansible_env.HOME }}/.config/nvim/init.lua'
         state: link
         force: true
-
-    - name: check if lua dir exists
-      ansible.builtin.stat:
-        path: '{{ ansible_env.HOME }}/.config/nvim/lua'
-      register: nvim_lua_dir
 
     - name: link lua
       ansible.builtin.file:

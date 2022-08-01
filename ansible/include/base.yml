@@ -18,6 +18,8 @@
       - geckodriver
       - gsed
       - kubernetes
+      - minikube
+      - docker
 
   - name: Ubuntu => install base packages
     when: ansible_distribution == 'Ubuntu'
