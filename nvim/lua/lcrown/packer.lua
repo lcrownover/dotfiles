@@ -38,7 +38,7 @@ return require('packer').startup(function(use)
   -- use 'glepnir/zephyr-nvim'
   --   use 'arcticicestudio/nord-vim'
   --   use 'gruvbox-community/gruvbox'
-  --   use 'catppuccin/nvim', {'as': 'catppuccin'}
+  use { 'catppuccin/nvim', as = 'catppuccin'}
 
   use 'windwp/nvim-autopairs'
   use 'numToStr/Comment.nvim'   -- ctrl+c to comment

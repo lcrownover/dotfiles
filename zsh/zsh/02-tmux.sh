@@ -1,4 +1,5 @@
-alias t='tmux'
+alias tmux='tmux -2'
+alias t='tmux -2'
 
 set_tmux_window_name() {
     [[ -n "$TMUX" ]] && tmux rename-window "$1"
@@ -9,24 +10,24 @@ reset_tmux_window_name() {
     [[ -n "$TMUX" ]] && tmux rename-window $DEFAULT_TMUX_WINDOW_NAME
 }
 
-function main() {
-    # [[ -n $TMUX ]] && OP="switch" || OP="attach"
-    # $(tmux ls | grep -q main) || tmux new-session -d -s main
-    # tmux $OP -t main
-    tmux new-session -A -s main
+main() {
+    [[ -n $TMUX ]] && OP="switch" || OP="attach"
+    $(tmux ls | grep -q main) || tmux new-session -d -s main
+    tmux -2 $OP -t main
+    # tmux -2 new-session -A -s main
 }
 
-function unmain() {
+unmain() {
     $(tmux ls | grep -q main) && tmux kill-session -t main
 }
 
 # split after 80 chars
-function code_split() {
+code_split() {
     tmux split-window -h -l $(echo "$(tput cols) 80 - p" | dc)
 }
 
 # projects
-function project_switch() {
+project_switch() {
     PROJ_FILE="$HOME/.proj-list"
     touch $PROJ_FILE
     if [ $# -eq 0 ]; then
@@ -101,7 +102,7 @@ ts() {
         *)
             [[ -n $TMUX ]] && OP="switch" || OP="attach"
             $(tmux ls | grep -q "$1") || tmux new-session -d -s "$1"
-            tmux $OP -t "$1"
+            tmux -2 $OP -t "$1"
             ;;
     esac
 }
@@ -116,4 +117,3 @@ tn() {
             ;;
     esac
 }
-

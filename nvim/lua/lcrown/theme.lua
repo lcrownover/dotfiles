@@ -1,17 +1,17 @@
 -- used for tmux color passing
-vim.cmd [[
-    if exists('+termguicolors')
-      let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-      let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-      set termguicolors
-    endif
-]]
+-- vim.cmd [[
+--     if exists('+termguicolors')
+--       let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+--       let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+--       set termguicolors
+--     endif
+-- ]]
 
 
 -- Change the colorscheme here and it will change everywhere
 local theme = 'onedark'
--- local theme = 'zephyr'
 -- local theme = 'catppuccin'
+-- local theme = 'zephyr'
 -- local theme = 'material'
 -- local theme = 'nightfox'
 -- local theme = 'nord'
@@ -22,8 +22,8 @@ if theme == 'onedark' then
     vim.g.lualine_theme = 'onedark'
     local onedark = require('onedark')
     onedark.setup {
-    style = 'cool',
-    transparent = true,
+      style = 'cool',
+      transparent = true,
     }
     onedark.load()
 
@@ -39,18 +39,19 @@ elseif theme == 'catppuccin' then
     vim.g.lualine_theme = 'catppuccin'
     local catppuccin = require("catppuccin")
     catppuccin.setup({
-    transparent_background = true,
-    gitgutter = true,
-    barbar = true,
+      transparent_background = true,
+      integrations = {
+        lsp_saga = true,
+        gitgutter = true,
+        barbar = true,
+      }
     })
     vim.g.catppuccin_flavour = "frappe"
-    vim.cmd('colorscheme catppuccin')
-    vim.cmd('highlight CursorLineNR guifg=#e5c890')
-    vim.cmd('highlight LineNr guifg=#737994')
+    vim.cmd [[colorscheme catppuccin]]
 
 elseif theme == 'gruvbox' then
     vim.g.lualine_theme = 'gruvbox'
-    -- vim.g.gruvbox_italic = 1
+    vim.g.gruvbox_italic = 1
     vim.g.gruvbox_contrast_dark = 'hard'
     vim.g.gruvbox_invert_selection = '0'
     vim.cmd('colorscheme gruvbox')
@@ -66,7 +67,7 @@ elseif theme == 'gruvbox' then
 elseif theme == 'material' then
     vim.g.lualine_theme = 'material'
     vim.g.material_theme_style = 'default'
-    -- vim.g.material_terminal_italics = 1
+    vim.g.material_terminal_italics = 1
     vim.cmd('colorscheme material')
 
 elseif theme == 'tokyonight' then
@@ -76,10 +77,9 @@ elseif theme == 'tokyonight' then
 
 elseif theme == 'nord' then
     vim.g.lualine_theme = 'nord'
-    -- https://github.com/romgrk/barbar.nvim#highlighting
     vim.g.nord_uniform_diff_background = 1
-    -- vim.g.nord_italic = 1
-    -- vim.g.nord_italic_comments = 1
+    vim.g.nord_italic = 1
+    vim.g.nord_italic_comments = 1
     vim.g.nord_underline = 1
     vim.g.nord_bold_vertical_split_line = 1
     vim.cmd('colorscheme nord')
