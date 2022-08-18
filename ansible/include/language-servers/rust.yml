@@ -5,19 +5,16 @@
 
   tasks:
 
-  - name: macOS => install rust
-    when: ansible_distribution == 'MacOSX'
-    community.general.homebrew:
-      state: latest
-      name:
-        - 'rust'
-        - 'rust-analyzer'
-
-  - name: Ubuntu => install rust
-    when: ansible_distribution == 'Ubuntu'
+  - name: install rust
     shell:
       cmd: 'curl https://sh.rustup.rs -sSf | sh -s -- -y'
       creates: '{{ ansible_env.HOME }}/.cargo/env'
+
+  - name: macOS => install rust-analyzer
+    when: ansible_distribution == 'MacOSX'
+    shell:
+      cmd: "mkdir -p {{ansible_env.HOME}}/.local/bin; curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/.local/bin/rust-analyzer ; chmod +x ~/.local/bin/rust-analyzer"
+      creates: '{{ ansible_env.HOME }}/.local/bin/rust-analyzer'
 
   - name: Ubuntu => install rust-analyzer
     when: ansible_distribution == 'Ubuntu'
@@ -25,3 +22,18 @@
       cmd: 'mkdir -p ~/.local/bin; curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/.local/bin/rust-analyzer ; chmod +x ~/.local/bin/rust-analyzer'
       creates: '{{ ansible_env.HOME }}/.local/bin/rust-analyzer'
 
+  - name: clone rust-analyzer
+    git:
+      repo: https://github.com/rust-lang/rust-analyzer.git
+      dest: "{{ansible_env.HOME}}/repos/rust-analyzer"
+
+  - name: install rust-analyzer
+    command:
+      cmd: cargo xtask install --server
+      chdir: "{{ansible_env.HOME}}/repos/rust-analyzer"
+      creates: "{{ansible_env.HOME}}/.cargo/bin/rust-analyzer"
+
+  - name: install rustfmt
+    command:
+      cmd: rustup component add rustfmt
+      creates: "{{ansible_env.HOME}}/.cargo/bin/rustfmt"

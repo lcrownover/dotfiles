@@ -4,7 +4,7 @@ vim.opt.colorcolumn = '80,120'
 vim.opt.cursorline = true
 vim.opt.indentkeys:remove(':,<:>')
 vim.opt.list = true
-vim.opt.listchars = { tab = '├─', trail = '·' }
+vim.opt.listchars:append({ tab = '├─', trail = '·' })
 vim.opt.errorbells = false
 vim.opt.hlsearch = false
 vim.opt.wrap = false

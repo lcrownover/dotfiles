@@ -38,8 +38,9 @@ return require('packer').startup(function(use)
   -- use 'glepnir/zephyr-nvim'
   --   use 'arcticicestudio/nord-vim'
   --   use 'gruvbox-community/gruvbox'
-  use { 'catppuccin/nvim', as = 'catppuccin'}
+  -- use { 'catppuccin/nvim', as = 'catppuccin'}
 
+--   use "lukas-reineke/indent-blankline.nvim" -- indent lines
   use 'windwp/nvim-autopairs'
   use 'numToStr/Comment.nvim'   -- ctrl+c to comment
   use 'airblade/vim-gitgutter'
