@@ -7,10 +7,12 @@
 
   - name: ensure base directories
     ansible.builtin.file:
-      path:
-      - '{{ ansible_env.HOME }}/repos'
-      - '{{ ansible_env.HOME }}/.config'
+      path: "{{item}}"
       state: directory
+    loop:
+    - '{{ ansible_env.HOME }}/repos'
+    - '{{ ansible_env.HOME }}/.config'
+
 
   - name: macOS => install base packages
     when: ansible_distribution == 'MacOSX'
