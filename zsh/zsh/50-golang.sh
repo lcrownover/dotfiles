@@ -16,6 +16,7 @@ gonew() {
     fi
 
     mkdir -p "$basedir/$projectname/cmd/$projectname/"
+    mkdir "$basedir/$projectname/bin"
 
     printf 'package main\n\nimport (\n\t"fmt"\n)\n\nfunc main() {\n\tfmt.Println("hello world")\n}\n' > "$basedir/$projectname/cmd/$projectname/main.go"
     printf "# $projectname\n" > "$basedir/$projectname/README.md"
