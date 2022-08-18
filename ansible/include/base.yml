@@ -5,9 +5,11 @@
 
   tasks:
 
-  - name: ensure repos dir
+  - name: ensure base directories
     ansible.builtin.file:
-      path: '{{ ansible_env.HOME }}/repos'
+      path:
+      - '{{ ansible_env.HOME }}/repos'
+      - '{{ ansible_env.HOME }}/.config'
       state: directory
 
   - name: macOS => install base packages
