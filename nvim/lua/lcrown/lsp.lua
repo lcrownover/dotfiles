@@ -250,7 +250,6 @@ null_ls.setup({
       null_ls.builtins.formatting.black,
       null_ls.builtins.diagnostics.tidy,
       null_ls.builtins.formatting.rubocop,
-      -- null_ls.builtins.formatting.rustfmt,
       null_ls.builtins.code_actions.xo,
       null_ls.builtins.diagnostics.markdownlint,
     },
