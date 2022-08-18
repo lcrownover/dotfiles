@@ -26,28 +26,28 @@
 - import_playbook: include/nvim.yml
   tags: [nvim]
 
-- import_playbook: include/language-servers/markdown.yml
+- import_playbook: include/languages/markdown.yml
   tags: [nvim, markdown]
 
-- import_playbook: include/language-servers/lua.yml
+- import_playbook: include/languages/lua.yml
   tags: [nvim, lua]
 
-- import_playbook: include/language-servers/rust.yml
+- import_playbook: include/languages/rust.yml
   tags: [nvim, rust]
 
-- import_playbook: include/language-servers/python.yml
+- import_playbook: include/languages/python.yml
   tags: [nvim, python]
 
-- import_playbook: include/language-servers/bash.yml
+- import_playbook: include/languages/bash.yml
   tags: [nvim, bash]
 
-- import_playbook: include/language-servers/bash.yml
+- import_playbook: include/languages/bash.yml
   tags: [nvim, bash]
 
-- import_playbook: include/language-servers/vim.yml
+- import_playbook: include/languages/vim.yml
   tags: [nvim, vim]
 
-- import_playbook: include/language-servers/ansible.yml
+- import_playbook: include/languages/ansible.yml
   tags: [nvim, ansible]
 
 - import_playbook: include/keepassxc.yml
