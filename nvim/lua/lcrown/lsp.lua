@@ -137,6 +137,19 @@ lsp['pyright'].setup {
 }
 
 ---------------------------------------
+-- golang
+---------------------------------------
+
+local set_golang_fmt = function()
+  vim.opt.expandtab = false
+end
+vim.api.nvim_create_autocmd({"BufEnter"}, {
+  pattern = "*.go",
+  callback = set_golang_fmt,
+})
+
+
+---------------------------------------
 -- ruby
 ---------------------------------------
 
