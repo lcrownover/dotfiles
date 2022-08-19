@@ -40,6 +40,8 @@
       dest: '{{ zsh_plugin_dir }}/zsh-syntax-highlighting'
       clone: yes
       update: yes
+    become: yes
+    become_user: "{{ lookup('env', 'USER') }}"
 
   - name: install autosuggestions
     ansible.builtin.git:
@@ -47,6 +49,8 @@
       dest: '{{ zsh_plugin_dir }}/zsh-autosuggestions'
       clone: yes
       update: yes
+    become: yes
+    become_user: "{{ lookup('env', 'USER') }}"
 
   - name: secure dirs
     file:
