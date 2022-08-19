@@ -26,14 +26,14 @@
 - import_playbook: include/nvim.yml
   tags: [nvim]
 
+- import_playbook: include/languages/rust.yml
+  tags: [nvim, rust]
+
 - import_playbook: include/languages/markdown.yml
   tags: [nvim, markdown]
 
 - import_playbook: include/languages/lua.yml
   tags: [nvim, lua]
-
-- import_playbook: include/languages/rust.yml
-  tags: [nvim, rust]
 
 - import_playbook: include/languages/python.yml
   tags: [nvim, python]

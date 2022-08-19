@@ -9,7 +9,8 @@
 
   tasks:
 
-    - name: clone lua-language-server
+    - name: macOS => clone lua-language-server
+      when: ansible_distribution == "MacOSX"
       ansible.builtin.git:
         repo: https://github.com/sumneko/lua-language-server
         dest: '{{ lua_repo_dir }}'
@@ -17,19 +18,22 @@
         clone: true
         update: true
 
-    - name: init submodules
+    - name: macOS => init submodules
+      when: ansible_distribution == "MacOSX"
       ansible.builtin.command:
         cmd: 'git submodule update --init --recursive'
         chdir: '{{ lua_repo_dir }}'
         creates: '{{ lua_build_dir }}'
 
-    - name: compile lua-language-server
+    - name: macOS => compile lua-language-server
+      when: ansible_distribution == "MacOSX"
       ansible.builtin.command:
         cmd: './compile/install.sh'
         chdir: '{{ lua_build_dir }}'
         creates: '{{ lua_build_dir }}/build'
 
-    - name: rebuild lua-language-server
+    - name: macOS => rebuild lua-language-server
+      when: ansible_distribution == "MacOSX"
       ansible.builtin.command:
         cmd: './3rd/luamake/luamake rebuild'
         chdir: '{{ lua_repo_dir }}'
