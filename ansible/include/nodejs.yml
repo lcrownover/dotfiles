@@ -14,6 +14,7 @@
 
   - name: RedHat => add node module
     when: ansible_distribution == 'RedHat'
+    become: true
     dnf:
       name: "@nodejs:16"
       state: present
