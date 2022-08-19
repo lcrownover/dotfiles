@@ -25,15 +25,6 @@
       - minikube
       - docker
 
-  - name: Linux => install base packages
-    when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
-    become: true
-    package:
-      name:
-      - go
-      - geckodriver
-      - kubernetes
-
   - name: macOS => install homebrew casks
     when: ansible_distribution == 'MacOSX'
     community.general.homebrew_cask:
