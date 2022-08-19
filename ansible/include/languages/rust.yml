@@ -16,17 +16,17 @@
       dest: "{{ansible_env.HOME}}/repos/rust-analyzer"
 
   - name: install rust-analyzer
-    command:
-      cmd: cargo xtask install --server
+    shell:
+      cmd: "source {{ansible_env.HOME}}/.cargo/env; cargo xtask install --server"
       chdir: "{{ansible_env.HOME}}/repos/rust-analyzer"
       creates: "{{ansible_env.HOME}}/.cargo/bin/rust-analyzer"
 
   - name: install rustfmt
-    command:
-      cmd: rustup component add rustfmt
+    shell:
+      cmd: "source {{ansible_env.HOME}}/.cargo/env; rustup component add rustfmt"
       creates: "{{ansible_env.HOME}}/.cargo/bin/rustfmt"
 
   - name: install clippy
-    command:
-      cmd: rustup component add clippy
+    shell:
+      cmd: "source {{ansible_env.HOME}}/.cargo/env; rustup component add clippy"
       creates: "{{ansible_env.HOME}}/.cargo/bin/cargo-clippy"
