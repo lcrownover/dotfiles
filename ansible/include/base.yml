@@ -27,6 +27,7 @@
 
   - name: Linux => install base packages
     when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
+    become: true
     package:
       name:
       - go
