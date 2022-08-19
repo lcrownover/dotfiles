@@ -31,9 +31,9 @@
     - name: RedHat => install neovim build dependencies
       when: ansible_distribution == 'RedHat'
       become: true
-      dnf:
+      package:
         state: latest
-        package:
+        name:
           - ninja-build
           - libtool
           - autoconf
