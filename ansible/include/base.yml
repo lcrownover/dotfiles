@@ -27,8 +27,7 @@
 
   - name: Linux => install base packages
     when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
-    apt:
-      update_cache: yes
+    package:
       name:
       - go
       - geckodriver
