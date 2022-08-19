@@ -1,7 +1,15 @@
 tssh() {
-    TERM=screen-256color ssh "$@"
+    TERM=screen-256color \ssh "$@"
 }
 alias ssh='tssh'
+
+dev() {
+    if [[ $# -lt 1 ]]; then
+        ssh is-lc-dev.uoregon.edu
+    else
+        ssh -t is-lc-dev.uoregon.edu "$@; bash"
+    fi
+}
 
 # this function re-links all the ssh configs from keepass where the keys are stored
 function ensure_ssh_keys() {

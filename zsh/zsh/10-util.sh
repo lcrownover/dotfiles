@@ -63,11 +63,11 @@ function spushd() { pushd "$1" > /dev/null }
 function spopd() { popd > /dev/null }
 
 # known_hosts_quick
-function known_hosts_remove() {
+known_hosts_remove() {
 	if ! [[ $1 =~ "[0-9]+" ]]; then
 		echo "bad input $1"
 	else
-		sed -i "" "$1d" $HOME/.ssh/known_hosts
+		sed -i -e "$1d" $HOME/.ssh/known_hosts
 	fi
 }
 
