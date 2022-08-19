@@ -11,6 +11,7 @@
       state: directory
     loop:
     - '{{ ansible_env.HOME }}/repos'
+    - '{{ ansible_env.HOME }}/src'
     - '{{ ansible_env.HOME }}/.config'
 
 
