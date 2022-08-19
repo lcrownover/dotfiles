@@ -52,6 +52,7 @@
     file:
       path: "{{item}}"
       mode: '0600'
+      owner: "{{ lookup('env', 'USER') }}"
     loop:
       - "{{ansible_env.HOME}}/.oh-my-zsh/cache/completions"
       - "{{ansible_env.HOME}}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
