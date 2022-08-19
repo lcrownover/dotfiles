@@ -25,3 +25,10 @@
       cmd: "tar -C /usr/local -xzf {{ansible_env.HOME}}/src/go1.19.linux-amd64.tar.gz"
       creates: /usr/local/go
     become: true
+
+  - name: Linux => install go
+    when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
+    command:
+      cmd: go get golang.org/x/tools/gopls@latest
+      creates: /usr/local/gopls
+    become: true
