@@ -25,8 +25,8 @@
       - minikube
       - docker
 
-  - name: Ubuntu => install base packages
-    when: ansible_distribution == 'Ubuntu'
+  - name: Linux => install base packages
+    when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
     apt:
       update_cache: yes
       name:

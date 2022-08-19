@@ -5,9 +5,9 @@ alias ssh='tssh'
 
 dev() {
     if [[ $# -lt 1 ]]; then
-        ssh is-lc-dev.uoregon.edu
+        ssh is-lc-rh8.uoregon.edu
     else
-        ssh -t is-lc-dev.uoregon.edu "$@; bash"
+        ssh -t is-lc-rh8.uoregon.edu "$@; bash"
     fi
 }
 

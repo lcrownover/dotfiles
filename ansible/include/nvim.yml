@@ -28,8 +28,28 @@
           - 'ripgrep'
           - 'black'
 
-    - name: Ubuntu => clone neovim
-      when: ansible_distribution == 'Ubuntu'
+    - name: RedHat => install neovim build dependencies
+      when: ansible_distribution == 'RedHat'
+      become: true
+      dnf:
+        state: latest
+        package:
+          - ninja-build
+          - libtool
+          - autoconf
+          - automake
+          - cmake
+          - gcc
+          - gcc-c++
+          - make
+          - pkgconfig
+          - unzip
+          - patch
+          - gettext
+          - curl
+
+    - name: Linux => clone neovim
+      when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
       ansible.builtin.git:
         repo: https://github.com/neovim/neovim
         dest: '{{ nvim_src_dir }}'
@@ -37,23 +57,23 @@
         clone: true
         update: false
 
-    - name: Ubuntu => make neovim
-      when: ansible_distribution == 'Ubuntu'
+    - name: Linux => make neovim
+      when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
       ansible.builtin.command:
         cmd: '/usr/bin/env make CMAKE_BUILD_TYPE=RelWithDebInfo'
         chdir: '{{ nvim_src_dir }}'
         creates: '{{ nvim_src_dir }}/build'
 
-    - name: Ubuntu => install neovim
-      when: ansible_distribution == 'Ubuntu'
+    - name: Linux => install neovim
+      when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
       become: true
       ansible.builtin.command:
         cmd: 'make install'
         chdir: '{{ nvim_src_dir }}'
         creates: '/usr/local/bin/nvim'
 
-    - name: Ubuntu => link nvim
-      when: ansible_distribution == 'Ubuntu'
+    - name: Linux => link nvim
+      when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
       become: true
       ansible.builtin.file:
         src: '/usr/local/bin/nvim'

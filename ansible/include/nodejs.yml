@@ -5,18 +5,30 @@
 
   tasks:
 
-  - name: add node repo
+  - name: Ubuntu => add node repo
     when: ansible_distribution == 'Ubuntu'
     ansible.builtin.shell: 'curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -'
     args:
       warn: no
       creates: '/etc/apt/sources.list.d/nodesource.list'
 
-  - name: install nodejs
+  - name: RedHat => add node module
+    when: ansible_distribution == 'RedHat'
+    dnf:
+      name: "@nodejs:16"
+      state: present
+
+  - name: Ubuntu => install nodejs
     when: ansible_distribution == 'Ubuntu'
     become: yes
     ansible.builtin.apt:
       pkg: ["nodejs"]
+      state: latest
+
+  - name: RedHat => install nodejs
+    when: ansible_distribution == 'RedHat'
+    dnf:
+      name: nodejs
       state: latest
 
   - name: link .npmrc
@@ -24,5 +36,3 @@
       src: '{{ ansible_env.PWD }}/../../npm/npmrc'
       dest: '{{ ansible_env.HOME }}/.npmrc'
       state: link
-
-
