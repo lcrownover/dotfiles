@@ -9,7 +9,7 @@
     when: ansible_distribution == 'Ubuntu'
     ansible.builtin.shell: 'curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -'
     args:
-      warn: no
+      warn: false
       creates: '/etc/apt/sources.list.d/nodesource.list'
 
   - name: RedHat => add node module
@@ -21,13 +21,14 @@
 
   - name: Ubuntu => install nodejs
     when: ansible_distribution == 'Ubuntu'
-    become: yes
+    become: true
     ansible.builtin.apt:
       pkg: ["nodejs"]
       state: latest
 
   - name: RedHat => install nodejs
     when: ansible_distribution == 'RedHat'
+    become: true
     dnf:
       name: nodejs
       state: latest
