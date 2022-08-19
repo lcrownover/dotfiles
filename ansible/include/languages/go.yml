@@ -1,22 +1,28 @@
 ---
-- name: Linux => check if go version is downloaded
-  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
-  stat:
-    path: /opt/go1.19.linux-amd64.tar.gz
-  register: go_archive_check
+- name: go
+  hosts: localhost
+  gather_facts: no
 
-- name: Linux => download go
-  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
-  get_url:
-    url: https://go.dev/dl/go1.19.linux-amd64.tar.gz
-    dest: /opt/go1.19.linux-amd64.tar.gz
-    mode: "0644"
-  when: not go_archive_check.stat.exists
+  tasks:
 
-- name: Linux => unarchive go
-  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
-  unarchive:
-    src: /opt/go1.19.linux-amd64.tar.gz
-    dest: /opt/
-    remote_src: true
-  when: not go_archive_check.stat.exists
+  - name: Linux => check if go version is downloaded
+    when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
+    stat:
+      path: /opt/go1.19.linux-amd64.tar.gz
+    register: go_archive_check
+
+  - name: Linux => download go
+    when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
+    get_url:
+      url: https://go.dev/dl/go1.19.linux-amd64.tar.gz
+      dest: /opt/go1.19.linux-amd64.tar.gz
+      mode: "0644"
+    when: not go_archive_check.stat.exists
+
+  - name: Linux => unarchive go
+    when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
+    unarchive:
+      src: /opt/go1.19.linux-amd64.tar.gz
+      dest: /opt/
+      remote_src: true
+    when: not go_archive_check.stat.exists
