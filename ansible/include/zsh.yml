@@ -9,8 +9,8 @@
   tasks:
 
   - name: install oh-my-zsh
-    ansible.builtin.command:
-      cmd: 'curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh'
+    shell:
+      cmd: 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
       creates: '{{ ansible_env.HOME }}/.oh-my-zsh'
 
   - name: link .zshrc
@@ -47,4 +47,3 @@
       dest: '{{ zsh_plugin_dir }}/zsh-autosuggestions'
       clone: yes
       update: yes
-
