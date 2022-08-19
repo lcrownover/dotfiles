@@ -29,7 +29,7 @@
   - name: RedHat => install nodejs
     when: ansible_distribution == 'RedHat'
     become: true
-    dnf:
+    package:
       name: nodejs
       state: latest
 
