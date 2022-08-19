@@ -29,6 +29,9 @@
 - import_playbook: include/languages/rust.yml
   tags: [nvim, rust]
 
+- import_playbook: include/languages/go.yml
+  tags: [nvim, go]
+
 - import_playbook: include/languages/markdown.yml
   tags: [nvim, markdown]
 
