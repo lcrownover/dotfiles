@@ -40,6 +40,7 @@
       dest: '{{ zsh_plugin_dir }}/zsh-syntax-highlighting'
       clone: yes
       update: yes
+      mode: '0600'
 
   - name: install autosuggestions
     ansible.builtin.git:
@@ -47,3 +48,4 @@
       dest: '{{ zsh_plugin_dir }}/zsh-autosuggestions'
       clone: yes
       update: yes
+      mode: '0600'
