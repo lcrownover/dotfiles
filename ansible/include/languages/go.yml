@@ -24,3 +24,4 @@
     command:
       cmd: "tar -C /usr/local -xzf {{ansible_env.HOME}}/src/go1.19.linux-amd64.tar.gz"
       creates: /usr/local/go
+    become: true
