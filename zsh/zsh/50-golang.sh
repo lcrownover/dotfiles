@@ -1,3 +1,4 @@
+append_path "/usr/local/go/bin"
 append_path "$HOME/go/bin"
 
 gonew() {
