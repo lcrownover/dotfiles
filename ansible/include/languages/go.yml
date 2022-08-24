@@ -29,6 +29,6 @@
   - name: Linux => install go
     when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'
     command:
-      cmd: go get golang.org/x/tools/gopls@latest
+      cmd: /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
       creates: /usr/local/gopls
     become: true
