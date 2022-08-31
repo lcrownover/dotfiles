@@ -10,3 +10,7 @@
       state: latest
       name: bash-language-server
       global: yes
+
+  - name: beautysh
+    pip:
+      name: beautysh

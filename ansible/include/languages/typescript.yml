@@ -16,3 +16,9 @@
       state: latest
       name: typescript
       global: true
+
+  - name: xo
+    community.general.npm:
+      state: latest
+      name: xo
+      global: true
