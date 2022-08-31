@@ -27,11 +27,11 @@ vpn() {
         TOKEN=push
     fi
 
-
     VPNCONF="$HOME/.config/openconnect/openconnect.conf"
-    VPNCMD="cd ~; (echo \$(get_from_keepass 'uoregon'); echo $TOKEN) | sudo openconnect --config=$VPNCONF"
-    tmux list-sessions | grep openconnect >/dev/null || tmux new-session -s "openconnect" -n "vpn" -d
-    ps ax | grep -v grep | grep -s 'openconnect --config'
+    VPNCMD="cd ~; (echo \$(get_from_keepass 'uoregon'); echo $TOKEN) | sudo openconnect --config=$VPNCONF --passwd-on-stdin"
+
+    tmux list-sessions | grep -q openconnect || tmux new-session -s "openconnect" -n "vpn" -d
+    ps ax | grep -v grep | grep -q 'openconnect --config'
     if [ $? -eq 1 ]; then
         tmux send-keys -t "openconnect:vpn" "$SUDOCMD" Enter
         tmux send-keys -t "openconnect:vpn" "$VPNCMD" Enter
