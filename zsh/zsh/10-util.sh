@@ -1,13 +1,44 @@
-# openfortivpn
-function vpn() {
-    VPNCONF="$HOME/.config/openfortivpn/openfortivpn.conf"
-    VPNCMD="cd ~; sudo openfortivpn -c $VPNCONF --otp push"
-    tmux list-sessions | grep openfortivpn >/dev/null || tmux new-session -s "openfortivpn" -n "vpn" -d
-    ps ax | grep -v grep | grep -s 'sudo openfortivpn -c'
-    if [ $? -eq 1 ]; then
-        tmux send-keys -t "openfortivpn:vpn" "$VPNCMD" C-m
+# openconnect vpn
+vpn() {
+    case "$1" in
+        "kill")
+            OP="kill"
+            ;;
+        *)
+            TOKEN="$1"
+            ;;
+    esac
+
+    SUDOCMD="echo \$(get_from_keepass 'mac') | sudo -S true"
+
+    if [ "$OP" = "kill" ]; then
+        unset OP
+        eval $SUDOCMD
+        PID="$(ps ax | grep -v grep | grep 'sudo openconnect --config' | awk '{print $1}')"
+        if [[ $PID ]]; then
+            sudo kill $PID
+        fi
+        unset PID
+        (tmux list-sessions | grep -q openconnect) && tmux kill-session -t openconnect
+        return
     fi
+
+    if [ -z "$TOKEN" ]; then
+        TOKEN=push
+    fi
+
+
+    VPNCONF="$HOME/.config/openconnect/openconnect.conf"
+    VPNCMD="cd ~; (echo \$(get_from_keepass 'uoregon'); echo $TOKEN) | sudo openconnect --config=$VPNCONF"
+    tmux list-sessions | grep openconnect >/dev/null || tmux new-session -s "openconnect" -n "vpn" -d
+    ps ax | grep -v grep | grep -s 'openconnect --config'
+    if [ $? -eq 1 ]; then
+        tmux send-keys -t "openconnect:vpn" "$SUDOCMD" Enter
+        tmux send-keys -t "openconnect:vpn" "$VPNCMD" Enter
+    fi
+    unset TOKEN
 }
+
 
 # z navigation
 if [ "$OS" = "mac" ]; then

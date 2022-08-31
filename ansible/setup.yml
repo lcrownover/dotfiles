@@ -57,7 +57,7 @@
   when: ansible_distribution == 'MacOSX'
   tags: [keepassxc]
 
-- import_playbook: include/openfortivpn.yml
+- import_playbook: include/openconnect.yml
   when: ansible_distribution == 'MacOSX'
   tags: [openfortivpn]
 

@@ -1,0 +1,30 @@
+---
+- name: configure openconnect vpn
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+    - name: macOS => install openconnect
+      when: ansible_distribution == 'MacOSX'
+      community.general.homebrew:
+        name: openconnect
+        state: present
+
+    - name: macOS => configure openconnect - configdir
+      when: ansible_distribution == 'MacOSX'
+      ansible.builtin.file:
+        path: '{{ ansible_env.HOME }}/.config/openconnect'
+        state: directory
+
+    - name: macOS => configure openconnect - write from template
+      when: ansible_distribution == 'MacOSX'
+      ansible.builtin.copy:
+        dest: '{{ ansible_env.HOME }}/.config/openconnect/openconnect.conf'
+        owner: lcrown
+        mode: '0600'
+        content: |
+          protocol = fortinet
+          server = admin-vpn.uoregon.edu
+          usergroup = admin_split
+          user = lcrown

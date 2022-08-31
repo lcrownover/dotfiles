@@ -10,3 +10,9 @@
       state: latest
       name: typescript-language-server
       global: true
+
+  - name: typescript
+    community.general.npm:
+      state: latest
+      name: typescript
+      global: true
