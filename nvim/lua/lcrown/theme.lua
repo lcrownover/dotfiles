@@ -1,13 +1,3 @@
--- used for tmux color passing
--- vim.cmd [[
---     if exists('+termguicolors')
---       let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
---       let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
---       set termguicolors
---     endif
--- ]]
-
-
 -- Change the colorscheme here and it will change everywhere
 local theme = 'onedark'
 -- local theme = 'catppuccin'
@@ -22,8 +12,10 @@ if theme == 'onedark' then
     vim.g.lualine_theme = 'onedark'
     local onedark = require('onedark')
     onedark.setup {
+      colors = {},
       style = 'cool',
       transparent = true,
+      lualine = { transparent = false },
     }
     onedark.load()
 
@@ -32,7 +24,6 @@ elseif theme == 'zephyr' then
     local zephyr = require('zephyr')
     vim.cmd('highlight Normal guibg=none')
     vim.cmd('highlight SignColumn guibg=none')
-    -- vim.cmd('highlight CursorLineNR guifg=' .. zephyr.yellow)
     vim.cmd('highlight LineNr guifg=' .. zephyr.bg)
 
 elseif theme == 'catppuccin' then

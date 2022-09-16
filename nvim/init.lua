@@ -1,8 +1,8 @@
 require('lcrown.packer')
 
+require('lcrown.mason')
 require('lcrown.sets')
 require('lcrown.formatting')
-
 require('lcrown.devicons')
 require('lcrown.treesitter')
 require('lcrown.lsp')

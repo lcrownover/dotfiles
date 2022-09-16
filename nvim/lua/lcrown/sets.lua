@@ -16,9 +16,6 @@ vim.opt.signcolumn = 'yes'
 vim.opt.termguicolors = true
 vim.opt.undofile = true
 
--- fix background color in tmux
--- vim.opt.t_ut=
-
 vim.opt.tabstop = 4
 vim.opt.sts = 4
 vim.opt.shiftwidth = 4

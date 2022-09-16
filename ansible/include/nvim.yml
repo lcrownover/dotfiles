@@ -8,6 +8,34 @@
 
   tasks:
 
+    - name: Set langugage_servers fact
+      set_fact:
+        language_servers:
+          - lua-language-server
+          - go-debug-adapter
+          - angular-language-server
+          - ansible-language-server
+          - awk-language-server
+          - bash-language-server
+          - black
+          - delve
+          - dockerfile-language-server
+          - eslint_d
+          - gopls
+          - luacheck
+          - luaformatter
+          - markdownlint
+          - puppet-editor-services
+          - pylint
+          - pyright
+          - rust-analyzer
+          - shfmt
+          - solargraph
+          - terraform-ls
+          - typescript-language-server
+          - vim-language-server
+
+
     - name: Ubuntu => install neovim build dependencies
       when: ansible_distribution == 'Ubuntu'
       become: true
@@ -84,7 +112,7 @@
       when: ansible_distribution == 'MacOSX'
       community.general.homebrew:
         name: neovim
-        state: head
+        state: HEAD
 
     - name: create nvim configdir
       ansible.builtin.file:
@@ -129,3 +157,8 @@
       ansible.builtin.command:
         cmd: "nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
         creates: '{{ ansible_env.HOME }}/.local/share/nvim/site/pack/packer/start/plenary.nvim'
+
+    - name: install language servers with Mason
+      ansible.builtin.command:
+        cmd: "nvim --headless -c 'MasonInstall {{language_servers | join(' ')}} | true"
+        creates: '{{ ansible_env.HOME }}/.local/share/nvim/mason/bin'

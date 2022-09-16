@@ -19,9 +19,9 @@ cmp.setup {
     })
   },
   snippet = {
-      expand = function(args)
-          require('luasnip').lsp_expand(args.body)
-      end,
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
   },
   min_length = 0, -- allow for `from package import _` in Python
   mapping = {
@@ -59,44 +59,48 @@ local lsp = require('lspconfig')
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(_, bufnr)
-    --Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  --Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    local opts = { noremap = true, silent = true }
-    -- lsp remaps
-    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-    vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-    vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-    vim.keymap.set('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-    vim.keymap.set('n', '<leader>fs', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
-    vim.keymap.set('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-    vim.keymap.set('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  local opts = { noremap = true, silent = true }
+  -- lsp remaps
+  vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+  vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
+  vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+  vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+  vim.keymap.set('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  vim.keymap.set('n', '<leader>fs', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
+  vim.keymap.set('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  vim.keymap.set('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 
-    -- lspsaga remaps
-    -- local action = require("lspsaga.action")
-    -- Scrolling inside the hover doc is done with Ctrl+f/b
-    -- vim.keymap.set("n", "<C-f>", function() action.smart_scroll_with_saga(1) end, { silent = true })
-    -- vim.keymap.set("n", "<C-b>", function() action.smart_scroll_with_saga(-1) end, { silent = true })
+  -- lspsaga remaps
+  -- local action = require("lspsaga.action")
+  -- Scrolling inside the hover doc is done with Ctrl+f/b
+  -- vim.keymap.set("n", "<C-f>", function() action.smart_scroll_with_saga(1) end, { silent = true })
+  -- vim.keymap.set("n", "<C-b>", function() action.smart_scroll_with_saga(-1) end, { silent = true })
 
-    -- You can do various actions inside the finder window
-    -- open = "o",
-    -- vsplit = "s",
-    -- split = "i",
-    vim.keymap.set("n", "gh", require("lspsaga.finder").lsp_finder, opts)
-    vim.keymap.set("n", "K", require("lspsaga.hover").render_hover_doc, { silent = true })
-    vim.keymap.set("n", "gn", require("lspsaga.rename").lsp_rename, { silent = true, noremap = true })
-    vim.keymap.set("n", "<F2>", require("lspsaga.rename").lsp_rename, { silent = true, noremap = true })
-    vim.keymap.set("n", "gs", require("lspsaga.definition").preview_definition, { silent = true, noremap = true })
+  -- You can do various actions inside the finder window
+  -- open = "o",
+  -- vsplit = "s",
+  -- split = "i",
+  vim.keymap.set("n", "gh", require("lspsaga.finder").lsp_finder, opts)
+  vim.keymap.set("n", "K", require("lspsaga.hover").render_hover_doc, { silent = true })
+  vim.keymap.set("n", "gn", require("lspsaga.rename").lsp_rename, { silent = true, noremap = true })
+  vim.keymap.set("n", "<F2>", require("lspsaga.rename").lsp_rename, { silent = true, noremap = true })
+  vim.keymap.set("n", "gs", require("lspsaga.definition").peek_definition, { silent = true, noremap = true })
 
-    -- jump diagnostic
-    vim.keymap.set("n", "[e", require("lspsaga.diagnostic").goto_prev, { silent = true, noremap = true })
-    vim.keymap.set("n", "]e", require("lspsaga.diagnostic").goto_next, { silent = true, noremap = true })
-    -- or jump to error
-    vim.keymap.set("n", "[E", function() require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, { silent = true, noremap = true })
-    vim.keymap.set("n", "]E", function() require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR }) end, { silent = true, noremap = true })
+  -- jump diagnostic
+  vim.keymap.set("n", "[e", require("lspsaga.diagnostic").goto_prev, { silent = true, noremap = true })
+  vim.keymap.set("n", "]e", require("lspsaga.diagnostic").goto_next, { silent = true, noremap = true })
+  -- or jump to error
+  vim.keymap.set("n", "[E",
+    function() require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR }) end,
+    { silent = true, noremap = true })
+  vim.keymap.set("n", "]E",
+    function() require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR }) end,
+    { silent = true, noremap = true })
 end
 
 
@@ -115,9 +119,9 @@ local basic_servers = {
   "html",
 }
 for _, server in ipairs(basic_servers) do
-    lsp[server].setup {
+  lsp[server].setup {
     on_attach = on_attach,
-    }
+  }
 end
 
 
@@ -143,7 +147,7 @@ lsp['pyright'].setup {
 local set_golang_fmt = function()
   vim.opt.expandtab = false
 end
-vim.api.nvim_create_autocmd({"BufEnter"}, {
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = "*.go",
   callback = set_golang_fmt,
 })
@@ -168,23 +172,23 @@ lsp['solargraph'].setup {
 ---------------------------------------
 -- lua
 ---------------------------------------
-local sumneko_root_path = os.getenv("HOME") .. "/repos/lua-language-server"
-local sumneko_binary = os.getenv("HOME") .. "/repos/lua-language-server/bin/lua-language-server"
-
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
+-- local sumneko_root_path = os.getenv("HOME") .. "/repos/lua-language-server"
+-- local sumneko_binary = os.getenv("HOME") .. "/repos/lua-language-server/bin/lua-language-server"
+--
+-- local runtime_path = vim.split(package.path, ';')
+-- table.insert(runtime_path, "lua/?.lua")
+-- table.insert(runtime_path, "lua/?/init.lua")
 
 lsp['sumneko_lua'].setup {
   on_attach = on_attach,
-  cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
+  -- cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
   settings = {
     Lua = {
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
         -- Setup your lua path
-        path = runtime_path,
+        -- path = runtime_path,
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
@@ -210,8 +214,8 @@ lsp['sumneko_lua'].setup {
 require('rust-tools').setup({
   server = { on_attach = on_attach },
   tools = {
-    autoSetHints = true,
     inlay_hints = {
+      auto = true,
       show_parameter_hints = false,
       parameter_hints_prefix = "",
       other_hints_prefix = "",
@@ -259,14 +263,15 @@ lsp['terraformls'].setup {
 ---------------------------------------
 local null_ls = require 'null-ls'
 null_ls.setup({
-    sources = {
-      null_ls.builtins.formatting.black,
-      null_ls.builtins.diagnostics.tidy,
-      null_ls.builtins.formatting.rubocop,
-      null_ls.builtins.code_actions.xo,
-      null_ls.builtins.diagnostics.markdownlint,
-      null_ls.builtins.formatting.beautysh,
-    },
+  sources = {
+    null_ls.builtins.formatting.black,
+    null_ls.builtins.diagnostics.tidy,
+    null_ls.builtins.formatting.rubocop,
+    -- null_ls.builtins.code_actions.xo,
+    -- null_ls.builtins.formatting.eslint,
+    -- null_ls.builtins.diagnostics.markdownlint,
+    null_ls.builtins.formatting.beautysh,
+  },
 })
 
 
@@ -276,43 +281,47 @@ null_ls.setup({
 
 -- fancy symbols for completion
 require('lspkind').init({
-    -- enables text annotations
-    mode = true,
-    preset = 'default',
+  -- enables text annotations
+  mode = true,
+  preset = 'default',
 
-    -- override preset symbols
-    -- default: {}
-    symbol_map = {
-      Text = "",
-      Method = "",
-      Function = "",
-      Constructor = "",
-      Field = "ﰠ",
-      Variable = "",
-      Class = "ﴯ",
-      Interface = "",
-      Module = "",
-      Property = "ﰠ",
-      Unit = "塞",
-      Value = "",
-      Enum = "",
-      Keyword = "",
-      Snippet = "",
-      Color = "",
-      File = "",
-      Reference = "",
-      Folder = "",
-      EnumMember = "",
-      Constant = "",
-      Struct = "פּ",
-      Event = "",
-      Operator = "",
-      TypeParameter = ""
-    },
+  -- override preset symbols
+  -- default: {}
+  symbol_map = {
+    Text = "",
+    Method = "",
+    Function = "",
+    Constructor = "",
+    Field = "ﰠ",
+    Variable = "",
+    Class = "ﴯ",
+    Interface = "",
+    Module = "",
+    Property = "ﰠ",
+    Unit = "塞",
+    Value = "",
+    Enum = "",
+    Keyword = "",
+    Snippet = "",
+    Color = "",
+    File = "",
+    Reference = "",
+    Folder = "",
+    EnumMember = "",
+    Constant = "",
+    Struct = "פּ",
+    Event = "",
+    Operator = "",
+    TypeParameter = ""
+  },
 })
 
 local lspsaga = require("lspsaga")
-lspsaga.init_lsp_saga()
+lspsaga.init_lsp_saga({
+  code_action_lightbulb = {
+    enable = false,
+  }
+})
 
 -- trouble (quickfix for errors and lsp stuff)
 require("trouble").setup {}

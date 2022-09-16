@@ -22,6 +22,10 @@ return require('packer').startup(function(use)
   use 'saadparwaiz1/cmp_luasnip'
 
   -- LSP
+  use "williamboman/mason.nvim"
+  use "williamboman/mason-lspconfig.nvim"
+  use 'WhoIsSethDaniel/mason-tool-installer.nvim'
+  use "jayp0521/mason-null-ls.nvim"
   use 'neovim/nvim-lspconfig'
   use 'onsails/lspkind-nvim'
   use 'jose-elias-alvarez/null-ls.nvim'
@@ -59,5 +63,8 @@ return require('packer').startup(function(use)
   use 'rodjek/vim-puppet'
   use 'simrat39/rust-tools.nvim'
   use 'Vimjas/vim-python-pep8-indent'   -- fix until treesitter python and yaml indent is fixed
+
+  -- debugging
+  use 'mfussenegger/nvim-dap'
 
 end)

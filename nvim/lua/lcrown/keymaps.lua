@@ -15,9 +15,6 @@ map('n', 'N', 'Nzzzv')
 -- better joining
 map('n', 'J', 'mzJ`z')
 
--- folding
-map('n', '=', 'za')
-
 -- break points
 map('i', ',', ',<c-g>u')
 map('i', '.', '.<c-g>u')
@@ -137,8 +134,8 @@ map('n', '<leader>vs', '<cmd>lua VSCode()<cr>')
 map('n', '<leader>da', ":exe ':normal a _' . strftime('%c') . '_'<cr>")
 
 -- easier commenting, for some reason C-_ means C-/
-map('n', '<C-_>', '<Plug>(comment_toggle_current_linewise)', {silent = true})
-map('x', '<C-_>', '<Plug>(comment_toggle_linewise_visual)', {silent = true})
+map('n', '<C-_>', ':normal gcc<CR>')
+map('x', '<C-_>', ':normal gcc<CR>')
 
 
 -- close buffer
@@ -157,4 +154,3 @@ map('n', '<Leader>a=', ':Tabularize /=<CR>')
 map('x', '<Leader>a=', ':Tabularize /=<CR>')
 map('n', '<Leader>a:', ':Tabularize /:\zs<CR>')
 map('x', '<Leader>a:', ':Tabularize /:\zs<CR>')
-
