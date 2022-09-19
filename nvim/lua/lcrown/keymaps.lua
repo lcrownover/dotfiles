@@ -27,8 +27,8 @@ map('n', '<c-w>\\', ':vsplit<cr>', {silent = true})
 map('n', '<c-w>w', ':close<cr>', {silent = true})
 
 -- nerdtree
-map('n', '<leader>b', ':NERDTreeFind<cr>')
-map('n', '<c-b>', ':NERDTreeToggle<CR>')
+-- map('n', '<leader>b', ':NERDTreeFind<cr>')
+-- map('n', '<c-b>', ':NERDTreeToggle<CR>')
 
 -- nvim tree doesnt work with symlinks
 map('n', '<C-b>',     ':NvimTreeToggle<CR>')

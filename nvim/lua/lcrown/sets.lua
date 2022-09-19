@@ -1,3 +1,5 @@
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
 vim.opt.mouse:append('a')
 vim.opt.clipboard = 'unnamed'
 vim.opt.colorcolumn = '80,120'
@@ -26,11 +28,11 @@ vim.opt.splitright = true
 
 vim.g.mapleader = " "
 
-vim.g.NERDTreeAutoDeleteBuffer = 1
-vim.g.NERDTreeMinimalUI = 1
-vim.g.NERDTreeDirArrows = 1
-vim.g.NERDTreeQuitOnOpen = 1
-vim.g.NERDTreeWinPos = "right"
+-- vim.g.NERDTreeAutoDeleteBuffer = 1
+-- vim.g.NERDTreeMinimalUI = 1
+-- vim.g.NERDTreeDirArrows = 1
+-- vim.g.NERDTreeQuitOnOpen = 1
+-- vim.g.NERDTreeWinPos = "right"
 
 -- vim-visual-multi maps
 vim.cmd([[
@@ -38,9 +40,3 @@ vim.cmd([[
   let g:VM_maps["Undo"] = 'u'
   let g:VM_maps["Redo"] = '<C-r>'
 ]])
-
--- nvim-tree doesnt work with my symlink setup...
--- let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
--- let g:nvim_tree_quit_on_open = 1
--- let g:nvim_tree_git_hl = 1
--- let g:nvim_tree_add_trailing = 1
