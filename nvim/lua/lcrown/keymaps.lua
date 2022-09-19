@@ -31,9 +31,9 @@ map('n', '<leader>b', ':NERDTreeFind<cr>')
 map('n', '<c-b>', ':NERDTreeToggle<CR>')
 
 -- nvim tree doesnt work with symlinks
--- map('n', '<C-b>',     ':NvimTreeToggle<CR>')
+map('n', '<C-b>',     ':NvimTreeToggle<CR>')
 -- map('n', '<leader>r', ':NvimTreeRefresh<CR>')
--- map('n', '<leader>b', ':NvimTreeFindFile<CR>')
+map('n', '<leader>b', ':NvimTreeFindFile<CR>')
 
 -- bufferline
 map('n', '<c-h>', ':BufferPrevious<cr>', {silent = true})

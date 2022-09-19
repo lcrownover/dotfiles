@@ -36,19 +36,22 @@ return require('packer').startup(function(use)
   use 'hoob3rt/lualine.nvim'
   use 'romgrk/barbar.nvim'
 
+  -- file explorer
+  -- use 'scrooloose/nerdtree'
+  use 'kyazdani42/nvim-tree.lua'
+
   -- theme
   use 'navarasu/onedark.nvim'
   -- use 'joshdick/onedark.vim'
   -- use 'glepnir/zephyr-nvim'
-  --   use 'arcticicestudio/nord-vim'
-  --   use 'gruvbox-community/gruvbox'
+  -- use 'arcticicestudio/nord-vim'
+  -- use 'gruvbox-community/gruvbox'
   -- use { 'catppuccin/nvim', as = 'catppuccin'}
 
 --   use "lukas-reineke/indent-blankline.nvim" -- indent lines
   use 'windwp/nvim-autopairs'
   use 'numToStr/Comment.nvim'   -- ctrl+c to comment
   use 'airblade/vim-gitgutter'
-  use 'scrooloose/nerdtree'
   use 'mbbill/undotree'   -- leader u
   use 'mg979/vim-visual-multi'   -- C-n add cursor on match
   use 'godlygeek/tabular'

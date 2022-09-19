@@ -1,7 +1,7 @@
 require('lcrown.packer')
-
 require('lcrown.mason')
 require('lcrown.sets')
+require('lcrown.nvim-tree')
 require('lcrown.formatting')
 require('lcrown.devicons')
 require('lcrown.treesitter')
@@ -14,5 +14,4 @@ require('lcrown.terminal')
 require('lcrown.misc')
 
 -- require('lcrown.debugging')
--- require('lcrown.nvim-tree')
 -- require('lcrown.playground')
