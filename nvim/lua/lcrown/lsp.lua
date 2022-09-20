@@ -190,6 +190,7 @@ lsp['sumneko_lua'].setup {
 -- rust
 ---------------------------------------
 
+-- rust-tools configures rust_analyzer for us
 require('rust-tools').setup({
   server = {
     on_attach = on_attach,
