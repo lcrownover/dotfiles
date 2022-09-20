@@ -15,6 +15,7 @@ require('lcrown.formatting')
 
 -- language server setups
 require('lcrown.lsp')
+require('lcrown.lspsaga')
 
 -- these configs have no order
 require('lcrown.theme')

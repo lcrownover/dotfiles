@@ -19,3 +19,8 @@ require('trim').setup({
     [[%s/\%^\n\+//]], -- trim first line
   },
 })
+
+-- autopairs config
+require('nvim-autopairs').setup({
+  disable_filetype = { "TelescopePrompt", "vim" },
+})
