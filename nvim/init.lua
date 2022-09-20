@@ -2,6 +2,9 @@
 require('lcrown.packer')
 require('lcrown.mason')
 
+-- caching
+require('lcrown.impatient')
+
 -- prereqs, base stuff
 require('lcrown.sets')
 require('lcrown.devicons')

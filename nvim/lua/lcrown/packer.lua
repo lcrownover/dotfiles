@@ -5,6 +5,9 @@ return require('packer').startup(function(use)
   -- treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
+  -- caching
+  use 'lewis6991/impatient.nvim'
+
   -- telescope
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
@@ -61,6 +64,7 @@ return require('packer').startup(function(use)
   use 'tpope/vim-eunuch'   -- fancy commands like :ChMod, :Find
   use 'tpope/vim-surround'   -- cs{[ to change { to [
   use 'cappyzawa/trim.nvim'
+  use 'voldikss/vim-floaterm'
 
   -- linting and language
   use 'rodjek/vim-puppet'

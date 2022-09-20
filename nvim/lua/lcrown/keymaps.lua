@@ -82,6 +82,11 @@ map('n', '<F10>', ":lua require'dap'.step_over()<CR>", {silent = true})
 map('n', '<F11>', ":lua require'dap'.step_into()<CR>", {silent = true})
 map('n', '<F12>', ":lua require'dap'.step_out()<CR>", {silent = true})
 
+-- FloaTerm configuration
+map('n', "<leader>ft", ":FloatermNew --name=myfloat --height=0.8 --width=0.7 --autoclose=2 zsh <CR> ")
+map('n', "t", ":FloatermToggle myfloat<CR>")
+vim.keymap.set('t', "<Esc>", "<C-\\><C-n>:q<CR>")
+
 -- -- open a new nvim terminal
 -- map('n', '<leader>t', ':terminal<cr>i')
 -- map('t', '<esc>', '<c-\\><c-n>')
