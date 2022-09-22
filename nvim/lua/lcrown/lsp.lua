@@ -31,6 +31,7 @@ cmp.setup {
       select = true
     }
   },
+
   sources = {
     { name = "nvim_lsp" },
     { name = "luasnip" },

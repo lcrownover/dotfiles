@@ -26,6 +26,9 @@ map('n', '<c-w>-', ':split<cr>', {silent = true})
 map('n', '<c-w>\\', ':vsplit<cr>', {silent = true})
 map('n', '<c-w>w', ':close<cr>', {silent = true})
 
+-- toggle showing of whitespace characters
+map('n', '<leader>s', ':lua ToggleWhitespaceVisibility()<CR>')
+
 -- nerdtree
 -- map('n', '<leader>b', ':NERDTreeFind<cr>')
 -- map('n', '<c-b>', ':NERDTreeToggle<CR>')

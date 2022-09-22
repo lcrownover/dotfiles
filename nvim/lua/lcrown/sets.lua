@@ -5,8 +5,7 @@ vim.opt.clipboard = 'unnamed'
 vim.opt.colorcolumn = '80,120'
 vim.opt.cursorline = true
 vim.opt.indentkeys:remove(':,<:>')
-vim.opt.list = true
-vim.opt.listchars:append({ tab = '├─', trail = '·' })
+vim.opt.listchars:append({ tab = '├─', trail = '·', eol = '↲', space = "_"})
 vim.opt.errorbells = false
 vim.opt.hlsearch = false
 vim.opt.wrap = false
@@ -45,3 +44,7 @@ vim.cmd([[
   let g:VM_maps["Undo"] = 'u'
   let g:VM_maps["Redo"] = '<C-r>'
 ]])
+
+function ToggleWhitespaceVisibility()
+  vim.opt.list = not vim.opt.list:get()
+end

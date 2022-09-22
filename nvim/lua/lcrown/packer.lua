@@ -4,6 +4,7 @@ return require('packer').startup(function(use)
 
   -- treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use 'nvim-treesitter/playground'
 
   -- caching
   use 'lewis6991/impatient.nvim'
@@ -45,6 +46,7 @@ return require('packer').startup(function(use)
 
   -- theme
   use 'navarasu/onedark.nvim'
+  use 'tanvirtin/monokai.nvim'
   -- use 'joshdick/onedark.vim'
   -- use 'glepnir/zephyr-nvim'
   -- use 'arcticicestudio/nord-vim'
