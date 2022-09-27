@@ -29,8 +29,6 @@ function LoadTheme(theme_name)
       lualine = { transparent = false },
       code_style = {
         comments = 'italic',
-        keywords = 'italic',
-        functions = 'italic',
       },
       highlights = {
         -- TSOperator = { fg = palette.cyan },
