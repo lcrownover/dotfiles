@@ -46,7 +46,10 @@ return require('packer').startup(function(use)
 
   -- theme
   use 'navarasu/onedark.nvim'
-  use 'tanvirtin/monokai.nvim'
+  -- use 'tanvirtin/monokai.nvim'
+  -- use 'ellisonleao/gruvbox.nvim'
+  -- use 'sainnhe/gruvbox-material'
+  use 'folke/tokyonight.nvim'
   -- use 'joshdick/onedark.vim'
   -- use 'glepnir/zephyr-nvim'
   -- use 'arcticicestudio/nord-vim'
