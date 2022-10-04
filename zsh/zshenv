@@ -31,3 +31,6 @@ for f in $ZSH_CONF_DIR/*.sh; do
 done
 
 . "$HOME/.cargo/env"
+
+export EDITOR="nvim"
+export VISUAL="nvim"

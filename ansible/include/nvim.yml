@@ -82,7 +82,7 @@
         repo: https://github.com/neovim/neovim
         dest: '{{ nvim_src_dir }}'
         clone: true
-        update: false
+        update: true
 
     - name: Linux => make neovim
       when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'RedHat'

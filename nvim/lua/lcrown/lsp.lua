@@ -227,7 +227,7 @@ lsp['terraformls'].setup {
 local null_ls = require 'null-ls'
 null_ls.setup({
   sources = {
-    null_ls.builtins.formatting.black,
+    null_ls.builtins.formatting.blue,
     null_ls.builtins.diagnostics.tidy,
     null_ls.builtins.formatting.rubocop,
     null_ls.builtins.formatting.beautysh,
