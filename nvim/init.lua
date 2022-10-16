@@ -11,7 +11,7 @@ require('lcrown.devicons')
 require('lcrown.treesitter')
 
 -- file navigation
-require('lcrown.nvim-tree')
+-- require('lcrown.nvim-tree')
 
 -- formatting is basic spacing setup for specific languages
 require('lcrown.formatting')
@@ -25,6 +25,7 @@ require('lcrown.theme')
 require('lcrown.telescope')
 require('lcrown.nvim-comment')
 require('lcrown.terminal')
+require('lcrown.leap')
 require('lcrown.misc')
 
 -- keymaps should be last

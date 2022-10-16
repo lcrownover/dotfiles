@@ -41,15 +41,16 @@ return require('packer').startup(function(use)
   use 'romgrk/barbar.nvim'
 
   -- file explorer
-  -- use 'scrooloose/nerdtree'
-  use 'kyazdani42/nvim-tree.lua'
+  use 'scrooloose/nerdtree'
+  -- use 'kyazdani42/nvim-tree.lua'
 
   -- theme
+  -- use '~/repos/tokyonight.nvim'
+  use 'folke/tokyonight.nvim'
   use 'navarasu/onedark.nvim'
   -- use 'tanvirtin/monokai.nvim'
   -- use 'ellisonleao/gruvbox.nvim'
   -- use 'sainnhe/gruvbox-material'
-  use 'folke/tokyonight.nvim'
   -- use 'joshdick/onedark.vim'
   -- use 'glepnir/zephyr-nvim'
   -- use 'arcticicestudio/nord-vim'
@@ -70,11 +71,13 @@ return require('packer').startup(function(use)
   use 'tpope/vim-surround'   -- cs{[ to change { to [
   use 'cappyzawa/trim.nvim'
   use 'voldikss/vim-floaterm'
+  use 'ggandor/leap.nvim'
 
   -- linting and language
   use 'rodjek/vim-puppet'
   use 'simrat39/rust-tools.nvim'
   use 'Vimjas/vim-python-pep8-indent'   -- fix until treesitter python and yaml indent is fixed
+  use 'fatih/vim-go'
 
   -- debugging
   use 'mfussenegger/nvim-dap'

@@ -42,7 +42,8 @@ cmp.setup {
 }
 
 -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 
 ---------------------------------------
@@ -143,6 +144,8 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = "*.go",
   callback = set_golang_fmt,
 })
+-- disable "K" in vim-go
+vim.g.go_doc_keywordprg_enabled = 0
 
 
 ---------------------------------------

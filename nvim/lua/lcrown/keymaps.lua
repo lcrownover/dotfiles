@@ -2,7 +2,6 @@
 local function map(mode, lhs, rhs, opts)
     local options = {noremap = true}
     if opts then options = vim.tbl_extend("force", options, opts) end
-    -- vim.api.nvim_set_keymap(mode, lhs, rhs, options)
     vim.keymap.set(mode, lhs, rhs, options)
 end
 
@@ -30,13 +29,11 @@ map('n', '<c-w>w', ':close<cr>', {silent = true})
 map('n', '<leader>s', ':lua ToggleWhitespaceVisibility()<CR>')
 
 -- nerdtree
--- map('n', '<leader>b', ':NERDTreeFind<cr>')
--- map('n', '<c-b>', ':NERDTreeToggle<CR>')
-
--- nvim tree doesnt work with symlinks
-map('n', '<C-b>',     ':NvimTreeToggle<CR>')
--- map('n', '<leader>r', ':NvimTreeRefresh<CR>')
-map('n', '<leader>b', ':NvimTreeFindFile<CR>')
+map('n', '<leader>b', ':NERDTreeFind<cr>')
+map('n', '<c-b>', ':NERDTreeToggle<CR>')
+-- nvimtree
+-- map('n', '<C-b>',     ':NvimTreeToggle<CR>')
+-- map('n', '<leader>b', ':NvimTreeFindFile<CR>')
 
 -- bufferline
 map('n', '<c-h>', ':BufferPrevious<cr>', {silent = true})
