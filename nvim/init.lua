@@ -25,7 +25,6 @@ require('lcrown.theme')
 require('lcrown.telescope')
 require('lcrown.nvim-comment')
 require('lcrown.terminal')
-require('lcrown.leap')
 require('lcrown.misc')
 
 -- keymaps should be last

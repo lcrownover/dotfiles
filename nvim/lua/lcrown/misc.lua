@@ -8,3 +8,5 @@ require("trouble").setup {}
 
 -- fidget gives a cool loading status for lsp
 require "fidget".setup {}
+
+require("nvim-surround").setup{}

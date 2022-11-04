@@ -68,10 +68,9 @@ return require('packer').startup(function(use)
   use 'norcalli/nvim-colorizer.lua'
   use 'folke/trouble.nvim'
   use 'tpope/vim-eunuch'   -- fancy commands like :ChMod, :Find
-  use 'tpope/vim-surround'   -- cs{[ to change { to [
+  use 'kylechui/nvim-surround'   -- cs{[ to change { to [
   use 'cappyzawa/trim.nvim'
   use 'voldikss/vim-floaterm'
-  use 'ggandor/leap.nvim'
 
   -- linting and language
   use 'rodjek/vim-puppet'
