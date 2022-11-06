@@ -13,7 +13,6 @@
         language_servers:
           - lua-language-server
           - go-debug-adapter
-          - angular-language-server
           - ansible-language-server
           - awk-language-server
           - bash-language-server
@@ -112,7 +111,7 @@
       when: ansible_distribution == 'MacOSX'
       community.general.homebrew:
         name: neovim
-        state: HEAD
+        state: present
 
     - name: create nvim configdir
       ansible.builtin.file:
@@ -160,8 +159,6 @@
 
     - name: install language servers with Mason
       ansible.builtin.command:
-        cmd: "nvim --headless -c 'MasonInstall {{language_servers | join(' ')}}' -c 'quitall'"
+        cmd: "nvim --headless -c 'MasonInstall {{item}}' -c 'quitall'"
         creates: '{{ ansible_env.HOME }}/.local/share/nvim/mason/bin'
-
-    - debug:
-        msg: "nvim --headless -c 'MasonInstall {{language_servers | join(' ')}}' -c 'quitall'"
+      loop: "{{language_servers}}"

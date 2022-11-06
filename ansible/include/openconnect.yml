@@ -21,7 +21,7 @@
       when: ansible_distribution == 'MacOSX'
       ansible.builtin.copy:
         dest: '{{ ansible_env.HOME }}/.config/openconnect/openconnect.conf'
-        owner: lcrown
+        owner: "{{ansible_env.USER}}"
         mode: '0600'
         content: |
           protocol = fortinet

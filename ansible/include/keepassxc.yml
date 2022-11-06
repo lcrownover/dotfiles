@@ -16,11 +16,16 @@
         name: keepassxc
         state: present
 
-    - name: macOS => configure keepassxc
+    - name: macOS => check if keepassxc password file exists
       when: ansible_distribution == 'MacOSX'
+      stat:
+        path: '{{ ansible_env.HOME }}/.config/zsh/01-secure-env-keepassxc.sh'
+      register: kp
+
+    - name: macOS => configure keepassxc
+      when: ansible_distribution == 'MacOSX' and not kp.stat.exists
       ansible.builtin.copy:
         content: "export KEEPASSDBPW='{{ keepassxc_password }}'"
         dest: '{{ ansible_env.HOME }}/.config/zsh/01-secure-env-keepassxc.sh'
-        owner: lcrown
+        owner: "{{ansible_env.USER}}"
         mode: '0600'
-

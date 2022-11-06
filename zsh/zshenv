@@ -21,8 +21,17 @@ case "$(uname -a)" in
         ;;
 esac
 
+case "$(uname -p)" in
+    i386)
+        export HOMEBREW_BINDIR="/usr/local/bin"
+        ;;
+    *)
+        export HOMEBREW_BINDIR="/opt/homebrew/bin"
+        ;;
+esac
+
 if [ "$OS" = "mac" ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    eval "$($HOMEBREW_BINDIR/brew shellenv)"
 fi
 
 # Source all my configs from the conf dir
@@ -30,7 +39,7 @@ for f in $ZSH_CONF_DIR/*.sh; do
     source $f
 done
 
-. "$HOME/.cargo/env"
+# . "$HOME/.cargo/env"
 
 export EDITOR="nvim"
 export VISUAL="nvim"

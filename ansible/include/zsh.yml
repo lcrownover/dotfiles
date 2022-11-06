@@ -34,21 +34,28 @@
       state: link
       force: yes
 
-  # - name: install syntax highlighting
-  #   shell:
-  #     cmd: "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
-  #     creates: '{{ zsh_plugin_dir }}/zsh-syntax-highlighting'
-  #
-  # - name: install autosuggestions
-  #   shell:
-  #     cmd: "git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
-  #     creates: '{{ zsh_plugin_dir }}/zsh-autosuggestions'
-  #
-  # - name: secure dirs
-  #   file:
-  #     path: "{{item}}"
-  #     mode: '0600'
-  #   loop:
-  #     - "{{ansible_env.HOME}}/.oh-my-zsh/cache/completions"
-  #     - "{{ansible_env.HOME}}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
-  #     - "{{ansible_env.HOME}}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+  - name: install z.sh
+    ansible.builtin.git:
+      repo: https://github.com/rupa/z
+      dest: '{{ ansible_env.HOME }}/repos/z'
+      clone: true
+      update: true
+
+  - name: install syntax highlighting
+    shell:
+      cmd: "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+      creates: '{{ zsh_plugin_dir }}/zsh-syntax-highlighting'
+
+  - name: install autosuggestions
+    shell:
+      cmd: "git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+      creates: '{{ zsh_plugin_dir }}/zsh-autosuggestions'
+
+  - name: secure dirs
+    file:
+      path: "{{item}}"
+      mode: '0600'
+    loop:
+      - "{{ansible_env.HOME}}/.oh-my-zsh/cache/completions"
+      - "{{ansible_env.HOME}}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+      - "{{ansible_env.HOME}}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"

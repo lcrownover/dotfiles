@@ -1,6 +1,6 @@
 # z navigation
 if [ "$OS" = "mac" ]; then
-    . /opt/homebrew/etc/profile.d/z.sh
+    . $HOME/repos/z/z.sh
 fi
 
 # todo/notes
@@ -28,7 +28,7 @@ function cl() {
 }
 
 # gnu sed for MacOS
-if [[ -f /opt/homebrew/bin/gsed ]]; then
+if [[ -f $HOMEBREW_BINDIR/gsed ]]; then
     alias sed="gsed"
 fi
 

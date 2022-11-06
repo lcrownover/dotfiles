@@ -13,21 +13,31 @@
     - '{{ ansible_env.HOME }}/repos'
     - '{{ ansible_env.HOME }}/src'
     - '{{ ansible_env.HOME }}/.config'
-
+    - '{{ ansible_env.HOME }}/bin'
 
   - name: macOS => install base packages
     when: ansible_distribution == 'MacOSX'
     community.general.homebrew:
       name:
+      - rust
       - go
+      - z
+      - ripgrep
+      - fzf
       - geckodriver
       - gsed
-      - kubernetes
+      - kubernetes-cli
       - minikube
-      - docker
 
   - name: macOS => install homebrew casks
     when: ansible_distribution == 'MacOSX'
     community.general.homebrew_cask:
       name:
       - rectangle
+      - docker
+
+  - name: macOS => JetbrainsMono font install
+    when: ansible_distribution == 'MacOSX'
+    get_url:
+      url: https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete%20Mono.ttf
+      dest: "{{ansible_env.HOME}}/Library/Fonts/JetBrains Mono Regular Nerd Font Complete Mono.ttf"
