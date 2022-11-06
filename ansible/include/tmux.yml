@@ -13,3 +13,26 @@
         src: '{{ ansible_env.PWD }}/../../tmux/tmux.conf'
         dest: '{{ ansible_env.HOME }}/.tmux.conf'
         state: link
+      register: new_tmux
+
+    - name: update terminal descriptions
+      when: new_tmux.changed
+      block:
+      - name: create temp build dir
+        tempfile:
+          state: directory
+          suffix: terminfo
+        register: tmp
+
+      - name: download terminfo
+        get_url:
+          url: https://invisible-island.net/datafiles/current/terminfo.src.gz
+          dest: "{{tmp.path}}/terminfo.src.gz"
+
+      - name: unzip terminfo
+        command: gunzip terminfo.src.gz
+        args:
+          chdir: "{{tmp.path}}"
+
+      - name: load tmux definition
+        command: "/usr/bin/env tic -xe tmux-256color {{tmp.path}}/terminfo.src"

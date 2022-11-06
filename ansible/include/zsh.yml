@@ -54,7 +54,7 @@
   - name: secure dirs
     file:
       path: "{{item}}"
-      mode: '0600'
+      mode: 'u=rwx,g-rwx,o-rwx'
     loop:
       - "{{ansible_env.HOME}}/.oh-my-zsh/cache/completions"
       - "{{ansible_env.HOME}}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
