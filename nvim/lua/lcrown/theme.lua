@@ -2,8 +2,8 @@
 
 -- tokyonight
 -- local theme = 'tokyonight'
--- local style = "day"
 -- local style = "storm"
+-- local style = "day"
 
 -- onedark
  local theme = 'onedark'
