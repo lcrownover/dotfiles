@@ -1,0 +1,21 @@
+---
+- name: configure mac-specific stuff
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+    - name: macOS => create keybindings parent directory
+      when: ansible_distribution == 'MacOSX'
+      file:
+        path: "{{ansible_env.HOME}}/Library/KeyBindings"
+        state: directory
+
+    - name: macOS => no more bell for ctrl+/
+      when: ansible_distribution == 'MacOSX'
+      copy:
+        dest: "{{ansible_env.HOME}}/Library/KeyBindings/DefaultKeyBinding.dict"
+        content: |
+          {
+              "^/" = "noop:";
+          }

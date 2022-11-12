@@ -5,9 +5,6 @@
 - import_playbook: include/base.yml
   tags: [base]
 
-# - import_playbook: include/nodejs.yml
-  # tags: [nodejs]
-
 - import_playbook: include/tmux.yml
   tags: [tmux]
 
@@ -26,32 +23,9 @@
 - import_playbook: include/nvim.yml
   tags: [nvim]
 
-# - import_playbook: include/languages/rust.yml
-  # tags: [nvim, rust]
-
-# - import_playbook: include/languages/go.yml
-  # tags: [nvim, go]
-
-# - import_playbook: include/languages/markdown.yml
-  # tags: [nvim, markdown]
-
-# - import_playbook: include/languages/lua.yml
-  # tags: [nvim, lua]
-#
-# - import_playbook: include/languages/python.yml
-  # tags: [nvim, python]
-#
-# - import_playbook: include/languages/bash.yml
-  # tags: [nvim, bash]
-#
-# - import_playbook: include/languages/bash.yml
-  # tags: [nvim, bash]
-#
-# - import_playbook: include/languages/vim.yml
-  # tags: [nvim, vim]
-#
-# - import_playbook: include/languages/ansible.yml
-  # tags: [nvim, ansible]
+- import_playbook: include/mac.yml
+  when: ansible_distribution == 'MacOSX'
+  tags: [mac]
 
 - import_playbook: include/keepassxc.yml
   when: ansible_distribution == 'MacOSX'
