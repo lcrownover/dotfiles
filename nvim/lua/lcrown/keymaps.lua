@@ -36,8 +36,8 @@ map('n', '<c-b>', ':NERDTreeToggle<CR>')
 -- map('n', '<leader>b', ':NvimTreeFindFile<CR>')
 
 -- bufferline
-map('n', '<c-h>', ':BufferPrevious<cr>', {silent = true})
-map('n', '<c-l>', ':BufferNext<cr>', {silent = true})
+-- map('n', '<c-h>', ':BufferPrevious<cr>', {silent = true})
+-- map('n', '<c-l>', ':BufferNext<cr>', {silent = true})
 
 -- telescope
 map('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files({follow = true})<cr>", {silent = true})

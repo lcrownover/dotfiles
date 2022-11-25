@@ -38,7 +38,10 @@ return require('packer').startup(function(use)
 
   -- bars
   use 'hoob3rt/lualine.nvim'
-  use 'romgrk/barbar.nvim'
+  -- use 'romgrk/barbar.nvim'
+
+  -- tmux
+  use 'christoomey/vim-tmux-navigator'
 
   -- file explorer
   use 'scrooloose/nerdtree'

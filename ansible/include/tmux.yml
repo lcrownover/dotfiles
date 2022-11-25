@@ -15,6 +15,14 @@
         state: link
       register: new_tmux
 
+    - name: tmux plugin manager
+      ansible.builtin.git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: ~/.config/tmux/plugins/tpm
+
+    - name: install tmux plugins
+      command: "{{ansible_env.HOME}}/.config/tmux/plugins/tpm/bin/install_plugins"
+
     - name: update terminal descriptions
       when: new_tmux.changed
       block:
