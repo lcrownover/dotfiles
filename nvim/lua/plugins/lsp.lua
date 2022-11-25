@@ -1,7 +1,3 @@
----------------------------------------
--- nvim-cmp (completion)
----------------------------------------
-
 -- lspkind shows icons for sources
 local lspkind = require('lspkind')
 
@@ -67,7 +63,7 @@ local on_attach = function(_, bufnr)
   vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
   vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
   vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-  vim.keymap.set('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  -- vim.keymap.set('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   vim.keymap.set('n', '<leader>fs', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
@@ -235,4 +231,15 @@ null_ls.setup({
     null_ls.builtins.formatting.rubocop,
     null_ls.builtins.formatting.beautysh,
   },
+})
+
+
+---------------------------------------
+-- lspsaga
+---------------------------------------
+local lspsaga = require("lspsaga")
+lspsaga.init_lsp_saga({
+  code_action_lightbulb = {
+    enable = false,
+  }
 })

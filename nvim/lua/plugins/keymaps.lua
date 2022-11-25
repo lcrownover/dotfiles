@@ -21,9 +21,8 @@ map('i', '!', '!<c-g>u')
 map('i', '?', '?<c-g>u')
 
 -- splits
-map('n', '<c-w>-', ':split<cr>', {silent = true})
-map('n', '<c-w>\\', ':vsplit<cr>', {silent = true})
-map('n', '<c-w>w', ':close<cr>', {silent = true})
+map('n', '-', ':split<cr>', {silent = true})
+map('n', '\\', ':vsplit<cr>', {silent = true})
 
 -- toggle showing of whitespace characters
 map('n', '<leader>s', ':lua ToggleWhitespaceVisibility()<CR>')
@@ -142,9 +141,8 @@ map('n', '<leader>da', ":exe ':normal a _' . strftime('%c') . '_'<cr>")
 vim.keymap.set('n', '<C-_>', '<Plug>(comment_toggle_linewise_current)')
 vim.keymap.set('v', '<C-_>', '<Plug>(comment_toggle_linewise_visual)')
 
-
 -- close buffer
-map('n', '<leader>w', ':bd<cr>', {silent = true})
+map('n', '<leader>w', ':close<cr>', {silent = true})
 
 -- quick key for regex
 map('n', '<leader>r', ':%s/')

@@ -1,34 +1,17 @@
--- managers
-require('lcrown.packer')
-require('lcrown.mason')
+require('plugins.impatient')
+require('plugins.packer')
+require('plugins.mason')
+require('plugins.treesitter')
 
--- caching
-require('lcrown.impatient')
+require('plugins.sets')
 
--- prereqs, base stuff
-require('lcrown.sets')
-require('lcrown.devicons')
-require('lcrown.treesitter')
+require('plugins.telescope')
+require('plugins.lsp')
+require('plugins.misc')
 
--- file navigation
--- require('lcrown.nvim-tree')
+require('plugins.formatting')
+require('plugins.theme')
 
--- formatting is basic spacing setup for specific languages
-require('lcrown.formatting')
+-- require('plugins.nvim-tree')
 
--- language server setups
-require('lcrown.lsp')
-require('lcrown.lspsaga')
-
--- these configs have no order
-require('lcrown.theme')
-require('lcrown.telescope')
-require('lcrown.nvim-comment')
-require('lcrown.terminal')
-require('lcrown.misc')
-
--- keymaps should be last
-require('lcrown.keymaps')
-
--- require('lcrown.debugging')
--- require('lcrown.playground')
+require('plugins.keymaps')
