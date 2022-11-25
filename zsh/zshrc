@@ -32,5 +32,6 @@ fi
 
 compdef __start_kubectl k
 source <(kubectl completion zsh)
+source <(podman completion zsh)
 
 setopt prompt_subst

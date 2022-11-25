@@ -21,19 +21,18 @@ alias swap_list=" ls $HOME/.local/share/nvim/swap/*.s*"
 
 # edit config
 function navigate_and_edit_nvim_config() {
-    pushd . > /dev/null
+    spushd
     cd $HOME/.config/nvim
     nvim init.vim
-    popd > /dev/null
+    spopd
 }
 alias vimc='navigate_and_edit_nvim_config'
 
 # edit dotfiles
 function navigate_and_edit_dotfiles() {
-    pushd . > /dev/null
+    spushd
     cd $DOTFILES
     nvim .
-    popd > /dev/null
+    spopd
 }
 alias vimd='navigate_and_edit_dotfiles'
-

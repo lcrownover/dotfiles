@@ -1,13 +1,19 @@
 -- Change the colorscheme options here and it will change everywhere
 
+-- catppuccin
+-- local theme = 'catppuccin'
+-- local style = 'frappe'
+
+-- tundra
+-- local theme = 'tundra'
+
 -- tokyonight
--- local theme = 'tokyonight'
--- local style = "storm"
--- local style = "day"
+local theme = 'tokyonight'
+local style = 'storm'
 
 -- onedark
- local theme = 'onedark'
- local style = "cool"
+-- local theme = 'onedark'
+-- local style = "cool"
 
 -- nord
 -- local theme = 'nord'
@@ -19,7 +25,9 @@ function LoadTheme(theme_name)
     require('tokyonight').setup({
       style = style,
       transparent = true,
-      on_highlights = function(hl, _)
+      on_highlights = function(hl, c)
+        hl.LineNr = { fg = c.comment }
+        hl.CursorLineNr = { fg = c.comment }
         hl.NvimTreeNormal = { bg = "None" }
         hl.NvimTreeNormalNC = { bg = "None" }
         hl.NvimTreeWinSeparator = { bg = "None" }
@@ -35,6 +43,18 @@ function LoadTheme(theme_name)
       end,
     })
     vim.cmd [[colorscheme tokyonight]]
+
+  elseif theme_name == 'catppuccin' then
+    vim.g.lualine_theme = 'catppuccin'
+    require('catppuccin').setup({ flavour = style, transparent_background = true })
+    vim.cmd [[colorscheme catppuccin]]
+
+  elseif theme_name == 'tundra' then
+    vim.g.lualine_theme = 'tundra'
+    require('nvim-tundra').setup({
+      transparent_background = true,
+    })
+    vim.cmd [[colorscheme tundra]]
 
   elseif theme_name == 'onedark' then
     vim.g.lualine_theme = 'onedark'
@@ -56,17 +76,10 @@ function LoadTheme(theme_name)
         comments = 'italic',
       },
       highlights = {
-        -- TSOperator = { fg = palette.cyan },
         CursorLineNr = { fg = palette.orange },
-        -- LineNr = { fg = palette.blue }
-        -- TSParameter = { fg = palette.fg },
-        -- TSPunctDelimiter = { fg = palette.cyan },
-        -- TSPunctBracket = { fg = palette.red },
       },
-
     }
     onedark.load()
-
 
   elseif theme_name == 'nord' then
     vim.g.lualine_theme = 'nord'
@@ -86,7 +99,6 @@ function LoadTheme(theme_name)
     vim.cmd('highlight WarningMsg guifg=#be6069')
 
   end
-
 end
 
 LoadTheme(theme)
@@ -101,28 +113,10 @@ end
 
 require 'lualine'.setup {
   options = {
-    icons_enabled = true,
     theme = vim.g.lualine_theme,
-    component_separators = { '', '' },
-    section_separators = { '', '' },
-    disabled_filetypes = {}
   },
   sections = {
-    lualine_a = { 'mode' },
     lualine_b = { 'branch' },
-    lualine_c = { 'filename' },
     lualine_x = { 'encoding', 'fileformat', 'filetype', lsp_status },
-    lualine_y = { 'progress' },
-    lualine_z = { 'location' }
   },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = { 'filename' },
-    lualine_x = { 'location' },
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  extensions = {}
 }

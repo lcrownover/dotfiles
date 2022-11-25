@@ -138,9 +138,9 @@ map('n', '<leader>vs', '<cmd>lua VSCode()<cr>')
 -- easy datetime stamp
 map('n', '<leader>da', ":exe ':normal a _' . strftime('%c') . '_'<cr>")
 
--- easier commenting, for some reason C-_ means C-/
-map('n', '<C-_>', ':normal gcc<CR>')
-map('x', '<C-_>', ':normal gcc<CR>')
+-- easier commenting, C-_ means C-/
+vim.keymap.set('n', '<C-_>', '<Plug>(comment_toggle_linewise_current)')
+vim.keymap.set('v', '<C-_>', '<Plug>(comment_toggle_linewise_visual)')
 
 
 -- close buffer

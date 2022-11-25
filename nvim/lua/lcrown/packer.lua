@@ -47,7 +47,8 @@ return require('packer').startup(function(use)
   -- theme
   -- use '~/repos/tokyonight.nvim'
   use 'folke/tokyonight.nvim'
-  use 'navarasu/onedark.nvim'
+  -- use 'navarasu/onedark.nvim'
+  -- use 'sam4llis/nvim-tundra'
   -- use 'tanvirtin/monokai.nvim'
   -- use 'ellisonleao/gruvbox.nvim'
   -- use 'sainnhe/gruvbox-material'
