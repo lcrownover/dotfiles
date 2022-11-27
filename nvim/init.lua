@@ -1,17 +1,28 @@
-require('plugins.impatient')
-require('plugins.packer')
-require('plugins.mason')
-require('plugins.treesitter')
+-- load packer first
+require('lcrownover.packer')
+-- then caching
+require('lcrownover.plugins.impatient')
 
-require('plugins.sets')
+require('lcrownover.core.options')
+require('lcrownover.plugins.themes.tokyonight')
+require('lcrownover.plugins.treesitter')
+require('lcrownover.plugins.telescope')
+require('lcrownover.plugins.nvim-cmp')
+require('lcrownover.plugins.lsp.mason')
+require('lcrownover.plugins.lsp.lspconfig')
+require('lcrownover.plugins.lsp.lspsaga')
+require('lcrownover.plugins.lsp.fidget')
+require('lcrownover.plugins.nvim-tree')
+require('lcrownover.plugins.lualine')
+require('lcrownover.plugins.nvim-autopairs')
+require('lcrownover.plugins.comment')
+require('lcrownover.plugins.trouble')
+require('lcrownover.plugins.colorizer')
+require('lcrownover.plugins.diffview')
+require('lcrownover.plugins.nvim-surround')
 
-require('plugins.telescope')
-require('plugins.lsp')
-require('plugins.misc')
+-- keymaps last
+require('lcrownover.core.keymaps')
 
-require('plugins.formatting')
-require('plugins.theme')
-
--- require('plugins.nvim-tree')
-
-require('plugins.keymaps')
+-- just for testing
+-- require('lcrownover.core.playground')

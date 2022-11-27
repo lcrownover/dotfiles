@@ -7,34 +7,6 @@
     nvim_src_dir: '{{ ansible_env.HOME }}/repos/neovim'
 
   tasks:
-
-    - name: Set langugage_servers fact
-      set_fact:
-        language_servers:
-          - lua-language-server
-          - go-debug-adapter
-          - ansible-language-server
-          - awk-language-server
-          - bash-language-server
-          - black
-          - delve
-          - dockerfile-language-server
-          - eslint_d
-          - gopls
-          - luacheck
-          - luaformatter
-          - markdownlint
-          - puppet-editor-services
-          - pylint
-          - pyright
-          - rust-analyzer
-          - shfmt
-          - solargraph
-          - terraform-ls
-          - typescript-language-server
-          - vim-language-server
-
-
     - name: Ubuntu => install neovim build dependencies
       when: ansible_distribution == 'Ubuntu'
       become: true
@@ -143,22 +115,3 @@
         dest: '{{ ansible_env.HOME }}/.config/nvim/lua'
         state: link
         force: true
-
-    - name: install packer
-      ansible.builtin.git:
-        repo:  https://github.com/wbthomason/packer.nvim
-        dest: '{{ ansible_env.HOME }}/.local/share/nvim/site/pack/packer/start/packer.nvim'
-        clone: true
-        update: true
-        depth: 1
-
-    - name: install nvim plugins
-      ansible.builtin.command:
-        cmd: "nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' -c 'quitall'"
-        creates: '{{ ansible_env.HOME }}/.local/share/nvim/site/pack/packer/start/plenary.nvim'
-
-    - name: install language servers with Mason
-      ansible.builtin.command:
-        cmd: "nvim --headless -c 'MasonInstall {{item}}' -c 'quitall'"
-        creates: '{{ ansible_env.HOME }}/.local/share/nvim/mason/bin'
-      loop: "{{language_servers}}"

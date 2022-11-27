@@ -1,3 +1,11 @@
+-- don't search here
+local file_ignore_patterns = {
+  "node_modules",
+  "Music",
+  "Library",
+  "venv",
+}
+
 require('telescope').setup {
   extensions = {
     fzf = {
@@ -19,12 +27,7 @@ require('telescope').setup {
       '--smart-case',
       '--follow',
     },
-    file_ignore_patterns = {
-      "node_modules",
-      "Music",
-      "Library",
-      "venv",
-    },
+    file_ignore_patterns = file_ignore_patterns,
     set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
     mappings = {
       i = {
@@ -49,14 +52,14 @@ require('telescope').setup {
 }
 require('telescope').load_extension('fzf')
 
-local M = {}
-
-M.grep_notes = function()
-  require('telescope.builtin').live_grep({
-    prompt_title = "< Grep Notes >",
-    shorten_path = true,
-    search_dirs = { "~/.gdrive/notes" },
-  })
-end
-
-return M
+-- local M = {}
+--
+-- M.grep_notes = function()
+--   require('telescope.builtin').live_grep({
+--     prompt_title = "< Grep Notes >",
+--     shorten_path = true,
+--     search_dirs = { "~/.gdrive/notes" },
+--   })
+-- end
+--
+-- return M
