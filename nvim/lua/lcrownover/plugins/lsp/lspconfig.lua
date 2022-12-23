@@ -88,6 +88,21 @@ lsp['pyright'].setup {
   }
 }
 
+
+---------------------------------------
+-- ansible
+---------------------------------------
+lsp['ansiblels'].setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {
+    "yaml.ansible",
+    "yml",
+    "yaml",
+  }
+}
+
+
 ---------------------------------------
 -- golang
 ---------------------------------------

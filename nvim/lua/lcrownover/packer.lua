@@ -99,6 +99,12 @@ return require('packer').startup(function(use)
   -- debugging
   use 'mfussenegger/nvim-dap'
 
+  -- markdown preview
+  use({
+      "iamcco/markdown-preview.nvim",
+      run = function() vim.fn["mkdp#util#install"]() end,
+  })
+
   if packer_bootstrap then
     require('packer').sync()
   end

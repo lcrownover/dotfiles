@@ -1,2 +1,3 @@
 zsh/zsh/*-secure-*.sh
 ansible/ansible.cfg
+.luarc.json
