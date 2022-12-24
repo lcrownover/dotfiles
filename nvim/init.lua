@@ -20,6 +20,7 @@ require('lcrownover.plugins.trouble')
 require('lcrownover.plugins.colorizer')
 require('lcrownover.plugins.diffview')
 require('lcrownover.plugins.nvim-surround')
+require('lcrownover.plugins.trim')
 
 -- keymaps last
 require('lcrownover.core.keymaps')
