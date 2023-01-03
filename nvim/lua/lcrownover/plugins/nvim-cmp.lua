@@ -15,10 +15,16 @@ cmp.setup({
     }),
   },
 
+  snippet = {
+    expand = function(args)
+      require("luasnip").lsp_expand(args.body)
+    end,
+  },
+
   -- sources for autocompletion
   sources = {
     { name = "nvim_lsp" }, -- lsp
-    -- { name = "luasnip" }, -- snippets
+    { name = "luasnip" }, -- snippets
     { name = "buffer" }, -- current buffer
     { name = "path" }, -- os path
   },
@@ -33,4 +39,23 @@ cmp.setup({
   },
 
   min_length = 0, -- allow for `from package import _` in Python
+  experimental = { ghost_text = true },
+})
+
+require("luasnip").config.set_config({
+  history = true,
+  updateevents = "TextChanged,TextChangedI",
+})
+require("luasnip.loaders.from_vscode").load()
+
+require("snippy").setup({
+  mappings = {
+    is = {
+      ["<Tab>"] = "expand_or_advance",
+      ["<S-Tab"] = "previous",
+    },
+    nx = {
+      ["<leader>x"] = "cut_text",
+    },
+  },
 })

@@ -30,7 +30,7 @@ return require('packer').startup(function(use)
   use 'kyazdani42/nvim-web-devicons'
 
   -- treesitter
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSInstall all' }
   use 'nvim-treesitter/playground'
 
   -- telescope
@@ -43,11 +43,14 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-nvim-lsp'
+  use 'ray-x/lsp_signature.nvim'
 
   -- snippets
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
-  use 'rafamadriz/friendly-snippets'
+  use 'dcampos/nvim-snippy'
+  use 'honza/vim-snippets'
+  use 'dcampos/cmp-snippy'
 
   -- LSP
   use 'williamboman/mason.nvim'
