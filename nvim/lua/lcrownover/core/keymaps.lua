@@ -1,136 +1,64 @@
 -- Functional wrapper for mapping custom keybindings
 local function map(mode, lhs, rhs, opts)
-    local options = {noremap = true}
-    if opts then options = vim.tbl_extend("force", options, opts) end
-    vim.keymap.set(mode, lhs, rhs, options)
+  local options = { noremap = true }
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
+  vim.keymap.set(mode, lhs, rhs, options)
 end
 
-map('n', '<leader>u', ':UndotreeShow<CR>', {silent = true})
+map("n", "<leader>u", ":UndotreeShow<CR>", { silent = true })
 
 -- centering screen on next results
-map('n', 'n', 'nzzzv')
-map('n', 'N', 'Nzzzv')
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
 
 -- better joining
-map('n', 'J', 'mzJ`z')
+map("n", "J", "mzJ`z")
 
 -- delete single character without copying into register
 map("n", "x", '"_x')
 
 -- splits
-map('n', '<leader>s-', ':split<cr>', {silent = true})
-map('n', '<leader>s\\', ':vsplit<cr>', {silent = true})
-map('n', '<leader>sc', ':close<cr>', {silent = true})
+map("n", "<leader>s-", ":split<cr>", { silent = true })
+map("n", "<leader>s\\", ":vsplit<cr>", { silent = true })
+map("n", "<leader>sc", ":close<cr>", { silent = true })
 
 -- toggle showing of whitespace characters
-map('n', '<leader>sw', ':lua ToggleWhitespaceVisibility()<CR>')
-
--- nvimtree
-map('n', '<C-b>',     ':NvimTreeToggle<CR>')
-map('n', '<leader>b', ':NvimTreeFindFile<CR>')
-
--- telescope
-map('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files({follow = true})<cr>", {silent = true})
-map('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>", {silent = true})
-map('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>", {silent = true})
-map('n', '<leader>fp', "<cmd>lua require('telescope.builtin').file_browser()<cr>", {silent = true})
-map('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", {silent = true})
-map('n', '<leader>f;', "<cmd>lua require('telescope.builtin').resume()<cr>", {silent = true})
-map('n', '<leader>fc', "<cmd>lua require('telescope.builtin').git_commits()<cr>", {silent = true})
-
--- fugitive
-map('n', '<leader>gs', ':Git<cr>')
-map('n', '<leader>gc', ':Git commit<cr>')
-map('n', '<leader>gp', ':Git push<cr>')
-map('n', '<leader>gb', ':Git blame<cr>')
-map('n', '<leader>gd', ':Gvdiffsplit<cr>')
-map('n', '<leader>gh', ':diffget //2<cr>')
-map('n', '<leader>gl', ':diffget //3<cr>')
-
--- debugging
-map('n', '<leader>db', ":lua require'dap'.toggle_breakpoint()<cr>", {silent = true})
-map('n', '<leader>dc', ":lua require'dap'.continue()<cr>", {silent = true})
-map('n', '<leader>di', ":lua require'dap'.step_into()<cr>", {silent = true})
-map('n', '<leader>du', ":lua require'dap'.step_out()<cr>", {silent = true})
-map('n', '<leader>do', ":lua require'dap'.step_over()<cr>", {silent = true})
-map('n', '<leader>dg', ":lua require'dapui'.toggle()<cr>", {silent = true})
-map('n', '<F5>', ":lua require'dap'.continue()<CR>", {silent = true})
-map('n', '<F6>', ":lua require'dapui'.toggle()<CR>", {silent = true})
-map('n', '<F10>', ":lua require'dap'.step_over()<CR>", {silent = true})
-map('n', '<F11>', ":lua require'dap'.step_into()<CR>", {silent = true})
-map('n', '<F12>', ":lua require'dap'.step_out()<CR>", {silent = true})
-
--- trouble! (quickfix lists for lsp errors)
-map('n', '<leader>tt', ':Trouble<cr>', {silent = true})
-map('n', '<leader>tq', ':TroubleClose<cr>', {silent = true})
-map('n', '<leader>tr', ':TroubleRefresh<cr>', {silent = true})
-
--- restart lsp server
-map('n', '<leader>lr', ':LspRestart<cr>')
-map('n', '<leader>li', ':LspInfo<cr>')
+map("n", "<leader>sw", ":lua ToggleWhitespaceVisibility()<CR>")
 
 -- execute the current buffer with bash
-map('n', '<leader>xb', ':w !bash<cr>')
-
--- change the mode to executable
-map('n', '<leader>xm', ':Chmod +x<cr>')
+map("n", "<leader>xb", ":w !bash<cr>")
 
 -- execute current file
-map('n', '<leader>xf', ':!%:p<cr>')
+map("n", "<leader>xf", ":!%:p<cr>")
 
 -- close the quickfix window
-map('n', '<leader>c', ':cclose<cr>', {silent = true})
+map("n", "<leader>c", ":cclose<cr>", { silent = true })
 
 -- scratch buffers, normal or splits
-map('n', '<leader>nn', ':enew<cr>')
-map('n', '<leader>nv', ':vnew<cr>')
-map('n', '<leader>nh', ':new<cr>')
+map("n", "<leader>nn", ":enew<cr>")
+map("n", "<leader>nv", ":vnew<cr>")
+map("n", "<leader>nh", ":new<cr>")
 
 -- toggle sign column for copy-paste
-map('n', '<leader>nu', ':set invnu<cr>:set invrnu<cr>')
-
+map("n", "<leader>nu", ":set invnu<cr>:set invrnu<cr>")
 
 -- close buffer
-map('n', '<leader>w', ':close<cr>', {silent = true})
+map("n", "<leader>w", ":close<cr>", { silent = true })
 
 -- keep visual mode after indenting
-map('x', '>', '>gv')
-map('x', '<', '<gv')
-
--- tabularize
-map('n', '<Leader>a=', ':Tabularize /=<CR>')
-map('x', '<Leader>a=', ':Tabularize /=<CR>')
-map('n', '<Leader>a:', ':Tabularize /:\zs<CR>')
-map('x', '<Leader>a:', ':Tabularize /:\zs<CR>')
-
--- debugging break points
-map('i', ',', ',<c-g>u')
-map('i', '.', '.<c-g>u')
-map('i', '!', '!<c-g>u')
-map('i', '?', '?<c-g>u')
-
--- easier commenting, C-_ means C-/
--- vim.keymap.set('n', '<C-_>', '<Plug>(comment_toggle_linewise_current)')
--- vim.keymap.set('v', '<C-_>', '<Plug>(comment_toggle_linewise_visual)')
-
--- open vs code
--- map('n', '<leader>vs', '<cmd>lua VSCode()<cr>')
-
--- easy datetime stamp
--- map('n', '<leader>da', ":exe ':normal a _' . strftime('%c') . '_'<cr>")
+map("x", ">", ">gv")
+map("x", "<", "<gv")
 
 -- quick key for regex
--- map('n', '<leader>r', ':%s/')
--- map('x', '<leader>r', ':s/')
+map("n", "<leader>r", ":%s/")
+map("x", "<leader>r", ":s/")
 
 -- diffing files
 -- map('n', '<leader>d<', ':diffthis<cr>')
 -- map('n', '<leader>d>', ':vsplit<cr>:diffthis<cr>:wincmd p<cr>:bprev<cr>')
 -- map('n', '<leader>dq', ':diffoff<cr>')
-
--- nerdtree
--- map('n', '<leader>b', ':NERDTreeFind<cr>')
--- map('n', '<c-b>', ':NERDTreeToggle<CR>')
 
 -- bufferline
 -- map('n', '<c-h>', ':BufferPrevious<cr>', {silent = true})

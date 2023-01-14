@@ -1,29 +1,21 @@
--- load packer first
-require('lcrownover.packer')
--- then caching
-require('lcrownover.plugins.impatient')
+require("lcrownover.core.options")
 
-require('lcrownover.core.options')
-require('lcrownover.plugins.themes.tokyonight')
-require('lcrownover.plugins.treesitter')
-require('lcrownover.plugins.telescope')
-require('lcrownover.plugins.nvim-cmp')
-require('lcrownover.plugins.lsp.mason')
-require('lcrownover.plugins.lsp.lspconfig')
-require('lcrownover.plugins.lsp.lspsaga')
-require('lcrownover.plugins.lsp.fidget')
-require('lcrownover.plugins.nvim-tree')
-require('lcrownover.plugins.lualine')
-require('lcrownover.plugins.nvim-autopairs')
-require('lcrownover.plugins.comment')
-require('lcrownover.plugins.trouble')
-require('lcrownover.plugins.colorizer')
-require('lcrownover.plugins.diffview')
-require('lcrownover.plugins.nvim-surround')
-require('lcrownover.plugins.trim')
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
--- keymaps last
-require('lcrownover.core.keymaps')
+require("lazy").setup("lcrownover.plugins")
+
+require("lcrownover.core.keymaps")
 
 -- just for testing
 -- require('lcrownover.core.playground')
