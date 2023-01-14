@@ -1,6 +1,7 @@
 -- telescope
 return {
   "nvim-telescope/telescope.nvim",
+  event = "BufEnter",
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-lua/plenary.nvim",

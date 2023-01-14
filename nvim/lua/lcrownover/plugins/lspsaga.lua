@@ -1,5 +1,6 @@
 return {
   "glepnir/lspsaga.nvim",
+  event = "BufReadPre",
   branch = "main",
   keys = {
     -- lspsaga remaps
@@ -27,19 +28,14 @@ return {
   },
   config = function()
     require("lspsaga").setup({
-      code_action_lightbulb = {
+      symbol_in_winbar = {
+        enable = false,
+      },
+      lightbulb = {
         enable = false,
       },
       -- keybinds for navigation in lspsaga window
-      move_in_saga = { prev = "<C-k>", next = "<C-j>" },
-      -- use enter to open file with finder
-      finder_action_keys = {
-        open = "<CR>",
-      },
-      -- use enter to open file with definition preview
-      definition_action_keys = {
-        edit = "<CR>",
-      },
+      -- move_in_saga = { prev = "<C-k>", next = "<C-j>" },
     })
   end,
 }
