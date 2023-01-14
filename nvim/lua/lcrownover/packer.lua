@@ -30,7 +30,7 @@ return require('packer').startup(function(use)
   use 'kyazdani42/nvim-web-devicons'
 
   -- treesitter
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSInstall all' }
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'nvim-treesitter/playground'
 
   -- telescope
