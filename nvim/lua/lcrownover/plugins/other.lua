@@ -107,4 +107,11 @@ return {
       end,
     },
   },
+
+  {
+    "arnamak/stay-centered.nvim",
+    config = function()
+      require("stay-centered")
+    end,
+  },
 }
