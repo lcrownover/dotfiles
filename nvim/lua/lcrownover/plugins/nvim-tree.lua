@@ -1,10 +1,6 @@
 return {
   "kyazdani42/nvim-tree.lua",
   event = "BufEnter",
-  keys = {
-    { "<C-b>", ":NvimTreeToggle<CR>" },
-    { "<leader>b", ":NvimTreeFindFile<CR>" },
-  },
   config = function()
     require("nvim-tree").setup({
       sort_by = "case_sensitive",

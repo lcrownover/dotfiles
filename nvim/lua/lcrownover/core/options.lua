@@ -54,11 +54,11 @@ opt.foldexpr = 'nvim_treesitter#foldexpr()'
 -- vim.g.NERDTreeWinPos = "right"
 
 -- vim-visual-multi maps
-vim.cmd([[
-  let g:VM_maps = {}
-  let g:VM_maps["Undo"] = 'u'
-  let g:VM_maps["Redo"] = '<C-r>'
-]])
+-- vim.cmd([[
+--   let g:VM_maps = {}
+--   let g:VM_maps["Undo"] = 'u'
+--   let g:VM_maps["Redo"] = '<C-r>'
+-- ]])
 
 function ToggleWhitespaceVisibility()
   opt.list = not opt.list:get()

@@ -9,23 +9,6 @@ return {
     "saadparwaiz1/cmp_luasnip",
     "onsails/lspkind-nvim",
     "L3MON4D3/LuaSnip",
-    -- snippets
-    -- {
-    --   "L3MON4D3/LuaSnip",
-    --   dependencies = {
-    --     "rafamadriz/friendly-snippets",
-    --     config = function()
-    --       require("luasnip.loaders.from_vscode").lazy_load()
-    --     end,
-    --   },
-    --   config = {
-    --     history = true,
-    --     delete_check_events = "TextChanged",
-    --   },
-    -- },
-    -- "dcampos/nvim-snippy",
-    -- "honza/vim-snippets",
-    -- "dcampos/cmp-snippy",
     "windwp/nvim-autopairs",
   },
   config = function()
@@ -73,23 +56,6 @@ return {
       experimental = { ghost_text = true },
     })
 
-    -- require("luasnip").config.set_config({
-    --   history = true,
-    --   updateevents = "TextChanged,TextChangedI",
-    -- })
-    --
-    -- require("snippy").setup({
-    --   mappings = {
-    --     is = {
-    --       ["<Tab>"] = "expand_or_advance",
-    --       ["<S-Tab"] = "previous",
-    --     },
-    --     nx = {
-    --       ["<leader>x"] = "cut_text",
-    --     },
-    --   },
-    -- })
-    --
     -- make autopairs and completion work together
     local cmp_autopairs = require("nvim-autopairs.completion.cmp")
     cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())

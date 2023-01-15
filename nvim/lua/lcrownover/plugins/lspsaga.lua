@@ -1,31 +1,6 @@
 return {
   "glepnir/lspsaga.nvim",
-  event = "BufReadPre",
-  branch = "main",
-  keys = {
-    -- lspsaga remaps
-    { "gh", "<cmd>Lspsaga lsp_finder<CR>" },
-    { "K", "<cmd>Lspsaga hover_doc<CR>" },
-    { "gn", "<cmd>Lspsaga rename<CR>" },
-    { "<F2>", "<cmd>Lspsaga rename<CR>" },
-    { "gs", "<cmd>Lspsaga peek_definition<CR>" },
-    -- jump diagnostic
-    { "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>" },
-    { "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>" },
-    -- or jump to error
-    {
-      "[E",
-      function()
-        require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
-      end,
-    },
-    {
-      "]E",
-      function()
-        require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
-      end,
-    },
-  },
+  event = "BufRead",
   config = function()
     require("lspsaga").setup({
       symbol_in_winbar = {
@@ -34,8 +9,6 @@ return {
       lightbulb = {
         enable = false,
       },
-      -- keybinds for navigation in lspsaga window
-      -- move_in_saga = { prev = "<C-k>", next = "<C-j>" },
     })
   end,
 }

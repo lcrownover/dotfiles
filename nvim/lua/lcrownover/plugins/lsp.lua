@@ -21,19 +21,6 @@ return {
     -- Additional lua configuration, makes nvim stuff amazing
     "folke/neodev.nvim",
   },
-  keys = {
-    { "gd", "<cmd>lua vim.lsp.buf.definition()<cr>" },
-    { "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>" },
-    { "gr", "<cmd>lua vim.lsp.buf.references()<cr>" },
-    { "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>" },
-    { "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>" },
-    { "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>" },
-    { "<leader>fs", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>" },
-    { "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>" },
-    { "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>" },
-    { "<leader>lr", ":LspRestart<cr>" },
-    { "<leader>li", ":LspInfo<cr>" },
-  },
   config = function()
     -- helper for quickly setting format override options per-language
     local set_fmt = function(file_patterns, indent_length, expandtab)
@@ -62,8 +49,6 @@ return {
           border = "rounded",
         },
       }, bufnr)
-
-      -- lsp keymaps
     end
 
     -- pass capabilities into each lsp server
@@ -110,22 +95,21 @@ return {
     ---------------------------------------
     -- ansible
     ---------------------------------------
-    lsp["ansiblels"].setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      filetypes = {
-        "yaml.ansible",
-        "yml",
-        "yaml",
-      },
-    })
+    -- lsp["ansiblels"].setup({
+    --   on_attach = on_attach,
+    --   capabilities = capabilities,
+    --   filetypes = {
+    --     "yaml.ansible",
+    --     "yml",
+    --     "yaml",
+    --   },
+    -- })
 
     ---------------------------------------
     -- golang
     ---------------------------------------
     set_fmt({ "*.go" }, 4, false)
-    -- disable "K" in vim-go
-    vim.g.go_doc_keywordprg_enabled = 0
+    vim.g.go_doc_keywordprg_enabled = 0 -- disable "K" in vim-go
 
     ---------------------------------------
     -- ruby
@@ -134,9 +118,6 @@ return {
     lsp["solargraph"].setup({
       on_attach = on_attach,
       capabilities = capabilities,
-      flags = {
-        debounce_text_changes = 150,
-      },
       settings = {
         solargraph = {
           formatting = true,
