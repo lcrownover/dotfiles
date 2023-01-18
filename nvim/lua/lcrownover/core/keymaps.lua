@@ -81,8 +81,9 @@ bind("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>",
 bind("n", "<leader>f;", "<cmd>lua require('telescope.builtin').resume()<cr>", { silent = true })
 bind("n", "<leader>fq", "<cmd>lua require('telescope.builtin').quickfix()<cr>", { silent = true })
 bind("n", "<leader>fk", "<cmd>lua require('telescope.builtin').keymaps()<cr>", { silent = true })
-bind("n", "<leader>fgc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", { silent = true })
-bind("n", "<leader>fgs", "<cmd>lua require('telescope.builtin').git_status()<cr>", { silent = true })
+bind("n", "<leader>fc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", { silent = true })
+bind("n", "<leader>fs", "<cmd>lua require('telescope.builtin').git_status()<cr>", { silent = true })
+bind("n", "<leader>fa", "<cmd>lua require('telescope.builtin').autocommands()<cr>", { silent = true })
 
 -- lsp
 bind("n", "gd", "<cmd>lua require('telescope.builtin').lsp.definitions()<cr>")

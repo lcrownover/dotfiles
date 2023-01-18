@@ -1,7 +1,7 @@
 -- LSP
 return {
   "neovim/nvim-lspconfig",
-  event = "BufReadPre",
+  event = "BufRead",
   dependencies = {
     "williamboman/mason.nvim",
     "jose-elias-alvarez/null-ls.nvim",

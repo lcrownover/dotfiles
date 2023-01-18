@@ -9,6 +9,9 @@ return {
       lightbulb = {
         enable = false,
       },
+      ui = {
+        title = false,
+      },
     })
   end,
 }
