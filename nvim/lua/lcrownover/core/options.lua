@@ -7,6 +7,7 @@ vim.g.loaded_netrwPlugin = 1
 
 -- leader
 vim.g.mapleader = " "
+vim.g.localleader = " "
 
 -- mouse and clipboard
 opt.mouse:append('a')
@@ -21,7 +22,7 @@ opt.smartcase = true
 opt.termguicolors = true
 opt.undofile = true
 opt.cursorline = true
-opt.colorcolumn = '80,120'
+-- opt.colorcolumn = '80,120'
 opt.indentkeys:remove(':,<:>')
 opt.listchars:append({ tab = '├─', trail = '·', eol = '↲', space = "_"})
 opt.wrap = false

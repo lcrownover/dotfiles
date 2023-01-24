@@ -16,6 +16,14 @@ return {
   { "lewis6991/gitsigns.nvim", config = true },
 
   {
+    "lervag/vimtex",
+    ft = "tex",
+    config = function()
+      vim.g.vimtex_view_method = "zathura"
+    end,
+  },
+
+  {
     "akinsho/bufferline.nvim",
     event = "BufReadPre",
     config = true,
