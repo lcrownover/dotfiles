@@ -55,9 +55,9 @@ bind("n", "<leader>xm", ":Chmod +x<cr>" )
 bind("n", "<C-b>", ":NvimTreeToggle<CR>")
 bind("n", "<leader>b", ":NvimTreeFindFile<CR>")
 
--- bufferline
-bind("n", "<C-n>", "<cmd>BufferLineCycleNext<cr>")
-bind("n", "<C-p>", "<cmd>BufferLineCyclePrev<cr>")
+-- barbar
+bind("n", "<C-n>", "<cmd>BufferNext<cr>")
+bind("n", "<C-p>", "<cmd>BufferPrevious<cr>")
 
 -- fugitive
 bind("n", "<leader>gs", ":Git<cr>")

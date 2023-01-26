@@ -29,16 +29,18 @@
 -- }
 
 return {
-  "AlexvZyl/nordic.nvim",
-  lazy = false, -- make sure we load this during startup if it is your main colorscheme
-  priority = 1000, -- make sure to load this before all the other start plugins
-  config = function()
-    require("nordic").setup({
-      telescope = {
-        style = 'classic'
-      }
-    })
-    require('nordic').load()
-    vim.g.lualine_theme = "nordic"
-  end,
+    "AlexvZyl/nordic.nvim",
+    dir = "/home/lcrown/repos/nordic.nvim/",
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+        require("nordic").setup({
+            transparent = true,
+            telescope = {
+                style = "classic",
+            },
+        })
+        require("nordic").load()
+        vim.g.lualine_theme = "nordic"
+    end,
 }

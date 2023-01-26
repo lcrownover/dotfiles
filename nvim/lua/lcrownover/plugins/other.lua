@@ -24,9 +24,11 @@ return {
   },
 
   {
-    "akinsho/bufferline.nvim",
+    "romgrk/barbar.nvim",
     event = "BufReadPre",
-    config = true,
+    config = function()
+      require('bufferline').setup()
+    end,
   },
 
   {
