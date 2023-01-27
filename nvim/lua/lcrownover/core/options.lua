@@ -7,7 +7,6 @@ vim.g.loaded_netrwPlugin = 1
 
 -- leader
 vim.g.mapleader = " "
-vim.g.localleader = " "
 
 -- mouse and clipboard
 opt.mouse:append('a')

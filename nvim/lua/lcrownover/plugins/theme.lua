@@ -30,14 +30,28 @@
 
 return {
     "AlexvZyl/nordic.nvim",
-    dir = "/home/lcrown/repos/nordic.nvim/",
+    dir = "/Users/lcrown/repos/nordic.nvim/",
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
         require("nordic").setup({
-            transparent = true,
             telescope = {
                 style = "classic",
+            },
+            transparent_bg = true,
+            override = {
+                NvimTreeNormal = { bg = "None" },
+                NvimTreeNormalNC = { bg = "None" },
+                NvimTreeWinSeparator = { bg = "None" },
+                -- TelescopeNormal = { bg = "None" },
+                -- TelescopeBorder = { bg = "None" },
+                -- TelescopePromptNormal = { bg = "None" },
+                -- TelescopePromptBorder = { bg = "None" },
+                -- TelescopePromptTitle = { bg = "None" },
+                -- TelescopePreviewTitle = { bg = "None" },
+                -- TelescopePreviewNormal = { bg = "None" },
+                -- TelescopePreviewBorder = { bg = "None" },
+                -- TelescopeResultsTitle = { bg = "None" },
             },
         })
         require("nordic").load()
