@@ -86,7 +86,7 @@ bind("n", "<leader>fs", "<cmd>lua require('telescope.builtin').git_status()<cr>"
 bind("n", "<leader>fa", "<cmd>lua require('telescope.builtin').autocommands()<cr>", { silent = true })
 
 -- lsp
-bind("n", "gd", "<cmd>lua require('telescope.builtin').lsp.definitions()<cr>")
+bind("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>")
 bind("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
 bind("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>")
 bind("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>")
