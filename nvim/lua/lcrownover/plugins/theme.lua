@@ -27,34 +27,38 @@
 --     vim.g.lualine_theme = "tokyonight"
 --   end,
 -- }
-
 return {
-    "AlexvZyl/nordic.nvim",
-    -- dir = "/Users/lcrown/repos/nordic.nvim/",
+    "catppuccin/nvim",
+    name = "catppuccin",
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
-        require("nordic").setup({
-            telescope = {
-                style = "classic",
-            },
-            transparent_bg = true,
-            override = {
-                NvimTreeNormal = { bg = "None" },
-                NvimTreeNormalNC = { bg = "None" },
-                NvimTreeWinSeparator = { bg = "None" },
-                -- TelescopeNormal = { bg = "None" },
-                -- TelescopeBorder = { bg = "None" },
-                -- TelescopePromptNormal = { bg = "None" },
-                -- TelescopePromptBorder = { bg = "None" },
-                -- TelescopePromptTitle = { bg = "None" },
-                -- TelescopePreviewTitle = { bg = "None" },
-                -- TelescopePreviewNormal = { bg = "None" },
-                -- TelescopePreviewBorder = { bg = "None" },
-                -- TelescopeResultsTitle = { bg = "None" },
-            },
+        require("catppuccin").setup({
+            flavour = "frappe",
+            transparent_background = true,
         })
-        require("nordic").load()
-        vim.g.lualine_theme = "nordic"
+        vim.cmd.colorscheme("catppuccin")
+        vim.g.lualine_theme = "catppuccin"
     end,
 }
+
+-- return {
+-- "AlexvZyl/nordic.nvim",
+-- lazy = false, -- make sure we load this during startup if it is your main colorscheme
+-- priority = 1000, -- make sure to load this before all the other start plugins
+-- config = function()
+--     require("nordic").setup({
+--         telescope = {
+--             style = "classic",
+--         },
+--         transparent_bg = true,
+--         override = {
+--             NvimTreeNormal = { bg = "None" },
+--             NvimTreeNormalNC = { bg = "None" },
+--             NvimTreeWinSeparator = { bg = "None" },
+--         },
+--     })
+--     require("nordic").load()
+--     vim.g.lualine_theme = "nordic"
+-- end,
+-- }
