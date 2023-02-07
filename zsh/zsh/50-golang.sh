@@ -32,7 +32,7 @@ gobae() {
     bin="$(basename $(pwd))"
     GOOS=linux GOARCH=amd64 go build -o bin/$bin cmd/$bin/main.go
     docker_file=$(mktemp)
-    printf "FROM golang:1.9.0\nCOPY bin/$bin /go/bin/$bin\n" > $docker_file
+    printf "FROM golang:1.2.0\nCOPY bin/$bin /go/bin/$bin\n" > $docker_file
     docker build -f $docker_file -t $bin .
     rm $docker_file
     docker run $bin $bin $@

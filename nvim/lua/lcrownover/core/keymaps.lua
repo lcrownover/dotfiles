@@ -49,11 +49,11 @@ bind("n", "<leader>xb", ":w !bash<cr>")
 bind("n", "<leader>xf", ":!%:p<cr>")
 
 -- eunuch
-bind("n", "<leader>xm", ":Chmod +x<cr>" )
+bind("n", "<leader>xm", ":Chmod +x<cr>")
 
 -- nvim-tree
-bind("n", "<C-b>", ":NvimTreeToggle<CR>")
-bind("n", "<leader>b", ":NvimTreeFindFile<CR>")
+bind("n", "<C-b>", ":Neotree toggle<CR>", { silent = true })
+bind("n", "<leader>b", ":Neotree filesystem reveal<CR>", { silent = true })
 
 -- barbar
 bind("n", "<C-n>", "<cmd>BufferNext<cr>")
@@ -69,9 +69,9 @@ bind("n", "<leader>gh", ":diffget //2<cr>")
 bind("n", "<leader>gl", ":diffget //3<cr>")
 
 -- trouble
-bind("n", "<leader>tt", ":Trouble<cr>", { silent = true } )
-bind("n", "<leader>tq", ":TroubleClose<cr>", { silent = true } )
-bind("n", "<leader>tr", ":TroubleRefresh<cr>", { silent = true } )
+bind("n", "<leader>tt", ":Trouble<cr>", { silent = true })
+bind("n", "<leader>tq", ":TroubleClose<cr>", { silent = true })
+bind("n", "<leader>tr", ":TroubleRefresh<cr>", { silent = true })
 
 -- telescope
 bind("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files({follow = true})<cr>", { silent = true })
