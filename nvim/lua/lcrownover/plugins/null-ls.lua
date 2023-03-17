@@ -8,9 +8,9 @@ return {
         null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.jq,
-        null_ls.builtins.formatting.markdownlint,
         null_ls.builtins.formatting.rubocop,
         null_ls.builtins.formatting.shfmt,
+        null_ls.builtins.formatting.prettier
       },
     })
   end,
