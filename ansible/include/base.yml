@@ -28,6 +28,7 @@
       - gsed
       - kubernetes-cli
       - minikube
+      - kitty
 
   - name: macOS => tap fonts
     when: ansible_distribution == 'MacOSX'
