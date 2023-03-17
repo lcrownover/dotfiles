@@ -1,0 +1,6 @@
+  - name: link kitty dir
+    ansible.builtin.file:
+      src: '{{ ansible_env.PWD }}/../../kitty'
+      dest: '{{ ansible_env.HOME }}/.config/kitty'
+      state: link
+      force: yes

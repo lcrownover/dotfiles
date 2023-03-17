@@ -11,6 +11,9 @@
 - import_playbook: include/ansible.yml
   tags: [ansible]
 
+- import_playbook: include/kitty.yml
+  tags: [kitty]
+
 - import_playbook: include/irb.yml
   tags: [irb]
 
