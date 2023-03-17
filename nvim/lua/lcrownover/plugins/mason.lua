@@ -46,7 +46,9 @@ return {
         "jq",
         "shfmt",
         "markdownlint",
+        "prettier",
       },
     })
+
   end,
 }
