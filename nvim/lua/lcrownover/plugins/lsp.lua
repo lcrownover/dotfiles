@@ -68,6 +68,7 @@ return {
       "cssls",      -- css
       "perlls",     -- perl
       "html",
+      "svelte",
     }
     for _, server in ipairs(basic_servers) do
       lsp[server].setup({
@@ -135,7 +136,7 @@ return {
     -- lua
     ---------------------------------------
     set_fmt({ "*.lua" }, 2, true)
-    lsp["sumneko_lua"].setup({
+    lsp["lua_ls"].setup({
       on_attach = on_attach,
       capabilities = capabilities,
       settings = {
