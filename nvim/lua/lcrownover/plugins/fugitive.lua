@@ -1,6 +1,5 @@
 return {
   "tpope/vim-fugitive",
-  opts = {},
   config = true,
   keys = {
     { "<leader>gs", ":Git<cr>" },
