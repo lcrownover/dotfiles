@@ -21,6 +21,19 @@ return {
     -- Additional lua configuration, makes nvim stuff amazing
     "folke/neodev.nvim",
   },
+  keys = {
+    { "gd",         "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>" },
+    { "gD",         "<cmd>lua vim.lsp.buf.declaration()<cr>" },
+    { "gr",         "<cmd>lua require('telescope.builtin').lsp_references()<cr>" },
+    { "gi",         "<cmd>lua vim.lsp.buf.implementation()<cr>" },
+    { "ga",         "<cmd>lua vim.lsp.buf.code_action()<CR>" },
+    { "<leader>e",  "<cmd>lua vim.diagnostic.open_float()<CR>" },
+    { "<leader>fs", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>" },
+    { "[d",         "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>" },
+    { "]d",         "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>" },
+    { "<leader>lr", ":LspRestart<cr>" },
+    { "<leader>li", ":LspInfo<cr>" },
+  },
   config = function()
     -- helper for quickly setting format override options per-language
     local set_fmt = function(file_patterns, indent_length, expandtab)

@@ -8,6 +8,18 @@ return {
     "nvim-lua/popup.nvim",
     "nvim-tree/nvim-web-devicons",
   },
+  keys = {
+    { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files({follow = true})<cr>", silent = true },
+    { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", silent = true },
+    { "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", silent = true },
+    { "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", silent = true },
+    { "<leader>f;", "<cmd>lua require('telescope.builtin').resume()<cr>", silent = true },
+    { "<leader>fq", "<cmd>lua require('telescope.builtin').quickfix()<cr>", silent = true },
+    { "<leader>fk", "<cmd>lua require('telescope.builtin').keymaps()<cr>", silent = true },
+    { "<leader>fc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", silent = true },
+    { "<leader>fs", "<cmd>lua require('telescope.builtin').git_status()<cr>", silent = true },
+    { "<leader>fa", "<cmd>lua require('telescope.builtin').autocommands()<cr>", silent = true },
+  },
   config = function()
     local file_ignore_patterns = {
       "node_modules",
