@@ -51,9 +51,6 @@ return {
       })
     end
 
-    local lsp = require("lspconfig")
-    local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
     local on_attach = function(_, bufnr)
       require("lsp_signature").on_attach({
         bind = true,
@@ -64,7 +61,10 @@ return {
     end
 
     -- pass capabilities into each lsp server
-    local capabilities = cmp_nvim_lsp.default_capabilities()
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+    -- shortcut
+    local lsp = require("lspconfig")
 
     ------------------------------------------------------------------------------
     -- Any server that doesn't have specific configuration can go here
