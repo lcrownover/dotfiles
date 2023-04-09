@@ -10,6 +10,7 @@ return {
     "onsails/lspkind-nvim",
     "L3MON4D3/LuaSnip",
     "windwp/nvim-autopairs",
+    "zbirenbaum/copilot-cmp",
   },
   config = function()
     local cmp = require("cmp")
@@ -28,30 +29,34 @@ return {
           select = true,
         }),
       },
-
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      },
       snippet = {
         expand = function(args)
           require("luasnip").lsp_expand(args.body)
         end,
       },
-
       -- sources for autocompletion
       sources = {
+        { name = "copilot" }, -- copilot
         { name = "nvim_lsp" }, -- lsp
         { name = "luasnip" }, -- snippets
         { name = "buffer" }, -- current buffer
         { name = "path" }, -- os path
       },
-
       -- configure completion icons
       formatting = {
         format = lspkind.cmp_format({
           mode = "symbol",
           maxwidth = 50,
           ellipsis_char = "...",
+          symbol_map = {
+            Copilot = "",
+          },
         }),
       },
-
       min_length = 0, -- allow for `from package import _` in Python
       experimental = { ghost_text = true },
     })
