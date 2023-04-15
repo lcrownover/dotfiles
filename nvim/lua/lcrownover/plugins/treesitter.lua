@@ -21,7 +21,7 @@ return {
         "go",
         "gomod",
         "graphql",
-        "help",
+        "vimdoc",
         "html",
         "http",
         "javascript",
