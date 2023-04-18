@@ -19,6 +19,7 @@ return {
     { "<leader>fc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", silent = true },
     { "<leader>fs", "<cmd>lua require('telescope.builtin').git_status()<cr>", silent = true },
     { "<leader>fa", "<cmd>lua require('telescope.builtin').autocommands()<cr>", silent = true },
+    { "<leader>fl", "<cmd>lua require('telescope.builtin').highlights()<cr>", silent = true },
   },
   config = function()
     local file_ignore_patterns = {
