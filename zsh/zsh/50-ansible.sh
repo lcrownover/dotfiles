@@ -1,4 +1,5 @@
 alias ap='ansible-playbook'
+alias app='ansible-parallel'
 alias ag='ansible-galaxy'
 alias ave='ansible-vault encrypt'
 alias aves='ansible-vault encrypt_string'

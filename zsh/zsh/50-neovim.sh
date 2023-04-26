@@ -7,7 +7,7 @@ alias vim='nvim'
 # shorter
 function v() {
     if [ -z $1 ]; then
-        nvim .
+        nvim
     else
         nvim $1
     fi
@@ -32,7 +32,7 @@ alias vimc='navigate_and_edit_nvim_config'
 function navigate_and_edit_dotfiles() {
     spushd
     cd $DOTFILES
-    nvim .
+    nvim
     spopd
 }
 alias vimd='navigate_and_edit_dotfiles'
