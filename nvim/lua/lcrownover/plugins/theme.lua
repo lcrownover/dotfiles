@@ -36,7 +36,7 @@ return {
     config = function()
     require("catppuccin").setup({
         flavour = "macchiato",
-        -- transparent_background = true,
+        transparent_background = true,
         -- To make the background solid while using the Kitty catppuccin theme,
         -- you have to change the background color in the kitty theme to a slightly different color
         -- than the background color of this theme.
