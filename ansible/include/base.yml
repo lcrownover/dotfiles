@@ -29,6 +29,7 @@
       - kubernetes-cli
       - minikube
       - kitty
+      - lazygit
 
   - name: macOS => tap fonts
     when: ansible_distribution == 'MacOSX'
