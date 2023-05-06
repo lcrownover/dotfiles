@@ -26,7 +26,7 @@ return {
         ["<C-e>"] = cmp.mapping.close(),
         ["<CR>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
+          select = false,
         }),
       },
       window = {
@@ -40,11 +40,11 @@ return {
       },
       -- sources for autocompletion
       sources = {
-        { name = "copilot" },  -- copilot
-        { name = "nvim_lsp" }, -- lsp
-        { name = "luasnip" },  -- snippets
-        { name = "buffer" },   -- current buffer
-        { name = "path" },     -- os path
+        { name = "copilot", priority = 5 }, -- copilot
+        { name = "nvim_lsp", priority = 4 }, -- lsp
+        { name = "luasnip", priority = 3 }, -- snippets
+        { name = "path", priority = 2 }, -- os path
+        { name = "buffer", priority = 1 }, -- current buffer
       },
       -- configure completion icons
       formatting = {
