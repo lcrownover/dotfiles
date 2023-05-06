@@ -12,13 +12,10 @@ return {
       end,
     },
     "ray-x/lsp_signature.nvim",
-
     "rodjek/vim-puppet",
     "simrat39/rust-tools.nvim",
-    "Vimjas/vim-python-pep8-indent", -- fix until treesitter python and yaml indent is fixed
+    "Vimjas/vim-python-pep8-indent",     -- fix until treesitter python and yaml indent is fixed
     "fatih/vim-go",
-
-    -- Additional lua configuration, makes nvim stuff amazing
     "folke/neodev.nvim",
   },
   keys = {
@@ -70,16 +67,16 @@ return {
     -- Any server that doesn't have specific configuration can go here
     ------------------------------------------------------------------------------
     local basic_servers = {
-      "gopls",      -- golang
-      "solargraph", -- ruby
-      "rust_analyzer", -- rust
-      "tsserver",   -- typescript
-      "bashls",     -- bash
-      "vimls",      -- vim
-      "puppet",     -- puppet
-      "clangd",     -- c
-      "cssls",      -- css
-      "perlls",     -- perl
+      "gopls",               -- golang
+      "solargraph",          -- ruby
+      "rust_analyzer",       -- rust
+      "tsserver",            -- typescript
+      "bashls",              -- bash
+      "vimls",               -- vim
+      "puppet",              -- puppet
+      "clangd",              -- c
+      "cssls",               -- css
+      "perlls",              -- perl
       "html",
       "svelte",
     }
@@ -123,7 +120,7 @@ return {
     -- golang
     ---------------------------------------
     set_fmt({ "*.go" }, 4, false)
-    vim.g.go_doc_keywordprg_enabled = 0 -- disable "K" in vim-go
+    vim.g.go_doc_keywordprg_enabled = 0     -- disable "K" in vim-go
     vim.api.nvim_create_autocmd("LspAttach", {
       pattern = "*.go",
       callback = function()

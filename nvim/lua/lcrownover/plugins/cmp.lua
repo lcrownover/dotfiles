@@ -40,11 +40,11 @@ return {
       },
       -- sources for autocompletion
       sources = {
-        { name = "copilot" }, -- copilot
+        { name = "copilot" },  -- copilot
         { name = "nvim_lsp" }, -- lsp
-        { name = "luasnip" }, -- snippets
-        { name = "buffer" }, -- current buffer
-        { name = "path" }, -- os path
+        { name = "luasnip" },  -- snippets
+        { name = "buffer" },   -- current buffer
+        { name = "path" },     -- os path
       },
       -- configure completion icons
       formatting = {
