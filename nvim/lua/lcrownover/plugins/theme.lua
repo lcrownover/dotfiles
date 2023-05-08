@@ -10,7 +10,7 @@ return {
         -- To make the background solid while using the Kitty catppuccin theme,
         -- you have to change the background color in the kitty theme to a slightly different color
         -- than the background color of this theme.
-        -- Specifically, change the kitty background color from 303446 to 303447.
+        -- Specifically, change the kitty background color from 303446 to 303445.
     })
     vim.cmd.colorscheme("catppuccin")
     vim.g.lualine_theme = "catppuccin"
