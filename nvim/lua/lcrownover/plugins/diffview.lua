@@ -1,6 +1,6 @@
 return {
   "sindrets/diffview.nvim",
-  cmd = "DiffViewOpen",
+  lazy = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
   },

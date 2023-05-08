@@ -52,6 +52,9 @@ bind("i", ".", ".<c-g>u")
 bind("i", "!", "!<c-g>u")
 bind("i", "?", "?<c-g>u")
 
+-- git
+bind("n", "<leader>gg", ":terminal lazygit<cr>i")
+
 -- diffing files
 -- bind('n', '<leader>d<', ':diffthis<cr>')
 -- bind('n', '<leader>d>', ':vsplit<cr>:diffthis<cr>:wincmd p<cr>:bprev<cr>')

@@ -1,4 +1,5 @@
 require("lcrownover.core.options")
+require("lcrownover.core.autocmds")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

@@ -10,16 +10,16 @@ return {
   },
   keys = {
     { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files({follow = true})<cr>", silent = true },
-    { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", silent = true },
-    { "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", silent = true },
-    { "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", silent = true },
-    { "<leader>f;", "<cmd>lua require('telescope.builtin').resume()<cr>", silent = true },
-    { "<leader>fq", "<cmd>lua require('telescope.builtin').quickfix()<cr>", silent = true },
-    { "<leader>fk", "<cmd>lua require('telescope.builtin').keymaps()<cr>", silent = true },
-    { "<leader>fc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", silent = true },
-    { "<leader>fs", "<cmd>lua require('telescope.builtin').git_status()<cr>", silent = true },
-    { "<leader>fa", "<cmd>lua require('telescope.builtin').autocommands()<cr>", silent = true },
-    { "<leader>fl", "<cmd>lua require('telescope.builtin').highlights()<cr>", silent = true },
+    { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>",                 silent = true },
+    { "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>",                   silent = true },
+    { "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>",                 silent = true },
+    { "<leader>f;", "<cmd>lua require('telescope.builtin').resume()<cr>",                    silent = true },
+    { "<leader>fq", "<cmd>lua require('telescope.builtin').quickfix()<cr>",                  silent = true },
+    { "<leader>fk", "<cmd>lua require('telescope.builtin').keymaps()<cr>",                   silent = true },
+    { "<leader>fc", "<cmd>lua require('telescope.builtin').git_commits()<cr>",               silent = true },
+    { "<leader>fs", "<cmd>lua require('telescope.builtin').git_status()<cr>",                silent = true },
+    { "<leader>fa", "<cmd>lua require('telescope.builtin').autocommands()<cr>",              silent = true },
+    { "<leader>fl", "<cmd>lua require('telescope.builtin').highlights()<cr>",                silent = true },
   },
   config = function()
     local file_ignore_patterns = {
@@ -33,7 +33,7 @@ return {
         fzf = {
           fuzzy = true,
           override_generic_sorter = true, -- override the generic sorter
-          override_file_sorter = true, -- override the file sorter
+          override_file_sorter = true,    -- override the file sorter
           case_mode = "smart_case",
         },
       },
@@ -73,16 +73,5 @@ return {
       },
     })
     require("telescope").load_extension("fzf")
-    -- local M = {}
-    --
-    -- M.grep_notes = function()
-    --   require('telescope.builtin').live_grep({
-    --     prompt_title = "< Grep Notes >",
-    --     shorten_path = true,
-    --     search_dirs = { "~/.gdrive/notes" },
-    --   })
-    -- end
-    --
-    -- return M
   end,
 }

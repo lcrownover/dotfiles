@@ -1,5 +1,6 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
+  lazy = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
@@ -9,7 +10,6 @@ return {
     { "<C-b>",     ":Neotree toggle<CR>",            silent = true },
     { "<leader>b", ":Neotree filesystem reveal<CR>", silent = true },
   },
-  lazy = false,
   config = function()
     require("neo-tree").setup({
       close_if_last_window = true,
