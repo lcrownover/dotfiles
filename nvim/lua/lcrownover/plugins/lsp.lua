@@ -69,16 +69,16 @@ return {
         -- Any server that doesn't have specific configuration can go here
         ------------------------------------------------------------------------------
         local basic_servers = {
-            "gopls",   -- golang
-            "solargraph", -- ruby
+            "gopls",         -- golang
+            "solargraph",    -- ruby
             "rust_analyzer", -- rust
-            "tsserver", -- typescript
-            "bashls",  -- bash
-            "vimls",   -- vim
-            "puppet",  -- puppet
-            "clangd",  -- c
-            "cssls",   -- css
-            "perlls",  -- perl
+            "tsserver",      -- typescript
+            "bashls",        -- bash
+            "vimls",         -- vim
+            "puppet",        -- puppet
+            "clangd",        -- c
+            "cssls",         -- css
+            "perlls",        -- perl
             "html",
             "svelte",
         }
@@ -179,7 +179,7 @@ return {
             },
             tools = {
                 inlay_hints = {
-                    auto = true,
+                    auto = false,
                 },
             },
         })
