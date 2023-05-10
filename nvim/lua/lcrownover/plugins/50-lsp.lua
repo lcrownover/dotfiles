@@ -336,7 +336,7 @@ return {
           }),
         },
         min_length = 0, -- allow for `from package import _` in Python
-        experimental = { ghost_text = true },
+        -- experimental = { ghost_text = true },
       })
 
       -- make autopairs and completion work together
