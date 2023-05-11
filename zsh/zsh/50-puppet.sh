@@ -237,9 +237,7 @@ function noop() {
 }
 
 function pat() {
-	c="puppet agent --test"
-	[[ ! -z $2 ]] && c+=" --environment $2"
-	bolt command run $c --targets $1 --stream --no-verbose
+    bolt command run "puppet agent --test" --targets $1 --transport pcp
 }
 
 function vim_puppet() {
