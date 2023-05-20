@@ -19,23 +19,23 @@ return {
         ensure_installed = {
           -- lsp servers
           "ansiblels",
-          "awk_ls",
+          -- "awk_ls",
           "bashls",
-          "clangd",
+          -- "clangd",
           "dockerls",
-          "eslint",
+          -- "eslint",
           "gopls",
           "html",
           "marksman",
-          "puppet",
+          -- "puppet",
           "pyright",
           "rust_analyzer",
-          "solargraph",
-          "svelte",
+          -- "solargraph",
+          -- "svelte",
           "lua_ls",
           "terraformls",
-          "tsserver",
-          "vimls",
+          -- "tsserver",
+          -- "vimls",
         },
       })
 
@@ -43,7 +43,7 @@ return {
         automatic_installation = true,
         ensure_installed = {
           "black",
-          "rubocop",
+          -- "rubocop",
           "jq",
           "shfmt",
           "markdownlint",
@@ -61,7 +61,7 @@ return {
           null_ls.builtins.formatting.black,
           null_ls.builtins.formatting.jq,
           null_ls.builtins.formatting.markdownlint,
-          null_ls.builtins.formatting.rubocop,
+          -- null_ls.builtins.formatting.rubocop,
           null_ls.builtins.formatting.shfmt,
           null_ls.builtins.formatting.prettier
         },
@@ -84,7 +84,6 @@ return {
       "rodjek/vim-puppet",
       "simrat39/rust-tools.nvim",
       "Vimjas/vim-python-pep8-indent", -- fix until treesitter python and yaml indent is fixed
-      -- "fatih/vim-go",
       "folke/neodev.nvim",
     },
     keys = {
@@ -139,17 +138,17 @@ return {
       ------------------------------------------------------------------------------
       local basic_servers = {
         "gopls",         -- golang
-        "solargraph",    -- ruby
+        -- "solargraph",    -- ruby
         "rust_analyzer", -- rust
-        "tsserver",      -- typescript
+        -- "tsserver",      -- typescript
         "bashls",        -- bash
-        "vimls",         -- vim
-        "puppet",        -- puppet
-        "clangd",        -- c
-        "cssls",         -- css
-        "perlls",        -- perl
+        -- "vimls",         -- vim
+        -- "puppet",        -- puppet
+        -- "clangd",        -- c
+        "cssls", -- css
+        -- "perlls",        -- perl
         "html",
-        "svelte",
+        -- "svelte",
       }
       for _, server in ipairs(basic_servers) do
         lsp[server].setup({
@@ -202,16 +201,16 @@ return {
       ---------------------------------------
       -- ruby
       ---------------------------------------
-      set_fmt({ "*.rb", "*.pp" }, 2, true)
-      lsp["solargraph"].setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = {
-          solargraph = {
-            formatting = true,
-          },
-        },
-      })
+      -- set_fmt({ "*.rb", "*.pp" }, 2, true)
+      -- lsp["solargraph"].setup({
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   settings = {
+      --     solargraph = {
+      --       formatting = true,
+      --     },
+      --   },
+      -- })
 
       ---------------------------------------
       -- lua
