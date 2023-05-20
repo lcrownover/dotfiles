@@ -84,7 +84,7 @@ return {
       "rodjek/vim-puppet",
       "simrat39/rust-tools.nvim",
       "Vimjas/vim-python-pep8-indent", -- fix until treesitter python and yaml indent is fixed
-      "fatih/vim-go",
+      -- "fatih/vim-go",
       "folke/neodev.nvim",
     },
     keys = {
@@ -191,7 +191,7 @@ return {
       -- golang
       ---------------------------------------
       set_fmt({ "*.go" }, 4, false)
-      vim.g.go_doc_keywordprg_enabled = 0 -- disable "K" in vim-go
+      -- vim.g.go_doc_keywordprg_enabled = 0 -- disable "K" in vim-go
       vim.api.nvim_create_autocmd("LspAttach", {
         pattern = "*.go",
         callback = function()
