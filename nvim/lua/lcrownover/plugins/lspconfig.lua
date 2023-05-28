@@ -110,9 +110,8 @@ return {
       on_attach = on_attach,
       capabilities = capabilities,
       filetypes = {
-        "yaml.ansible",
+        "yml.ansible",
         "yml",
-        "yaml",
       },
     })
 
