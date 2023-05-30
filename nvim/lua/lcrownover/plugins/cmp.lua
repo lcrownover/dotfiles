@@ -39,11 +39,11 @@ return {
       },
       -- sources for autocompletion
       sources = {
-        { name = "copilot",  priority = 5 },   -- copilot
-        { name = "nvim_lsp", priority = 4 },   -- lsp
-        { name = "luasnip",  priority = 3 },   -- snippets
-        { name = "path",     priority = 2 },   -- os path
-        { name = "buffer",   priority = 1 },   -- current buffer
+        { name = "luasnip",  priority = 5 },     -- snippets
+        { name = "copilot",  priority = 4 },     -- copilot
+        { name = "nvim_lsp", priority = 3 },     -- lsp
+        { name = "path",     priority = 2 },     -- os path
+        { name = "buffer",   priority = 1 },     -- current buffer
       },
       -- configure completion icons
       formatting = {
@@ -56,7 +56,7 @@ return {
           },
         }),
       },
-      min_length = 0,   -- allow for `from package import _` in Python
+      min_length = 0,     -- allow for `from package import _` in Python
       -- experimental = { ghost_text = true },
     })
 

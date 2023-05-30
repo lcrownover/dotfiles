@@ -128,10 +128,13 @@ return {
                 },
             },
         }
+        local golsp = vim.api.nvim_create_augroup("GoLSP", { clear = true, })
         vim.api.nvim_create_autocmd("LspAttach", {
+            group = golsp,
             pattern = "*.go",
             callback = function()
-                vim.keymap.set("n", "<leader>lr", ":!go run cmd/*/main.go<cr>")
+                vim.api.nvim_buf_set_keymap(0, "n", "<leader>llr", ":!go run cmd/*/main.go<cr>", {})
+                vim.api.nvim_buf_set_keymap(0, "n", "<leader>llj", ":GoTagAdd<cr>", {silent = true})
             end,
         })
 
