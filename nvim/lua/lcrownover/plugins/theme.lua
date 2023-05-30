@@ -16,11 +16,11 @@ return {
     lazy = false,
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
-    require("catppuccin").setup({
-        flavour = "frappe",
-        -- transparent_background = true,
-    })
-    vim.cmd.colorscheme("catppuccin")
-    vim.g.lualine_theme = "catppuccin"
+        require("catppuccin").setup({
+            flavour = "frappe",
+            -- transparent_background = true,
+        })
+        vim.cmd.colorscheme("catppuccin")
+        vim.g.lualine_theme = "catppuccin"
     end,
 }
