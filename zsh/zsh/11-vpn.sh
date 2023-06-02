@@ -13,19 +13,19 @@ vpn_usage() {
 
 vpn_set_dns() {
     networksetup -setdnsservers 'USB 10/100/1000 LAN' 128.223.32.36 128.223.60.23
-    networksetup -setdnsservers 'Thunderbolt Ethernet Slot 2' 128.223.32.36 128.223.60.23
+    networksetup -setdnsservers 'Thunderbolt Ethernet Slot 0' 128.223.32.36 128.223.60.23
     networksetup -setdnsservers 'Wi-Fi' 128.223.32.36 128.223.60.23
     networksetup -setsearchdomains 'USB 10/100/1000 LAN' talapas.uoregon.edu uoregon.edu
-    networksetup -setsearchdomains 'Thunderbolt Ethernet Slot 2' talapas.uoregon.edu uoregon.edu
+    networksetup -setsearchdomains 'Thunderbolt Ethernet Slot 0' talapas.uoregon.edu uoregon.edu
     networksetup -setsearchdomains 'Wi-Fi' talapas.uoregon.edu uoregon.edu
 }
 
 vpn_unset_dns() {
     networksetup -setdnsservers 'USB 10/100/1000 LAN' Empty
-    networksetup -setdnsservers 'Thunderbolt Ethernet Slot 2' Empty
+    networksetup -setdnsservers 'Thunderbolt Ethernet Slot 0' Empty
     networksetup -setdnsservers 'Wi-Fi' Empty
     networksetup -setsearchdomains 'USB 10/100/1000 LAN' Empty
-    networksetup -setsearchdomains 'Thunderbolt Ethernet Slot 2' Empty
+    networksetup -setsearchdomains 'Thunderbolt Ethernet Slot 0' Empty
     networksetup -setsearchdomains 'Wi-Fi' Empty
 }
 
