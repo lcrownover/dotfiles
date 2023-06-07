@@ -121,9 +121,6 @@ return {
         lsp["gopls"].setup {
             settings = {
                 gopls = {
-                    analyses = {
-                        unusedparams = true,
-                    },
                     staticcheck = true,
                 },
             },
