@@ -15,6 +15,7 @@ return {
         "simrat39/rust-tools.nvim",
         "Vimjas/vim-python-pep8-indent", -- fix until treesitter python and yaml indent is fixed
         "folke/neodev.nvim",
+        "lvimuser/lsp-inlayhints.nvim",
     },
     keys = {
         { "gd",         "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>" },
@@ -45,16 +46,43 @@ return {
                     vim.opt.shiftwidth = indent_length
                 end,
             })
+
+            vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = "LspAttach_inlayhints",
+                callback = function(args)
+                    if not (args.data and args.data.client_id) then
+                        return
+                    end
+
+                    local bufnr = args.buf
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    require("lsp-inlayhints").on_attach(client, bufnr)
+                end,
+            })
         end
 
-        local on_attach = function(_, bufnr)
+        local fmtgroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
+        local on_attach = function(client, bufnr)
+            print("should print anywhere lsp attaches")
             require("lsp_signature").on_attach({
                 bind = true,
                 handler_opts = {
                     border = "rounded",
                 },
             }, bufnr)
-            require("lsp-inlayhints").on_attach(_, bufnr)
+            print("after lsp_signature")
+
+            if client.supports_method("textDocument/formatting") then
+                print("should set up formatting")
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                    group = fmtgroup,
+                    buffer = bufnr,
+                    callback = function()
+                        vim.lsp.buf.format({ bufnr = bufnr })
+                    end,
+                })
+            end
         end
 
         -- pass capabilities into each lsp server
@@ -119,6 +147,8 @@ return {
         ---------------------------------------
         set_fmt({ "*.go" }, 4, false)
         lsp["gopls"].setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
             settings = {
                 gopls = {
                     staticcheck = true,
@@ -131,23 +161,10 @@ return {
             pattern = "*.go",
             callback = function()
                 vim.api.nvim_buf_set_keymap(0, "n", "<leader>llr", ":!go run cmd/*/main.go<cr>", {})
-                vim.api.nvim_buf_set_keymap(0, "n", "<leader>llj", ":GoTagAdd<cr>", {silent = true})
+                vim.api.nvim_buf_set_keymap(0, "n", "<leader>llta", ":GoTagAdd<cr>", { silent = true })
+                vim.api.nvim_buf_set_keymap(0, "n", "<leader>lltr", ":GoTagRm<cr>", { silent = true })
             end,
         })
-
-        ---------------------------------------
-        -- ruby
-        ---------------------------------------
-        -- set_fmt({ "*.rb", "*.pp" }, 2, true)
-        -- lsp["solargraph"].setup({
-        --   on_attach = on_attach,
-        --   capabilities = capabilities,
-        --   settings = {
-        --     solargraph = {
-        --       formatting = true,
-        --     },
-        --   },
-        -- })
 
         ---------------------------------------
         -- lua
