@@ -64,14 +64,12 @@ return {
 
         local fmtgroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
         local on_attach = function(client, bufnr)
-            print("should print anywhere lsp attaches")
             require("lsp_signature").on_attach({
                 bind = true,
                 handler_opts = {
                     border = "rounded",
                 },
             }, bufnr)
-            print("after lsp_signature")
 
             if client.supports_method("textDocument/formatting") then
                 print("should set up formatting")
@@ -98,7 +96,7 @@ return {
             -- "solargraph",    -- ruby
             "rust_analyzer", -- rust
             -- "tsserver",      -- typescript
-            "bashls",        -- bash
+            "bashls",  -- bash
             -- "vimls",         -- vim
             -- "puppet",        -- puppet
             -- "clangd",        -- c
