@@ -1,230 +1,310 @@
 return {
-    "neovim/nvim-lspconfig",
-    event = "BufRead",
-    dependencies = {
-        "williamboman/mason.nvim",
-        "jose-elias-alvarez/null-ls.nvim",
-        {
-            "j-hui/fidget.nvim",
-            config = function()
-                require("fidget").setup()
-            end,
-        },
-        "ray-x/lsp_signature.nvim",
-        "rodjek/vim-puppet",
-        "simrat39/rust-tools.nvim",
-        "Vimjas/vim-python-pep8-indent", -- fix until treesitter python and yaml indent is fixed
-        "folke/neodev.nvim",
-        "lvimuser/lsp-inlayhints.nvim",
-    },
-    keys = {
-        { "gd",         "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>" },
-        { "gD",         "<cmd>lua vim.lsp.buf.declaration()<cr>" },
-        { "gr",         "<cmd>lua require('telescope.builtin').lsp_references()<cr>" },
-        { "gi",         "<cmd>lua vim.lsp.buf.implementation()<cr>" },
-        { "ga",         "<cmd>lua vim.lsp.buf.code_action()<CR>" },
-        { "<leader>e",  "<cmd>lua vim.diagnostic.open_float()<CR>" },
-        { "<leader>fs", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>" },
-        { "[d",         "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>" },
-        { "]d",         "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>" },
-        { "<leader>lr", ":LspRestart<cr>" },
-        { "<leader>li", ":LspInfo<cr>" },
-        { "<leader>lh", "<cmd>lua require('rust-tools').inlay_hints.toggle()<CR>" }
-    },
-    config = function()
-        -- helper for quickly setting format override options per-language
-        local set_fmt = function(file_patterns, indent_length, expandtab)
-            vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-                pattern = file_patterns,
-                callback = function()
-                    if expandtab then
-                        vim.opt.expandtab = true
-                    else
-                        vim.opt.expandtab = false
-                    end
-                    vim.opt.tabstop = indent_length
-                    vim.opt.shiftwidth = indent_length
-                end,
-            })
+	"neovim/nvim-lspconfig",
+	event = "BufRead",
+	dependencies = {
+		{
+			"williamboman/mason.nvim",
+			cmd = "Mason",
+			dependencies = {
+				"williamboman/mason-lspconfig.nvim",
+				"WhoIsSethDaniel/mason-tool-installer.nvim",
+				"jayp0521/mason-null-ls.nvim",
+			},
+		},
+		{
+			"jose-elias-alvarez/null-ls.nvim",
+			config = function()
+				local null_ls = require("null-ls")
+				null_ls.setup({
+					sources = {
+						null_ls.builtins.formatting.black,
+						null_ls.builtins.formatting.jq,
+						null_ls.builtins.formatting.markdownlint,
+						null_ls.builtins.formatting.shfmt,
+						null_ls.builtins.formatting.prettier,
+						null_ls.builtins.formatting.stylua,
+					},
+				})
+			end,
+		},
+		{
+			"j-hui/fidget.nvim",
+			config = function()
+				require("fidget").setup()
+			end,
+		},
+		{
+			"glepnir/lspsaga.nvim",
+			config = function()
+				require("lspsaga").setup({
+					symbol_in_winbar = { enable = false },
+					lightbulb = { enable = false },
+					ui = { title = false },
+				})
+			end,
+		},
+		"ray-x/lsp_signature.nvim",
+		"simrat39/rust-tools.nvim",
+		"Vimjas/vim-python-pep8-indent", -- fix until treesitter python and yaml indent is fixed
+		"lvimuser/lsp-inlayhints.nvim",
+		-- "folke/neodev.nvim",
+	},
+	config = function()
+		------------------------------------------------------------------
+		--   Keymaps
+		------------------------------------------------------------------
+		vim.api.nvim_create_augroup("LspAttach_keybinds", {})
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = "LspAttach_keybinds",
+			callback = function()
+				-- Vanilla LSP
+				vim.keymap.set(
+					"n",
+					"gd",
+					"<cmd>lua require('telescope.builtin').lsp_definitions()<cr>",
+					{ silent = true }
+				)
+				vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", { silent = true })
+				vim.keymap.set(
+					"n",
+					"gr",
+					"<cmd>lua require('telescope.builtin').lsp_references()<cr>",
+					{ silent = true }
+				)
+				vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", { silent = true })
+				vim.keymap.set("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>", { silent = true })
+				vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", { silent = true })
+				vim.keymap.set(
+					"n",
+					"<leader>fs",
+					"<cmd>lua vim.lsp.buf.format({ async = true })<CR>",
+					{ silent = true }
+				)
+				vim.keymap.set("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", { silent = true })
+				vim.keymap.set("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", { silent = true })
+				vim.keymap.set("n", "<leader>lr", ":LspRestart<cr>", { silent = true })
+				vim.keymap.set("n", "<leader>li", ":LspInfo<cr>", { silent = true })
+				vim.keymap.set(
+					"n",
+					"<leader>lh",
+					"<cmd>lua require('rust-tools').inlay_hints.toggle()<CR>",
+					{ silent = true }
+				)
+				-- Lspsaga
+				vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
+				vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+				vim.keymap.set("n", "gn", "<cmd>Lspsaga rename<CR>", { silent = true })
+				vim.keymap.set("n", "<F2>", "<cmd>Lspsaga rename<CR>", { silent = true })
+				vim.keymap.set("n", "gs", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
+				vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true })
+				vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true })
+				vim.keymap.set("n", "[E", function()
+					require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
+				end, { silent = true })
+				vim.keymap.set("n", "]E", function()
+					require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
+				end, { silent = true })
+			end,
+		})
 
-            vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
-            vim.api.nvim_create_autocmd("LspAttach", {
-                group = "LspAttach_inlayhints",
-                callback = function(args)
-                    if not (args.data and args.data.client_id) then
-                        return
-                    end
+		------------------------------------------------------------------
+		--   Inlay Hints
+		------------------------------------------------------------------
+		vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = "LspAttach_inlayhints",
+			callback = function(args)
+				if not (args.data and args.data.client_id) then
+					return
+				end
 
-                    local bufnr = args.buf
-                    local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    require("lsp-inlayhints").on_attach(client, bufnr)
-                end,
-            })
-        end
+				local bufnr = args.buf
+				local client = vim.lsp.get_client_by_id(args.data.client_id)
+				require("lsp-inlayhints").on_attach(client, bufnr)
+			end,
+		})
 
-        local fmtgroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
-        local on_attach = function(client, bufnr)
-            require("lsp_signature").on_attach({
-                bind = true,
-                handler_opts = {
-                    border = "rounded",
-                },
-            }, bufnr)
+		------------------------------------------------------------------
+		--   Autoformatting
+		------------------------------------------------------------------
+		vim.api.nvim_create_augroup("LspAttach_formatting", {})
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = "LspAttach_formatting",
+			callback = function(args)
+				if not (args.data and args.data.client_id) then
+					return
+				end
 
-            if client.supports_method("textDocument/formatting") then
-                print("should set up formatting")
-                vim.api.nvim_create_autocmd("BufWritePre", {
-                    group = fmtgroup,
-                    buffer = bufnr,
-                    callback = function()
-                        vim.lsp.buf.format({ bufnr = bufnr })
-                    end,
-                })
-            end
-        end
+				local bufnr = args.buf
+				local client = vim.lsp.get_client_by_id(args.data.client_id)
+				if client.supports_method("textDocument/formatting") then
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						buffer = bufnr,
+						callback = function()
+							vim.lsp.buf.format({ bufnr = bufnr })
+						end,
+					})
+				end
+			end,
+		})
 
-        -- pass capabilities into each lsp server
-        local capabilities = require("cmp_nvim_lsp").default_capabilities()
+		------------------------------------------------------------------
+		--   lsp_signature
+		------------------------------------------------------------------
+		vim.api.nvim_create_augroup("LspAttach_signature", {})
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = "LspAttach_signature",
+			callback = function(args)
+				local bufnr = args.buf
+				require("lsp_signature").on_attach({
+					bind = true,
+					handler_opts = {
+						border = "rounded",
+					},
+				}, bufnr)
+			end,
+		})
 
-        -- shortcut
-        local lsp = require("lspconfig")
+		------------------------------------------------------------------
+		--   Mason
+		------------------------------------------------------------------
+		local mason = require("mason")
+		local mason_lspconfig = require("mason-lspconfig")
+		local mason_null_ls = require("mason-null-ls")
 
-        ------------------------------------------------------------------------------
-        -- Any server that doesn't have specific configuration can go here
-        ------------------------------------------------------------------------------
-        local basic_servers = {
-            -- "solargraph",    -- ruby
-            "rust_analyzer", -- rust
-            -- "tsserver",      -- typescript
-            "bashls",  -- bash
-            -- "vimls",         -- vim
-            -- "puppet",        -- puppet
-            -- "clangd",        -- c
-            "cssls", -- css
-            -- "perlls",        -- perl
-            "html",
-            -- "svelte",
-        }
-        for _, server in ipairs(basic_servers) do
-            lsp[server].setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-            })
-        end
+		mason.setup()
+		mason_lspconfig.setup({
+			automatic_installation = true,
+			ensure_installed = {
+				"ansiblels",
+				"bashls",
+				"dockerls",
+				"gopls",
+				"html",
+				"marksman",
+				"pyright",
+				"rust_analyzer",
+				"lua_ls",
+				"terraformls",
+			},
+		})
 
-        ---------------------------------------
-        -- python
-        ---------------------------------------
-        lsp["pyright"].setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-            settings = {
-                python = {
-                    analysis = {
-                        autoImportCompletions = false,
-                    },
-                },
-            },
-        })
+		mason_null_ls.setup({
+			automatic_installation = true,
+			ensure_installed = {
+				"black",
+				"jq",
+				"shfmt",
+				"markdownlint",
+				"prettier",
+			},
+		})
 
-        ---------------------------------------
-        -- ansible
-        ---------------------------------------
-        set_fmt({ "*.yml" }, 2, true)
-        lsp["ansiblels"].setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-            filetypes = {
-                "yml.ansible",
-                "yml",
-            },
-        })
+		local lsp = require("lspconfig")
+		local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-        ---------------------------------------
-        -- golang
-        ---------------------------------------
-        set_fmt({ "*.go" }, 4, false)
-        lsp["gopls"].setup {
-            on_attach = on_attach,
-            capabilities = capabilities,
-            settings = {
-                gopls = {
-                    staticcheck = true,
-                },
-            },
-        }
-        local golsp = vim.api.nvim_create_augroup("GoLSP", { clear = true, })
-        vim.api.nvim_create_autocmd("LspAttach", {
-            group = golsp,
-            pattern = "*.go",
-            callback = function()
-                vim.api.nvim_buf_set_keymap(0, "n", "<leader>llr", ":!go run cmd/*/main.go<cr>", {})
-                vim.api.nvim_buf_set_keymap(0, "n", "<leader>llta", ":GoTagAdd<cr>", { silent = true })
-                vim.api.nvim_buf_set_keymap(0, "n", "<leader>lltr", ":GoTagRm<cr>", { silent = true })
-            end,
-        })
+		------------------------------------------------------------------------------
+		-- Any server that doesn't have specific configuration can go here
+		------------------------------------------------------------------------------
+		local basic_servers = {
+			"rust_analyzer", -- rust
+			"bashls", -- bash
+			"cssls", -- css
+			"html",
+		}
+		for _, server in ipairs(basic_servers) do
+			lsp[server].setup({
+				capabilities = lsp_capabilities,
+			})
+		end
 
-        ---------------------------------------
-        -- lua
-        ---------------------------------------
-        set_fmt({ "*.lua" }, 2, true)
-        lsp["lua_ls"].setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-            settings = {
-                Lua = {
-                    runtime = {
-                        version = "LuaJIT",
-                    },
-                    diagnostics = {
-                        globals = { "vim", "require" },
-                    },
-                    workspace = {
-                        library = vim.api.nvim_get_runtime_file("", true),
-                    },
-                    telemetry = {
-                        enable = false,
-                    },
-                },
-            },
-        })
+		---------------------------------------
+		-- python
+		---------------------------------------
+		lsp["pyright"].setup({
+			on_attach = on_attach,
+			capabilities = lsp_capabilities,
+			settings = {
+				python = {
+					analysis = {
+						autoImportCompletions = false,
+					},
+				},
+			},
+		})
 
-        ---------------------------------------
-        -- rust
-        ---------------------------------------
-        require("rust-tools").setup({
-            server = {
-                on_attach = on_attach,
-                capabilities = capabilities,
-            },
-            tools = {
-                inlay_hints = {
-                    auto = false,
-                },
-            },
-        })
+		---------------------------------------
+		-- ansible
+		---------------------------------------
+		lsp["ansiblels"].setup({
+			capabilities = lsp_capabilities,
+			filetypes = {
+				"yml.ansible",
+				"yml",
+			},
+		})
 
-        ---------------------------------------
-        -- terraform
-        ---------------------------------------
-        set_fmt("*.tf", 2, true)
-        lsp["terraformls"].setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-            filetypes = {
-                "terraform",
-                "tf",
-            },
-        })
+		---------------------------------------
+		-- golang
+		---------------------------------------
+		lsp["gopls"].setup({
+			capabilities = lsp_capabilities,
+			settings = {
+				gopls = {
+					staticcheck = true,
+				},
+			},
+		})
+		local golsp = vim.api.nvim_create_augroup("GoLSP", { clear = true })
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = golsp,
+			pattern = "*.go",
+			callback = function()
+				vim.api.nvim_buf_set_keymap(0, "n", "<leader>llr", ":!go run cmd/*/main.go<cr>", {})
+				vim.api.nvim_buf_set_keymap(0, "n", "<leader>llta", ":GoTagAdd<cr>", { silent = true })
+				vim.api.nvim_buf_set_keymap(0, "n", "<leader>lltr", ":GoTagRm<cr>", { silent = true })
+			end,
+		})
 
-        ---------------------------------------
-        -- typescript/javascript
-        ---------------------------------------
-        set_fmt({ "*.ts", "*.js", "*.jsx" }, 2, true)
+		---------------------------------------
+		-- lua
+		---------------------------------------
+		lsp["lua_ls"].setup({
+			capabilities = lsp_capabilities,
+			settings = {
+				Lua = {
+					runtime = { version = "LuaJIT" },
+					diagnostics = { globals = { "vim", "require" } },
+					workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+					telemetry = { enable = false },
+					format = { enable = false },
+				},
+			},
+		})
 
-        ---------------------------------------
-        -- markdown
-        ---------------------------------------
-        set_fmt({ "*.md" }, 2, true)
-    end,
+		---------------------------------------
+		-- rust
+		---------------------------------------
+		require("rust-tools").setup({
+			server = {
+				capabilities = lsp_capabilities,
+			},
+			tools = {
+				inlay_hints = {
+					auto = false,
+				},
+			},
+		})
+
+		---------------------------------------
+		-- terraform
+		---------------------------------------
+		lsp["terraformls"].setup({
+			capabilities = lsp_capabilities,
+			filetypes = {
+				"terraform",
+				"tf",
+			},
+		})
+	end,
 }

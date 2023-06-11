@@ -31,8 +31,8 @@ return {
       extensions = {
         fzf = {
           fuzzy = true,
-          override_generic_sorter = true,   -- override the generic sorter
-          override_file_sorter = true,      -- override the file sorter
+          override_generic_sorter = true, -- override the generic sorter
+          override_file_sorter = true,    -- override the file sorter
           case_mode = "smart_case",
         },
       },
@@ -49,7 +49,7 @@ return {
           "--follow",
         },
         file_ignore_patterns = file_ignore_patterns,
-        set_env = { ["COLORTERM"] = "truecolor" },   -- default = nil,
+        set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
         mappings = {
           i = {
             ["<c-k>"] = require("telescope.actions").move_selection_previous,
