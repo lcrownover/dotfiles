@@ -223,7 +223,6 @@ return {
 		-- python
 		---------------------------------------
 		lsp["pyright"].setup({
-			on_attach = on_attach,
 			capabilities = lsp_capabilities,
 			settings = {
 				python = {
@@ -242,6 +241,7 @@ return {
 			filetypes = {
 				"yml.ansible",
 				"yml",
+				"yaml",
 			},
 		})
 

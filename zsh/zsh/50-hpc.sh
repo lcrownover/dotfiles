@@ -1,7 +1,15 @@
-alias hpc='ssh talapas-ln1'
-alias gpra='spushd ~/ansible/racs/ansible; ssh ansible@talapas-hn1.uoregon.edu -i ssh/id_rsa "cd ~ansible/racs; git pull"; spopd'
-alias hpca='spushd ~/ansible/racs/ansible; ssh -t ansible@talapas-hn1.uoregon.edu -i ssh/id_rsa "cd ~ansible/racs/ansible; bash"; spopd'
-alias hpch='ssh lrc@talapas-hn1'
+function t1() {
+	if [ -z "$1" ]; then
+		ssh lrc@talapas-ln1.uoregon.edu
+	else
+		ssh lrc@$1.uoregon.edu
+	fi
+}
 
-alias t2='ssh login1.talapas.uoregon.edu'
-alias t2h='ssh head1.talapas.uoregon.edu'
+function t2() {
+	if [ -z "$1" ]; then
+		ssh adm-lcrown@login.talapas.uoregon.edu
+	else
+		ssh adm-lcrown@$1.talapas.uoregon.edu
+	fi
+}
