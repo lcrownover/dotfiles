@@ -4,7 +4,9 @@ return {
 	dependencies = {
 		{
 			"williamboman/mason.nvim",
+			build = ":MasonUpdate",
 			cmd = "Mason",
+			config = true,
 			dependencies = {
 				"williamboman/mason-lspconfig.nvim",
 				"WhoIsSethDaniel/mason-tool-installer.nvim",
