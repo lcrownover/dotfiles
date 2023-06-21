@@ -9,7 +9,19 @@ function t1() {
 function t2() {
 	if [ -z "$1" ]; then
 		ssh adm-lcrown@login.talapas.uoregon.edu
-	else
-		ssh adm-lcrown@$1.talapas.uoregon.edu
 	fi
+	case "$1" in
+	"t")
+		ssh adm-lcrown@toolbox.talapas.uoregon.edu
+		;;
+	"h")
+		ssh adm-lcrown@head1.talapas.uoregon.edu
+		;;
+	"l")
+		ssh adm-lcrown@login1.talapas.uoregon.edu
+		;;
+	*)
+		ssh adm-lcrown@$1.talapas.uoregon.edu
+		;;
+	esac
 }

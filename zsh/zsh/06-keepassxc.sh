@@ -9,7 +9,7 @@ function get_from_keepass() {
     printf "%s" "$(echo $KEEPASSDBPW | $HOMEBREW_BINDIR/keepassxc-cli show $KEEPASSDBPATH "$entry" --attributes "$attribute" -q)"
 }
 
-get_from_racs_keepass() {
+function get_from_racs_keepass() {
     if [ $# -eq 0 ]; then
         echo "usage: $0 ENTRY [attribute]"
         return
@@ -21,7 +21,7 @@ get_from_racs_keepass() {
     printf "%s" "$(echo $RACSKEEPASSDBPW | $HOMEBREW_BINDIR/keepassxc-cli show $RACSKEEPASSDBPATH "$entry" --attributes "$attribute" -q)"
 }
 
-get_from_systems_keepass() {
+function get_from_systems_keepass() {
     if [ $# -eq 0 ]; then
         echo "usage: $0 ENTRY [attribute]"
         return

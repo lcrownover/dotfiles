@@ -33,3 +33,4 @@ fi
 # source <(kubectl completion zsh)
 
 setopt prompt_subst
+test -e /Users/lcrown/.iterm2_shell_integration.zsh && source /Users/lcrown/.iterm2_shell_integration.zsh || true

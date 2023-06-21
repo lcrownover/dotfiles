@@ -1,6 +1,9 @@
 -- concise
 local opt = vim.opt
 
+-- no startup message
+opt.shortmess:append({ I = true })
+
 -- nvim-tree
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
@@ -9,8 +12,8 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.mapleader = " "
 
 -- mouse and clipboard
-opt.mouse:append('a')
-opt.clipboard = 'unnamed'
+opt.mouse:append("a")
+opt.clipboard = "unnamed"
 
 -- searching
 opt.hlsearch = false
@@ -22,14 +25,14 @@ opt.termguicolors = true
 opt.undofile = true
 opt.cursorline = true
 -- opt.colorcolumn = '80,120'
-opt.indentkeys:remove(':,<:>')
-opt.listchars:append({ tab = '├─', trail = '·', eol = '↲', space = "_"})
+opt.indentkeys:remove(":,<:>")
+opt.listchars:append({ tab = "├─", trail = "·", eol = "↲", space = "_" })
 opt.wrap = false
 opt.number = true
 opt.relativenumber = true
 opt.scrolloff = 10
 opt.shiftwidth = 4
-opt.signcolumn = 'yes'
+opt.signcolumn = "yes"
 opt.errorbells = false
 
 -- default formatting
@@ -43,9 +46,9 @@ opt.splitbelow = true
 opt.splitright = true
 
 -- treesitter folding
-opt.foldmethod = 'expr'
+opt.foldmethod = "expr"
 opt.foldlevel = 99
-opt.foldexpr = 'nvim_treesitter#foldexpr()'
+opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- vim.g.NERDTreeAutoDeleteBuffer = 1
 -- vim.g.NERDTreeMinimalUI = 1
@@ -61,5 +64,5 @@ opt.foldexpr = 'nvim_treesitter#foldexpr()'
 -- ]])
 
 function ToggleWhitespaceVisibility()
-  opt.list = not opt.list:get()
+	opt.list = not opt.list:get()
 end
