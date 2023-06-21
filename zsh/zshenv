@@ -39,8 +39,6 @@ for f in $ZSH_CONF_DIR/*.sh; do
     source $f
 done
 
-source "$HOME/.cargo/env"
-
 export EDITOR="nvim"
 export VISUAL="nvim"
 export COLORTERM="truecolor"
