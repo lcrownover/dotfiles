@@ -1,4 +1,5 @@
 return {
-  'norcalli/nvim-colorizer.lua',
-  setup = true,
+	"norcalli/nvim-colorizer.lua",
+	event = "BufRead",
+	config = true,
 }

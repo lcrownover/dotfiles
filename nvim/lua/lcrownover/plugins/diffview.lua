@@ -1,8 +1,8 @@
 return {
-  "sindrets/diffview.nvim",
-  lazy = false,
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-  },
-  config = true,
+	"sindrets/diffview.nvim",
+	cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+	},
+	config = true,
 }
