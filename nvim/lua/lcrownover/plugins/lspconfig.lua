@@ -48,9 +48,7 @@ return {
 		},
 		"ray-x/lsp_signature.nvim",
 		"simrat39/rust-tools.nvim",
-		"Vimjas/vim-python-pep8-indent", -- fix until treesitter python and yaml indent is fixed
 		"lvimuser/lsp-inlayhints.nvim",
-		-- "folke/neodev.nvim",
 	},
 	config = function()
 		------------------------------------------------------------------
@@ -130,26 +128,26 @@ return {
 		------------------------------------------------------------------
 		--   Autoformatting
 		------------------------------------------------------------------
-		vim.api.nvim_create_augroup("LspAttach_formatting", {})
-		vim.api.nvim_create_autocmd("LspAttach", {
-			group = "LspAttach_formatting",
-			callback = function(args)
-				if not (args.data and args.data.client_id) then
-					return
-				end
-
-				local bufnr = args.buf
-				local client = vim.lsp.get_client_by_id(args.data.client_id)
-				if client.supports_method("textDocument/formatting") then
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						buffer = bufnr,
-						callback = function()
-							vim.lsp.buf.format({ bufnr = bufnr })
-						end,
-					})
-				end
-			end,
-		})
+		-- vim.api.nvim_create_augroup("LspAttach_formatting", {})
+		-- vim.api.nvim_create_autocmd("LspAttach", {
+		-- 	group = "LspAttach_formatting",
+		-- 	callback = function(args)
+		-- 		if not (args.data and args.data.client_id) then
+		-- 			return
+		-- 		end
+		--
+		-- 		local bufnr = args.buf
+		-- 		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		-- 		if client.supports_method("textDocument/formatting") then
+		-- 			vim.api.nvim_create_autocmd("BufWritePre", {
+		-- 				buffer = bufnr,
+		-- 				callback = function()
+		-- 					vim.lsp.buf.format({ bufnr = bufnr })
+		-- 				end,
+		-- 			})
+		-- 		end
+		-- 	end,
+		-- })
 
 		------------------------------------------------------------------
 		--   lsp_signature
