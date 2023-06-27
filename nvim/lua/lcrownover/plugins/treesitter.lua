@@ -7,7 +7,10 @@ return {
 		require("nvim-treesitter.configs").setup({
 			auto_install = true,
 			highlight = { enable = true },
-			indent = { enable = false, disable = { "html", "yaml", "sh", "go" } },
+			indent = {
+				enable = false,
+				disable = { "html", "yaml", "sh", "go" },
+			},
 			playground = {
 				enable = true,
 				disable = {},
