@@ -5,12 +5,12 @@
 # export BOLT=~/.puppetlabs/bolt
 export PUPPET_BASE_DIR="$HOME/puppet/is"
 # insert_path "/opt/puppetlabs/bin/"
-# insert_path "$HOME/repos/puppet-editor-services/"
+# insert_path "$HOME/code/repos/puppet-editor-services/"
 
 # alias boltfile="nvim $HOME/.puppetlabs/bolt/Puppetfile"
 # alias cdb="cd $HOME/.puppetlabs/bolt"
 # alias bcr='bolt command run --stream --no-verbose'
-# alias cds="cd $HOME/repos/systems"
+# alias cds="cd $HOME/code/repos/systems"
 # alias cdnag="cd $PUPPET_BASE_DIR/puppet-systems/nagios/"
 # alias cdey="cd $HOME/tools/eyaml"
 

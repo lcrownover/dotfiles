@@ -4,7 +4,7 @@
   gather_facts: false
 
   vars:
-    nvim_src_dir: '{{ ansible_env.HOME }}/repos/neovim'
+    nvim_src_dir: '{{ ansible_env.HOME }}/code/repos/neovim'
 
   tasks:
     - name: Ubuntu => install neovim build dependencies

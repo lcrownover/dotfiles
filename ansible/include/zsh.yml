@@ -37,7 +37,7 @@
   - name: install z.sh
     ansible.builtin.git:
       repo: https://github.com/rupa/z
-      dest: '{{ ansible_env.HOME }}/repos/z'
+      dest: '{{ ansible_env.HOME }}/code/repos/z'
       clone: true
       update: true
 

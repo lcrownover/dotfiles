@@ -6,3 +6,6 @@ alias aves='ansible-vault encrypt_string'
 alias avd='ansible-vault decrypt'
 alias avds='ansible-vault decrypt_string'
 alias avedit='ansible-vault edit'
+
+alias va='cd $HOME/code/racs-ansible && nvim .'
+alias vp='cd $HOME/code/racs-packages-t2 && nvim .'

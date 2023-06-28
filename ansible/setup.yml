@@ -8,9 +8,6 @@
 - import_playbook: include/tmux.yml
   tags: [tmux]
 
-- import_playbook: include/ansible.yml
-  tags: [ansible]
-
 - import_playbook: include/kitty.yml
   tags: [kitty]
 

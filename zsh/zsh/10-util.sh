@@ -1,6 +1,6 @@
 # z navigation
 if [ "$OS" = "mac" ]; then
-    . $HOME/repos/z/z.sh
+    . $HOME/code/repos/z/z.sh
 fi
 
 # todo/notes
@@ -20,6 +20,13 @@ alias todo="code -n $NOTESDIR; code -r $NOTESDIR/__todo.md"
 # copy file contents to clipboard
 function cl() {
     cat $1 | pbcopy
+}
+
+# search and cd with fzf
+function vs() {
+    cd $HOME/code && \
+    cd $(fd --max-depth 2 --type directory | fzf) && \
+    nvim .
 }
 
 # gnu sed for MacOS
