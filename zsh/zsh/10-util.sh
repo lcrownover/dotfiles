@@ -4,18 +4,18 @@ if [ "$OS" = "mac" ]; then
 fi
 
 # todo/notes
-alias notes="code -n $NOTESDIR"
-alias todo="code -n $NOTESDIR; code -r $NOTESDIR/__todo.md"
-# alias todo="vim_notes __todo.md"
-# alias notes="vim_notes"
-# function vim_notes() {
-#     spushd .
-#     cd "$NOTESDIR"
-#     set_tmux_window_name "notes"
-#     nvim "$1"
-#     reset_tmux_window_name
-#     spopd
-# }
+# alias notes="code -n $NOTESDIR"
+# alias todo="code -n $NOTESDIR; code -r $NOTESDIR/__todo.md"
+alias todo="vim_notes __todo.md"
+alias notes="vim_notes"
+function vim_notes() {
+    spushd .
+    cd "$NOTESDIR"
+    set_tmux_window_name "notes"
+    nvim "$1"
+    reset_tmux_window_name
+    spopd
+}
 
 # copy file contents to clipboard
 function cl() {
