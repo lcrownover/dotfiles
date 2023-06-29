@@ -11,7 +11,7 @@ if [ -z $TMUX ]; then
     [ "$TERM" = "xterm-kitty" ] && tmux new-session -A -s main
 
     # attach to main if OS is WSL
-    [ "$OS" = "wsl" ] && tmux new-session -A -s main
+    [ "$DOT_OS" = "wsl" ] && tmux new-session -A -s main
 fi
 
 export ZSH=$HOME/.oh-my-zsh

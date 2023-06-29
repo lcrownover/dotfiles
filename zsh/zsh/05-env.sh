@@ -1,4 +1,4 @@
-case "$OS" in
+case "$DOT_OS" in
     wsl)
         export GDRIVEDIR="/mnt/c/Users/Lucas\ Crownover/Google\ Drive/"
         ;;

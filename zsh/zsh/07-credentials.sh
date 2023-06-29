@@ -1,6 +1,6 @@
 # various credentials gotten from keepass
 
-if ! [ "$OS" = "mac" ]; then
+if ! [ "$DOT_OS" = "mac" ]; then
 	return
 fi
 

@@ -11,13 +11,13 @@ append_path() { [ $SHLVL -eq 1 ] && export PATH="$PATH:$1" }
 
 case "$(uname -a)" in
     Darwin*)
-        export OS="mac"
+        export DOT_OS="mac"
         ;;
     *WSL*)
-        export OS="wsl"
+        export DOT_OS="wsl"
         ;;
     *)
-        export OS="linux"
+        export DOT_OS="linux"
         ;;
 esac
 
@@ -30,7 +30,7 @@ case "$(uname -p)" in
         ;;
 esac
 
-if [ "$OS" = "mac" ]; then
+if [ "$DOT_OS" = "mac" ]; then
     eval "$($HOMEBREW_BINDIR/brew shellenv)"
 fi
 

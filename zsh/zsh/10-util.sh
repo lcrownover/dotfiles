@@ -1,5 +1,5 @@
 # z navigation
-if [ "$OS" = "mac" ]; then
+if [ "$DOT_OS" = "mac" ]; then
     . $HOME/code/repos/z/z.sh
 fi
 
