@@ -2,6 +2,7 @@
 #     tmux new-session -A -s vscode
 # fi
 
+# performance testing
 # PS4='%D{%s.%9.}+%N:%i> '
 # set -x
 
