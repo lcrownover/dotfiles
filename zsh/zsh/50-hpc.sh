@@ -5,6 +5,7 @@ function t1() {
 		ssh lrc@$1.uoregon.edu
 	fi
 }
+alias t1h="t1 talapas-hn1"
 
 function t2() {
 	if [ -z "$1" ]; then
@@ -25,3 +26,5 @@ function t2() {
 		;;
 	esac
 }
+alias t2h="t2 head1"
+alias t2t="t2 toolbox"
