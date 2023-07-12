@@ -3,19 +3,32 @@ if [ "$DOT_OS" = "mac" ]; then
     . $HOME/code/repos/z/z.sh
 fi
 
-# todo/notes
-# alias notes="code -n $NOTESDIR"
-# alias todo="code -n $NOTESDIR; code -r $NOTESDIR/__todo.md"
-alias todo="vim_notes __todo.md"
-alias notes="vim_notes"
-function vim_notes() {
-    spushd .
-    cd "$NOTESDIR"
-    set_tmux_window_name "notes"
-    nvim "$1"
-    reset_tmux_window_name
-    spopd
+function dir_jump() {
+    case "$1" in
+    racs*)
+        cd ~/code/racs-ansible
+        ;;
+    dot*)
+        cd ~/.dotfiles
+        ;;
+    *)
+        cd $(fd --max-depth 3 --type directory . ~/code | fzf)
+        ;;
+    esac
 }
+alias j="dir_jump"
+
+# todo/notes
+# alias todo="vim_notes __todo.md"
+# alias vnotes="vim_notes"
+# function vim_notes() {
+#     spushd .
+#     cd "$NOTESDIR"
+#     set_tmux_window_name "notes"
+#     nvim "$1"
+#     reset_tmux_window_name
+#     spopd
+# }
 
 # copy file contents to clipboard
 function cl() {
@@ -44,7 +57,6 @@ insert_path "/usr/local/opt/llvm/bin"
 
 function spushd() { pushd "$1" > /dev/null }
 function spopd() { popd > /dev/null }
-
 # known_hosts_quick
 known_hosts_remove() {
     if ! [[ $1 =~ "[0-9]+" ]]; then
@@ -61,24 +73,24 @@ function ssh_load_keys() {
     ssh-add ~/.ssh/github/id_rsa
 }
 
-function rcode(){
-    if [ "$#" = 1 ]; then
-        RHOST=$(echo $1 | cut -d':' -f1)
-        RPATH=$(echo $1 | cut -d':' -f2)
-    elif [ "$#" = 2 ]; then
-        RHOST=$1
-        RPATH=$2
-    else
-        echo "usage:  rcode HOSTNAME PATH"
-        return 1
-    fi
-    REMOTEPASS=$(rpw $RHOST)
-    RDIR=$(echo $RPATH | sed 's/\//\_/g')
-    LOCALMNTDIR="$HOME/mnt/$RHOST---$RDIR"
-    mkdir -p $LOCALMNTDIR
-    umount $LOCALMNTDIR 2>/dev/null
-    sshfs -o ServerAliveInterval=15,ServerAliveCountMax=3,password_stdin root@$RHOST:$RPATH $LOCALMNTDIR <<< $REMOTEPASS
-    code $LOCALMNTDIR
-    # umount -l $LOCALMNTDIR
-}
-alias urcode="df -h | grep root@ | awk '{print \$NF}' | xargs umount"
+# function rcode(){
+#     if [ "$#" = 1 ]; then
+#         RHOST=$(echo $1 | cut -d':' -f1)
+#         RPATH=$(echo $1 | cut -d':' -f2)
+#     elif [ "$#" = 2 ]; then
+#         RHOST=$1
+#         RPATH=$2
+#     else
+#         echo "usage:  rcode HOSTNAME PATH"
+#         return 1
+#     fi
+#     REMOTEPASS=$(rpw $RHOST)
+#     RDIR=$(echo $RPATH | sed 's/\//\_/g')
+#     LOCALMNTDIR="$HOME/mnt/$RHOST---$RDIR"
+#     mkdir -p $LOCALMNTDIR
+#     umount $LOCALMNTDIR 2>/dev/null
+#     sshfs -o ServerAliveInterval=15,ServerAliveCountMax=3,password_stdin root@$RHOST:$RPATH $LOCALMNTDIR <<< $REMOTEPASS
+#     code $LOCALMNTDIR
+#     # umount -l $LOCALMNTDIR
+# }
+# alias urcode="df -h | grep root@ | awk '{print \$NF}' | xargs umount"

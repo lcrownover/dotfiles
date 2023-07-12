@@ -2,14 +2,25 @@
 alias c='vscode'
 vscode() {
     case "$1" in
-        "")
-            code .
-            ;;
-        *)
-            code "$1"
-            ;;
+    "")
+        code .
+        ;;
+    *)
+        code "$1"
+        ;;
     esac
 }
+
+alias todo="code -n $NOTESDIR; code -r $NOTESDIR/__todo.md"
+alias notes="code -n $NOTESDIR"
+
+function vscode_dotfiles() {
+    spushd
+    cd $DOTFILES
+    code .
+    spopd
+}
+alias cdot="vscode_dotfiles"
 
 # vscode
 # function vscode_puppet() {
@@ -23,17 +34,6 @@ vscode() {
 # function vscode_nagios() {
 # 	spushd
 # 	cdnag
-# 	code .
-# 	spopd
-# }
-# function vscode_notes() {
-# 	spushd
-# 	cd "$NOTESDIR"
-# 	code .
-# }
-# function vscode_dotfiles() {
-# 	spushd
-# 	cd $DOTFILES
 # 	code .
 # 	spopd
 # }
