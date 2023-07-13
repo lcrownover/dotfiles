@@ -1,10 +1,17 @@
 return {
 	"zbirenbaum/copilot.lua",
+	cmd = "Copilot",
 	event = "InsertEnter",
 	config = function()
 		require("copilot").setup({
-			suggestion = { enabled = false },
-			panel = { enabled = false },
+			suggestion = {
+				auto_trigger = true,
+				keymap = {
+					accept = "<Right>",
+					dismiss = "<Left>",
+				},
+			},
+			-- panel = { enabled = false },
 			filetypes = {
 				yaml = true,
 			},
