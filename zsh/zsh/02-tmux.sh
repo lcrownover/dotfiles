@@ -1,28 +1,37 @@
 alias tmux='tmux -2'
 alias t='tmux -2'
 
-set_tmux_window_name() {
+function set_tmux_window_name() {
 	[[ -n "$TMUX" ]] && tmux rename-window $1
 }
 
-reset_tmux_window_name() {
+function reset_tmux_window_name() {
 	DEFAULT_TMUX_WINDOW_NAME="zsh"
 	[[ -n "$TMUX" ]] && tmux rename-window $DEFAULT_TMUX_WINDOW_NAME
 }
 
-main() {
+function main() {
 	[[ -n $TMUX ]] && OP="switch" || OP="attach"
 	$(tmux ls | grep -q main) || tmux new-session -d -s main
 	tmux -2 $OP -t main
 	# tmux -2 new-session -A -s main
 }
 
-unmain() {
+function tmux_close_last_stay_open() {
+	[[ -n $TMUX ]] || return
+    CURRENT_TMUX_WINDOW_ID=$(tmux list-windows | grep '(active)' | awk '{print $1}' | cut -d':' -f1)
+    if [[ $(tmux list-windows | wc -l) -eq 1 ]]; then
+        tmux new-window
+    fi
+    tmux kill-window -t :$CURRENT_TMUX_WINDOW_ID
+}
+
+function unmain() {
 	$(tmux ls | grep -q main) && tmux kill-session -t main
 }
 
 # split after 80 chars
-code_split() {
+function code_split() {
 	tmux split-window -h -l $(echo "$(tput cols) 80 - p" | dc)
 }
 

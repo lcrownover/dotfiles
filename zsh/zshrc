@@ -9,10 +9,13 @@
 # auto attach to tmux on kitty and wsl
 if [ -z $TMUX ]; then
     # attach to main if terminal is kitty
-    [ "$TERM" = "xterm-kitty" ] && tmux new-session -A -s main
-
-    # attach to main if OS is WSL
-    [ "$DOT_OS" = "wsl" ] && tmux new-session -A -s main
+    if [[ "$TERM" = "xterm-kitty" ]] || [[ "$DOT_OS" = "wsl" ]]; then
+        while true
+        do
+            tmux new-session -A -s main
+        done
+        exit
+    fi
 fi
 
 export ZSH=$HOME/.oh-my-zsh
