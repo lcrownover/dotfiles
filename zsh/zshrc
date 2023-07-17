@@ -10,11 +10,7 @@
 if [ -z $TMUX ]; then
     # attach to main if terminal is kitty
     if [[ "$TERM" = "xterm-kitty" ]] || [[ "$DOT_OS" = "wsl" ]]; then
-        while true
-        do
-            tmux new-session -A -s main
-        done
-        exit
+        tmux new-session -A -s main
     fi
 fi
 
