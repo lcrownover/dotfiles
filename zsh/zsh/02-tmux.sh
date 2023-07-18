@@ -18,11 +18,22 @@ function main() {
 }
 
 function tmux_close_last_stay_open() {
+    # dont do anything if not tmux
 	[[ -n $TMUX ]] || return
+
     CURRENT_TMUX_WINDOW_ID=$(tmux list-windows | grep '(active)' | awk '{print $1}' | cut -d':' -f1)
+    CURRENT_TMUX_PANE_ID=$(tmux list-panes | grep '(active)' | awk '{print $1}' | cut -d':' -f1)
+
+    # if there are more than one panes in the window, just kill the pane and exit early
+    if [[ $(tmux list-panes -t $CURRENT_TMUX_WINDOW_ID | wc -l) -gt 1 ]]; then
+        tmux kill-pane -t $CURRENT_TMUX_PANE_ID
+        return
+    fi
+    # if this is the last window, create a new blank one
     if [[ $(tmux list-windows | wc -l) -eq 1 ]]; then
         tmux new-window
     fi
+    # kill the current window
     tmux kill-window -t :$CURRENT_TMUX_WINDOW_ID
 }
 
