@@ -6,7 +6,11 @@ vscode() {
         code .
         ;;
     *)
-        code "$1"
+        if [ -f "$1" ]; then
+            code -r "$1"
+        else
+            code -n "$1"
+        fi
         ;;
     esac
 }

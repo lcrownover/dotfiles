@@ -19,12 +19,8 @@ return {
 				local null_ls = require("null-ls")
 				null_ls.setup({
 					sources = {
-						null_ls.builtins.formatting.black,
 						null_ls.builtins.formatting.jq,
-						null_ls.builtins.formatting.markdownlint,
-						null_ls.builtins.formatting.shfmt,
 						null_ls.builtins.formatting.prettier,
-						null_ls.builtins.formatting.stylua,
 					},
 				})
 			end,
@@ -75,12 +71,13 @@ return {
 				vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", { silent = true })
 				vim.keymap.set("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>", { silent = true })
 				vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", { silent = true })
-				vim.keymap.set(
-					"n",
-					"<leader>fs",
-					"<cmd>lua vim.lsp.buf.format({ async = true })<CR>",
-					{ silent = true }
-				)
+				vim.keymap.set("n", "<leader>fs", "<cmd>lua Format_file()<CR>", { silent = true })
+				-- vim.keymap.set(
+				-- 	"n",
+				-- 	"<leader>fs",
+				-- 	"<cmd>lua vim.lsp.buf.format({ async = true })<CR>",
+				-- 	{ silent = true }
+				-- )
 				vim.keymap.set("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", { silent = true })
 				vim.keymap.set("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", { silent = true })
 				vim.keymap.set("n", "<leader>lr", ":LspRestart<cr>", { silent = true })
@@ -150,6 +147,30 @@ return {
 		-- })
 
 		------------------------------------------------------------------
+		--   manual formatting for languages with no lsp support
+		------------------------------------------------------------------
+		vim.api.nvim_create_augroup("LspAttach_formatting", {})
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = "LspAttach_formatting",
+			callback = function()
+				local format_cmds = {
+					python = "!python -m black %",
+					sh = "!shfmt -i 4 -ci -bn -w %",
+				}
+				Format_file = function()
+					local filetype = vim.bo.filetype
+					local cmd = format_cmds[filetype]
+                    vim.cmd("write")
+					if cmd then
+						vim.cmd(cmd)
+					else
+						vim.lsp.buf.format()
+					end
+				end
+			end,
+		})
+
+		------------------------------------------------------------------
 		--   lsp_signature
 		------------------------------------------------------------------
 		vim.api.nvim_create_augroup("LspAttach_signature", {})
@@ -193,9 +214,7 @@ return {
 		mason_null_ls.setup({
 			automatic_installation = true,
 			ensure_installed = {
-				"black",
 				"jq",
-				"shfmt",
 				"markdownlint",
 				"prettier",
 			},

@@ -36,11 +36,11 @@ function cl() {
 }
 
 # search and cd with fzf
-function vs() {
-    cd $HOME/code && \
-    cd $(fd --max-depth 2 --type directory | fzf) && \
-    nvim .
-}
+# function vs() {
+#     cd $HOME/code && \
+#     cd $(fd --max-depth 2 --type directory | fzf) && \
+#     nvim .
+# }
 
 # gnu sed for MacOS
 if [[ -f $HOMEBREW_BINDIR/gsed ]]; then
@@ -48,8 +48,9 @@ if [[ -f $HOMEBREW_BINDIR/gsed ]]; then
 fi
 
 function firefox() {
-    FF="/Applications/Firefox.app/Contents/MacOS/firefox"
-    $FF file://"$(pwd)"/"$1"
+    if [ "$DOT_OS" = "mac" ]; then
+        /Applications/Firefox.app/Contents/MacOS/firefox file://"$(pwd)"/"$1"
+    fi
 }
 
 # clangd
