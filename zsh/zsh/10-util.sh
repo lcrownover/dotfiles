@@ -3,32 +3,39 @@ if [ "$DOT_OS" = "mac" ]; then
     . $HOME/code/repos/z/z.sh
 fi
 
+function spushd() {
+    pushd "$1" >/dev/null
+}
+function spopd() {
+    popd >/dev/null
+}
+
 function dir_jump() {
     case "$1" in
-    racs*)
-        cd ~/code/racs-ansible
-        ;;
-    dot*)
-        cd ~/.dotfiles
-        ;;
-    *)
-        cd $(fd --max-depth 3 --type directory . ~/code | fzf)
-        ;;
+        racs*)
+            cd ~/code/racs-ansible
+            ;;
+        dot*)
+            cd ~/.dotfiles
+            ;;
+        *)
+            cd $(fd --max-depth 3 --type directory . ~/code | fzf)
+            ;;
     esac
 }
 alias j="dir_jump"
 
 # todo/notes
-# alias todo="vim_notes __todo.md"
-# alias vnotes="vim_notes"
-# function vim_notes() {
-#     spushd .
-#     cd "$NOTESDIR"
-#     set_tmux_window_name "notes"
-#     nvim "$1"
-#     reset_tmux_window_name
-#     spopd
-# }
+alias todo="vim_notes __todo.md"
+alias vnotes="vim_notes"
+function vim_notes() {
+    spushd .
+    cd "$NOTESDIR"
+    set_tmux_window_name "notes"
+    nvim "$1"
+    reset_tmux_window_name
+    spopd
+}
 
 # copy file contents to clipboard
 function cl() {
@@ -36,11 +43,11 @@ function cl() {
 }
 
 # search and cd with fzf
-# function vs() {
-#     cd $HOME/code && \
-#     cd $(fd --max-depth 2 --type directory | fzf) && \
-#     nvim .
-# }
+function vs() {
+    cd $HOME/code \
+        && cd $(fd --max-depth 2 --type directory | fzf) \
+        && nvim .
+}
 
 # gnu sed for MacOS
 if [[ -f $HOMEBREW_BINDIR/gsed ]]; then
@@ -56,8 +63,6 @@ function firefox() {
 # clangd
 insert_path "/usr/local/opt/llvm/bin"
 
-function spushd() { pushd "$1" > /dev/null }
-function spopd() { popd > /dev/null }
 # known_hosts_quick
 known_hosts_remove() {
     if ! [[ $1 =~ "[0-9]+" ]]; then
@@ -69,7 +74,7 @@ known_hosts_remove() {
 
 # load keys
 function ssh_load_keys() {
-    eval `ssh-agent -s`
+    eval $(ssh-agent -s)
     ssh-add ~/.ssh/uoregon/id_rsa
     ssh-add ~/.ssh/github/id_rsa
 }
