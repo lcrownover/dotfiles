@@ -1,5 +1,5 @@
 if ! [ "$DOT_OS" = "mac" ]; then
-	return
+    return
 fi
 
 insert_path "$HOME/.cargo/bin"

@@ -13,7 +13,6 @@ function v() {
     fi
 }
 
-
 # clean swap
 alias swap_clean=" rm -f $HOME/.local/share/nvim/swap/*.s*"
 alias swap_cd=" cd $HOME/.local/share/nvim/swap/"

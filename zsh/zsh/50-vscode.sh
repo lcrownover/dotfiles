@@ -2,16 +2,16 @@
 alias c='vscode'
 vscode() {
     case "$1" in
-    "")
-        code .
-        ;;
-    *)
-        if [ -f "$1" ]; then
-            code -r "$1"
-        else
-            code -n "$1"
-        fi
-        ;;
+        "")
+            code .
+            ;;
+        *)
+            if [ -f "$1" ]; then
+                code -r "$1"
+            else
+                code -n "$1"
+            fi
+            ;;
     esac
 }
 

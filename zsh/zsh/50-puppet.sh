@@ -16,11 +16,11 @@ export PUPPET_BASE_DIR="$HOME/puppet/is"
 
 # this is used by a lot of other funcs
 function puppet_navigate_to_basedir() {
-	if [ -z $1 ]; then
-		cd $PUPPET_BASE_DIR
-	else
-		cd $PUPPET_BASE_DIR/puppet_$1
-	fi
+    if [ -z $1 ]; then
+        cd $PUPPET_BASE_DIR
+    else
+        cd $PUPPET_BASE_DIR/puppet_$1
+    fi
 }
 
 # puppet fileserver repos
@@ -148,7 +148,6 @@ function puppet_navigate_to_basedir() {
 #     git --git-dir "$pdir/.git" log -p --reverse -- "$fpath"
 # }
 
-
 # provide a commit message and it will commit and push all changes on all modules with that message
 # function puppet_git_commit_and_push_all() {
 # 	puppet_git_commit_all $1 push
@@ -171,7 +170,6 @@ function puppet_navigate_to_basedir() {
 # navigate to control-repo or puppet-systems
 # function cdpc() { tab-color 250 173 33; cd $PUPPET_BASE_DIR/puppet-control-repo }
 # function cdps() { tab-color 250 173 33; cd $PUPPET_BASE_DIR/puppet-systems }
-
 
 # aliases to provide shortened names for usability
 alias cdp='puppet_navigate_to_basedir'

@@ -19,17 +19,16 @@ gonew() {
     mkdir -p "$basedir/$projectname/cmd/$projectname/"
     mkdir "$basedir/$projectname/bin"
 
-    printf 'package main\n\nimport (\n\t"fmt"\n)\n\nfunc main() {\n\tfmt.Println("hello world")\n}\n' > "$basedir/$projectname/cmd/$projectname/main.go"
-    printf "# $projectname\n" > "$basedir/$projectname/README.md"
+    printf 'package main\n\nimport (\n\t"fmt"\n)\n\nfunc main() {\n\tfmt.Println("hello world")\n}\n' >"$basedir/$projectname/cmd/$projectname/main.go"
+    printf "# $projectname\n" >"$basedir/$projectname/README.md"
 
-    printf ".PHONY: all install clean\n\n" > "$basedir/$projectname/Makefile"
-    printf "all:\n\t@go build -o bin/$projectname cmd/$projectname/main.go\n\n" >> "$basedir/$projectname/Makefile"
-    printf "install:\n\t@cp bin/$projectname /usr/local/bin/$projectname\n\n" >> "$basedir/$projectname/Makefile"
-    printf "clean:\n\t@rm -f bin/$projectname /usr/local/bin/$projectname\n\n" >> "$basedir/$projectname/Makefile"
-
+    printf ".PHONY: all install clean\n\n" >"$basedir/$projectname/Makefile"
+    printf "all:\n\t@go build -o bin/$projectname cmd/$projectname/main.go\n\n" >>"$basedir/$projectname/Makefile"
+    printf "install:\n\t@cp bin/$projectname /usr/local/bin/$projectname\n\n" >>"$basedir/$projectname/Makefile"
+    printf "clean:\n\t@rm -f bin/$projectname /usr/local/bin/$projectname\n\n" >>"$basedir/$projectname/Makefile"
 
     spushd "$basedir/$projectname"
     git init --quiet
-    go mod init "github.com/lcrownover/$projectname" 2> /dev/null
+    go mod init "github.com/lcrownover/$projectname" 2>/dev/null
     spopd
 }

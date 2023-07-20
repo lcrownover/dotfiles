@@ -40,7 +40,10 @@ vpn_connect() {
         TOKEN="$1"
     fi
     VPNCONF="$HOME/.config/openconnect/openconnect.conf"
-    (echo $(get_from_keepass 'uoregon'); echo $TOKEN) | sudo openconnect --config=$VPNCONF --passwd-on-stdin
+    (
+        echo $(get_from_keepass 'uoregon')
+        echo $TOKEN
+    ) | sudo openconnect --config=$VPNCONF --passwd-on-stdin
 }
 
 sudo_auth() {
@@ -53,7 +56,7 @@ vpn() {
         return
     fi
 
-    while (( $# )); do
+    while (($#)); do
         case "$1" in
             "stop")
                 OP="stop"
@@ -83,7 +86,6 @@ vpn() {
                 ;;
         esac
     done
-
 
     if [ "$OP" = "stop" ]; then
         unset OP
