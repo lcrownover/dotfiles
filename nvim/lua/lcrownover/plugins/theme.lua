@@ -11,19 +11,29 @@
 -- }
 
 return {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    "olimorris/onedarkpro.nvim",
     lazy = false,
-    priority = 1000, -- make sure to load this before all the other start plugins
+    priority = 1000,
     config = function()
-        require("catppuccin").setup({
-            flavour = "frappe",
-            -- transparent_background = true,
-        })
-        vim.cmd.colorscheme("catppuccin")
-        vim.g.lualine_theme = "catppuccin"
-    end,
+        vim.cmd.colorscheme("onedark")
+        vim.g.lualine_theme = "onedark"
+    end
 }
+
+-- return {
+--     "catppuccin/nvim",
+--     name = "catppuccin",
+--     lazy = false,
+--     priority = 1000, -- make sure to load this before all the other start plugins
+--     config = function()
+--         require("catppuccin").setup({
+--             flavour = "frappe",
+--             -- transparent_background = true,
+--         })
+--         vim.cmd.colorscheme("catppuccin")
+--         vim.g.lualine_theme = "catppuccin"
+--     end,
+-- }
 
 -- return {
 --     "EdenEast/nightfox.nvim",
