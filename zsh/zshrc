@@ -20,10 +20,10 @@ ZSH_THEME="robbyrussell"
 ulimit -n 1024
 
 plugins=(
-	git
-	zsh-autosuggestions
-	docker
-	zsh-syntax-highlighting
+    git
+    zsh-autosuggestions
+    docker
+    zsh-syntax-highlighting
 )
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
@@ -38,7 +38,7 @@ if [[ -d $HOME/.pyenv ]]; then
     eval "$(pyenv init - --no-rehash zsh)"
 fi
 
-# compdef __start_kubectl k
-# source <(kubectl completion zsh)
+compdef __start_kubectl k
+source <(kubectl completion zsh)
 
 setopt prompt_subst

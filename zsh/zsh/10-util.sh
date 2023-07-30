@@ -27,12 +27,12 @@ alias j="dir_jump"
 
 # todo/notes
 alias todo="vim_notes __todo.md"
-alias vnotes="vim_notes"
+alias notes="vim_notes"
 function vim_notes() {
     spushd .
     cd "$NOTESDIR"
     set_tmux_window_name "notes"
-    nvim "$1"
+    nvim .
     reset_tmux_window_name
     spopd
 }

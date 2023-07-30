@@ -156,6 +156,7 @@ return {
 				local format_cmds = {
 					python = "!python -m black %",
 					sh = "!shfmt -i 4 -ci -bn -w %",
+					zsh = "!shfmt -i 4 -ci -bn -w %",
 				}
 				Format_file = function()
 					local filetype = vim.bo.filetype
