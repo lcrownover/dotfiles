@@ -32,7 +32,7 @@ function vim_notes() {
     spushd .
     cd "$NOTESDIR"
     set_tmux_window_name "notes"
-    nvim .
+    [ -z "$1" ] && nvim . || nvim "$1"
     reset_tmux_window_name
     spopd
 }
