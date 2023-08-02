@@ -7,11 +7,10 @@ return {
 			suggestion = {
 				auto_trigger = true,
 				keymap = {
-					accept = "<Right>",
-					dismiss = "<Left>",
+					accept = "<C-]>",
+                    dismiss = "<C-[>",
 				},
 			},
-			-- panel = { enabled = false },
 			filetypes = {
 				yaml = true,
 			},
