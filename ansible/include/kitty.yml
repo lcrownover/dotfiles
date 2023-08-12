@@ -1,4 +1,5 @@
   - name: link kitty dir
+    when: ansible_distribution == 'MacOSX'
     ansible.builtin.file:
       src: '{{ ansible_env.PWD }}/../../kitty'
       dest: '{{ ansible_env.HOME }}/.config/kitty'

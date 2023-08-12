@@ -11,14 +11,8 @@
 - import_playbook: include/kitty.yml
   tags: [kitty]
 
-- import_playbook: include/irb.yml
-  tags: [irb]
-
 - import_playbook: include/zsh.yml
   tags: [zsh]
-
-- import_playbook: include/pyenv.yml
-  tags: [pyenv]
 
 - import_playbook: include/nvim.yml
   tags: [nvim]
