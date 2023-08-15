@@ -19,7 +19,7 @@ function dir_jump() {
             cd ~/.dotfiles
             ;;
         *)
-            cd $(fd --max-depth 3 --type directory . ~/code | fzf)
+            cd $(fd --max-depth 3 --type directory . ~/code | fzf --query="$1")
             ;;
     esac
 }

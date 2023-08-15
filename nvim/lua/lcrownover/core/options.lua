@@ -24,7 +24,7 @@ opt.smartcase = true
 opt.termguicolors = true
 opt.undofile = true
 opt.cursorline = true
--- opt.colorcolumn = '80,120'
+opt.colorcolumn = '80,120'
 opt.indentkeys:remove(":,<:>")
 opt.listchars:append({ tab = "├─", trail = "·", eol = "↲", space = "_" })
 opt.wrap = false
