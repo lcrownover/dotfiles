@@ -8,14 +8,15 @@
 - import_playbook: include/tmux.yml
   tags: [tmux]
 
-- import_playbook: include/kitty.yml
-  tags: [kitty]
-
 - import_playbook: include/zsh.yml
   tags: [zsh]
 
 - import_playbook: include/nvim.yml
   tags: [nvim]
+
+- import_playbook: include/kitty.yml
+  when: ansible_distribution == 'MacOSX'
+  tags: [kitty]
 
 - import_playbook: include/mac.yml
   when: ansible_distribution == 'MacOSX'

@@ -1,7 +1,13 @@
-  - name: link kitty dir
-    when: ansible_distribution == 'MacOSX'
-    ansible.builtin.file:
-      src: '{{ ansible_env.PWD }}/../../kitty'
-      dest: '{{ ansible_env.HOME }}/.config/kitty'
-      state: link
-      force: yes
+---
+- name: configure kitty
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+    - name: link kitty dir
+      ansible.builtin.file:
+        src: '{{ ansible_env.PWD }}/../../kitty'
+        dest: '{{ ansible_env.HOME }}/.config/kitty'
+        state: link
+        force: yes

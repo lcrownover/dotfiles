@@ -22,9 +22,12 @@ gonew() {
     printf 'package main\n\nimport (\n\t"fmt"\n)\n\nfunc main() {\n\tfmt.Println("hello world")\n}\n' >"$basedir/$projectname/cmd/$projectname/main.go"
     printf "# $projectname\n" >"$basedir/$projectname/README.md"
 
+    printf "FROM golang:1.21\n\nWORKDIR /usr/src/app\n\nCOPY . .\nRUN go build -v -o /usr/local/bin/app ./...\n\nCMD [\"app\"]\n" > "$basedir/$projectname/Dockerfile"
+
     printf ".PHONY: all install clean\n\n" >"$basedir/$projectname/Makefile"
     printf "all:\n\t@go build -o bin/$projectname cmd/$projectname/main.go\n\n" >>"$basedir/$projectname/Makefile"
     printf "install:\n\t@cp bin/$projectname /usr/local/bin/$projectname\n\n" >>"$basedir/$projectname/Makefile"
+    printf "container:\n\t@docker build -t $projectname .\n\n" >>"$basedir/$projectname/Makefile"
     printf "clean:\n\t@rm -f bin/$projectname /usr/local/bin/$projectname\n\n" >>"$basedir/$projectname/Makefile"
 
     spushd "$basedir/$projectname"

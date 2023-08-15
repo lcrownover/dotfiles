@@ -8,9 +8,22 @@
 
   tasks:
 
+  - name: install zsh
+    when: ansible_distribution == 'Ubuntu'
+    package:
+      name: zsh
+      state: present
+
+  - name: install zsh
+    when: ansible_distribution == 'MacOSX'
+    community.general.homebrew:
+      name: zsh
+      state: present
+
+
   - name: install oh-my-zsh
     shell:
-      cmd: 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+      cmd: 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
       creates: '{{ ansible_env.HOME }}/.oh-my-zsh'
 
   - name: link .zshrc
@@ -56,6 +69,5 @@
       path: "{{item}}"
       mode: 'u=rwx,g-rwx,o-rwx'
     loop:
-      - "{{ansible_env.HOME}}/.oh-my-zsh/cache/completions"
       - "{{ansible_env.HOME}}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
       - "{{ansible_env.HOME}}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
