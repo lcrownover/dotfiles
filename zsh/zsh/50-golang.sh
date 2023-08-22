@@ -24,6 +24,8 @@ gonew() {
 
     printf "FROM golang:1.21\n\nWORKDIR /usr/src/app\n\nCOPY . .\nRUN go build -v -o /usr/local/bin/app ./...\n\nCMD [\"app\"]\n" > "$basedir/$projectname/Dockerfile"
 
+    printf "bin/\n" >"$basedir/$projectname/.gitignore"
+
     printf ".PHONY: all install clean\n\n" >"$basedir/$projectname/Makefile"
     printf "all:\n\t@go build -o bin/$projectname cmd/$projectname/main.go\n\n" >>"$basedir/$projectname/Makefile"
     printf "install:\n\t@cp bin/$projectname /usr/local/bin/$projectname\n\n" >>"$basedir/$projectname/Makefile"
@@ -33,5 +35,6 @@ gonew() {
     spushd "$basedir/$projectname"
     git init --quiet
     go mod init "github.com/lcrownover/$projectname" 2>/dev/null
+    go mod tidy 2>/dev/null
     spopd
 }
