@@ -26,8 +26,8 @@ function dir_jump() {
 alias j="dir_jump"
 
 # todo/notes
-alias todo="vim_notes __todo.md"
-alias notes="vim_notes"
+# alias todo="vim_notes __todo.md"
+# alias notes="vim_notes"
 function vim_notes() {
     spushd .
     cd "$NOTESDIR"

@@ -15,8 +15,8 @@ vscode() {
     esac
 }
 
-# alias todo="code -n $NOTESDIR; code -r $NOTESDIR/__todo.md"
-# alias notes="code -n $NOTESDIR"
+alias todo="code -n $NOTESDIR; code -r $NOTESDIR/__todo.md"
+alias notes="code -n $NOTESDIR"
 
 function vscode_dotfiles() {
     spushd
