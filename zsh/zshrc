@@ -43,4 +43,3 @@ source <(kubectl completion zsh)
 
 setopt prompt_subst
 
-bindkey -v

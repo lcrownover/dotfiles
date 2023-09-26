@@ -10,20 +10,7 @@ return {
 			dependencies = {
 				"williamboman/mason-lspconfig.nvim",
 				"WhoIsSethDaniel/mason-tool-installer.nvim",
-				"jayp0521/mason-null-ls.nvim",
 			},
-		},
-		{
-			"jose-elias-alvarez/null-ls.nvim",
-			config = function()
-				local null_ls = require("null-ls")
-				null_ls.setup({
-					sources = {
-						null_ls.builtins.formatting.jq,
-						null_ls.builtins.formatting.prettier,
-					},
-				})
-			end,
 		},
 		{
 			"j-hui/fidget.nvim",
@@ -55,39 +42,19 @@ return {
 			group = "LspAttach_keybinds",
 			callback = function()
 				-- Vanilla LSP
-				vim.keymap.set(
-					"n",
-					"gd",
-					"<cmd>lua require('telescope.builtin').lsp_definitions()<cr>",
-					{ silent = true }
-				)
+				vim.keymap.set("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", { silent = true })
 				vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", { silent = true })
-				vim.keymap.set(
-					"n",
-					"gr",
-					"<cmd>lua require('telescope.builtin').lsp_references()<cr>",
-					{ silent = true }
-				)
+				vim.keymap.set("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", { silent = true })
 				vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", { silent = true })
 				vim.keymap.set("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>", { silent = true })
 				vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", { silent = true })
 				vim.keymap.set("n", "<leader>fs", "<cmd>lua Format_file()<CR>", { silent = true })
-				-- vim.keymap.set(
-				-- 	"n",
-				-- 	"<leader>fs",
-				-- 	"<cmd>lua vim.lsp.buf.format({ async = true })<CR>",
-				-- 	{ silent = true }
-				-- )
+				-- vim.keymap.set( "n", "<leader>fs", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", { silent = true })
 				vim.keymap.set("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", { silent = true })
 				vim.keymap.set("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", { silent = true })
 				vim.keymap.set("n", "<leader>lr", ":LspRestart<cr>", { silent = true })
 				vim.keymap.set("n", "<leader>li", ":LspInfo<cr>", { silent = true })
-				vim.keymap.set(
-					"n",
-					"<leader>lh",
-					"<cmd>lua require('rust-tools').inlay_hints.toggle()<CR>",
-					{ silent = true }
-				)
+				vim.keymap.set( "n", "<leader>lh", "<cmd>lua require('rust-tools').inlay_hints.toggle()<CR>", { silent = true })
 				-- Lspsaga
 				vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
 				vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
@@ -119,6 +86,23 @@ return {
 				local bufnr = args.buf
 				local client = vim.lsp.get_client_by_id(args.data.client_id)
 				require("lsp-inlayhints").on_attach(client, bufnr)
+			end,
+		})
+
+		------------------------------------------------------------------
+		--   lsp_signature
+		------------------------------------------------------------------
+		vim.api.nvim_create_augroup("LspAttach_signature", {})
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = "LspAttach_signature",
+			callback = function(args)
+				local bufnr = args.buf
+				require("lsp_signature").on_attach({
+					bind = true,
+					handler_opts = {
+						border = "rounded",
+					},
+				}, bufnr)
 			end,
 		})
 
@@ -163,37 +147,24 @@ return {
 					local cmd = format_cmds[filetype]
                     vim.cmd("write")
 					if cmd then
+                        -- format_cmd found for the filetype
+                        -- run that command instead of the lsp formatter
 						vim.cmd(cmd)
 					else
+                        -- no format_cmd found for the filetype
+                        -- run the default lsp formatter
 						vim.lsp.buf.format()
 					end
 				end
 			end,
 		})
 
-		------------------------------------------------------------------
-		--   lsp_signature
-		------------------------------------------------------------------
-		vim.api.nvim_create_augroup("LspAttach_signature", {})
-		vim.api.nvim_create_autocmd("LspAttach", {
-			group = "LspAttach_signature",
-			callback = function(args)
-				local bufnr = args.buf
-				require("lsp_signature").on_attach({
-					bind = true,
-					handler_opts = {
-						border = "rounded",
-					},
-				}, bufnr)
-			end,
-		})
 
 		------------------------------------------------------------------
 		--   Mason
 		------------------------------------------------------------------
 		local mason = require("mason")
 		local mason_lspconfig = require("mason-lspconfig")
-		local mason_null_ls = require("mason-null-ls")
 
 		mason.setup()
 		mason_lspconfig.setup({
@@ -212,32 +183,36 @@ return {
 			},
 		})
 
-		mason_null_ls.setup({
-			automatic_installation = true,
-			ensure_installed = {
-				"jq",
-				"markdownlint",
-				"prettier",
-			},
-		})
-
 		local lsp = require("lspconfig")
 		local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-		------------------------------------------------------------------------------
-		-- Any server that doesn't have specific configuration can go here
-		------------------------------------------------------------------------------
-		local basic_servers = {
-			"rust_analyzer", -- rust
-			"bashls", -- bash
-			"cssls", -- css
-			"html",
-		}
-		for _, server in ipairs(basic_servers) do
-			lsp[server].setup({
-				capabilities = lsp_capabilities,
-			})
-		end
+		---------------------------------------
+		-- rust
+		---------------------------------------
+        lsp["rust_analyzer"].setup({
+            capabilities = lsp_capabilities,
+        })
+
+		---------------------------------------
+		-- bash
+		---------------------------------------
+        lsp["bashls"].setup({
+            capabilities = lsp_capabilities,
+        })
+
+		---------------------------------------
+		-- css
+		---------------------------------------
+        lsp["cssls"].setup({
+            capabilities = lsp_capabilities,
+        })
+
+		---------------------------------------
+		-- html
+		---------------------------------------
+        lsp["html"].setup({
+            capabilities = lsp_capabilities,
+        })
 
 		---------------------------------------
 		-- python
