@@ -19,7 +19,8 @@ bind("n", "<leader>sc", ":close<cr>", { silent = true })
 bind("n", "<leader>sw", ":lua ToggleWhitespaceVisibility()<CR>")
 
 -- close the quickfix window
-bind("n", "<leader>c", ":cclose<cr>", { silent = true })
+bind("n", "<leader>cf", ":copen<cr>", { silent = true })
+bind("n", "<leader>cc", ":cclose<cr>", { silent = true })
 
 -- scratch buffers, normal or splits
 bind("n", "<leader>nn", ":enew<cr>")

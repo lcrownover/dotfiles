@@ -54,12 +54,6 @@ opt.foldmethod = "expr"
 opt.foldlevel = 99
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 
--- vim.g.NERDTreeAutoDeleteBuffer = 1
--- vim.g.NERDTreeMinimalUI = 1
--- vim.g.NERDTreeDirArrows = 1
--- vim.g.NERDTreeQuitOnOpen = 1
--- vim.g.NERDTreeWinPos = "right"
-
 -- vim-visual-multi maps
 -- vim.cmd([[
 --   let g:VM_maps = {}
