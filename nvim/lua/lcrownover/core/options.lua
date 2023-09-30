@@ -10,10 +10,11 @@ vim.g.loaded_netrwPlugin = 1
 
 -- leader
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- mouse and clipboard
 opt.mouse:append("a")
-opt.clipboard = "unnamed"
+opt.clipboard = "unnamedplus"
 
 -- searching
 opt.hlsearch = false
@@ -21,6 +22,8 @@ opt.ignorecase = true
 opt.smartcase = true
 
 -- appearance
+opt.updatetime = 250
+opt.timeoutlen = 300
 opt.termguicolors = true
 opt.undofile = true
 opt.cursorline = true
@@ -40,6 +43,7 @@ opt.tabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
 opt.smartindent = true
+opt.breakindent = true
 
 -- splits
 opt.splitbelow = true

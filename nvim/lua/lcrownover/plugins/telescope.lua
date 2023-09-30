@@ -16,7 +16,6 @@ return {
 		{ "<leader>fq", "<cmd>lua require('telescope.builtin').quickfix()<cr>", silent = true },
 		{ "<leader>fm", "<cmd>lua require('telescope.builtin').keymaps()<cr>", silent = true },
 		{ "<leader>fc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", silent = true },
-		{ "<leader>fs", "<cmd>lua require('telescope.builtin').git_status()<cr>", silent = true },
 		{ "<leader>fa", "<cmd>lua require('telescope.builtin').autocommands()<cr>", silent = true },
 		{ "<leader>fl", "<cmd>lua require('telescope.builtin').highlights()<cr>", silent = true },
 	},
