@@ -10,8 +10,6 @@ return {
     local mason_lspconfig = require("mason-lspconfig")
     local mason_tool_installer = require("mason-tool-installer")
 
-    print("Setting up Mason")
-
     mason.setup()
 
     mason_lspconfig.setup({
@@ -27,6 +25,7 @@ return {
         "rust_analyzer",
         "lua_ls",
         "terraformls",
+        "svelte",
       },
     })
 
@@ -38,6 +37,9 @@ return {
         "black",
         "pylint",
         "eslint_d",
+        "ansible-lint",
+        "shfmt",
+        "shellcheck",
       },
     })
   end,

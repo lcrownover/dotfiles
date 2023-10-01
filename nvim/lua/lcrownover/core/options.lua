@@ -27,7 +27,7 @@ opt.timeoutlen = 300
 opt.termguicolors = true
 opt.undofile = true
 opt.cursorline = true
-opt.colorcolumn = '80,120'
+opt.colorcolumn = "80,120"
 opt.indentkeys:remove(":,<:>")
 opt.listchars:append({ tab = "├─", trail = "·", eol = "↲", space = "_" })
 opt.wrap = false
@@ -62,5 +62,5 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- ]])
 
 function ToggleWhitespaceVisibility()
-	opt.list = not opt.list:get()
+  opt.list = not opt.list:get()
 end
