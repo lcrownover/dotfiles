@@ -32,3 +32,51 @@ function get_from_systems_keepass() {
     if [ "$2" = "" ]; then attribute="password"; else attribute="$2"; fi
     printf "%s" "$(echo $SYSKEEPASSDBPW | $HOMEBREW_BINDIR/keepassxc-cli show $SYSKEEPASSDBPATH "$entry" --attributes "$attribute" -q)"
 }
+
+function keepass_switch() {
+    case "$1" in
+        lc*)
+            get_from_keepass 'uoregon'
+            ;;
+        lrc)
+            get_from_keepass 'talapas'
+            ;;
+        lk*)
+            get_from_keepass 'keepass'
+            ;;
+        keep*)
+            get_from_keepass 'Keepass - Systems'
+            ;;
+        dci)
+            get_from_systems_keepass 'DCI root/admin password'
+            ;;
+        ssh)
+            get_from_keepass 'uoregon' 'passphrase'
+            ;;
+        mac)
+            get_from_keepass 'mac'
+            ;;
+        aws)
+            get_from_keepass 'AWS - aws-lcrown'
+            ;;
+        ans*)
+            get_from_keepass 'ansible racs'
+            ;;
+        racs*)
+            get_from_keepass 'RACS Keepass'
+            ;;
+        root)
+            get_from_racs_keepass 'Talapas - root user'
+            ;;
+        lp)
+            get_from_keepass 'lastpass'
+            ;;
+        test*)
+            get_from_keepass 'test account'
+            ;;
+        *)
+            echo "Error: key '$1' not found"
+            exit 1
+            ;;
+    esac
+}
