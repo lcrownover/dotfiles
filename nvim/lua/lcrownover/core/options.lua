@@ -34,7 +34,6 @@ opt.wrap = false
 opt.number = true
 opt.relativenumber = true
 opt.scrolloff = 10
-opt.shiftwidth = 4
 opt.signcolumn = "yes"
 opt.errorbells = false
 
@@ -53,13 +52,6 @@ opt.splitright = true
 opt.foldmethod = "expr"
 opt.foldlevel = 99
 opt.foldexpr = "nvim_treesitter#foldexpr()"
-
--- vim-visual-multi maps
--- vim.cmd([[
---   let g:VM_maps = {}
---   let g:VM_maps["Undo"] = 'u'
---   let g:VM_maps["Redo"] = '<C-r>'
--- ]])
 
 function ToggleWhitespaceVisibility()
   opt.list = not opt.list:get()
