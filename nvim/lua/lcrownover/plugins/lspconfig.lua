@@ -9,19 +9,22 @@ return {
         require("fidget").setup()
       end,
     },
-    {
-      "glepnir/lspsaga.nvim",
-      config = function()
-        require("lspsaga").setup({
-          symbol_in_winbar = { enable = false },
-          lightbulb = { enable = false },
-          ui = { title = false },
-        })
-      end,
-    },
+    -- {
+    --   "glepnir/lspsaga.nvim",
+    --   config = function()
+    --     require("lspsaga").setup({
+    --       symbol_in_winbar = { enable = false },
+    --       lightbulb = { enable = false },
+    --       ui = { title = false },
+    --     })
+    --   end,
+    -- },
     "ray-x/lsp_signature.nvim",
-    "simrat39/rust-tools.nvim",
     "lvimuser/lsp-inlayhints.nvim",
+    {
+      "simrat39/rust-tools.nvim",
+      ft = "rust",
+    },
   },
   config = function()
     ------------------------------------------------------------------
@@ -197,16 +200,16 @@ return {
     ---------------------------------------
     -- rust
     ---------------------------------------
-    -- require("rust-tools").setup({
-    --     server = {
-    --         capabilities = lsp_capabilities,
-    --     },
-    --     tools = {
-    --         inlay_hints = {
-    --             auto = false,
-    --         },
-    --     },
-    -- })
+    require("rust-tools").setup({
+      server = {
+        capabilities = lsp_capabilities,
+      },
+      tools = {
+        inlay_hints = {
+          auto = false,
+        },
+      },
+    })
 
     ---------------------------------------
     -- terraform

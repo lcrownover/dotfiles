@@ -1,5 +1,6 @@
 return {
   "folke/trouble.nvim",
+  cmd = "Trouble",
   config = true,
   keys = {
     { "<leader>tt", ":Trouble<cr>", silent = true },

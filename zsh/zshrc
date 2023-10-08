@@ -3,8 +3,10 @@
 # fi
 
 # performance testing
-# PS4='%D{%s.%9.}+%N:%i> '
-# set -x
+# PS4=$'\\\011%D{%s%6.}\011%x\011%I\011%N\011%e\011'
+# exec 3>&2 2>/tmp/zshstart.$$.log
+# setopt xtrace prompt_subst
+# zmodload zsh/zprof
 
 # auto attach to tmux on kitty and wsl
 if [ -z $TMUX ]; then
@@ -38,8 +40,9 @@ if [[ -d $HOME/.pyenv ]]; then
     eval "$(pyenv init - --no-rehash zsh)"
 fi
 
-compdef __start_kubectl k
-source <(kubectl completion zsh)
-
 setopt prompt_subst
 
+# end performance testing
+# unsetopt xtrace
+# exec 2>&3 3>&-
+# zprof

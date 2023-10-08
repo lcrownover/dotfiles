@@ -27,6 +27,9 @@ return {
       },
     })
 
+    local util = require("conform.util")
+    util.add_formatter_args(require("conform.formatters.stylua"), { "--indent-type", "Spaces", "--indent-width", "2" })
+
     vim.keymap.set({ "n", "v" }, "<leader>fs", function()
       conform.format({
         lsp_fallback = true,

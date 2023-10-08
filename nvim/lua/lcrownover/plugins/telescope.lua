@@ -14,7 +14,7 @@ return {
     vim.keymap.set("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", {})
     vim.keymap.set("n", "<leader>f;", "<cmd>lua require('telescope.builtin').resume()<cr>", {})
     vim.keymap.set("n", "<leader>fq", "<cmd>lua require('telescope.builtin').quickfix()<cr>", {})
-    vim.keymap.set("n", "<leader>fm", "<cmd>lua require('telescope.builtin').keymaps()<cr>", {})
+    vim.keymap.set("n", "<leader>fk", "<cmd>lua require('telescope.builtin').keymaps()<cr>", {})
     vim.keymap.set("n", "<leader>fa", "<cmd>lua require('telescope.builtin').autocommands()<cr>", {})
     vim.keymap.set("n", "<leader>fc", "<cmd>lua require('telescope.builtin').highlights()<cr>", {})
     -- vim.keymap.set("n", "<leader>fc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", {})
