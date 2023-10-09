@@ -9,16 +9,16 @@ return {
         require("fidget").setup()
       end,
     },
-    -- {
-    --   "glepnir/lspsaga.nvim",
-    --   config = function()
-    --     require("lspsaga").setup({
-    --       symbol_in_winbar = { enable = false },
-    --       lightbulb = { enable = false },
-    --       ui = { title = false },
-    --     })
-    --   end,
-    -- },
+    {
+      "glepnir/lspsaga.nvim",
+      config = function()
+        require("lspsaga").setup({
+          symbol_in_winbar = { enable = false },
+          lightbulb = { enable = false },
+          ui = { title = false },
+        })
+      end,
+    },
     "ray-x/lsp_signature.nvim",
     "lvimuser/lsp-inlayhints.nvim",
     {

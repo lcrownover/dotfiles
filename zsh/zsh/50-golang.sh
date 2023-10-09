@@ -26,11 +26,12 @@ gonew() {
 
 	printf "bin/\n" >"$basedir/$projectname/.gitignore"
 
-	printf ".PHONY: all install clean run container\n\n" >"$basedir/$projectname/Makefile"
+	printf ".PHONY: all install clean run container handler\n\n" >"$basedir/$projectname/Makefile"
 	printf "all:\n\t@go build -o bin/%s cmd/%s/main.go\n\n" "$projectname" "$projectname" >>"$basedir/$projectname/Makefile"
 	printf "run:\n\t@go run cmd/%s/main.go\n\n" "$projectname" >>"$basedir/$projectname/Makefile"
 	printf "install:\n\t@cp bin/%s /usr/local/bin/%s\n\n" "$projectname" "$projectname" >>"$basedir/$projectname/Makefile"
 	printf "container:\n\t@docker build -t %s .\n\n" "$projectname" >>"$basedir/$projectname/Makefile"
+	printf "handler:\n\t@go build -o handler cmd/%s/main.go\n\n" "$projectname" >>"$basedir/$projectname/Makefile"
 	printf "clean:\n\t@rm -f bin/%s /usr/local/bin/%s\n\n" "$projectname" "$projectname" >>"$basedir/$projectname/Makefile"
 
 	spushd "$basedir/$projectname"

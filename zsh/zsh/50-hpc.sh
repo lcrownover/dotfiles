@@ -28,3 +28,5 @@ function t2() {
 }
 alias t2h="t2 head1"
 alias t2t="t2 toolbox"
+
+alias wintool="ssh adm-lcrown@is-racs-wintool"

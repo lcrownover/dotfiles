@@ -40,6 +40,7 @@ return {
         "ansible-lint",
         "shfmt",
         "shellcheck",
+        "markdownlint",
       },
     })
   end,
