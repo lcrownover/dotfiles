@@ -16,11 +16,11 @@ export PUPPET_BASE_DIR="$HOME/puppet/is"
 
 # this is used by a lot of other funcs
 function puppet_navigate_to_basedir() {
-    if [ -z $1 ]; then
-        cd $PUPPET_BASE_DIR
-    else
-        cd $PUPPET_BASE_DIR/puppet_$1
-    fi
+	if [ -z "$1" ]; then
+		cd "$PUPPET_BASE_DIR" || return
+	else
+		cd "$PUPPET_BASE_DIR/puppet_$1" || return
+	fi
 }
 
 # puppet fileserver repos
@@ -235,14 +235,14 @@ alias cdp='puppet_navigate_to_basedir'
 # }
 
 function pat() {
-    bolt command run "puppet agent --test" --targets $1 --transport pcp
+	bolt command run "puppet agent --test" --targets "$1" --transport pcp
 }
 
 function vim_puppet() {
-    spushd .
-    cdp
-    nvim puppet-control-repo/inventory.yaml
-    spopd
+	spushd .
+	cdp
+	nvim puppet-control-repo/inventory.yaml
+	spopd
 }
 # function vim_nagios() { cdnag; vim }
 
