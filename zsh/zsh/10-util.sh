@@ -7,7 +7,10 @@ function spushd() {
 	pushd "$1" >/dev/null || return
 }
 function spopd() {
-	popd >/dev/null || return
+	stack_depth=$(dirs -p | wc -l)
+	if [ "$stack_depth" -gt 1 ]; then
+		popd >/dev/null || return
+	fi
 }
 
 function dir_jump() {
