@@ -10,31 +10,31 @@ function gonew() {
 	projectname="$1"
 	shift
 
-	basedir="$(pwd)"
+	projectdir="$(pwd)/$projectname"
 	if [[ "$1" != "" ]]; then
-		basedir="$1"
+		projectdir="$1"
 		shift
 	fi
 
-	mkdir -p "$basedir/$projectname/cmd/$projectname/"
-	mkdir "$basedir/$projectname/bin"
+	mkdir -p "$projectdir/cmd/$projectname/"
+	mkdir "$projectdir/bin"
 
-	printf 'package main\n\nimport (\n\t"fmt"\n)\n\nfunc main() {\n\tfmt.Println("hello world")\n}\n' >"$basedir/$projectname/cmd/$projectname/main.go"
-	printf "# %s\n" "$projectname" >"$basedir/$projectname/README.md"
+	printf 'package main\n\nimport (\n\t"fmt"\n)\n\nfunc main() {\n\tfmt.Println("hello world")\n}\n' >"$projectdir/cmd/$projectname/main.go"
+	printf "# %s\n" "$projectname" >"$projectdir/README.md"
 
-	printf "FROM golang:1.21\n\nWORKDIR /usr/src/app\n\nCOPY . .\nRUN go build -v -o /usr/local/bin/app ./...\n\nCMD [\"app\"]\n" >"$basedir/$projectname/Dockerfile"
+	printf "FROM golang:1.21\n\nWORKDIR /usr/src/app\n\nCOPY . .\nRUN go build -v -o /usr/local/bin/app ./...\n\nCMD [\"app\"]\n" >"$projectdir/Dockerfile"
 
-	printf "bin/\n" >"$basedir/$projectname/.gitignore"
+	printf "bin/\n" >"$projectdir/.gitignore"
 
-	printf ".PHONY: all install clean run container handler\n\n" >"$basedir/$projectname/Makefile"
-	printf "all:\n\t@go build -o bin/%s cmd/%s/main.go\n\n" "$projectname" "$projectname" >>"$basedir/$projectname/Makefile"
-	printf "run:\n\t@go run cmd/%s/main.go\n\n" "$projectname" >>"$basedir/$projectname/Makefile"
-	printf "install:\n\t@cp bin/%s /usr/local/bin/%s\n\n" "$projectname" "$projectname" >>"$basedir/$projectname/Makefile"
-	printf "container:\n\t@docker build -t %s .\n\n" "$projectname" >>"$basedir/$projectname/Makefile"
-	printf "handler:\n\t@go build -o handler cmd/%s/main.go\n\n" "$projectname" >>"$basedir/$projectname/Makefile"
-	printf "clean:\n\t@rm -f bin/%s /usr/local/bin/%s\n\n" "$projectname" "$projectname" >>"$basedir/$projectname/Makefile"
+	printf ".PHONY: all install clean run container handler\n\n" >"$projectdir/Makefile"
+	printf "all:\n\t@go build -o bin/%s cmd/%s/main.go\n\n" "$projectname" "$projectname" >>"$projectdir/Makefile"
+	printf "run:\n\t@go run cmd/%s/main.go\n\n" "$projectname" >>"$projectdir/Makefile"
+	printf "install:\n\t@cp bin/%s /usr/local/bin/%s\n\n" "$projectname" "$projectname" >>"$projectdir/Makefile"
+	printf "container:\n\t@docker build -t %s .\n\n" "$projectname" >>"$projectdir/Makefile"
+	printf "handler:\n\t@go build -o handler cmd/%s/main.go\n\n" "$projectname" >>"$projectdir/Makefile"
+	printf "clean:\n\t@rm -f bin/%s /usr/local/bin/%s\n\n" "$projectname" "$projectname" >>"$projectdir/Makefile"
 
-	spushd "$basedir/$projectname"
+	spushd "$projectdir"
 	git init --quiet
 	go mod init "github.com/lcrownover/$projectname" 2>/dev/null
 	go mod tidy 2>/dev/null
