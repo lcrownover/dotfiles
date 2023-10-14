@@ -1,7 +1,7 @@
 append_path "/usr/local/go/bin"
 append_path "$HOME/go/bin"
 
-gonew() {
+function gonew() {
 	if [[ $# -lt 1 ]]; then
 		echo "usage: gonew PROJECT_NAME [basedir]"
 		return
@@ -39,4 +39,42 @@ gonew() {
 	go mod init "github.com/lcrownover/$projectname" 2>/dev/null
 	go mod tidy 2>/dev/null
 	spopd
+}
+
+function goupdate() {
+	usage() {
+		echo "usage: goupdate <linux|mac> <version>"
+		return
+	}
+	if [[ $# -lt 2 ]]; then
+		echo "not enough arguments"
+		usage
+		return
+	fi
+
+	case "$1" in
+	linux)
+		platform="linux-amd64"
+		;;
+	mac)
+		platform="darwin-arm64"
+		;;
+	*)
+		echo "invalid platform"
+		usage
+		return
+		;;
+	esac
+	shift
+
+	version="$1"
+	shift
+
+	tarball="go$version.$platform.tar.gz"
+
+	wget -q https://go.dev/dl/$tarball || return
+	echo "updating go to $version"
+	sudo rm -rf /usr/local/go
+	sudo tar -C /usr/local -xzf $tarball
+	rm -rf $tarball
 }
