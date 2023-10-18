@@ -26,10 +26,10 @@ function gonew() {
 
 	printf "bin/\n" >"$projectdir/.gitignore"
 
-	printf ".PHONY: all install clean run container handler\n\n" >"$projectdir/Makefile"
-	printf "all:\n\t@go build -o bin/%s cmd/%s/main.go\n\n" "$projectname" "$projectname" >>"$projectdir/Makefile"
-	printf "run:\n\t@go run cmd/%s/main.go\n\n" "$projectname" >>"$projectdir/Makefile"
-	printf "install:\n\t@cp bin/%s /usr/local/bin/%s\n\n" "$projectname" "$projectname" >>"$projectdir/Makefile"
+	printf ".PHONY: build install clean run container handler\n\n" >"$projectdir/Makefile"
+	printf "build:\n\t@go build -o bin/%s cmd/%s/main.go\n\n" "$projectname" "$projectname" >>"$projectdir/Makefile"
+	printf "run: build\n\t@go run cmd/%s/main.go\n\n" "$projectname" >>"$projectdir/Makefile"
+	printf "install: build\n\t@cp bin/%s /usr/local/bin/%s\n\n" "$projectname" "$projectname" >>"$projectdir/Makefile"
 	printf "container:\n\t@docker build -t %s .\n\n" "$projectname" >>"$projectdir/Makefile"
 	printf "handler:\n\t@go build -o handler cmd/%s/main.go\n\n" "$projectname" >>"$projectdir/Makefile"
 	printf "clean:\n\t@rm -f bin/%s /usr/local/bin/%s\n\n" "$projectname" "$projectname" >>"$projectdir/Makefile"
