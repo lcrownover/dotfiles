@@ -36,4 +36,5 @@ alias t1h="talapas_connect 1 talapas-hn1"
 alias t2h="talapas_connect 2 head1"
 alias t2t="talapas_connect 2 toolbox"
 
-alias wintool="ssh adm-lcrown@is-racs-wintool"
+alias ad="ssh adm-lcrown@is-racs-wintool"
+

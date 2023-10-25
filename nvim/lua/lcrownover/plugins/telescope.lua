@@ -27,25 +27,9 @@ return {
     }
     require("telescope").setup({
       defaults = {
-        -- added "follow" to the other defaults so it follows symlinks
-        -- vimgrep_arguments = {
-        --   "rg",
-        --   "--color=never",
-        --   "--no-heading",
-        --   "--with-filename",
-        --   "--line-number",
-        --   "--column",
-        --   "--smart-case",
-        --   "--follow",
-        -- },
         file_ignore_patterns = file_ignore_patterns,
-        -- set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
         mappings = {
           i = {
-            ["<c-k>"] = require("telescope.actions").move_selection_previous,
-            ["<c-j>"] = require("telescope.actions").move_selection_next,
-          },
-          n = {
             ["<c-k>"] = require("telescope.actions").move_selection_previous,
             ["<c-j>"] = require("telescope.actions").move_selection_next,
           },

@@ -10,7 +10,15 @@ return {
     local mason_lspconfig = require("mason-lspconfig")
     local mason_tool_installer = require("mason-tool-installer")
 
-    mason.setup()
+    mason.setup({
+      ui = {
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗",
+        },
+      },
+    })
 
     mason_lspconfig.setup({
       automatic_installation = true,

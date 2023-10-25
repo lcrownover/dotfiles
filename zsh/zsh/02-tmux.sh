@@ -70,11 +70,11 @@ function settitle() {
 	printf "\033k%s\033\\" "$1"
 }
 
-function ssh() {
-	set_tmux_window_name "$*"
-	command ssh "$@"
-	reset_tmux_window_name
-}
+# function ssh() {
+# 	set_tmux_window_name "$*"
+# 	command ssh "$@"
+# 	reset_tmux_window_name
+# }
 
 # projects
 project_switch() {
