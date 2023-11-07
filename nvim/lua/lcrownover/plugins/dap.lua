@@ -1,3 +1,6 @@
+--
+-- Make sure to `pip install debugpy` !!!
+--
 return {
   "mfussenegger/nvim-dap",
   dependencies = {
@@ -14,7 +17,7 @@ return {
     local dapui = require("dapui")
 
     require("mason-nvim-dap").setup({
-      automatic_installation = true,
+      -- automatic_installation = true,
       ensure_installed = {
         "delve",
         "debugpy",
