@@ -9,17 +9,17 @@ return {
         require("fidget").setup()
       end,
     },
-    {
-      "glepnir/lspsaga.nvim",
-      config = function()
-        require("lspsaga").setup({
-          symbol_in_winbar = { enable = false },
-          lightbulb = { enable = false },
-          ui = { title = false },
-        })
-      end,
-    },
-    "ray-x/lsp_signature.nvim",
+    -- {
+    --   "glepnir/lspsaga.nvim",
+    --   config = function()
+    --     require("lspsaga").setup({
+    --       symbol_in_winbar = { enable = false },
+    --       lightbulb = { enable = false },
+    --       ui = { title = false },
+    --     })
+    --   end,
+    -- },
+    -- "ray-x/lsp_signature.nvim",
     "lvimuser/lsp-inlayhints.nvim",
     {
       "simrat39/rust-tools.nvim",
@@ -54,27 +54,39 @@ return {
     vim.keymap.set("n", "<leader>li", ":LspInfo<cr>", opts)
 
     -- Native LSP
-    -- vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    -- vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-    -- vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+    opts.desc = "Show LSP hover doc"
+    vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+    opts.desc = "LSP rename symbol"
+    vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+    opts.desc = "LSP rename symbol"
+    vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+    opts.desc = "Go to previous LSP diagnostic"
+    vim.keymap.set("n", "[e", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
+    opts.desc = "Go to next LSP diagnostic"
+    vim.keymap.set("n", "]e", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
 
     -- Lspsaga
-    vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", opts)
-    vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
-    vim.keymap.set("n", "gn", "<cmd>Lspsaga rename<CR>", opts)
-    vim.keymap.set("n", "<F2>", "<cmd>Lspsaga rename<CR>", opts)
-    vim.keymap.set("n", "gs", "<cmd>Lspsaga peek_definition<CR>", opts)
-    vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
-    vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
-    vim.keymap.set("n", "[E", function()
-      require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
-    end, { silent = true })
-    vim.keymap.set("n", "]E", function()
-      require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
-    end, { silent = true })
-
-    -- rust tools
-    -- vim.keymap.set("n", "<leader>lh", "<cmd>lua require('rust-tools').inlay_hints.toggle()<CR>", { silent = true })
+    -- opts.desc = "Lspsaga finder"
+    -- vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", opts)
+    -- opts.desc = "Show LSP hover doc"
+    -- vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
+    -- opts.desc = "LSP rename symbol"
+    -- vim.keymap.set("n", "gn", "<cmd>Lspsaga rename<CR>", opts)
+    -- opts.desc = "LSP rename symbol"
+    -- vim.keymap.set("n", "<F2>", "<cmd>Lspsaga rename<CR>", opts)
+    -- vim.keymap.set("n", "gs", "<cmd>Lspsaga peek_definition<CR>", opts)
+    -- opts.desc = "Go to previous LSP diagnostic"
+    -- vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
+    -- opts.desc = "Go to next LSP diagnostic"
+    -- vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
+    -- opts.desc = "Go to previous LSP diagnostic"
+    -- vim.keymap.set("n", "[E", function()
+    --   require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
+    -- end, { silent = true })
+    -- opts.desc = "Go to next LSP diagnostic"
+    -- vim.keymap.set("n", "]E", function()
+    --   require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
+    -- end, { silent = true })
 
     ------------------------------------------------------------------
     --   Inlay Hints
@@ -96,19 +108,19 @@ return {
     ------------------------------------------------------------------
     --   lsp_signature
     ------------------------------------------------------------------
-    vim.api.nvim_create_augroup("LspAttach_signature", {})
-    vim.api.nvim_create_autocmd("LspAttach", {
-      group = "LspAttach_signature",
-      callback = function(args)
-        local bufnr = args.buf
-        require("lsp_signature").on_attach({
-          bind = true,
-          handler_opts = {
-            border = "rounded",
-          },
-        }, bufnr)
-      end,
-    })
+    -- vim.api.nvim_create_augroup("LspAttach_signature", {})
+    -- vim.api.nvim_create_autocmd("LspAttach", {
+    --   group = "LspAttach_signature",
+    --   callback = function(args)
+    --     local bufnr = args.buf
+    --     require("lsp_signature").on_attach({
+    --       bind = true,
+    --       handler_opts = {
+    --         border = "rounded",
+    --       },
+    --     }, bufnr)
+    --   end,
+    -- })
 
     ------------------------------------------------------------------
     -- Language Servers
@@ -122,6 +134,23 @@ return {
     ---------------------------------------
     lsp["rust_analyzer"].setup({
       capabilities = lsp_capabilities,
+    })
+    local rustlsp = vim.api.nvim_create_augroup("RustLSP", { clear = true })
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = rustlsp,
+      pattern = "*.rs",
+      callback = function()
+        vim.opt.tabstop = 4
+        vim.opt.shiftwidth = 4
+        vim.opt.expandtab = true
+        vim.api.nvim_buf_set_keymap(
+          0,
+          "n",
+          "<leader>lh",
+          "<cmd>lua require('rust-tools').inlay_hints.toggle()<CR>",
+          { silent = true }
+        )
+      end,
     })
 
     ---------------------------------------
