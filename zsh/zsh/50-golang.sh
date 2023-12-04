@@ -2,12 +2,19 @@ append_path "/usr/local/go/bin"
 append_path "$HOME/go/bin"
 
 function gonew() {
-	if [[ $# -lt 1 ]]; then
+    function usage() {
 		echo "usage: gonew PROJECT_NAME [basedir]"
 		return
+    }
+	if [[ $# -lt 1 ]]; then
+        usage
 	fi
 
 	projectname="$1"
+    if [[ "$projectname" = "." ]]; then
+        usage
+        return
+    fi
 	shift
 
 	projectdir="$(pwd)/$projectname"
@@ -38,7 +45,7 @@ function gonew() {
 	git init --quiet
 	go mod init "github.com/lcrownover/$projectname" 2>/dev/null
 	go mod tidy 2>/dev/null
-	spopd
+	# spopd
 }
 
 function goupdate() {
