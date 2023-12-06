@@ -21,4 +21,4 @@ yabai -m config mouse_action2 resize    # alt + right click
 yabai -m config mouse_drop_action swap
 
 # only tile certain apps
-yabai -m rule --add app!="^(iTerm2|Code)$" manage=off
+#yabai -m rule --add app!="^(iTerm2|Code)$" manage=off
