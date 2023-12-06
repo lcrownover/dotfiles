@@ -1,6 +1,9 @@
 return {
   "neovim/nvim-lspconfig",
   event = { "BufRead", "BufNewFile" },
+  opts = {
+    inlay_hints = { enable = true },
+  },
   dependencies = {
     {
       "j-hui/fidget.nvim",
@@ -20,7 +23,14 @@ return {
     --   end,
     -- },
     -- "ray-x/lsp_signature.nvim",
-    "lvimuser/lsp-inlayhints.nvim",
+    -- {
+    --   "lvimuser/lsp-inlayhints.nvim",
+    --   config = function()
+    --     require("lsp-inlayhints").setup({
+    --       enabled_at_startup = false,
+    --     })
+    --   end,
+    -- },
     {
       "simrat39/rust-tools.nvim",
       ft = "rust",
@@ -143,13 +153,13 @@ return {
         vim.opt.tabstop = 4
         vim.opt.shiftwidth = 4
         vim.opt.expandtab = true
-        vim.api.nvim_buf_set_keymap(
-          0,
-          "n",
-          "<leader>lh",
-          "<cmd>lua require('rust-tools').inlay_hints.toggle()<CR>",
-          { silent = true }
-        )
+        -- vim.api.nvim_buf_set_keymap(
+        --   0,
+        --   "n",
+        --   "<leader>lh",
+        --   "<cmd>lua require('lsp-inlayhints').toggle()<CR>",
+        --   { silent = true }
+        -- )
       end,
     })
 
