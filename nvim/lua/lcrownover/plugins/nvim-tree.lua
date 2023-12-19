@@ -14,6 +14,9 @@ return {
         side = "right",
         width = 50,
       },
+      filter = {
+        custom = { "^.git$" },
+      },
       actions = {
         open_file = {
           quit_on_open = true,

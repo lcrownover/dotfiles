@@ -22,7 +22,7 @@ opt.ignorecase = true
 opt.smartcase = true
 
 -- appearance
-opt.updatetime = 250
+opt.updatetime = 1000
 opt.timeoutlen = 300
 opt.termguicolors = true
 opt.undofile = true
@@ -34,6 +34,7 @@ opt.wrap = false
 opt.number = true
 opt.relativenumber = true
 opt.scrolloff = 10
+opt.sidescrolloff = 10
 opt.signcolumn = "yes"
 opt.errorbells = false
 
@@ -56,3 +57,12 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 function ToggleWhitespaceVisibility()
   opt.list = not opt.list:get()
 end
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank({
+      higroup = "IncSearch",
+      timeout = 300,
+    })
+  end,
+})

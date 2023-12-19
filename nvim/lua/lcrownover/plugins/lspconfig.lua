@@ -49,7 +49,7 @@ return {
     opts.desc = "Show LSP references"
     vim.keymap.set("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
     opts.desc = "Show LSP implementations"
-    vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+    vim.keymap.set("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<cr>", opts)
     opts.desc = "Show LSP code actions"
     vim.keymap.set("n", "ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
     opts.desc = "Show LSP diagnostics"
