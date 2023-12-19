@@ -21,7 +21,7 @@ fi
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 
-ulimit -n 1024
+ulimit -n 2048
 
 plugins=(
     git

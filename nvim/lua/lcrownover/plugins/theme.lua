@@ -58,7 +58,8 @@ return {
   priority = 1000,
   config = function()
     require("catppuccin").setup({
-      flavour = "macchiato",
+      flavour = "frappe",
+      -- flavour = "macchiato",
     })
     vim.cmd.colorscheme("catppuccin")
     vim.g.lualine_theme = "catppuccin"
