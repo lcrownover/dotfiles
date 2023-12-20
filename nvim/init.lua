@@ -1,4 +1,3 @@
-require("lcrownover.core.options")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -13,9 +12,15 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Load all the base vim options
+require("lcrownover.core.options")
+
+-- Load all the plugins
 require("lazy").setup("lcrownover.plugins")
 
+-- Finish off with keymaps
 require("lcrownover.core.keymaps")
 
 -- just for testing
 -- require('lcrownover.core.playground')
+

@@ -1,5 +1,6 @@
+-- write close tags automatically
 return {
-	"windwp/nvim-ts-autotag",
+  "windwp/nvim-ts-autotag",
   ft = {
     "html",
     "javascript",
@@ -9,7 +10,7 @@ return {
     "svelte",
     "vue",
   },
-	config = function()
-		require("nvim-ts-autotag").setup()
-	end,
+  config = function()
+    require("nvim-ts-autotag").setup()
+  end,
 }

@@ -8,6 +8,7 @@ return {
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "saadparwaiz1/cmp_luasnip",
     "onsails/lspkind-nvim",
+    "neovim/nvim-lspconfig",
     {
       "L3MON4D3/LuaSnip",
       version = "v2.*",
@@ -25,16 +26,13 @@ return {
     local lspkind = require("lspkind")
 
     cmp.setup({
-      completion = {
-        competeopt = "menu,menuone,preview,noselect",
-      },
       mapping = {
         ["<C-k>"] = cmp.mapping.select_prev_item(),
         ["<C-j>"] = cmp.mapping.select_next_item(),
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.close(),
+        ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
       },
       window = {

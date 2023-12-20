@@ -1,5 +1,5 @@
 return {
-	"cappyzawa/trim.nvim",
-	cmd = "Trim",
-	config = true,
+  "cappyzawa/trim.nvim",
+  cmd = "Trim",
+  config = true,
 }

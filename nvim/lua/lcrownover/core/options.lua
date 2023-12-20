@@ -4,9 +4,50 @@ local opt = vim.opt
 -- no startup message
 opt.shortmess:append({ I = true })
 
--- nvim-tree
+-- nvim-tree - this needs to be set super early in the config
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- termguicolors - enable true colors support
+opt.termguicolors = true
+
+-- updatetime - how many milliseconds until the swap file is written
+opt.updatetime = 1000
+
+-- timeoutlen - how long to wait for a mapped sequence to complete
+opt.timeoutlen = 1000
+
+-- undofile - save undo history
+opt.undofile = true
+
+-- cursorline - highlight the current line
+opt.cursorline = true
+
+-- colorcolumn - highlight columns
+opt.colorcolumn = "80,120"
+
+-- indentkeys:remove - remove some indent keys
+-- opt.indentkeys:remove(":,<:>")
+
+-- listchars - representation of whitespace characters
+opt.listchars:append({ tab = "├─", trail = "·", eol = "↲", space = "_" })
+
+-- wrap - wrap lines
+opt.wrap = false
+
+-- line numbers
+opt.number = true
+opt.relativenumber = true
+
+-- scrolloff - how many lines to keep above and below the cursor
+opt.scrolloff = 10
+opt.sidescrolloff = 10
+
+-- signcolumn - always show the sign column
+opt.signcolumn = "yes"
+
+-- errorbells - turn that shit off
+opt.errorbells = false
 
 -- leader
 vim.g.mapleader = " "
@@ -20,23 +61,6 @@ opt.clipboard = "unnamedplus"
 opt.hlsearch = false
 opt.ignorecase = true
 opt.smartcase = true
-
--- appearance
-opt.updatetime = 1000
-opt.timeoutlen = 300
-opt.termguicolors = true
-opt.undofile = true
-opt.cursorline = true
-opt.colorcolumn = "80,120"
-opt.indentkeys:remove(":,<:>")
-opt.listchars:append({ tab = "├─", trail = "·", eol = "↲", space = "_" })
-opt.wrap = false
-opt.number = true
-opt.relativenumber = true
-opt.scrolloff = 10
-opt.sidescrolloff = 10
-opt.signcolumn = "yes"
-opt.errorbells = false
 
 -- default formatting
 opt.tabstop = 4
@@ -54,15 +78,17 @@ opt.foldmethod = "expr"
 opt.foldlevel = 99
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 
+-- this will toggle the visibility of whitespace characters
 function ToggleWhitespaceVisibility()
   opt.list = not opt.list:get()
 end
 
+-- this flashes the current selection when I yank it
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank({
       higroup = "IncSearch",
-      timeout = 300,
+      timeout = 200,
     })
   end,
 })

@@ -7,8 +7,8 @@ return {
       suggestion = {
         auto_trigger = true,
         keymap = {
-          accept = "<C-Right>",
-          dismiss = "<C-Left>",
+          accept = "]c",
+          dismiss = "[c",
         },
       },
       filetypes = {
