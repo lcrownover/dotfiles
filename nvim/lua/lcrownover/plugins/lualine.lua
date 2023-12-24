@@ -1,5 +1,6 @@
 return {
   "hoob3rt/lualine.nvim",
+  lazy = false,
   config = function()
     require("lualine").setup({
       options = {

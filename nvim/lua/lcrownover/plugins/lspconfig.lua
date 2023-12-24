@@ -23,7 +23,11 @@ return {
         })
       end,
     },
-    { "ray-x/lsp_signature.nvim", event = "VeryLazy", config = true },
+    {
+      "ray-x/lsp_signature.nvim",
+      event = "VeryLazy",
+      config = true,
+    },
     -- {
     --   "lvimuser/lsp-inlayhints.nvim",
     --   config = function()
@@ -34,6 +38,7 @@ return {
     -- },
     {
       "simrat39/rust-tools.nvim",
+      event = "LspAttach",
       ft = "rust",
     },
   },
