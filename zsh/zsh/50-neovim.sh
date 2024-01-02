@@ -4,6 +4,8 @@ test -d ~/.backup || mkdir ~/.backup
 # neovim
 alias vim='nvim'
 
+alias vimv='spushd ~/.dotfiles/nvim; nvim .; spopd'
+
 # shorter
 function v() {
 	if [ -z "$1" ]; then

@@ -23,7 +23,7 @@ return {
   },
   config = function()
     local cmp = require("cmp")
-    local lspkind = require("lspkind")
+    -- local lspkind = require("lspkind")
 
     cmp.setup({
       mapping = {
@@ -54,16 +54,16 @@ return {
         { name = "buffer" },
       },
       -- configure completion icons
-      formatting = {
-        format = lspkind.cmp_format({
-          mode = "symbol",
-          maxwidth = 50,
-          ellipsis_char = "...",
-          symbol_map = {
-            Copilot = "",
-          },
-        }),
-      },
+      -- formatting = {
+      --   format = lspkind.cmp_format({
+      --     mode = "symbol",
+      --     maxwidth = 50,
+      --     ellipsis_char = "...",
+      --     symbol_map = {
+      --       Copilot = "",
+      --     },
+      --   }),
+      -- },
       min_length = 0, -- allow for `from package import _` in Python
     })
 

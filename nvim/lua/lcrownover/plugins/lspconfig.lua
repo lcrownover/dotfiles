@@ -66,6 +66,9 @@ return {
     opts.desc = "Show LSP info"
     vim.keymap.set("n", "<leader>li", ":LspInfo<cr>", opts)
 
+    opts.desc = "LSP Format"
+    vim.keymap.set({ "n", "v" }, "<leader>fs", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
+
     -- Native LSP
     -- opts.desc = "Show LSP hover doc"
     -- vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
