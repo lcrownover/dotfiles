@@ -2,19 +2,19 @@ append_path "/usr/local/go/bin"
 append_path "$HOME/go/bin"
 
 function gonew() {
-    function usage() {
+	function usage() {
 		echo "usage: gonew PROJECT_NAME [basedir]"
 		return
-    }
+	}
 	if [[ $# -lt 1 ]]; then
-        usage
+		usage
 	fi
 
 	projectname="$1"
-    if [[ "$projectname" = "." ]]; then
-        usage
-        return
-    fi
+	if [[ "$projectname" = "." ]]; then
+		usage
+		return
+	fi
 	shift
 
 	projectdir="$(pwd)/$projectname"
@@ -26,20 +26,57 @@ function gonew() {
 	mkdir -p "$projectdir/cmd/$projectname/"
 	mkdir "$projectdir/bin"
 
-	printf 'package main\n\nimport (\n\t"fmt"\n)\n\nfunc main() {\n\tfmt.Println("hello world")\n}\n' >"$projectdir/cmd/$projectname/main.go"
+	cat <<EOF >"$projectdir/cmd/$projectname/main.go"
+package main
+
+import (
+    "fmt"
+)
+
+func main() {
+    fmt.Println("hello world")
+}
+EOF
 	printf "# %s\n" "$projectname" >"$projectdir/README.md"
 
-	printf "FROM golang:1.21\n\nWORKDIR /usr/src/app\n\nCOPY . .\nRUN go build -v -o /usr/local/bin/app ./...\n\nCMD [\"app\"]\n" >"$projectdir/Dockerfile"
+	cat <<EOF >"$projectdir/Dockerfile"
+FROM golang:1.21
 
-	printf "bin/\n" >"$projectdir/.gitignore"
+WORKDIR /usr/src/app
 
-	printf ".PHONY: build install clean run container handler\n\n" >"$projectdir/Makefile"
-	printf "build:\n\t@go build -o bin/%s cmd/%s/main.go\n\n" "$projectname" "$projectname" >>"$projectdir/Makefile"
-	printf "run: build\n\t@go run cmd/%s/main.go\n\n" "$projectname" >>"$projectdir/Makefile"
-	printf "install: build\n\t@cp bin/%s /usr/local/bin/%s\n\n" "$projectname" "$projectname" >>"$projectdir/Makefile"
-	printf "container:\n\t@docker build -t %s .\n\n" "$projectname" >>"$projectdir/Makefile"
-	printf "handler:\n\t@go build -o handler cmd/%s/main.go\n\n" "$projectname" >>"$projectdir/Makefile"
-	printf "clean:\n\t@rm -f bin/%s /usr/local/bin/%s\n\n" "$projectname" "$projectname" >>"$projectdir/Makefile"
+COPY . .
+RUN go build -v -o /usr/local/bin/app cmd/$projectname/main.go
+
+CMD ["app"]
+EOF
+
+	cat <<EOF >"$projectdir/.gitignore"
+bin/
+env.sh
+EOF
+
+	cat <<EOF >"$projectdir/Makefile"
+.PHONY: build install clean run container handler
+all: build
+
+build:
+    @go build -o bin/$projectname cmd/$projectname/main.go
+
+run: build
+    @go run cmd/$projectname/main.go
+
+install: build
+    @cp bin/$projectname /usr/local/bin/$projectname
+
+container:
+    @docker build -t $projectname .
+
+handler:
+    @go build -o handler cmd/$projectname/main.go
+
+clean:
+    @rm -f bin/$projectname /usr/local/bin/$projectname
+EOF
 
 	spushd "$projectdir"
 	git init --quiet
