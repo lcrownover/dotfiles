@@ -4,7 +4,7 @@ local opt = vim.opt
 -- no startup message
 opt.shortmess:append({ I = true })
 
--- nvim-tree - this needs to be set super early in the config
+-- disable netrw - this needs to be set super early in the config
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -88,7 +88,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank({
       higroup = "IncSearch",
-      timeout = 200,
+      timeout = 100,
     })
   end,
 })
