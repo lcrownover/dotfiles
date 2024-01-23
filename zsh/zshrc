@@ -10,8 +10,11 @@
 
 # auto attach to tmux on kitty and wsl
 if [ -z $TMUX ]; then
+    # attach to main if terminal is alacritty
+    if [[ "$TERM" = "xterm-256color" ]]; then
+        tmux new-session -A -s main
     # attach to main if terminal is kitty
-    if [[ "$TERM" = "xterm-kitty" ]]; then
+    elif [[ "$TERM" = "xterm-kitty" ]]; then
         tmux new-session -A -s main
     elif  [[ "$DOT_OS" = "wsl" ]]; then
         tmux new-session -A -s main

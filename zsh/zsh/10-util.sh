@@ -16,7 +16,10 @@ function spopd() {
 function dir_jump() {
 	case "$1" in
 	racs*)
-		cd ~/code/racs-ansible || return
+		cd ~/racs/racs-ansible || return
+		;;
+	doc*)
+		cd ~/racs/racs-internal-docs || return
 		;;
 	dot*)
 		cd ~/.dotfiles || return
