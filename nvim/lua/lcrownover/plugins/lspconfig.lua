@@ -25,7 +25,7 @@ return {
     },
     {
       "ray-x/lsp_signature.nvim",
-      event = "VeryLazy",
+      event = "BufRead",
       config = true,
     },
     -- {
@@ -305,6 +305,16 @@ return {
         "terraform",
         "tf",
       },
+    })
+    local tflsp = vim.api.nvim_create_augroup("TerraformLSP", { clear = true })
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = tflsp,
+      pattern = "*.tf",
+      callback = function()
+        vim.opt.tabstop = 2
+        vim.opt.shiftwidth = 2
+        vim.opt.expandtab = false
+      end,
     })
   end,
 }
