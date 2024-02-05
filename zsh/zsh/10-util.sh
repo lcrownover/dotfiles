@@ -24,6 +24,9 @@ function dir_jump() {
 	dot*)
 		cd ~/.dotfiles || return
 		;;
+	sch*)
+		cd ~/.gdrive/school || return
+		;;
 	*)
 		cd "$(fd --max-depth 3 --type directory . ~/code | fzf --query="$1")" || return
 		;;
