@@ -47,10 +47,10 @@ return {
       -- sources for autocompletion
       sources = {
         { name = "nvim_lsp_signature_help" },
-        { name = "luasnip" },
         { name = "nvim_lsp" },
-        -- { name = "copilot" },
         { name = "path" },
+        { name = "luasnip" },
+        -- { name = "copilot" },
         { name = "buffer" },
       },
       -- configure completion icons
