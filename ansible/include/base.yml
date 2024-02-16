@@ -4,43 +4,42 @@
   gather_facts: no
 
   tasks:
+    - name: ensure base directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - "{{ ansible_env.HOME }}/code"
+        - "{{ ansible_env.HOME }}/code/repos"
+        - "{{ ansible_env.HOME }}/src"
+        - "{{ ansible_env.HOME }}/.config"
+        - "{{ ansible_env.HOME }}/bin"
 
-  - name: ensure base directories
-    ansible.builtin.file:
-      path: "{{item}}"
-      state: directory
-    loop:
-    - '{{ ansible_env.HOME }}/code'
-    - '{{ ansible_env.HOME }}/code/repos'
-    - '{{ ansible_env.HOME }}/src'
-    - '{{ ansible_env.HOME }}/.config'
-    - '{{ ansible_env.HOME }}/bin'
+    - name: macOS => install base packages
+      when: ansible_distribution == 'MacOSX'
+      community.general.homebrew:
+        name:
+          - rust
+          - go
+          - z
+          - ripgrep
+          - fzf
+          - geckodriver
+          - gsed
+          - kubernetes-cli
+          - minikube
+          - kitty
+          - lazygit
 
-  - name: macOS => install base packages
-    when: ansible_distribution == 'MacOSX'
-    community.general.homebrew:
-      name:
-      - rust
-      - go
-      - z
-      - ripgrep
-      - fzf
-      - geckodriver
-      - gsed
-      - kubernetes-cli
-      - minikube
-      - kitty
-      - lazygit
+    - name: macOS => tap fonts
+      when: ansible_distribution == 'MacOSX'
+      community.general.homebrew_tap:
+        name: homebrew/cask-fonts
 
-  - name: macOS => tap fonts
-    when: ansible_distribution == 'MacOSX'
-    community.general.homebrew_tap:
-      name: homebrew/cask-fonts
-
-  - name: macOS => install homebrew casks
-    when: ansible_distribution == 'MacOSX'
-    community.general.homebrew_cask:
-      name:
-      - rectangle
-      - docker
-      - font-jetbrains-mono-nerd-font
+    - name: macOS => install homebrew casks
+      when: ansible_distribution == 'MacOSX'
+      community.general.homebrew_cask:
+        name:
+          - rectangle
+          - docker
+          - font-jetbrains-mono-nerd-font
