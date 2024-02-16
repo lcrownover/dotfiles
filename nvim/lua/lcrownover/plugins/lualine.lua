@@ -3,9 +3,9 @@ return {
   lazy = false,
   config = function()
     require("lualine").setup({
-      -- options = {
-      --   theme = vim.g.lualine_theme,
-      -- },
+      options = {
+        theme = vim.g.lualine_theme,
+      },
     })
   end,
 }

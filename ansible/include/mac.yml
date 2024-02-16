@@ -4,7 +4,6 @@
   gather_facts: no
 
   tasks:
-
     - name: macOS => create keybindings parent directory
       when: ansible_distribution == 'MacOSX'
       file:
