@@ -10,18 +10,30 @@
 --     end,
 -- }
 
+-- return {
+--   "catppuccin/nvim",
+--   name = "catppuccin",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     require("catppuccin").setup({
+--       -- flavour = "frappe",
+--       flavour = "macchiato",
+--     })
+--     vim.cmd.colorscheme("catppuccin")
+--     vim.g.lualine_theme = "catppuccin"
+--   end,
+-- }
+
 return {
-  "catppuccin/nvim",
-  name = "catppuccin",
+  "Mofiqul/vscode.nvim",
   lazy = false,
   priority = 1000,
   config = function()
-    require("catppuccin").setup({
-      -- flavour = "frappe",
-      flavour = "macchiato",
+    require("vscode").setup({
+      italic_comments = true,
     })
-    vim.cmd.colorscheme("catppuccin")
-    vim.g.lualine_theme = "catppuccin"
+    require("vscode").load()
+    vim.g.lualine_theme = "codedark"
   end,
 }
-
