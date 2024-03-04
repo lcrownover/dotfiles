@@ -10,33 +10,33 @@
 --     end,
 -- }
 
-return {
-  "catppuccin/nvim",
-  name = "catppuccin",
-  lazy = false,
-  priority = 1000,
-  config = function()
-    require("catppuccin").setup({
-      -- flavour = "frappe",
-      flavour = "macchiato",
-    })
-    vim.cmd.colorscheme("catppuccin")
-    vim.g.lualine_theme = "catppuccin"
-  end,
-}
-
 -- return {
---   "sainnhe/gruvbox-material",
+--   "catppuccin/nvim",
+--   name = "catppuccin",
 --   lazy = false,
 --   priority = 1000,
 --   config = function()
---     vim.g.gruvbox_material_background = "hard"
---     vim.g.gruvbox_material_enable_italic = 1
---     vim.g.gruvbox_material_better_performance = 1
---     vim.cmd.colorscheme("gruvbox-material")
---     vim.g.lualine_theme = "gruvbox-material"
+--     require("catppuccin").setup({
+--       -- flavour = "frappe",
+--       flavour = "macchiato",
+--     })
+--     vim.cmd.colorscheme("catppuccin")
+--     vim.g.lualine_theme = "catppuccin"
 --   end,
 -- }
+
+return {
+  "sainnhe/gruvbox-material",
+  lazy = false,
+  priority = 1000,
+  config = function()
+    vim.g.gruvbox_material_background = "medium"
+    vim.g.gruvbox_material_enable_italic = 1
+    vim.g.gruvbox_material_better_performance = 1
+    vim.cmd.colorscheme("gruvbox-material")
+    vim.g.lualine_theme = "gruvbox-material"
+  end,
+}
 
 -- return {
 --   "Mofiqul/vscode.nvim",

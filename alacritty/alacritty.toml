@@ -1,17 +1,21 @@
 import = [
-  "~/.config/alacritty/catppuccin-macchiato.toml"
+  "~/.config/alacritty/gruvbox_material_medium_dark.toml"
 ]
 
 [env]
 TERM = "xterm-256color"
 
 [window]
-decorations = "None"
+# decorations = "None"
 padding = { x = 4, y = 4 }
 startup_mode = "Maximized"
 option_as_alt = "OnlyLeft"
 
 [font]
+# normal = { family = "FiraCode Nerd Font", style = "Regular" }
+# size = 16.0
+# normal = { family = "DroidSansM Nerd Font", style = "Regular" }
+# size = 16.0
 normal = { family = "JetbrainsMono Nerd Font", style = "Regular" }
 size = 16.0
 offset = { x = 0, y = 2 }

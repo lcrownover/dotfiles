@@ -8,7 +8,7 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   config = function()
-    -- vim.keymap.set("n", "<c-p>", "<cmd>lua require('telescope.builtin').find_files({follow = true})<cr>", {})
+    vim.keymap.set("n", "<c-p>", "<cmd>lua require('telescope.builtin').find_files({follow = true})<cr>", {})
     vim.keymap.set("n", "<c-g>", "<cmd>lua require('telescope.builtin').live_grep()<cr>", {})
     vim.keymap.set("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files({follow = true})<cr>", {})
     vim.keymap.set("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", {})
