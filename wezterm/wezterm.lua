@@ -24,6 +24,9 @@ config.color_scheme = "Gruvbox Material (Gogh)"
 -- Font settings
 config.font = wezterm.font("JetBrains Mono")
 config.font_size = 16.0
+config.line_height = 1.05
+
+config.freetype_render_target = "HorizontalLcd"
 
 -- and finally, return the configuration to wezterm
 return config
