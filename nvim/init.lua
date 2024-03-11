@@ -282,6 +282,17 @@ require("lazy").setup({
     end,
   },
 
+  -- {
+  --   "lukas-reineke/indent-blankline.nvim",
+  --   main = "ibl",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("ibl").setup({
+  --       scope = { enabled = false },
+  --     })
+  --   end,
+  -- },
+
   { -- Diffview (I don't ever use this...)
     "sindrets/diffview.nvim",
     cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
@@ -889,15 +900,5 @@ require("lazy").setup({
 --   end
 -- },
 --
--- {
---   "lukas-reineke/indent-blankline.nvim",
---   main = "ibl",
---   event = "VeryLazy",
---   config = function()
---     require("ibl").setup({
---       scope = { enabled = false },
---     })
---   end,
--- }
 
 -- vim: ts=2 sts=2 sw=2 et
