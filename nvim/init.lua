@@ -322,6 +322,12 @@ require("lazy").setup({
     },
   },
 
+  { -- Auto pairs for brackets, quotes, etc.
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
+  },
+
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     "lewis6991/gitsigns.nvim",
     opts = {
@@ -412,7 +418,7 @@ require("lazy").setup({
 
   { -- LSP and LSP accessories
     "neovim/nvim-lspconfig",
-    lazy = false,
+    event = { "BufRead", "BufNewFile" },
     opts = {
       inlay_hints = { enable = true },
     },
@@ -498,14 +504,6 @@ require("lazy").setup({
         lua_ls = {
           settings = {
             Lua = {
-              -- runtime = { version = "LuaJIT" },
-              -- workspace = {
-              --   checkThirdParty = false,
-              --   library = {
-              --     "${3rd}/luv/library",
-              --     unpack(vim.api.nvim_get_runtime_file("", true)),
-              --   },
-              -- },
               completion = {
                 callSnippet = "Replace",
               },
@@ -808,22 +806,7 @@ require("lazy").setup({
 
       -- Dap UI setup
       -- For more information, see |:help nvim-dap-ui|
-      dapui.setup({
-        icons = { expanded = "▾", collapsed = "▸", current_frame = "*" },
-        controls = {
-          icons = {
-            pause = "⏸",
-            play = "▶",
-            step_into = "⏎",
-            step_over = "⏭",
-            step_out = "⏮",
-            step_back = "b",
-            run_last = "▶▶",
-            terminate = "⏹",
-            disconnect = "⏏",
-          },
-        },
-      })
+      dapui.setup({})
 
       dap.listeners.after.event_initialized["dapui_config"] = dapui.open
       dap.listeners.before.event_terminated["dapui_config"] = dapui.close
