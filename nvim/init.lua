@@ -892,5 +892,16 @@ require("lazy").setup({
 --     vim.g.lualine_theme = "monokai-pro"
 --   end
 -- },
+--
+-- {
+--   "lukas-reineke/indent-blankline.nvim",
+--   main = "ibl",
+--   event = "VeryLazy",
+--   config = function()
+--     require("ibl").setup({
+--       scope = { enabled = false },
+--     })
+--   end,
+-- }
 
 -- vim: ts=2 sts=2 sw=2 et
