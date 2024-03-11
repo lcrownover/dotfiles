@@ -248,3 +248,16 @@ function vim_puppet() {
 
 alias vip='vim_puppet'
 # alias vin='vim_nagios'
+
+# pdk validation (ppv 2.2.0.0)
+function ppv() {
+	if [ -z "$1" ]; then
+		echo "Usage: ppv <version>"
+		return 1
+	fi
+
+	local version="$1"
+	local dockerimage="puppet/pdk:$version"
+
+	docker run --rm --platform linux/amd64 -v $PWD:/workspace -w /workspace $dockerimage validate --parallel
+}

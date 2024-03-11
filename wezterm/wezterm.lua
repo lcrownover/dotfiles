@@ -22,7 +22,7 @@ config.window_padding = { left = 8, right = 8, top = 8, bottom = 8 }
 config.color_scheme = "Gruvbox Material (Gogh)"
 
 -- Font settings
-config.font = wezterm.font("JetBrains Mono")
+config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = 'Medium' })
 config.font_size = 16.0
 config.line_height = 1.05
 

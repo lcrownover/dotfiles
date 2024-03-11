@@ -37,7 +37,7 @@ func main() {
     fmt.Println("hello world")
 }
 EOF
-	printf "# %s\n" "$projectname" >"$projectdir/README.md"
+	test -f "$projectdir/README.md" || printf "# %s\n" "$projectname" >"$projectdir/README.md"
 
 	cat <<EOF >"$projectdir/Dockerfile"
 FROM golang:1.21
@@ -50,7 +50,7 @@ RUN go build -v -o /usr/local/bin/app cmd/$projectname/main.go
 CMD ["app"]
 EOF
 
-	cat <<EOF >"$projectdir/.gitignore"
+	test -f "$projectdir/.gitignore" || cat <<EOF >"$projectdir/.gitignore"
 bin/
 env.sh
 EOF
