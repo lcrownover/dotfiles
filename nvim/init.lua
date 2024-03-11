@@ -412,7 +412,7 @@ require("lazy").setup({
 
   { -- LSP and LSP accessories
     "neovim/nvim-lspconfig",
-    event = { "BufRead", "BufNewFile" },
+    lazy = false,
     opts = {
       inlay_hints = { enable = true },
     },
