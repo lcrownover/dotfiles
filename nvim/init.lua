@@ -262,6 +262,15 @@ require("lazy").setup({
     opts = {},
   },
 
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {},
+    keys = {
+      { "<leader>tt", ":TroubleToggle<cr>", { desc = "Toggle trouble" } },
+    },
+  },
+
   { -- Copilot
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
@@ -443,7 +452,7 @@ require("lazy").setup({
           map("gr", require("telescope.builtin").lsp_references, "Goto References")
           map("gi", require("telescope.builtin").lsp_implementations, "Goto Implementations")
           map("<leader>ls", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
-          map("<leader>ws", require("telescope.builtin").lsp_workspace_symbols, "Workspace Symbols")
+          -- map("<leader>ws", require("telescope.builtin").lsp_workspace_symbols, "Workspace Symbols")
           map("<leader>lr", ":LspRestart<cr>", "Restart LSP server")
           map("<leader>li", ":LspInfo<cr>", "Show LSP info")
           map("<leader>fs", vim.lsp.buf.format, "LSP Format")
