@@ -5,8 +5,8 @@ local config = wezterm.config_builder()
 -- Start maximized
 local mux = wezterm.mux
 wezterm.on("gui-startup", function(cmd)
-  local _, _, window = mux.spawn_window(cmd or {})
-  window:gui_window():maximize()
+    local _, _, window = mux.spawn_window(cmd or {})
+    window:gui_window():maximize()
 end)
 
 -- Don't show the tab bar
