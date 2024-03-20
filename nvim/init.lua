@@ -535,6 +535,7 @@ require("lazy").setup({
         "shfmt",
         "shellcheck",
         "markdownlint",
+        "yamlfmt",
       }
       -- Builds a list of LSP server names to be installed
       local ensure_installed = vim.tbl_keys(servers or {})
@@ -565,19 +566,44 @@ require("lazy").setup({
     end,
   },
 
-  { -- Autoformat
-    "stevearc/conform.nvim",
-    opts = {
-      notify_on_error = false,
-      formatters_by_ft = {
-        lua = { "stylua" },
-        python = { "isort", "ruff" },
-        javascript = { { "prettierd", "prettier" } },
-        ansibnle = { "ansible-lint" },
-        bash = { "shfmt" },
-        markdown = { "markdownlint" },
-      },
-    },
+  -- { -- Autoformat
+  --   "stevearc/conform.nvim",
+  --   opts = {
+  --     notify_on_error = false,
+  --     formatters_by_ft = {
+  --       lua = { "stylua" },
+  --       -- python = { "isort", "ruff_format" },
+  --       python = function(bufnr)
+  --         if require("conform").get_formatter_info("ruff_format", bufnr).available then
+  --           return { "ruff_format" }
+  --         else
+  --           return { "isort", "black" }
+  --         end
+  --       end,
+  --       javascript = { { "prettierd", "prettier" } },
+  --       ansible = { "yamlfmt" },
+  --       bash = { "shfmt" },
+  --       markdown = { "markdownlint" },
+  --     },
+  --   },
+  -- },
+  { -- none-ls does auto formatting
+    "nvimtools/none-ls.nvim",
+    event = "BufRead",
+    config = function()
+      local null_ls = require("null-ls")
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.isort,
+          null_ls.builtins.formatting.black,
+          null_ls.builtins.formatting.prettierd,
+          null_ls.builtins.formatting.yamlfmt,
+          null_ls.builtins.formatting.shfmt,
+          null_ls.builtins.formatting.markdownlint,
+        },
+      })
+    end,
   },
 
   { -- Completion
