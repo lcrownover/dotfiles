@@ -527,6 +527,7 @@ require("lazy").setup({
       -- List of formatters and linters to install
       local lsp_tools = {
         "prettier",
+        "prettierd",
         "stylua",
         "isort",
         "ruff",
@@ -794,10 +795,11 @@ require("lazy").setup({
     dependencies = {
       -- Creates the debugger UI
       "rcarriga/nvim-dap-ui",
+      -- Automated tests?
+      "nvim-neotest/nvim-nio",
       -- Installs debug adapters
       "williamboman/mason.nvim",
       "jay-babu/mason-nvim-dap.nvim",
-
       -- Add debuggers
       "leoluz/nvim-dap-go",
       "mfussenegger/nvim-dap-python",
