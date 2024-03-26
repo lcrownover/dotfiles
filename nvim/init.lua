@@ -566,28 +566,6 @@ require("lazy").setup({
       })
     end,
   },
-
-  -- { -- Autoformat
-  --   "stevearc/conform.nvim",
-  --   opts = {
-  --     notify_on_error = false,
-  --     formatters_by_ft = {
-  --       lua = { "stylua" },
-  --       -- python = { "isort", "ruff_format" },
-  --       python = function(bufnr)
-  --         if require("conform").get_formatter_info("ruff_format", bufnr).available then
-  --           return { "ruff_format" }
-  --         else
-  --           return { "isort", "black" }
-  --         end
-  --       end,
-  --       javascript = { { "prettierd", "prettier" } },
-  --       ansible = { "yamlfmt" },
-  --       bash = { "shfmt" },
-  --       markdown = { "markdownlint" },
-  --     },
-  --   },
-  -- },
   { -- none-ls does auto formatting
     "nvimtools/none-ls.nvim",
     event = "BufRead",
@@ -599,7 +577,7 @@ require("lazy").setup({
           null_ls.builtins.formatting.isort,
           null_ls.builtins.formatting.black,
           null_ls.builtins.formatting.prettierd,
-          null_ls.builtins.formatting.yamlfmt,
+          -- null_ls.builtins.formatting.yamlfmt,
           null_ls.builtins.formatting.shfmt,
           null_ls.builtins.formatting.markdownlint,
         },
