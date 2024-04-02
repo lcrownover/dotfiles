@@ -231,8 +231,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-
-	{ -- Color Theme
+	-- Color Theme
+	{
 		"sainnhe/gruvbox-material",
 		lazy = false,
 		priority = 1000,
@@ -244,6 +244,21 @@ require("lazy").setup({
 			vim.g.lualine_theme = "gruvbox-material"
 		end,
 	},
+
+	-- {
+	-- 	"folke/tokyonight.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	--      require("tokyonight").setup({
+	--        -- styles = {
+	--        --   keywords = { italic = false },
+	--        -- }
+	--      })
+	-- 		vim.cmd.colorscheme("tokyonight")
+	-- 		vim.g.lualine_theme = "tokyonight"
+	-- 	end,
+	-- },
 
 	{ -- Better navigation inside tmux
 		"christoomey/vim-tmux-navigator",
@@ -646,7 +661,7 @@ require("lazy").setup({
 					-- { name = "copilot" },
 					{ name = "buffer" },
 				},
-        -- hover doc fix
+				-- hover doc fix
 				view = {
 					entries = {
 						vertical_positioning = "above",
