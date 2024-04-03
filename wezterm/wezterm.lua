@@ -19,7 +19,8 @@ config.window_close_confirmation = "NeverPrompt"
 config.window_padding = { left = 8, right = 8, top = 8, bottom = 8 }
 
 -- Color settings
-config.color_scheme = "Gruvbox Material (Gogh)"
+-- config.color_scheme = "Everforest Dark (Gogh)"
+-- config.color_scheme = "Gruvbox Material (Gogh)"
 
 -- Font settings
 config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = 'Medium' })

@@ -180,8 +180,8 @@ vim.keymap.set("n", "<c-w>w", ":close<cr>", { desc = "Close split" })
 vim.keymap.set("n", "<leader>sw", ToggleWhitespaceVisibility, { desc = "Toggle whitespace visibility" })
 
 -- close the quickfix window
-vim.keymap.set("n", "<leader>cf", ":copen<cr>", { desc = "Open quickfix window" })
-vim.keymap.set("n", "<leader>cc", ":cclose<cr>", { desc = "Close quickfix window" })
+vim.keymap.set("n", "<leader>qf", ":copen<cr>", { desc = "Open quickfix window" })
+vim.keymap.set("n", "<leader>qc", ":cclose<cr>", { desc = "Close quickfix window" })
 
 -- scratch buffers, normal or splits
 vim.keymap.set("n", "<leader>nn", ":enew<cr>", { desc = "New scratch buffer" })
@@ -202,7 +202,10 @@ vim.keymap.set("x", "<leader>r", ":s/", { desc = "Search and replace selection" 
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic error messages" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic quickfix list" })
+-- vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic quickfix list" })
+
+-- toggle copilot
+vim.keymap.set("n", "<leader>cc", ":Copilot toggle<cr>", { desc = "Copilot Toggle" })
 
 --[[
 ===============================================================================
@@ -232,19 +235,19 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	-- Color Theme
-	{
-		"sainnhe/gruvbox-material",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			vim.g.gruvbox_material_background = "medium"
-			vim.g.gruvbox_material_enable_italic = 1
-			vim.g.gruvbox_material_better_performance = 1
-			vim.cmd.colorscheme("gruvbox-material")
-			vim.g.lualine_theme = "gruvbox-material"
-		end,
-	},
-
+	-- {
+	-- 	"sainnhe/gruvbox-material",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		vim.g.gruvbox_material_background = "medium"
+	-- 		vim.g.gruvbox_material_enable_italic = 1
+	-- 		vim.g.gruvbox_material_better_performance = 1
+	-- 		vim.cmd.colorscheme("gruvbox-material")
+	-- 		vim.g.lualine_theme = "gruvbox-material"
+	-- 	end,
+	-- },
+	--
 	-- {
 	-- 	"folke/tokyonight.nvim",
 	-- 	lazy = false,
@@ -259,6 +262,17 @@ require("lazy").setup({
 	-- 		vim.g.lualine_theme = "tokyonight"
 	-- 	end,
 	-- },
+	{
+		"sainnhe/everforest",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.g.everforest_background = "hard"
+			vim.g.everforest_better_performance = 1
+			vim.cmd([[colorscheme everforest]])
+			vim.g.lualine_theme = "everforest"
+		end,
+	},
 
 	{ -- Better navigation inside tmux
 		"christoomey/vim-tmux-navigator",
@@ -289,7 +303,7 @@ require("lazy").setup({
 	{ -- Copilot
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
-		event = { "BufRead", "BufNewFile" },
+		-- event = { "BufRead", "BufNewFile" },
 		config = function()
 			require("copilot").setup({
 				suggestion = {
@@ -854,18 +868,6 @@ require("lazy").setup({
                         |_|
 ===============================================================================
 --]]
-
--- {
---     "sainnhe/everforest",
---     lazy = false,
---     priority = 1000,
---     config = function()
---         vim.g.everforest_background = "medium"
---         vim.g.everforest_better_performance = 1
---         vim.cmd([[colorscheme everforest]])
---         vim.g.lualine_theme = "everforest"
---     end,
--- },
 
 -- {
 --   "catppuccin/nvim",
