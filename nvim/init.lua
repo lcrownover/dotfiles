@@ -640,7 +640,7 @@ require("lazy").setup({
 			-- completion icons
 			"onsails/lspkind-nvim",
 			-- copilot
-			"zbirenbaum/copilot-cmp",
+			-- "zbirenbaum/copilot-cmp",
 		},
 		config = function()
 			local cmp = require("cmp")
