@@ -8,19 +8,21 @@
 # setopt xtrace prompt_subst
 # zmodload zsh/zprof
 
-# if [ -z $TMUX ]; then
-#     if [[ "$TERM" = "xterm-kitty" ]]; then # attach to main if terminal is kitty
-#         tmux new-session -A -s main
-#     elif [[ "$TERM_PROGRAM" = "iTerm.app" ]]; then
-#         :
-#     elif [[ "$TERM_PROGRAM" = "vscode" ]]; then
-#         :
-#     elif [[ "$TERM" = "xterm-256color" ]]; then # attach to main if terminal is alacritty/wezterm (this conflicts with vs code)
-#         tmux new-session -A -s main
-#     elif  [[ "$DOT_OS" = "wsl" ]]; then
-#         tmux new-session -A -s main
-#     fi
-# fi
+if [ -z $TMUX ]; then
+    if [[ "$TERM" = "xterm-kitty" ]]; then # attach to main if terminal is kitty
+        tmux new-session -A -s main
+    elif [[ "$TERM_PROGRAM" = "iTerm.app" ]]; then
+        :
+    elif [[ "$TERM_PROGRAM" = "vscode" ]]; then
+        :
+    elif [[ "$TERM_PROGRAM" = "WezTerm" ]]; then
+        :
+    elif [[ "$TERM" = "xterm-256color" ]]; then # attach to main if terminal is alacritty/wezterm (this conflicts with vs code)
+        tmux new-session -A -s main
+    elif  [[ "$DOT_OS" = "wsl" ]]; then
+        tmux new-session -A -s main
+    fi
+fi
 
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"

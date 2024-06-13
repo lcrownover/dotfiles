@@ -48,6 +48,7 @@ config.keys = {
     { key = "k",  mods = "ALT", action = wezterm.action.ActivatePaneDirection("Up") },
     { key = "j",  mods = "ALT", action = wezterm.action.ActivatePaneDirection("Down") },
     { key = "r",  mods = "ALT", action = wezterm.action.RotatePanes("CounterClockwise") },
+    { key = "[",  mods = "ALT", action = wezterm.action.ActivateCopyMode },
 }
 
 -- and finally, return the configuration to wezterm
