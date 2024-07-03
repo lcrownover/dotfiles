@@ -1,5 +1,9 @@
 import = [
-  "~/.config/alacritty/catppuccin-macchiato.toml"
+  # "~/.config/alacritty/tokyonight.toml"
+  "~/.config/alacritty/tokyonight-storm.toml"
+  # "~/.config/alacritty/catppuccin-mocha.toml"
+  # "~/.config/alacritty/catppuccin-macchiato.toml"
+  # "~/.config/alacritty/monokai_pro.toml"
 ]
 
 [env]

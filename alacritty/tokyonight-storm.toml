@@ -1,0 +1,29 @@
+# Tokyo Night Storm - Ported from folke's nvim theme
+
+# Default colors
+[colors.primary]
+background = '#222435'
+foreground = '#cad3f2'
+
+# Normal colors
+[colors.normal]
+black   = '#222435'
+red     = '#ee7d82'
+green   = '#cae797'
+yellow  = '#f6c983'
+blue    = '#6ea5dd'
+magenta = '#ba9bf8'
+cyan    = '#77d3bf'
+white   = '#cad3f2'
+
+# Bright colors
+[colors.bright]
+black   = '#222435'
+red     = '#ee7d82'
+green   = '#cae797'
+yellow  = '#f6c983'
+blue    = '#6ea5dd'
+magenta = '#ba9bf8'
+cyan    = '#77d3bf'
+white   = '#cad3f2'
+
