@@ -52,6 +52,19 @@ if [[ $HOME == "/Users/$(whoami)" ]]; then
     export PATH="$PATH:$HOME/.local/bin"
 fi
 
+# use CTRL-Z to toggle between suspend and fg
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line -w
+  else
+    zle push-input -w
+    zle clear-screen -w
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
 setopt prompt_subst
 
 # end performance testing

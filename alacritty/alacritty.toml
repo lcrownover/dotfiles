@@ -1,9 +1,10 @@
 import = [
   # "~/.config/alacritty/tokyonight.toml"
-  "~/.config/alacritty/tokyonight-storm.toml"
+  # "~/.config/alacritty/tokyonight-storm.toml"
+  # "~/.config/alacritty/ayu-dark.toml"
   # "~/.config/alacritty/catppuccin-mocha.toml"
   # "~/.config/alacritty/catppuccin-macchiato.toml"
-  # "~/.config/alacritty/monokai_pro.toml"
+  "~/.config/alacritty/monokai_pro.toml"
 ]
 
 [env]
@@ -18,4 +19,3 @@ option_as_alt = "OnlyLeft"
 normal = { family = "JetbrainsMono Nerd Font", style = "Regular" }
 size = 16.0
 offset = { x = 0, y = 2 }
-
