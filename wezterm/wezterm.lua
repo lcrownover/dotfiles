@@ -20,7 +20,8 @@ config.window_padding = { left = 8, right = 8, top = 8, bottom = 0 }
 
 -- Color settings
 -- config.color_scheme = "Everforest Dark (Gogh)"
-config.color_scheme = "Catppuccin Macchiato"
+-- config.color_scheme = "Catppuccin Macchiato"
+config.color_scheme = "Monokai Pro (Gogh)"
 
 -- Font settings
 config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Medium" })
