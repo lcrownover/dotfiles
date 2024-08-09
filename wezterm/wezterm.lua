@@ -9,26 +9,34 @@ wezterm.on("gui-startup", function(cmd)
     window:gui_window():maximize()
 end)
 
--- Don't show the tab bar
-config.hide_tab_bar_if_only_one_tab = true
-
--- Don't prompt to exit
-config.window_close_confirmation = "NeverPrompt"
-
 -- Padding around the window
 config.window_padding = { left = 8, right = 8, top = 8, bottom = 0 }
 
--- Color settings
--- config.color_scheme = "Everforest Dark (Gogh)"
--- config.color_scheme = "Catppuccin Macchiato"
-config.color_scheme = "Monokai Pro (Gogh)"
+-- Monokai Pro
+local theme = wezterm.color.get_builtin_schemes()['Monokai Pro (Gogh)']
+theme.background = "#2d2a2e"
+config.colors = {
+    split = theme.ansi[6],
+    tab_bar = {
+        background = "#2d2a2e",
+        active_tab = {
+            bg_color = theme.ansi[6],
+            fg_color = theme.background,
+        },
+    }
+}
+
+config.color_schemes = {
+    ['My Theme'] = theme,
+}
+config.color_scheme = 'My Theme'
 
 -- Font settings
 config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Medium" })
 config.font_size = 16.0
 config.line_height = 1.05
 
-config.freetype_render_target = "HorizontalLcd"
+-- config.freetype_render_target = "HorizontalLcd"
 
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
@@ -50,6 +58,17 @@ config.keys = {
     { key = "j",  mods = "ALT", action = wezterm.action.ActivatePaneDirection("Down") },
     { key = "r",  mods = "ALT", action = wezterm.action.RotatePanes("CounterClockwise") },
     { key = "[",  mods = "ALT", action = wezterm.action.ActivateCopyMode },
+    {
+        key = "r",
+        mods = "ALT",
+        action = wezterm.action.PromptInputLine {
+            description = 'Enter new tab name',
+            action = wezterm.action_callback(function(window, _, line)
+                if line then
+                    window:active_tab():set_title(line)
+                end
+            end) },
+    }
 }
 
 -- and finally, return the configuration to wezterm
