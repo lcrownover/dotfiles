@@ -28,7 +28,7 @@ function dir_jump() {
 		cd ~/.gdrive/school || return
 		;;
 	*)
-		cd "$(fd --max-depth 3 --type directory . ~/code | fzf --query="$1")" || return
+		cd "$(fd --max-depth 3 --type directory . ~/racs ~/code | fzf --query="$1")" || return
 		;;
 	esac
 }
