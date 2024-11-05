@@ -15,7 +15,7 @@ function get_from_racs_keepass() {
 		return
 	fi
 	RACSKEEPASSDBPW="$(get_from_keepass 'RACS Keepass')"
-	RACSKEEPASSDBPATH="$HOME/OneDrive - University Of Oregon/RACS-KeePass/racs-keepass.kdbx"
+	RACSKEEPASSDBPATH="$HOME/OneDrive - University Of Oregon/O365_RACS_Staff/General/Keepass/racs-keepass.kdbx"
 	entry="$1"
 	if [ "$2" = "" ]; then attribute="password"; else attribute="$2"; fi
 	printf "%s" "$(echo $RACSKEEPASSDBPW | $HOMEBREW_BINDIR/keepassxc-cli show $RACSKEEPASSDBPATH "$entry" --attributes "$attribute" -q)"

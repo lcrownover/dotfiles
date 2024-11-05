@@ -1,8 +1,3 @@
-# z navigation
-if [ "$DOT_OS" = "mac" ]; then
-	source $HOME/code/repos/z/z.sh
-fi
-
 function spushd() {
 	pushd "$1" >/dev/null || return
 }
