@@ -48,9 +48,7 @@ if [[ -d $HOME/.pyenv ]]; then
     eval "$(pyenv init - --no-rehash zsh)"
 fi
 
-if [[ $HOME == "/Users/$(whoami)" ]]; then
-    export PATH="$PATH:$HOME/.local/bin"
-fi
+export PATH="$PATH:$HOME/.local/bin"
 
 # use CTRL-Z to toggle between suspend and fg
 fancy-ctrl-z () {
