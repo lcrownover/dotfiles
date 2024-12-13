@@ -1,1 +1,1 @@
-alias tf="tofu"
+alias tf="terraform"
