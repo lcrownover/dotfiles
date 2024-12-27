@@ -68,6 +68,12 @@ function firefox() {
 	fi
 }
 
+function edge() {
+	if [ "$DOT_OS" = "mac" ]; then
+       open -a Microsoft\ Edge "$1"
+	fi
+}
+
 # clangd
 insert_path "/usr/local/opt/llvm/bin"
 
