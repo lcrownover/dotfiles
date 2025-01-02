@@ -17,6 +17,9 @@ if [ -z $TMUX ]; then
         :
     elif [[ "$TERM_PROGRAM" = "WezTerm" ]]; then
         :
+    elif [[ "$TERM_PROGRAM" = "ghostty" ]]; then
+        # tmux new-session -A -s main
+        :
     elif [[ "$TERM" = "xterm-256color" ]]; then # attach to main if terminal is alacritty/wezterm (this conflicts with vs code)
         tmux new-session -A -s main
     elif  [[ "$DOT_OS" = "wsl" ]]; then
@@ -69,4 +72,3 @@ setopt prompt_subst
 # unsetopt xtrace
 # exec 2>&3 3>&-
 # zprof
-
