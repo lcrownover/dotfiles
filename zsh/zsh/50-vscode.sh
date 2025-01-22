@@ -5,6 +5,15 @@ vscode() {
 	"")
 		code .
 		;;
+	d)
+		code ~/.dotfiles
+		;;
+	r)
+		code ~/racs/racs-ansible
+		;;
+	rd)
+		code ~/racs/racs-internal-docs
+		;;
 	*)
 		if [ -f "$1" ]; then
 			code -r "$1"
