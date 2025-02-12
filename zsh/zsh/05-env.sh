@@ -5,7 +5,7 @@ wsl)
 *)
 	# set gdrive to mirror, choose $HOME/.gdrive as the mirror location.
 	#export GDRIVEDIR="$HOME/Library/CloudStorage/GoogleDrive-lcrownover127@gmail.com/My Drive"
-	export GDRIVEDIR="$HOME/.gdrive"
+	export GDRIVEDIR="$HOME/Google Drive/My Drive/"
 	;;
 esac
 

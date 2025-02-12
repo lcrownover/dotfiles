@@ -20,7 +20,7 @@ function dir_jump() {
 		cd ~/.dotfiles || return
 		;;
 	sch*)
-		cd ~/.gdrive/school || return
+		cd "$HOME/Google Drive/My Drive/school" || return
 		;;
 	*)
 		cd "$(fd --max-depth 3 --type directory . ~/racs ~/code | fzf --query="$1")" || return
@@ -70,7 +70,7 @@ function firefox() {
 
 function edge() {
 	if [ "$DOT_OS" = "mac" ]; then
-       open -a Microsoft\ Edge "$1"
+		open -a Microsoft\ Edge "$1"
 	fi
 }
 
