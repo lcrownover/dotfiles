@@ -60,22 +60,22 @@ EOF
 all: build
 
 build:
-    @go build -o bin/$projectname cmd/$projectname/main.go
+	@go build -o bin/$projectname cmd/$projectname/main.go
 
 run: build
-    @go run cmd/$projectname/main.go
+	@go run cmd/$projectname/main.go
 
 install: build
-    @cp bin/$projectname /usr/local/bin/$projectname
+	@cp bin/$projectname /usr/local/bin/$projectname
 
 container:
-    @docker build -t $projectname .
+	@docker build -t $projectname .
 
 handler:
-    @go build -o handler cmd/$projectname/main.go
+	@go build -o handler cmd/$projectname/main.go
 
 clean:
-    @rm -f bin/$projectname /usr/local/bin/$projectname
+	@rm -f bin/$projectname /usr/local/bin/$projectname
 EOF
 
 	spushd "$projectdir"
