@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 append_path "/usr/local/go/bin"
 append_path "$HOME/go/bin"
 
@@ -11,6 +13,7 @@ function gonew() {
 	fi
 
 	projectname="$1"
+	binname="$(echo $projectname | cut -d'-' -f1)"
 	if [[ "$projectname" = "." ]]; then
 		usage
 		return
@@ -23,10 +26,10 @@ function gonew() {
 		shift
 	fi
 
-	mkdir -p "$projectdir/cmd/$projectname/"
+	mkdir -p "$projectdir/cmd/$binname/"
 	mkdir "$projectdir/bin"
 
-	cat <<EOF >"$projectdir/cmd/$projectname/main.go"
+	cat <<EOF >"$projectdir/cmd/$binname/main.go"
 package main
 
 import (
@@ -45,14 +48,35 @@ FROM golang:1.21
 WORKDIR /usr/src/app
 
 COPY . .
-RUN go build -v -o /usr/local/bin/app cmd/$projectname/main.go
+RUN go build -v -o /usr/local/bin/app cmd/$binname/main.go
 
 CMD ["app"]
 EOF
 
 	test -f "$projectdir/.gitignore" || cat <<EOF >"$projectdir/.gitignore"
 bin/
-env.sh
+
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Go workspace file
+go.work
+go.work.sum
+
+# env file
+.env
 EOF
 
 	cat <<EOF >"$projectdir/Makefile"
@@ -60,29 +84,28 @@ EOF
 all: build
 
 build:
-	@go build -o bin/$projectname cmd/$projectname/main.go
+	@go build -o bin/$binname cmd/$binname/main.go
 
 run: build
-	@go run cmd/$projectname/main.go
+	@go run cmd/$binname/main.go
 
 install: build
-	@cp bin/$projectname /usr/local/bin/$projectname
+	@cp bin/$binname /usr/local/bin/$binname
 
 container:
-	@docker build -t $projectname .
+	@docker build -t $binname .
 
 handler:
-	@go build -o handler cmd/$projectname/main.go
+	@go build -o handler cmd/$binname/main.go
 
 clean:
-	@rm -f bin/$projectname /usr/local/bin/$projectname
+	@rm -f bin/$binname /usr/local/bin/$binname
 EOF
 
 	spushd "$projectdir"
 	git init --quiet
-	go mod init "github.com/lcrownover/$projectname" 2>/dev/null
+	go mod init "github.com/lcrownover/$projectname" 2>/dev/null && \
 	go mod tidy 2>/dev/null
-	# spopd
 }
 
 function goupdate() {
