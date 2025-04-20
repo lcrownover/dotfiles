@@ -5,19 +5,14 @@ append_path "$HOME/go/bin"
 
 function gonew() {
 	function usage() {
-		echo "usage: gonew PROJECT_NAME [basedir]"
-		return
+		echo "usage: gonew NAME [basedir]"
 	}
 	if [[ $# -lt 1 ]]; then
 		usage
+		return
 	fi
 
 	projectname="$1"
-	binname="$(echo $projectname | cut -d'-' -f1)"
-	if [[ "$projectname" = "." ]]; then
-		usage
-		return
-	fi
 	shift
 
 	projectdir="$(pwd)/$projectname"
@@ -26,10 +21,14 @@ function gonew() {
 		shift
 	fi
 
-	mkdir -p "$projectdir/cmd/$binname/"
-	mkdir "$projectdir/bin"
+	mkdir -p "$projectdir/bin"
 
-	cat <<EOF >"$projectdir/cmd/$binname/main.go"
+	spushd "$projectdir"
+
+	git init --quiet
+	go mod init "github.com/lcrownover/$projectname" 2>/dev/null
+
+	cat <<EOF >"main.go"
 package main
 
 import (
@@ -40,20 +39,20 @@ func main() {
     fmt.Println("hello world")
 }
 EOF
-	test -f "$projectdir/README.md" || printf "# %s\n" "$projectname" >"$projectdir/README.md"
+	test -f "README.md" || printf "# %s\n" "$projectname" >"README.md"
 
 	cat <<EOF >"$projectdir/Dockerfile"
-FROM golang:1.21
+FROM golang:1.24
 
 WORKDIR /usr/src/app
 
 COPY . .
-RUN go build -v -o /usr/local/bin/app cmd/$binname/main.go
+RUN go build -v -o /usr/local/bin/app $projectname.go
 
 CMD ["app"]
 EOF
 
-	test -f "$projectdir/.gitignore" || cat <<EOF >"$projectdir/.gitignore"
+	test -f ".gitignore" || cat <<EOF >".gitignore"
 bin/
 
 *.exe
@@ -79,32 +78,26 @@ go.work.sum
 .env
 EOF
 
-	cat <<EOF >"$projectdir/Makefile"
-.PHONY: build install clean run container handler
+	cat <<EOF >"Makefile"
+.PHONY: build install clean run container
 all: build
 
 build:
-	@go build -o bin/$binname cmd/$binname/main.go
+	@go build -o bin/$projectname $projectname.go
 
 run: build
-	@go run cmd/$binname/main.go
+	@go run $projectname.go
 
 install: build
-	@cp bin/$binname /usr/local/bin/$binname
+	@cp bin/$projectname /usr/local/bin/$projectname
 
 container:
-	@docker build -t $binname .
-
-handler:
-	@go build -o handler cmd/$binname/main.go
+	@docker build -t $projectname .
 
 clean:
-	@rm -f bin/$binname /usr/local/bin/$binname
+	@rm -f bin/$projectname /usr/local/bin/$projectname
 EOF
 
-	spushd "$projectdir"
-	git init --quiet
-	go mod init "github.com/lcrownover/$projectname" 2>/dev/null && \
 	go mod tidy 2>/dev/null
 }
 
