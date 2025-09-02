@@ -9,27 +9,11 @@ local config = {}
 --     window:gui_window():maximize()
 -- end)
 
--- Padding around the window
+config.window_decorations = "TITLE | RESIZE | MACOS_USE_BACKGROUND_COLOR_AS_TITLEBAR_COLOR"
 config.window_padding = { left = 8, right = 8, top = 8, bottom = 0 }
-
--- Monokai Pro
--- local theme = wezterm.color.get_builtin_schemes()['Monokai Pro (Gogh)']
--- theme.background = "#2d2a2e"
--- config.colors = {
---     split = theme.ansi[6],
---     tab_bar = {
---         background = "#2d2a2e",
---         active_tab = {
---             bg_color = theme.ansi[6],
---             fg_color = theme.background,
---         },
---     }
--- }
-
--- config.color_schemes = {
---     ['My Theme'] = theme,
--- }
--- config.color_scheme = 'My Theme'
+config.initial_rows = 38
+config.initial_cols = 168
+config.default_cwd = wezterm.home_dir
 
 config.color_scheme = 'Tokyo Night Storm'
 
@@ -38,41 +22,56 @@ config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 16.0
 config.line_height = 1.05
 
--- config.freetype_render_target = "HorizontalLcd"
+-- Tab bar
+config.use_fancy_tab_bar = false
+config.tab_bar_at_bottom = true
+config.enable_tab_bar = true
+config.hide_tab_bar_if_only_one_tab = false
 
-config.enable_tab_bar = false
--- config.use_fancy_tab_bar = false
--- config.tab_bar_at_bottom = true
--- config.enable_tab_bar = true
--- config.hide_tab_bar_if_only_one_tab = false
+config.keys = {
+  { key = "w", mods = "CMD",        action = wezterm.action.CloseCurrentPane({ confirm = true }) },
+  { key = "t", mods = "CMD",        action = wezterm.action({SpawnCommandInNewTab = { cwd = wezterm.home_dir }})},
+  { key = "x", mods = "CTRL|SHIFT", action = wezterm.action.CloseCurrentTab({ confirm = true }) },
 
--- config.keys = {
---     { key = "m",  mods = "ALT", action = wezterm.action.TogglePaneZoomState },
---     { key = "c",  mods = "ALT", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
---     { key = "n",  mods = "ALT", action = wezterm.action.ActivateTabRelative(1) },
---     { key = "p",  mods = "ALT", action = wezterm.action.ActivateTabRelative(-1) },
---     { key = "x",  mods = "ALT", action = wezterm.action.CloseCurrentTab({ confirm = true }) },
---     { key = "w",  mods = "ALT", action = wezterm.action.CloseCurrentPane({ confirm = true }) },
---     { key = "-",  mods = "ALT", action = wezterm.action.SplitVertical },
---     { key = "\\", mods = "ALT", action = wezterm.action.SplitHorizontal },
---     { key = "h",  mods = "ALT", action = wezterm.action.ActivatePaneDirection("Left") },
---     { key = "l",  mods = "ALT", action = wezterm.action.ActivatePaneDirection("Right") },
---     { key = "k",  mods = "ALT", action = wezterm.action.ActivatePaneDirection("Up") },
---     { key = "j",  mods = "ALT", action = wezterm.action.ActivatePaneDirection("Down") },
---     { key = "r",  mods = "ALT", action = wezterm.action.RotatePanes("CounterClockwise") },
---     { key = "[",  mods = "ALT", action = wezterm.action.ActivateCopyMode },
---     {
---         key = "r",
---         mods = "ALT",
---         action = wezterm.action.PromptInputLine {
---             description = 'Enter new tab name',
---             action = wezterm.action_callback(function(window, _, line)
---                 if line then
---                     window:active_tab():set_title(line)
---                 end
---             end) },
---     }
--- }
+  { key = "m", mods = "CTRL|SHIFT", action = wezterm.action.TogglePaneZoomState },
+  { key = "[", mods = "CTRL|SHIFT", action = wezterm.action.ActivateCopyMode },
 
--- and finally, return the configuration to wezterm
+  { key = "n", mods = "CTRL|SHIFT", action = wezterm.action.ActivateTabRelative(1) },
+  { key = "p", mods = "CTRL|SHIFT", action = wezterm.action.ActivateTabRelative(-1) },
+
+  { key = "_", mods = "CTRL|SHIFT", action = wezterm.action.SplitVertical },
+  { key = "|", mods = "CTRL|SHIFT", action = wezterm.action.SplitHorizontal },
+
+  -- temp until muscle memory
+  { key = "h", mods = "CTRL|SHIFT",       action = wezterm.action.ActivatePaneDirection("Left") },
+  { key = "l", mods = "CTRL|SHIFT",       action = wezterm.action.ActivatePaneDirection("Right") },
+  { key = "k", mods = "CTRL|SHIFT",       action = wezterm.action.ActivatePaneDirection("Up") },
+  { key = "j", mods = "CTRL|SHIFT",       action = wezterm.action.ActivatePaneDirection("Down") },
+  -- migrate muscle memory here
+  { key = "h", mods = "CTRL",       action = wezterm.action.ActivatePaneDirection("Left") },
+  { key = "l", mods = "CTRL",       action = wezterm.action.ActivatePaneDirection("Right") },
+  { key = "k", mods = "CTRL",       action = wezterm.action.ActivatePaneDirection("Up") },
+  { key = "j", mods = "CTRL",       action = wezterm.action.ActivatePaneDirection("Down") },
+  { key = " ", mods = "CTRL|SHIFT", action = wezterm.action.RotatePanes("CounterClockwise") },
+
+  { key = "UpArrow",    mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ 'Up', 1 }) },
+  { key = "DownArrow",  mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ 'Down', 1 }) },
+  { key = "LeftArrow",  mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ 'Left', 1 }) },
+  { key = "RightArrow", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ 'Right', 1 }) },
+
+  { key = "5", mods = "CTRL|SHIFT", action = wezterm.action.PaneSelect({ mode = "SwapWithActive" }) },
+
+  {
+    key = "r",
+    mods = "CTRL|SHIFT",
+    action = wezterm.action.PromptInputLine {
+      description = 'Enter new tab name',
+      action = wezterm.action_callback(function(window, _, line)
+        if line then
+          window:active_tab():set_title(line)
+        end
+      end) },
+  }
+}
+
 return config

@@ -10,7 +10,8 @@
 
 if [ -z $TMUX ]; then
     if [[ "$TERM" = "xterm-kitty" ]]; then # attach to main if terminal is kitty
-        tmux new-session -A -s main
+        # tmux new-session -A -s main
+        :
     elif [[ "$TERM_PROGRAM" = "iTerm.app" ]]; then
         :
     elif [[ "$TERM_PROGRAM" = "vscode" ]]; then
@@ -18,8 +19,8 @@ if [ -z $TMUX ]; then
     elif [[ "$TERM_PROGRAM" = "WezTerm" ]]; then
         :
     elif [[ "$TERM_PROGRAM" = "ghostty" ]]; then
-        # tmux new-session -A -s main
-        :
+        tmux new-session -A -s main
+        # :
     elif [[ "$TERM" = "xterm-256color" ]]; then # attach to main if terminal is alacritty/wezterm (this conflicts with vs code)
         tmux new-session -A -s main
     elif  [[ "$DOT_OS" = "wsl" ]]; then
@@ -37,6 +38,7 @@ plugins=(
     zsh-autosuggestions
     docker
     zsh-syntax-highlighting
+    direnv
 )
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'

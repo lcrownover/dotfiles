@@ -37,3 +37,11 @@ function awsdev() {
 function aws-ami-catalog() {
     edge 'https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#AMICatalog:'
 }
+
+function ssm() {
+	if [ -z "$1" ]; then
+		echo "usage: give a valid instance id for \$1"
+		return
+	fi
+	aws ssm start-session --target "$1"
+}

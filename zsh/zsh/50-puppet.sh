@@ -4,8 +4,7 @@
 #
 # export BOLT=~/.puppetlabs/bolt
 export PUPPET_BASE_DIR="$HOME/puppet/is"
-# insert_path "/opt/puppetlabs/bin/"
-# insert_path "$HOME/code/repos/puppet-editor-services/"
+# export PATH="$PATH:$HOME/repos/puppet-editor-services/"
 
 # alias boltfile="nvim $HOME/.puppetlabs/bolt/Puppetfile"
 # alias cdb="cd $HOME/.puppetlabs/bolt"
@@ -16,11 +15,11 @@ export PUPPET_BASE_DIR="$HOME/puppet/is"
 
 # this is used by a lot of other funcs
 function puppet_navigate_to_basedir() {
-	if [ -z "$1" ]; then
-		cd "$PUPPET_BASE_DIR" || return
-	else
-		cd "$PUPPET_BASE_DIR/puppet_$1" || return
-	fi
+    if [ -z "$1" ]; then
+        cd "$PUPPET_BASE_DIR" || return
+    else
+        cd "$PUPPET_BASE_DIR/puppet_$1" || return
+    fi
 }
 
 # puppet fileserver repos
@@ -33,11 +32,11 @@ function puppet_navigate_to_basedir() {
 # }
 
 # outputs a list of all the dirs in the PUPPET_BASE_DIR
-# function puppet_list_puppet_directories() {
-#     for f in $(find $PUPPET_BASE_DIR/* -type d -maxdepth 0 | grep -v vscode | grep -v _mass_scripts); do
-#         echo "$(basename $f)"
-#     done
-# }
+function puppet_list_puppet_directories() {
+    for f in $(find $PUPPET_BASE_DIR/* -type d -maxdepth 0 | grep -v vscode | grep -v _mass_scripts); do
+        echo "$(basename $f)"
+    done
+}
 
 # returns the status of any puppet repos that have changes pending
 # function puppet_git_status_all() {
@@ -154,18 +153,18 @@ function puppet_navigate_to_basedir() {
 # }
 
 # pull all puppet modules
-# function puppet_pull_all() {
-# 	cwd=$(pwd)
-# 	puppet_navigate_to_basedir
-# 	for pdir in $(puppet_list_puppet_directories); do
-# 		cd $pdir
-#         [ "$1" = "master" ] && git checkout master --quiet
-#         echo "[$(git branch --show-current)] $pdir"
-# 		git pull origin $(git rev-parse --abbrev-ref HEAD) --quiet
-# 		cd ..
-# 	done
-# 	cd $cwd
-# }
+function puppet_pull_all() {
+    cwd=$(pwd)
+    puppet_navigate_to_basedir
+    for pdir in $(puppet_list_puppet_directories); do
+        cd $pdir
+        [ "$1" = "master" ] && git checkout master --quiet
+        echo "[$(git branch --show-current)] $pdir"
+        git pull origin $(git rev-parse --abbrev-ref HEAD) --quiet
+        cd ..
+    done
+    cd $cwd
+}
 
 # navigate to control-repo or puppet-systems
 # function cdpc() { tab-color 250 173 33; cd $PUPPET_BASE_DIR/puppet-control-repo }
@@ -175,7 +174,7 @@ function puppet_navigate_to_basedir() {
 alias cdp='puppet_navigate_to_basedir'
 # alias cdfs='puppet_navigate_to_filesystem_repos'
 
-# alias gpa='puppet_pull_all'
+alias pgpa='puppet_pull_all'
 # alias gsa='puppet_git_status_all'
 # alias gsal='puppet_git_status_all_long'
 # alias gca='puppet_git_commit_all'
@@ -235,14 +234,14 @@ alias cdp='puppet_navigate_to_basedir'
 # }
 
 function pat() {
-	bolt command run "puppet agent --test" --targets "$1" --transport pcp
+    bolt command run "puppet agent --test" --targets "$1" --transport pcp
 }
 
 function vim_puppet() {
-	spushd .
-	cdp
-	nvim puppet-control-repo/inventory.yaml
-	spopd
+    spushd .
+    cdp
+    nvim puppet-control-repo/inventory.yaml
+    spopd
 }
 # function vim_nagios() { cdnag; vim }
 
@@ -250,14 +249,14 @@ alias vip='vim_puppet'
 # alias vin='vim_nagios'
 
 # pdk validation (ppv 2.2.0.0)
-function ppv() {
-	if [ -z "$1" ]; then
-		echo "Usage: ppv <version>"
-		return 1
-	fi
-
-	local version="$1"
-	local dockerimage="puppet/pdk:$version"
-
-	docker run --rm --platform linux/amd64 -v $PWD:/workspace -w /workspace $dockerimage validate --parallel
-}
+# function ppv() {
+#     if [ -z "$1" ]; then
+#         echo "Usage: ppv <version>"
+#         return 1
+#     fi
+#
+#     local version="$1"
+#     local dockerimage="puppet/pdk:$version"
+#
+#     docker run --rm --platform linux/amd64 -v $PWD:/workspace -w /workspace $dockerimage validate --parallel
+# }

@@ -47,7 +47,7 @@ FROM golang:1.24
 WORKDIR /usr/src/app
 
 COPY . .
-RUN go build -v -o /usr/local/bin/app $projectname.go
+RUN go build -v -o /usr/local/bin/app main.go
 
 CMD ["app"]
 EOF
@@ -83,10 +83,10 @@ EOF
 all: build
 
 build:
-	@go build -o bin/$projectname $projectname.go
+	@go build -o bin/$projectname main.go
 
 run: build
-	@go run $projectname.go
+	@go run main.go
 
 install: build
 	@cp bin/$projectname /usr/local/bin/$projectname
