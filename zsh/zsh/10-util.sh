@@ -17,23 +17,33 @@ function dir_jump() {
         "$HOME/puppet"
         "$HOME/work"
     )
+    max_depth=3
     case "$1" in
     racs*)
         cd "$HOME/racs/racs-ansible" || return
+        return
         ;;
     doc*)
         cd "$HOME/racs/racs-internal-docs" || return
+        return
         ;;
     dot*)
         cd "$HOME/.dotfiles" || return
+        return
         ;;
     sch*)
         cd "$HOME/Google Drive/My Drive/school" || return
+        return
         ;;
-    *)
-        cd "$(fd --max-depth 3 --type directory . ${search_dirs[*]} | fzf --query="$1")" || return
+    aws*)
+        search_dirs=("$HOME/work/cloud/aws/uo-cloud-infra/")
+        max_depth=1
         ;;
     esac
+    cd "$(fd \
+        --max-depth "${max_depth}" \
+        --type directory . "${search_dirs[@]}" |
+        fzf --query="$1")" || return
 }
 alias j="dir_jump"
 
