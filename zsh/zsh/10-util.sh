@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function spushd() {
     pushd "$1" >/dev/null || return
 }
@@ -109,25 +111,4 @@ function ssh_load_keys() {
     eval "$(ssh-agent -s)"
     ssh-add ~/.ssh/uoregon/id_rsa
     ssh-add ~/.ssh/github/id_rsa
-}
-
-# update alacritty app icon
-function update_alacritty_icon() {
-    icon_path=/Applications/Alacritty.app/Contents/Resources/alacritty.icns
-    if [ ! -f "$icon_path" ]; then
-        echo "Can't find existing icon, make sure Alacritty is installed"
-        exit 1
-    fi
-
-    echo "Backing up existing icon"
-    hash="$(shasum $icon_path | head -c 10)"
-    mv "$icon_path" "$icon_path.backup-$hash"
-
-    echo "Downloading replacement icon"
-    icon_url=https://github.com/hmarr/dotfiles/files/8549877/alacritty.icns.gz
-    curl -sL $icon_url | gunzip >"$icon_path"
-
-    touch /Applications/Alacritty.app
-    killall Finder
-    killall Dock
 }

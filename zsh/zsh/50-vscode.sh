@@ -1,37 +1,39 @@
+#!/bin/bash
+
 # vscode
 alias c='vscode'
 vscode() {
-	case "$1" in
-	"")
-		code .
-		;;
-	d)
-		code ~/.dotfiles
-		;;
-	r)
-		code ~/racs/racs-ansible
-		;;
-	rd)
-		code ~/racs/racs-internal-docs
-		;;
-	*)
-		if [ -f "$1" ]; then
-			code -r "$1"
-		else
-			code -n "$1"
-		fi
-		;;
-	esac
+    case "$1" in
+    "")
+        code .
+        ;;
+    d)
+        code ~/.dotfiles
+        ;;
+    r)
+        code ~/racs/racs-ansible
+        ;;
+    rd)
+        code ~/racs/racs-internal-docs
+        ;;
+    *)
+        if [ -f "$1" ]; then
+            code -r "$1"
+        else
+            code -n "$1"
+        fi
+        ;;
+    esac
 }
 
 #alias todo="code -n $NOTESDIR; code -r $NOTESDIR/__todo.md"
 #alias notes="code -n $NOTESDIR"
 
 function vscode_dotfiles() {
-	spushd
-	cd "$DOTFILES" || return
-	code .
-	spopd
+    spushd
+    cd "$DOTFILES" || return
+    code .
+    spopd
 }
 alias cdot="vscode_dotfiles"
 
