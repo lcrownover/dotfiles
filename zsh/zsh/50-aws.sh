@@ -82,3 +82,15 @@ function ssm() {
     fi
     aws ssm start-session --target "$1"
 }
+
+function delete-tf-lock() {
+    if [ -z "$1" ]; then
+        echo "usage: give the dynamodb table name for \$1"
+        return
+    fi
+    aws dynamodb scan --table-name sample-app-630391674139-tfstate-lock --attributes-to-get "LockID" --query "Items[*]" --output json |
+        jq -c '.[]' |
+        while read -r item; do
+            aws dynamodb delete-item --table-name sample-app-630391674139-tfstate-lock --key "$item"
+        done
+}

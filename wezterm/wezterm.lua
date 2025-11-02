@@ -1,13 +1,14 @@
+--
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 local config = {}
 
 -- Start maximized
--- local mux = wezterm.mux
--- wezterm.on("gui-startup", function(cmd)
---     local _, _, window = mux.spawn_window(cmd or {})
---     window:gui_window():maximize()
--- end)
+local mux = wezterm.mux
+wezterm.on("gui-startup", function(cmd)
+    local _, _, window = mux.spawn_window(cmd or {})
+    window:gui_window():maximize()
+end)
 
 config.window_decorations = "TITLE | RESIZE | MACOS_USE_BACKGROUND_COLOR_AS_TITLEBAR_COLOR"
 config.window_padding = { left = 8, right = 8, top = 8, bottom = 0 }
@@ -15,12 +16,17 @@ config.initial_rows = 38
 config.initial_cols = 168
 config.default_cwd = wezterm.home_dir
 
-config.color_scheme = 'Tokyo Night Storm'
+local monokai = require("colors.monokai_pro")
+config.colors = monokai
+-- config.color_scheme = 'Tokyo Night Storm'
+-- config.color_scheme = 'Monokai (dark) (terminal.sexy)'
+-- config.color_scheme = 'Tomorrow Night (Gogh)'
 
 -- Font settings
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 16.0
-config.line_height = 1.05
+config.cell_width = 1.05
+config.line_height = 1.1
 
 -- Tab bar
 config.use_fancy_tab_bar = false
@@ -47,12 +53,12 @@ config.keys = {
   { key = "l", mods = "CTRL|SHIFT",       action = wezterm.action.ActivatePaneDirection("Right") },
   { key = "k", mods = "CTRL|SHIFT",       action = wezterm.action.ActivatePaneDirection("Up") },
   { key = "j", mods = "CTRL|SHIFT",       action = wezterm.action.ActivatePaneDirection("Down") },
+  { key = " ", mods = "CTRL|SHIFT",       action = wezterm.action.RotatePanes("CounterClockwise") },
   -- migrate muscle memory here
-  { key = "h", mods = "CTRL",       action = wezterm.action.ActivatePaneDirection("Left") },
-  { key = "l", mods = "CTRL",       action = wezterm.action.ActivatePaneDirection("Right") },
-  { key = "k", mods = "CTRL",       action = wezterm.action.ActivatePaneDirection("Up") },
-  { key = "j", mods = "CTRL",       action = wezterm.action.ActivatePaneDirection("Down") },
-  { key = " ", mods = "CTRL|SHIFT", action = wezterm.action.RotatePanes("CounterClockwise") },
+  -- { key = "h", mods = "CTRL",       action = wezterm.action.ActivatePaneDirection("Left") },
+  -- { key = "l", mods = "CTRL",       action = wezterm.action.ActivatePaneDirection("Right") },
+  -- { key = "k", mods = "CTRL",       action = wezterm.action.ActivatePaneDirection("Up") },
+  -- { key = "j", mods = "CTRL",       action = wezterm.action.ActivatePaneDirection("Down") },
 
   { key = "UpArrow",    mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ 'Up', 1 }) },
   { key = "DownArrow",  mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ 'Down', 1 }) },

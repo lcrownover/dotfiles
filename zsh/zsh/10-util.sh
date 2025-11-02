@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export PATH="$PATH:$HOME/.local/bin"
+
 function spushd() {
     pushd "$1" >/dev/null || return
 }
@@ -112,3 +114,19 @@ function ssh_load_keys() {
     ssh-add ~/.ssh/uoregon/id_rsa
     ssh-add ~/.ssh/github/id_rsa
 }
+
+alias bat="bat --theme=ansi"
+
+# use CTRL-Z to toggle between suspend and fg
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line -w
+  else
+    zle push-input -w
+    zle clear-screen -w
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
