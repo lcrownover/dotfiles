@@ -24,7 +24,7 @@ config.colors = monokai
 
 -- Font settings
 config.font = wezterm.font("JetBrainsMono Nerd Font")
-config.font_size = 16.0
+config.font_size = 15.0
 config.cell_width = 1.05
 config.line_height = 1.1
 
