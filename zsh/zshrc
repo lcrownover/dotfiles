@@ -4,28 +4,40 @@
 # setopt xtrace prompt_subst
 # zmodload zsh/zprof
 
-# if [ -z $TMUX ]; then
-#     if [[ "$TERM" = "xterm-kitty" ]]; then # attach to main if terminal is kitty
-#         tmux new-session -A -s main
-#         # :
-#     elif [[ "$TERM_PROGRAM" = "iTerm.app" ]]; then
-#         :
-#     elif [[ "$TERM_PROGRAM" = "vscode" ]]; then
-#         :
-#     elif [[ "$TERM_PROGRAM" = "WezTerm" ]]; then
-#         :
-#     elif [[ "$TERM_PROGRAM" = "ghostty" ]]; then
-#         tmux new-session -A -s main
-#         # :
-#     elif [[ "$TERM" = "xterm-256color" ]]; then # attach to main if terminal is alacritty/wezterm (this conflicts with vs code)
-#         # tmux new-session -A -s main
-#         :
-#     elif  [[ "$DOT_OS" = "wsl" ]]; then
-#         tmux new-session -A -s main
-#     else
-#         :
-#     fi
-# fi
+case "$(uname -a)" in
+    Darwin*)
+        export DOT_OS="mac"
+        ;;
+    *WSL*)
+        export DOT_OS="wsl"
+        ;;
+    *)
+        export DOT_OS="linux"
+        ;;
+esac
+
+if [ -z $TMUX ]; then
+    if  [[ "$DOT_OS" = "wsl" ]]; then
+        tmux new-session -A -s main
+    elif [[ "$TERM" = "xterm-kitty" ]]; then # attach to main if terminal is kitty
+        tmux new-session -A -s main
+        # :
+    elif [[ "$TERM_PROGRAM" = "iTerm.app" ]]; then
+        :
+    elif [[ "$TERM_PROGRAM" = "vscode" ]]; then
+        :
+    elif [[ "$TERM_PROGRAM" = "WezTerm" ]]; then
+        :
+    elif [[ "$TERM_PROGRAM" = "ghostty" ]]; then
+        tmux new-session -A -s main
+        # :
+    elif [[ "$TERM" = "xterm-256color" ]]; then # attach to main if terminal is alacritty/wezterm (this conflicts with vs code)
+        # tmux new-session -A -s main
+        :
+    else
+        :
+    fi
+fi
 
 ulimit -n 4096
 
