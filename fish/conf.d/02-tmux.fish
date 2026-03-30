@@ -1,3 +1,5 @@
+set -x DISABLE_AUTO_TITLE true
+
 alias tmux 'tmux -2'
 alias t 'start_tmux_session_with_pwd_name'
 
@@ -74,16 +76,16 @@ function main
     else
         set op attach
     end
-    tmux ls | grep -q main; or tmux new-session -d -s main
+    tmux ls | grep -q main; or tmux new-session -d -s main -n ''
     tmux -2 $op -t main
 end
 if test -z "$TMUX"
     if test "$DOT_OS" = wsl
-        tmux new-session -A -s main
+        tmux new-session -A -s main -n ''
     else if test "$TERM" = xterm-kitty
-        tmux new-session -A -s main
+        tmux new-session -A -s main -n ''
     else if test "$TERM_PROGRAM" = ghostty
-        tmux new-session -A -s main
+        tmux new-session -A -s main -n ''
     # iTerm.app, vscode, WezTerm: no auto-attach
     end
 end

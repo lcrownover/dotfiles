@@ -29,6 +29,8 @@ function fish_prompt
     string join '' -- (set_color blue) (prompt_pwd --full-length-dirs 2) (set_color normal) (fish_git_prompt) (set_color purple) ' > ' (set_color normal)
 end
 
+fish_add_path /opt/homebrew/bin/
+
 set -gx EDITOR nvim
 set -gx VISUAL zed
 set -gx COLORTERM truecolor
