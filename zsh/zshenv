@@ -27,6 +27,6 @@ for f in $ZSH_CONF_DIR/*.sh; do
     source $f
 done
 
-export EDITOR="zed"
+export EDITOR="nvim"
 export VISUAL="zed"
 export COLORTERM="truecolor"

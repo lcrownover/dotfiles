@@ -4,6 +4,8 @@
 #
 # export BOLT=~/.puppetlabs/bolt
 export PUPPET_BASE_DIR="$HOME/puppet/is"
+alias pdk='docker run --rm -it -v "$(pwd):/workspace" -w /workspace localhost:3000/pdk/pdk:latest'
+
 # export PATH="$PATH:$HOME/repos/puppet-editor-services/"
 
 # alias boltfile="nvim $HOME/.puppetlabs/bolt/Puppetfile"
@@ -39,27 +41,27 @@ function puppet_list_puppet_directories() {
 }
 
 # returns the status of any puppet repos that have changes pending
-# function puppet_git_status_all() {
-#     tmp=~/temp/.gsapout
-#     spushd .
-# 	puppet_navigate_to_basedir
-# 	for pdir in $(puppet_list_puppet_directories); do
-# 		cd $pdir
-# 		if [[ $(git status --porcelain | wc -l) -gt 0 ]]; then
-# 			if [ "$1" = "long" ]; then
-# 				echo "[$(git rev-parse --abbrev-ref HEAD)] $pdir" | tee -a $tmp
-# 				echo "$(git diff)\n\n" >> $tmp
-# 			else
-# 				echo "[$(git rev-parse --abbrev-ref HEAD)] $pdir"
-#                 git status --porcelain
-# 			fi
-# 		fi
-# 		cd ..
-# 	done
-#     spopd
-# 	[ "$1" = "long" ] && vim $tmp
-# 	echo > $tmp
-# }
+function puppet_git_status_all() {
+    tmp=~/temp/.gsapout
+    spushd .
+    puppet_navigate_to_basedir
+    for pdir in $(puppet_list_puppet_directories); do
+        cd $pdir
+        if [[ $(git status --porcelain | wc -l) -gt 0 ]]; then
+            if [ "$1" = "long" ]; then
+                echo "[$(git rev-parse --abbrev-ref HEAD)] $pdir" | tee -a $tmp
+                echo "$(git diff)\n\n" >>$tmp
+            else
+                echo "[$(git rev-parse --abbrev-ref HEAD)] $pdir"
+                git status --porcelain
+            fi
+        fi
+        cd ..
+    done
+    spopd
+    [ "$1" = "long" ] && vim $tmp
+    echo >$tmp
+}
 
 # shows each repo and its currently checked-out branch
 # function puppet_git_branch_all() {
@@ -175,11 +177,11 @@ alias cdp='puppet_navigate_to_basedir'
 # alias cdfs='puppet_navigate_to_filesystem_repos'
 
 alias pgpa='puppet_pull_all'
-# alias gsa='puppet_git_status_all'
-# alias gsal='puppet_git_status_all_long'
-# alias gca='puppet_git_commit_all'
-# alias gba='puppet_git_branch_all'
-# alias gcap='puppet_git_commit_and_push_all'
+alias pgsa='puppet_git_status_all'
+# alias pgsal='puppet_git_status_all_long'
+# alias pgca='puppet_git_commit_all'
+# alias pgba='puppet_git_branch_all'
+# alias pgcap='puppet_git_commit_and_push_all'
 
 # alias gprs='ssh is-puppetmaster.uoregon.edu "cd /etc/puppetlabs/fileserver-repos/puppet-systems; sudo git pull"'
 
@@ -237,26 +239,40 @@ function pat() {
     bolt command run "puppet agent --test" --targets "$1" --transport pcp
 }
 
-function vim_puppet() {
+function code_puppet() {
     spushd .
     cdp
-    nvim puppet-control-repo/inventory.yaml
+    code puppet-control-repo/inventory.yaml
     spopd
 }
-# function vim_nagios() { cdnag; vim }
+alias cip='code_puppet'
 
-alias vip='vim_puppet'
-# alias vin='vim_nagios'
+# pdk validation
+pdk_version_tag="3.5.1.1.30.g7d6a7d3"
+function ppv() {
+    if [ -z "$1" ]; then
+        echo "Usage: ppv <version>"
+        return 1
+    fi
 
-# pdk validation (ppv 2.2.0.0)
-# function ppv() {
-#     if [ -z "$1" ]; then
-#         echo "Usage: ppv <version>"
-#         return 1
-#     fi
-#
-#     local version="$1"
-#     local dockerimage="puppet/pdk:$version"
-#
-#     docker run --rm --platform linux/amd64 -v $PWD:/workspace -w /workspace $dockerimage validate --parallel
-# }
+    local version="$1"
+    local dockerimage="puppet/pdk:$version"
+
+    docker run --rm --platform linux/amd64 -v $PWD:/workspace $dockerimage validate --parallel
+}
+
+# eyaml
+function ees() {
+    if [ -z "$1" ]; then
+        echo "usage: ees <string to encrypt>"
+        return
+    fi
+    eyaml encrypt --pkcs7-public-key="$PUPPET_BASE_DIR/puppet_systems/pe_pub_key.pem" --output=block --string="$1"
+}
+function eef() {
+    if [ -z "$1" ]; then
+        echo "usage: eef <path to file to encrypt>"
+        return
+    fi
+    eyaml encrypt --pkcs7-public-key="$PUPPET_BASE_DIR/puppet_systems/pe_pub_key.pem" --output=block --file="$1"
+}

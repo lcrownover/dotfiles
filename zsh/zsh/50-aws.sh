@@ -36,7 +36,7 @@ function aws-profile-add() {
         echo "usage: give a profile name for \$1"
         return
     fi
-    python "$AWS_PROFILE_MANAGER" add "$1"
+    python3 "$AWS_PROFILE_MANAGER" add "$1"
 }
 
 function aws-profile-remove() {
@@ -44,7 +44,7 @@ function aws-profile-remove() {
         echo "usage: give a profile name for \$1"
         return
     fi
-    python "$AWS_PROFILE_MANAGER" remove "$1"
+    python3 "$AWS_PROFILE_MANAGER" remove "$1"
 }
 
 function aws-login-profile() {
@@ -60,7 +60,7 @@ function aws-login-profile() {
 
 function aws-login() {
     if [ -z "$1" ]; then
-        profile_name=$(python "$AWS_PROFILE_MANAGER" list | fzf)
+        profile_name=$(python3 "$AWS_PROFILE_MANAGER" list | fzf)
     else
         profile_name="$1"
     fi
