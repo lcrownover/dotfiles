@@ -1,0 +1,51 @@
+# Settings
+font-size = 15
+adjust-cell-height = 10%
+#theme = TokyoNight Storm
+# theme = Sonokai
+theme = Sonokai_Shusia
+window-height = 36
+window-width = 140
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor, sudo
+
+auto-update = check
+auto-update-channel = tip
+
+## Keybinds
+
+# Scrolling
+keybind=ctrl+up=scroll_page_lines:-100
+keybind=ctrl+down=scroll_page_lines:100
+
+# Open scrollback in $EDITOR
+keybind=ctrl+shift+s=write_scrollback_file:open
+
+
+# Tabs
+keybind = ctrl+shift+n=next_tab
+keybind = ctrl+shift+p=previous_tab
+
+# Splits
+keybind = ctrl+shift+backslash=new_split:right
+keybind = ctrl+shift+minus=new_split:down
+
+keybind = ctrl+shift+equal=equalize_splits
+
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+j=goto_split:bottom
+keybind = ctrl+shift+k=goto_split:top
+keybind = ctrl+shift+l=goto_split:right
+
+keybind = ctrl+shift+m=toggle_split_zoom
+
+keybind = ctrl+shift+up=resize_split:up,20
+keybind = ctrl+shift+down=resize_split:down,20
+keybind = ctrl+shift+left=resize_split:left,10
+keybind = ctrl+shift+right=resize_split:right,10
+keybind = shift+enter=text:\x1b\r
+
+# Fonts
+keybind = ctrl+shift=reset_font_size
+
