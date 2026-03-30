@@ -1,3 +1,4 @@
 zsh/zsh/*-secure-*.sh
+fish/conf.d/*secure*.fish
 ansible/ansible.cfg
 .luarc.json
