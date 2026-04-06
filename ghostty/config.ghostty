@@ -2,7 +2,7 @@
 font-size = 15
 adjust-cell-height = 10%
 #theme = TokyoNight Storm
-# theme = Sonokai
+#theme = Monokai Pro
 theme = Sonokai_Shusia
 window-height = 36
 window-width = 140
@@ -48,4 +48,3 @@ keybind = shift+enter=text:\x1b\r
 
 # Fonts
 keybind = ctrl+shift=reset_font_size
-

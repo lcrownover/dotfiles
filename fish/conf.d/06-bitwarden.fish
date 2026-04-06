@@ -20,8 +20,6 @@ function bitwarden_switch
             get_from_bitwarden 'keepass'
         case 'keep*'
             get_from_bitwarden 'Keepass - Systems'
-        case dci
-            get_from_systems_bitwarden 'DCI root/admin password'
         case ssh
             get_from_bitwarden 'uoregon' 'passphrase'
         case mac
@@ -32,8 +30,6 @@ function bitwarden_switch
             get_from_bitwarden 'ansible racs'
         case 'racs*'
             get_from_bitwarden 'RACS Keepass'
-        case root
-            get_from_racs_bitwarden 'Talapas - root user'
         case lp
             get_from_bitwarden 'lastpass'
         case 'test*'

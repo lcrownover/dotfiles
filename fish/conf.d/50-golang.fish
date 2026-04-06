@@ -89,12 +89,12 @@ function goupdate
             return
     end
 
-    set version $argv[1]
-    set tarball "go$version.$platform.tar.gz"
+    set goversion $argv[1]
+    set tarball "go$goversion.$platform.tar.gz"
     set tarfile "/tmp/$tarball"
 
     wget -O $tarfile -q https://go.dev/dl/$tarball; or return
-    echo "updating go to $version"
+    echo "updating go to $goversion"
     sudo rm -rf /usr/local/go
     sudo tar -C /usr/local -xzf $tarfile
     rm -rf $tarfile

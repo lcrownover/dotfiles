@@ -53,7 +53,7 @@ function tmux_close_last_stay_open() {
     fi
     # if this is the last window, create a new blank one
     if [[ $(tmux list-windows | wc -l) -eq 1 ]]; then
-        tmux new-window
+        tmux new-window -n ''
     fi
     # kill the current window
     tmux kill-window -t :"$CURRENT_TMUX_WINDOW_ID"

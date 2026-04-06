@@ -77,8 +77,8 @@ function ppv
         echo "Usage: ppv <version>"
         return 1
     end
-    set version $argv[1]
-    set dockerimage "puppet/pdk:$version"
+    set pdkversion $argv[1]
+    set dockerimage "puppet/pdk:$pdkversion"
     docker run --rm --platform linux/amd64 -v $PWD:/workspace $dockerimage validate --parallel
 end
 
