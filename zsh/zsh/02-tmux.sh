@@ -20,7 +20,7 @@ case "$TMUX" in
 esac
 
 function start_tmux_session_with_pwd_name() {
-    [[ -n $VTMUX ]] || tmux new-session -s "$(pwd)"
+    [[ -n $VTMUX ]] || tmux new-session -s "$(pwd)" -n ''
 }
 
 function set_tmux_window_name() {
@@ -34,7 +34,7 @@ function reset_tmux_window_name() {
 
 function main() {
     [[ -n "$VTMUX" ]] && OP="switch" || OP="attach"
-    tmux ls | grep -q main || tmux new-session -d -s main
+    tmux ls | grep -q main || tmux new-session -d -s main -n ''
     tmux -2 "$OP" -t main
     # tmux -2 new-session -A -s main
 }

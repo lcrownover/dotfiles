@@ -130,3 +130,6 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
+alias ls="eza"
+alias ll="eza -l"
+alias la="eza -la"
