@@ -18,8 +18,11 @@ case "$(uname -p)" in
         ;;
 esac
 
+# cached loading of brew environment
 if [ "$DOT_OS" = "mac" ]; then
-    eval "$($HOMEBREW_BINDIR/brew shellenv)"
+  _brew_env_cache="${XDG_CACHE_HOME:-$HOME/.cache}/brew_shellenv.zsh"
+  [[ ! -f "$_brew_env_cache" ]] && $HOMEBREW_BINDIR/brew shellenv >| "$_brew_env_cache"
+  source "$_brew_env_cache"
 fi
 
 # Source all my configs from the conf dir
