@@ -9,3 +9,6 @@ error_symbol = '[>](red)'
 
 [cmd_duration]
 disabled = true
+
+[lua]
+disabled = true
