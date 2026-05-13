@@ -1,4 +1,5 @@
 alias jcode='jupyter_code'
+alias jactivate='jupyter_activate'
 
 jupyter_code() {
     if [ ! -d .venv ]; then
@@ -6,6 +7,14 @@ jupyter_code() {
         return 1
     fi
     code --profile Jupyter .
+}
+
+jupyter_activate() {
+    if [ ! -d .venv ]; then
+        echo "only run this command from a directory created by 'jupyter_init'" >&2
+        return 1
+    fi
+    source ".venv/bin/activate"
 }
 
 jupyter_init() {
