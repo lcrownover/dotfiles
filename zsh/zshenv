@@ -1,42 +1,16 @@
-# This file is sourced for ALL shells
-
-setopt aliases
-
-export ZSH_CONF_DIR="$HOME/.config/zsh"
-
-function insert_path() {
-    [ $SHLVL -eq 1 ] && export PATH="$1:$PATH"
-}
-function append_path() {
-    [ $SHLVL -eq 1 ] && export PATH="$PATH:$1"
-}
+# Runs for ALL shells
 
 case "$(uname -p)" in
-    i386)
-        export HOMEBREW_BINDIR="/usr/local/bin"
-        ;;
-    *)
-        export HOMEBREW_BINDIR="/opt/homebrew/bin"
+    i386) export HOMEBREW_BINDIR="/usr/local/bin" ;;
+    *)    export HOMEBREW_BINDIR="/opt/homebrew/bin" ;;
+esac
+
+case "$(uname -s)" in
+    Darwin)
+        _brew_env_cache="${XDG_CACHE_HOME:-$HOME/.cache}/brew_shellenv.zsh"
+        [[ ! -f "$_brew_env_cache" ]] && $HOMEBREW_BINDIR/brew shellenv >| "$_brew_env_cache"
+        source "$_brew_env_cache"
         ;;
 esac
 
-# cached loading of brew environment
-if [ "$DOT_OS" = "mac" ]; then
-  _brew_env_cache="${XDG_CACHE_HOME:-$HOME/.cache}/brew_shellenv.zsh"
-  [[ ! -f "$_brew_env_cache" ]] && $HOMEBREW_BINDIR/brew shellenv >| "$_brew_env_cache"
-  source "$_brew_env_cache"
-fi
-
-# Source all my configs from the conf dir
-for f in $ZSH_CONF_DIR/*.sh; do
-    source "$f"
-done
-
-# Keymappings for ctrl+arrow word-by-word navigation
-bindkey '^[[1;5C' forward-word
-bindkey '^[[1;5D' backward-word
-
-
 export EDITOR="nvim"
-export VISUAL="zed"
-export COLORTERM="truecolor"

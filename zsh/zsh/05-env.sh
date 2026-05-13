@@ -1,5 +1,3 @@
-#!/bin/bash
-
 case "$DOT_OS" in
 wsl)
     export GDRIVEDIR="/mnt/c/Users/Lucas\ Crownover/Google\ Drive/"

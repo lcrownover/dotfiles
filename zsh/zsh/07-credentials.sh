@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # various credentials gotten from keepass
 
 if ! [ "$DOT_OS" = "mac" ]; then

@@ -1,7 +1,3 @@
-# sourced from ~/.zshrc
-#
-# Puppet configurations
-#
 # export BOLT=~/.puppetlabs/bolt
 export PUPPET_BASE_DIR="$HOME/puppet/is"
 alias pdk='docker run --rm -it -v "$(pwd):/workspace" -w /workspace localhost:3000/pdk/pdk:latest'

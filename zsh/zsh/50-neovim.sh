@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # make the swp dir
 test -d ~/.backup || mkdir ~/.backup
 

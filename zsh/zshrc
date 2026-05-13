@@ -1,4 +1,4 @@
-# This file is only sourced for INTERACTIVE shells
+# Runs for INTERACTIVE shells only
 #
 # performance testing
 # PS4=$'\\\011%D{%s%6.}\011%x\011%I\011%N\011%e\011'
@@ -18,10 +18,33 @@ case "$(uname -a)" in
         ;;
 esac
 
+export ZSH_CONF_DIR="$HOME/.config/zsh"
+
+setopt aliases
+
+function insert_path() {
+    [ $SHLVL -eq 1 ] && export PATH="$1:$PATH"
+}
+function append_path() {
+    [ $SHLVL -eq 1 ] && export PATH="$PATH:$1"
+}
+
+# Source all my configs from the conf dir
+for f in $ZSH_CONF_DIR/*.sh; do
+    source "$f"
+done
+
+# Keymappings for ctrl+arrow word-by-word navigation
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+
+export VISUAL="zed"
+export COLORTERM="truecolor"
+
 if [ -z $TMUX ]; then
-    if  [[ "$DOT_OS" = "wsl" ]]; then
+    if [[ "$DOT_OS" = "wsl" ]]; then
         tmux new-session -A -s main -n ''
-    elif [[ "$TERM" = "xterm-kitty" ]]; then # attach to main if terminal is kitty
+    elif [[ "$TERM" = "xterm-kitty" ]]; then
         tmux new-session -A -s main -n ''
         # :
     elif [[ "$TERM_PROGRAM" = "iTerm.app" ]]; then
@@ -33,7 +56,7 @@ if [ -z $TMUX ]; then
     elif [[ "$TERM_PROGRAM" = "ghostty" ]]; then
         tmux new-session -A -s main -n ''
         # :
-    elif [[ "$TERM" = "xterm-256color" ]]; then # attach to main if terminal is alacritty/wezterm (this conflicts with vs code)
+    elif [[ "$TERM" = "xterm-256color" ]]; then
         # tmux new-session -A -s main -n ''
         :
     else
@@ -66,4 +89,3 @@ eval "$(starship init zsh)"
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/lcrown/.lmstudio/bin"
 # End of LM Studio CLI section
-

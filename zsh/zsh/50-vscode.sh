@@ -1,6 +1,3 @@
-#!/bin/bash
-
-# vscode
 alias c='vscode'
 vscode() {
     case "$1" in

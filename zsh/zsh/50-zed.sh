@@ -1,5 +1,3 @@
-#!/bin/bash
-
 alias z='zzed'
 zzed() {
     case "$1" in

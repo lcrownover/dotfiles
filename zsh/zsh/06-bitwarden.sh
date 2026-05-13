@@ -1,5 +1,3 @@
-#!/bin/bash
-
 function get_from_bitwarden() {
     if [ $# -eq 0 ]; then
         echo "usage: $0 ENTRY [attribute]"

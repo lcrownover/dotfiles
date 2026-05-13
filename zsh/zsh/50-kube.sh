@@ -1,11 +1,8 @@
-#!/bin/bash
-
-if type kubectl >/dev/null 2>&1; then
-    alias k=lazykubectl
+if command -v kubectl >/dev/null 2>&1; then
+    kubectl() {
+        unfunction kubectl
+        source <(command kubectl completion zsh)
+        kubectl "$@"
+    }
+    alias k=kubectl
 fi
-
-lazykubectl() {
-    compdef __start_kubectl k
-    source <(kubectl completion zsh)
-    kubectl "$@"
-}

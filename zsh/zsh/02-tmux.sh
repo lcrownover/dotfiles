@@ -1,5 +1,3 @@
-#!/bin/bash
-
 alias tmux='tmux -2'
 alias t='start_tmux_session_with_pwd_name'
 

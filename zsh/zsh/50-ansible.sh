@@ -1,5 +1,3 @@
-#!/bin/bash
-
 alias ap='ansible-playbook'
 alias app='ansible-parallel'
 alias ag='ansible-galaxy'

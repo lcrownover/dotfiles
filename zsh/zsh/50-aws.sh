@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 append_path "/usr/local/aws-cli"
 
 AWS_PROFILE_MANAGER="$HOME/.config/zsh/scripts/aws-profiles.py"
@@ -88,7 +86,7 @@ function delete-tf-lock() {
         echo "usage: give the dynamodb table name for \$1"
         return
     fi
-    aws dynamodb scan --table-name sample-app-630391674139-tfstate-lock --attributes-to-get "LockID" --query "Items[*]" --output json |
+    aws dynamodb scan --table-name "$1" --attributes-to-get "LockID" --query "Items[*]" --output json |
         jq -c '.[]' |
         while read -r item; do
             aws dynamodb delete-item --table-name sample-app-630391674139-tfstate-lock --key "$item"

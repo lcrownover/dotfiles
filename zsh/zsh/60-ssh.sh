@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # this function re-links all the ssh configs from keepass where the keys are stored
 # this hasnt been maintained so i doubt it actually works enough.
 function ensure_ssh_keys() {
