@@ -1,13 +1,15 @@
-# This file is sourced from ~/.zshrc and loads the rest of the zsh configs
-#
-# this file is the entrypoint when non-interactive shells open a zsh process
+# This file is sourced for ALL shells
 
 setopt aliases
 
 export ZSH_CONF_DIR="$HOME/.config/zsh"
 
-function insert_path() { [ $SHLVL -eq 1 ] && export PATH="$1:$PATH" }
-function append_path() { [ $SHLVL -eq 1 ] && export PATH="$PATH:$1" }
+function insert_path() {
+    [ $SHLVL -eq 1 ] && export PATH="$1:$PATH"
+}
+function append_path() {
+    [ $SHLVL -eq 1 ] && export PATH="$PATH:$1"
+}
 
 case "$(uname -p)" in
     i386)
@@ -27,8 +29,13 @@ fi
 
 # Source all my configs from the conf dir
 for f in $ZSH_CONF_DIR/*.sh; do
-    source $f
+    source "$f"
 done
+
+# Keymappings for ctrl+arrow word-by-word navigation
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+
 
 export EDITOR="nvim"
 export VISUAL="zed"

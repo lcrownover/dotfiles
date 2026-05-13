@@ -1,3 +1,5 @@
+# This file is only sourced for INTERACTIVE shells
+#
 # performance testing
 # PS4=$'\\\011%D{%s%6.}\011%x\011%I\011%N\011%e\011'
 # exec 3>&2 2>/tmp/zshstart.$$.log
@@ -41,6 +43,9 @@ fi
 
 ulimit -n 4096
 
+# use emacs style, not vim
+bindkey -e
+
 # zinit plugins and turbo loading
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
@@ -57,3 +62,8 @@ eval "$(starship init zsh)"
 # unsetopt xtrace
 # exec 2>&3 3>&-
 # zprof
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/lcrown/.lmstudio/bin"
+# End of LM Studio CLI section
+

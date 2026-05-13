@@ -2,9 +2,9 @@
 font-size = 15
 adjust-cell-height = 10%
 #theme = TokyoNight Storm
-#theme = Monokai Pro
+theme = Monokai Pro
 #theme = Sonokai_Shusia
-theme = OneDarkPro
+#theme = OneDarkPro
 window-height = 36
 window-width = 140
 cursor-style = block

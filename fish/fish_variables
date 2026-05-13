@@ -1,4 +1,0 @@
-# This file contains fish universal variable definitions.
-# VERSION: 3.0
-SETUVAR __fish_initialized:4300
-SETUVAR fish_user_paths:/opt/homebrew/bin\x1e/Users/lcrown/\x2ecargo/bin\x1e/Users/lcrown/\x2enpm/bin\x1e/Users/lcrown/go/bin\x1e/usr/local/go/bin\x1e/usr/local/aws\x2dcli\x1e/Users/lcrown/\x2elocal/bin
