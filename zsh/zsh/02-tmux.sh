@@ -38,8 +38,7 @@ function main() {
 }
 
 function tmux_close_last_stay_open() {
-    # dont do anything if not tmux
-    [[ -n $VTMUX ]] || return
+    [[ -n $TMUX ]] || return
 
     CURRENT_TMUX_WINDOW_ID=$(tmux list-windows | grep '(active)' | awk '{print $1}' | cut -d':' -f1)
     CURRENT_TMUX_PANE_ID=$(tmux list-panes | grep '(active)' | awk '{print $1}' | cut -d':' -f1)
