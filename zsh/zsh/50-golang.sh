@@ -40,7 +40,7 @@ EOF
     test -f "README.md" || printf "# %s\n" "$projectname" >"README.md"
 
     cat <<EOF >"$projectdir/Dockerfile"
-FROM golang:1.24
+FROM golang:1.26
 
 WORKDIR /usr/src/app
 

@@ -15,5 +15,3 @@ export NOTESDIR="$GDRIVEDIR/notes"
 
 alias cdgd="cd '$GDRIVEDIR'"
 alias cdod="cd '$ONEDRIVEDIR'"
-
-alias ibrew='arch -x86_64 /usr/local/homebrew/bin/brew'

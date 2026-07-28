@@ -66,16 +66,16 @@ function vim_notes() {
 }
 
 # copy file contents to clipboard
-function cl() {
+function clip() {
     pbcopy <"$1"
 }
 
 # search and cd with fzf
-function vs() {
-    cd "$HOME/code" &&
-        cd "$(fd --max-depth 2 --type directory | fzf)" &&
-        nvim .
-}
+# function vs() {
+#     cd "$HOME/code" &&
+#         cd "$(fd --max-depth 2 --type directory | fzf)" &&
+#         nvim .
+# }
 
 # gnu sed for MacOS
 if [[ -f $HOMEBREW_BINDIR/gsed ]]; then
@@ -100,17 +100,14 @@ function excel() {
     fi
 }
 
-# clangd
-insert_path "/usr/local/opt/llvm/bin"
-
 # known_hosts_quick
-known_hosts_remove() {
-    if ! [[ $1 =~ [0-9]+ ]]; then
-        echo "bad input $1"
-    else
-        gsed -i -e "$1d" "$HOME/.ssh/known_hosts"
-    fi
-}
+# known_hosts_remove() {
+#     if ! [[ $1 =~ [0-9]+ ]]; then
+#         echo "bad input $1"
+#     else
+#         gsed -i -e "$1d" "$HOME/.ssh/known_hosts"
+#     fi
+# }
 
 # load keys
 function ssh_load_keys() {

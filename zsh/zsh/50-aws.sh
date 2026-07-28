@@ -56,6 +56,7 @@ function aws-login-profile() {
     eval "$(aws configure export-credentials --profile "$AWS_PROFILE" --format env)"
 }
 
+# This is the primary way to log into AWS profiles
 function aws-login() {
     if [ -z "$1" ]; then
         profile_name=$(python3 "$AWS_PROFILE_MANAGER" list | fzf)
@@ -63,10 +64,6 @@ function aws-login() {
         profile_name="$1"
     fi
     aws-login-profile "$profile_name"
-}
-
-function awsdev() {
-    ssh ec2-user@ec2-35-87-208-146.us-west-2.compute.amazonaws.com
 }
 
 function aws-ami-catalog() {
