@@ -94,6 +94,12 @@ function edge() {
     fi
 }
 
+function excel() {
+    if [ "$DOT_OS" = "mac" ]; then
+        open -a Microsoft\ Excel "$1"
+    fi
+}
+
 # clangd
 insert_path "/usr/local/opt/llvm/bin"
 
@@ -116,17 +122,17 @@ function ssh_load_keys() {
 alias bat="bat --theme=ansi"
 
 # use CTRL-Z to toggle between suspend and fg
-fancy-ctrl-z() {
-    if [[ $#BUFFER -eq 0 ]]; then
-        BUFFER="fg"
-        zle accept-line -w
-    else
-        zle push-input -w
-        zle clear-screen -w
-    fi
-}
-zle -N fancy-ctrl-z
-bindkey '^Z' fancy-ctrl-z
+# fancy-ctrl-z() {
+#     if [[ $#BUFFER -eq 0 ]]; then
+#         BUFFER="fg"
+#         zle accept-line -w
+#     else
+#         zle push-input -w
+#         zle clear-screen -w
+#     fi
+# }
+# zle -N fancy-ctrl-z
+# bindkey '^Z' fancy-ctrl-z
 
 # history with ctrl-r using fzf
 source <(fzf --zsh)

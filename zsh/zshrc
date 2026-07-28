@@ -34,10 +34,6 @@ for f in $ZSH_CONF_DIR/*.sh; do
     source "$f"
 done
 
-# Keymappings for ctrl+arrow word-by-word navigation
-bindkey '^[[1;5C' forward-word
-bindkey '^[[1;5D' backward-word
-
 export VISUAL="zed"
 export COLORTERM="truecolor"
 
@@ -68,6 +64,11 @@ ulimit -n 4096
 
 # use emacs style, not vim
 bindkey -e
+
+bindkey "^[[1;5D" backward-word   # Ctrl+Left
+bindkey "^[[1;5C" forward-word    # Ctrl+Right
+bindkey "^[[1~" beginning-of-line   # Fn+Left (Home)
+bindkey "^[[4~" end-of-line         # Fn+Right (End)
 
 # zinit plugins and turbo loading
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
