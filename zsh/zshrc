@@ -86,7 +86,3 @@ eval "$(starship init zsh)"
 # unsetopt xtrace
 # exec 2>&3 3>&-
 # zprof
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/lcrown/.lmstudio/bin"
-# End of LM Studio CLI section
