@@ -1,6 +1,6 @@
 append_path "/usr/local/aws-cli"
 
-AWS_PROFILE_MANAGER="$HOME/.config/zsh/scripts/aws-profiles.py"
+ln -s "$HOME/.config/zsh/scripts/aws-profile-manager" "$HOME/.local/bin/aws-profile-manager"
 
 #
 # Configuring SSO for CLI (old)
@@ -25,25 +25,9 @@ AWS_PROFILE_MANAGER="$HOME/.config/zsh/scripts/aws-profiles.py"
 
 export AWS_REGION="us-west-2"
 
-function aws-list-profiles() {
-    awk '/profile/ {print $2}' ~/.aws/config | tr -d ']'
-}
-
-function aws-profile-add() {
-    if [ -z "$1" ]; then
-        echo "usage: give a profile name for \$1"
-        return
-    fi
-    python3 "$AWS_PROFILE_MANAGER" add "$1"
-}
-
-function aws-profile-remove() {
-    if [ -z "$1" ]; then
-        echo "usage: give a profile name for \$1"
-        return
-    fi
-    python3 "$AWS_PROFILE_MANAGER" remove "$1"
-}
+# function aws-list-profiles() {
+#     awk '/profile/ {print $2}' ~/.aws/config | tr -d ']'
+# }
 
 function aws-login-profile() {
     if [ -z "$1" ]; then
@@ -59,7 +43,7 @@ function aws-login-profile() {
 # This is the primary way to log into AWS profiles
 function aws-login() {
     if [ -z "$1" ]; then
-        profile_name=$(python3 "$AWS_PROFILE_MANAGER" list | fzf)
+        profile_name=$(aws-profile-manager list | fzf)
     else
         profile_name="$1"
     fi

@@ -141,8 +141,8 @@ def main():
     add_parser = subparsers.add_parser("add", help="Add a profile")
     add_parser.add_argument("profile_name", help="Profile name")
     add_parser.add_argument("--account-id", help="Account ID")
-    add_parser.add_argument("--role-name", help="Role name")
-    add_parser.add_argument("--region", help="Region")
+    add_parser.add_argument("--role-name", help="Role name", default="Administrator")
+    add_parser.add_argument("--region", help="Region", default="us-west-2")
 
     remove_parser = subparsers.add_parser("remove", help="Remove a profile")
     remove_parser.add_argument("profile_name", help="Profile name")
