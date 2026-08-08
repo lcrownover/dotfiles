@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+
+import argparse
+
+COMMON_LOCATIONS = {
+    ".": ".",
+    "d": "/Users/lcrown/.dotfiles",
+    "racs": "/Users/lcrown/racs/racs-ansible",
+}
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Zed Directory Manager")
+    parser.add_argument(
+        "location",
+        help="filesystem location to open zed to. leave blank for fzf list of common locations",
+    )
+    args = parser.parse_args()
+
+    # No args passed, return a list of all the common locations
+    if not args.location:
+        print("\n".join([location for location in COMMON_LOCATIONS.values()]))
+        exit(0)
+
+    # If it's a registered location, print the single value of that key
+    if args.location in COMMON_LOCATIONS:
+        print(COMMON_LOCATIONS[args.location])
+        exit(0)
+
+    # Otherwise, print it and let bash handle if it exists
+    print(args.location)
+    exit(0)
+
+
+if __name__ == "__main__":
+    main()

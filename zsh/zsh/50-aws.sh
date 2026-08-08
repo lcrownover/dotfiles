@@ -1,6 +1,6 @@
 append_path "/usr/local/aws-cli"
 
-ln -s "$HOME/.config/zsh/scripts/aws-profile-manager" "$HOME/.local/bin/aws-profile-manager"
+ln -sf "$HOME/.config/zsh/scripts/aws-profile-manager" "$HOME/.local/bin/aws-profile-manager"
 
 #
 # Configuring SSO for CLI (old)
