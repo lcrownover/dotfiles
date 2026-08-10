@@ -49,3 +49,6 @@ keybind = shift+enter=text:\x1b\r
 
 # Fonts
 keybind = ctrl+shift=reset_font_size
+
+# Quick Terminal
+keybind = global:cmd+shift+space=toggle_quick_terminal
