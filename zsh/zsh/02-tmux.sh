@@ -22,7 +22,12 @@ function start_tmux_session_with_pwd_name() {
 }
 
 function set_tmux_window_name() {
-    [[ -n $VTMUX ]] && tmux rename-window "$1"
+    [[ -n $VTMUX ]] || return
+    if [[ "$1" == "" ]]; then
+        tmux rename-window " $(basename $(pwd))"
+    else
+        tmux rename-window " $1"
+    fi
 }
 
 function reset_tmux_window_name() {
