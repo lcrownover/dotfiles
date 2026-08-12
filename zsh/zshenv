@@ -41,9 +41,8 @@ function append_path() {
 mkdir -p "$HOME/.local/bin"
 
 # Configs that need to exist for every shell, including non-interactive
-# ones (e.g. commands tmux's run-shell invokes). Keep these to exports,
-# PATH setup, and function defs with no risky side effects at source
-# time. Interactive-only stuff (aliases that shadow real commands,
+# ones (e.g. commands tmux's run-shell invokes).
+# Interactive-only stuff (aliases that shadow real commands,
 # prompts, keybindings, plugin managers) lives in rc.d and is sourced
 # from zshrc instead.
 for f in "$ZSH_CONF_DIR"/env.d/*.sh; do

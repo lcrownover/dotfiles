@@ -1,28 +1,12 @@
 alias tmux='tmux -2'
 alias t='start_tmux_session_with_pwd_name'
 
-# TMUX gets set in VSCode for some reason
-# so we can't use the default TMUX
-case "$TMUX" in
-"")
-    VTMUX=""
-    ;;
-*)
-    $(tmux ls 2>&1 | grep -q 'no server running')
-    if [ $? -eq 0 ]; then
-        VTMUX=""
-    else
-        VTMUX="$TMUX"
-    fi
-    ;;
-esac
-
 start_tmux_session_with_pwd_name() {
-    [[ -n $VTMUX ]] || tmux new-session -s "$(pwd)" -n ''
+    [[ -n "$TMUX" ]] || tmux new-session -s "$(pwd)" -n ''
 }
 
 set_tmux_window_name() {
-    [[ -n $VTMUX ]] || return
+    [[ -n "$TMUX" ]] || return
     if [[ "$1" == "" ]]; then
         tmux rename-window " $(basename $(pwd))"
     else
@@ -32,18 +16,18 @@ set_tmux_window_name() {
 
 reset_tmux_window_name() {
     DEFAULT_TMUX_WINDOW_NAME="zsh"
-    [[ -n $VTMUX ]] && tmux rename-window $DEFAULT_TMUX_WINDOW_NAME
+    [[ -n "$TMUX" ]] && tmux rename-window $DEFAULT_TMUX_WINDOW_NAME
 }
 
 main() {
-    [[ -n "$VTMUX" ]] && OP="switch" || OP="attach"
+    [[ -n "$TMUX" ]] && OP="switch" || OP="attach"
     tmux ls | grep -q main || tmux new-session -d -s main -n ''
     tmux -2 "$OP" -t main
     # tmux -2 new-session -A -s main
 }
 
 tmux_close_last_stay_open() {
-    [[ -n $TMUX ]] || return
+    [[ -n "$TMUX" ]] || return
 
     CURRENT_TMUX_WINDOW_ID=$(tmux list-windows | grep '(active)' | awk '{print $1}' | cut -d':' -f1)
     CURRENT_TMUX_PANE_ID=$(tmux list-panes | grep '(active)' | awk '{print $1}' | cut -d':' -f1)
