@@ -12,7 +12,7 @@ alias pdk='docker run --rm -it -v "$(pwd):/workspace" -w /workspace localhost:30
 # alias cdey="cd $HOME/tools/eyaml"
 
 # this is used by a lot of other funcs
-function puppet_navigate_to_basedir() {
+puppet_navigate_to_basedir() {
     if [ -z "$1" ]; then
         cd "$PUPPET_BASE_DIR" || return
     else
@@ -30,14 +30,14 @@ function puppet_navigate_to_basedir() {
 # }
 
 # outputs a list of all the dirs in the PUPPET_BASE_DIR
-function puppet_list_puppet_directories() {
+puppet_list_puppet_directories() {
     for f in $(find $PUPPET_BASE_DIR/* -type d -maxdepth 0 | grep -v vscode | grep -v _mass_scripts); do
         echo "$(basename $f)"
     done
 }
 
 # returns the status of any puppet repos that have changes pending
-function puppet_git_status_all() {
+puppet_git_status_all() {
     tmp=~/temp/.gsapout
     spushd .
     puppet_navigate_to_basedir
@@ -151,7 +151,7 @@ function puppet_git_status_all() {
 # }
 
 # pull all puppet modules
-function puppet_pull_all() {
+puppet_pull_all() {
     cwd=$(pwd)
     puppet_navigate_to_basedir
     for pdir in $(puppet_list_puppet_directories); do
@@ -231,11 +231,11 @@ alias pgsa='puppet_git_status_all'
 # 	fi
 # }
 
-function pat() {
+pat() {
     bolt command run "puppet agent --test" --targets "$1" --transport pcp
 }
 
-function code_puppet() {
+code_puppet() {
     spushd .
     cdp
     code puppet-control-repo/inventory.yaml
@@ -245,7 +245,7 @@ alias cip='code_puppet'
 
 # pdk validation
 pdk_version_tag="3.5.1.1.30.g7d6a7d3"
-function ppv() {
+ppv() {
     if [ -z "$1" ]; then
         echo "Usage: ppv <version>"
         return 1
@@ -258,14 +258,14 @@ function ppv() {
 }
 
 # eyaml
-function ees() {
+ees() {
     if [ -z "$1" ]; then
         echo "usage: ees <string to encrypt>"
         return
     fi
     eyaml encrypt --pkcs7-public-key="$PUPPET_BASE_DIR/puppet_systems/pe_pub_key.pem" --output=block --string="$1"
 }
-function eef() {
+eef() {
     if [ -z "$1" ]; then
         echo "usage: eef <path to file to encrypt>"
         return

@@ -1,4 +1,4 @@
-function get_from_keepass() {
+get_from_keepass() {
     if [ $# -eq 0 ]; then
         echo "usage: $0 ENTRY [attribute]"
         return
@@ -9,7 +9,7 @@ function get_from_keepass() {
     printf "%s" "$(echo "$KEEPASSDBPW" | "$HOMEBREW_BINDIR"/keepassxc-cli show "$KEEPASSDBPATH" "$entry" --attributes "$attribute" -q)"
 }
 
-function get_from_racs_keepass() {
+get_from_racs_keepass() {
     if [ $# -eq 0 ]; then
         echo "usage: $0 ENTRY [attribute]"
         return
@@ -21,7 +21,7 @@ function get_from_racs_keepass() {
     printf "%s" "$(echo "$RACSKEEPASSDBPW" | "$HOMEBREW_BINDIR"/keepassxc-cli show "$RACSKEEPASSDBPATH" "$entry" --attributes "$attribute" -q)"
 }
 
-function get_from_systems_keepass() {
+get_from_systems_keepass() {
     if [ $# -eq 0 ]; then
         echo "usage: $0 ENTRY [attribute]"
         return
@@ -33,7 +33,7 @@ function get_from_systems_keepass() {
     printf "%s" "$(echo "$SYSKEEPASSDBPW" | "$HOMEBREW_BINDIR"/keepassxc-cli show "$SYSKEEPASSDBPATH" "$entry" --attributes "$attribute" -q)"
 }
 
-function keepass_switch() {
+keepass_switch() {
     case "$1" in
     lc*)
         get_from_keepass 'uoregon'

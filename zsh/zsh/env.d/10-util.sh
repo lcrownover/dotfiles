@@ -1,16 +1,16 @@
 export PATH="$PATH:$HOME/.local/bin"
 
-function spushd() {
+spushd() {
     pushd "$1" >/dev/null || return
 }
-function spopd() {
+spopd() {
     stack_depth=$(dirs -p | wc -l)
     if [ "$stack_depth" -gt 1 ]; then
         popd >/dev/null || return
     fi
 }
 
-function dir_jump() {
+dir_jump() {
     search_dirs=(
         "$HOME/racs"
         "$HOME/code"
@@ -49,91 +49,37 @@ function dir_jump() {
 }
 alias j="dir_jump"
 
-# todo/notes
-# alias todo="vim_notes __todo.md"
-# alias notes="vim_notes"
-function vim_notes() {
-    spushd .
-    cd "$NOTESDIR" || return
-    set_tmux_window_name "notes"
-    if [ -z "$1" ]; then
-        nvim .
-    else
-        nvim "$1"
-    fi
-    reset_tmux_window_name
-    spopd
-}
-
 # copy file contents to clipboard
-function clip() {
+clip() {
     pbcopy <"$1"
 }
 
-# search and cd with fzf
-# function vs() {
-#     cd "$HOME/code" &&
-#         cd "$(fd --max-depth 2 --type directory | fzf)" &&
-#         nvim .
-# }
-
-# gnu sed for MacOS
+# gnu sed for macOS
 if [[ -f $HOMEBREW_BINDIR/gsed ]]; then
     alias sed="gsed"
 fi
 
-function firefox() {
+firefox() {
     if [ "$DOT_OS" = "mac" ]; then
         /Applications/Firefox.app/Contents/MacOS/firefox file://"$(pwd)"/"$1"
     fi
 }
 
-function edge() {
+edge() {
     if [ "$DOT_OS" = "mac" ]; then
         open -a Microsoft\ Edge "$1"
     fi
 }
 
-function excel() {
+excel() {
     if [ "$DOT_OS" = "mac" ]; then
         open -a Microsoft\ Excel "$1"
     fi
 }
 
-# known_hosts_quick
-# known_hosts_remove() {
-#     if ! [[ $1 =~ [0-9]+ ]]; then
-#         echo "bad input $1"
-#     else
-#         gsed -i -e "$1d" "$HOME/.ssh/known_hosts"
-#     fi
-# }
-
 # load keys
-function ssh_load_keys() {
+ssh_load_keys() {
     eval "$(ssh-agent -s)"
     ssh-add ~/.ssh/uoregon/id_rsa
     ssh-add ~/.ssh/github/id_rsa
 }
-
-alias bat="bat --theme=ansi"
-
-# use CTRL-Z to toggle between suspend and fg
-# fancy-ctrl-z() {
-#     if [[ $#BUFFER -eq 0 ]]; then
-#         BUFFER="fg"
-#         zle accept-line -w
-#     else
-#         zle push-input -w
-#         zle clear-screen -w
-#     fi
-# }
-# zle -N fancy-ctrl-z
-# bindkey '^Z' fancy-ctrl-z
-
-# history with ctrl-r using fzf
-source <(fzf --zsh)
-
-alias ls="eza"
-alias ll="eza -l"
-alias la="eza -la"

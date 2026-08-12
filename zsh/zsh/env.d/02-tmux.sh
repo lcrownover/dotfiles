@@ -17,11 +17,11 @@ case "$TMUX" in
     ;;
 esac
 
-function start_tmux_session_with_pwd_name() {
+start_tmux_session_with_pwd_name() {
     [[ -n $VTMUX ]] || tmux new-session -s "$(pwd)" -n ''
 }
 
-function set_tmux_window_name() {
+set_tmux_window_name() {
     [[ -n $VTMUX ]] || return
     if [[ "$1" == "" ]]; then
         tmux rename-window " $(basename $(pwd))"
@@ -30,19 +30,19 @@ function set_tmux_window_name() {
     fi
 }
 
-function reset_tmux_window_name() {
+reset_tmux_window_name() {
     DEFAULT_TMUX_WINDOW_NAME="zsh"
     [[ -n $VTMUX ]] && tmux rename-window $DEFAULT_TMUX_WINDOW_NAME
 }
 
-function main() {
+main() {
     [[ -n "$VTMUX" ]] && OP="switch" || OP="attach"
     tmux ls | grep -q main || tmux new-session -d -s main -n ''
     tmux -2 "$OP" -t main
     # tmux -2 new-session -A -s main
 }
 
-function tmux_close_last_stay_open() {
+tmux_close_last_stay_open() {
     [[ -n $TMUX ]] || return
 
     CURRENT_TMUX_WINDOW_ID=$(tmux list-windows | grep '(active)' | awk '{print $1}' | cut -d':' -f1)
@@ -61,15 +61,15 @@ function tmux_close_last_stay_open() {
     tmux kill-window -t :"$CURRENT_TMUX_WINDOW_ID"
 }
 
-function unmain() {
+unmain() {
     tmux ls | grep -q main && tmux kill-session -t main
 }
 
 # split after 80 chars
-function code_split() {
+code_split() {
     tmux split-window -h -l "$(echo "$(tput cols) 80 - p" | dc)"
 }
 
-function settitle() {
+settitle() {
     printf "\033k%s\033\\" "$1"
 }

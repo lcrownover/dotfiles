@@ -1,4 +1,4 @@
-function get_from_bitwarden() {
+get_from_bitwarden() {
     if [ $# -eq 0 ]; then
         echo "usage: $0 ENTRY [attribute]"
         return
@@ -10,7 +10,7 @@ function get_from_bitwarden() {
     bw lock >/dev/null &
 }
 
-function bitwarden_switch() {
+bitwarden_switch() {
     case "$1" in
     lc*)
         get_from_bitwarden 'uoregon'

@@ -1,4 +1,18 @@
-# Runs for ALL shells
+# Runs for ALL shells, interactive or not (login shells, scripts, tmux
+# run-shell, etc). Keep this file cheap and side-effect-free beyond
+# what those contexts actually need.
+
+case "$(uname -a)" in
+    Darwin*)
+        export DOT_OS="mac"
+        ;;
+    *WSL*)
+        export DOT_OS="wsl"
+        ;;
+    *)
+        export DOT_OS="linux"
+        ;;
+esac
 
 case "$(uname -p)" in
     i386) export HOMEBREW_BINDIR="/usr/local/bin" ;;
@@ -14,3 +28,24 @@ case "$(uname -s)" in
 esac
 
 export EDITOR="nvim"
+
+export ZSH_CONF_DIR="$HOME/.config/zsh"
+
+function insert_path() {
+    [ $SHLVL -eq 1 ] && export PATH="$1:$PATH"
+}
+function append_path() {
+    [ $SHLVL -eq 1 ] && export PATH="$PATH:$1"
+}
+
+mkdir -p "$HOME/.local/bin"
+
+# Configs that need to exist for every shell, including non-interactive
+# ones (e.g. commands tmux's run-shell invokes). Keep these to exports,
+# PATH setup, and function defs with no risky side effects at source
+# time. Interactive-only stuff (aliases that shadow real commands,
+# prompts, keybindings, plugin managers) lives in rc.d and is sourced
+# from zshrc instead.
+for f in "$ZSH_CONF_DIR"/env.d/*.sh; do
+    source "$f"
+done

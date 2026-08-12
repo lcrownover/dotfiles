@@ -6,33 +6,14 @@
 # setopt xtrace prompt_subst
 # zmodload zsh/zprof
 
-case "$(uname -a)" in
-    Darwin*)
-        export DOT_OS="mac"
-        ;;
-    *WSL*)
-        export DOT_OS="wsl"
-        ;;
-    *)
-        export DOT_OS="linux"
-        ;;
-esac
-
-export ZSH_CONF_DIR="$HOME/.config/zsh"
+# DOT_OS, ZSH_CONF_DIR, insert_path/append_path, and env.d/*.sh
+# (PATH/exports/functions needed by every shell) are set up in zshenv,
+# which runs before this file for interactive shells too.
 
 setopt aliases
 
-function insert_path() {
-    [ $SHLVL -eq 1 ] && export PATH="$1:$PATH"
-}
-function append_path() {
-    [ $SHLVL -eq 1 ] && export PATH="$PATH:$1"
-}
-
-mkdir -p "$HOME/.local/bin"
-
-# Source all my configs from the conf dir
-for f in $ZSH_CONF_DIR/*.sh; do
+# Source interactive-only configs from the conf dir
+for f in "$ZSH_CONF_DIR"/rc.d/*.sh; do
     source "$f"
 done
 

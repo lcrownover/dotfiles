@@ -1,7 +1,7 @@
 append_path "/usr/local/go/bin"
 append_path "$HOME/go/bin"
 
-function gonew() {
+gonew() {
     function usage() {
         echo "usage: gonew NAME [basedir]"
     }
@@ -99,7 +99,7 @@ EOF
     go mod tidy 2>/dev/null
 }
 
-function goupdate() {
+goupdate() {
     usage() {
         echo "usage: goupdate <version>"
         return
@@ -130,9 +130,9 @@ function goupdate() {
     tarball="go$version.$platform.tar.gz"
     tarfile="/tmp/$tarball"
 
-    wget -O $tarfile -q https://go.dev/dl/$tarball || return
+    wget -O "$tarfile" -q "https://go.dev/dl/$tarball" || return
     echo "updating go to $version"
     sudo rm -rf /usr/local/go
-    sudo tar -C /usr/local -xzf $tarfile
-    rm -rf $tarfile
+    sudo tar -C /usr/local -xzf "$tarfile"
+    rm -rf "$tarfile"
 }

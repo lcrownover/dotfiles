@@ -15,7 +15,7 @@ zzed() {
 alias todo="zed -n \"\$NOTESDIR\"; zed \"\$NOTESDIR\"/__todo.md"
 alias notes="zed -n \"\$NOTESDIR\""
 
-function zed_dotfiles() {
+zed_dotfiles() {
     spushd
     cd "$DOTFILES" || return
     zed .

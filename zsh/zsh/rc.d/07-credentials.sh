@@ -4,7 +4,7 @@ if ! [ "$DOT_OS" = "mac" ]; then
     return
 fi
 
-function load_token() {
+load_token() {
     case "$1" in
     "github")
         GITHUB_TOKEN="$(get_from_bitwarden 'Github' 'token -- lcrown')"
