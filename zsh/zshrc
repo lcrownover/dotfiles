@@ -49,10 +49,8 @@ zinit wait lucid for \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
 
-zinit ice as"command" from"gh-r" \
-          atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
-          atpull"%atclone" src"init.zsh"
-zinit light starship/starship
+eval "$(starship init zsh)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 for f in "$HOME"/.config/zsh/rc.d/*.sh; do
     source "$f"
