@@ -1,4 +1,9 @@
-export PATH="$PATH:$HOME/.local/bin"
+# history with ctrl-r using fzf
+source <(fzf --zsh)
+
+alias ls="eza"
+alias ll="eza -l"
+alias la="eza -la"
 
 spushd() {
     pushd "$1" >/dev/null || return
@@ -10,6 +15,15 @@ spopd() {
     fi
 }
 
+insert_path() {
+    [ -z "$TMUX" ] && LVL=1 || LVL=2
+    [ "$SHLVL" -eq "$LVL" ] && export PATH="$1:$PATH"
+}
+append_path() {
+    [ -z "$TMUX" ] && LVL=1 || LVL=2
+    [ "$SHLVL" -eq "$LVL" ] && export PATH="$PATH:$1"
+}
+
 dir_jump() {
     search_dirs=(
         "$HOME/racs"
@@ -18,6 +32,8 @@ dir_jump() {
         "$HOME/azure"
         "$HOME/puppet"
         "$HOME/work"
+        "$HOME/work/cloud"
+        "$HOME/work/cloud/aws"
     )
     max_depth=3
     case "$1" in

@@ -1,3 +1,15 @@
+case "$(uname -a)" in
+Darwin*)
+    export DOT_OS="mac"
+    ;;
+*WSL*)
+    export DOT_OS="wsl"
+    ;;
+*)
+    export DOT_OS="linux"
+    ;;
+esac
+
 case "$DOT_OS" in
 wsl)
     export GDRIVEDIR="/mnt/c/Users/Lucas\ Crownover/Google\ Drive/"
@@ -13,3 +25,6 @@ export NOTESDIR="$GDRIVEDIR/notes"
 
 alias cdgd="cd '$GDRIVEDIR'"
 alias cdod="cd '$ONEDRIVEDIR'"
+alias bat="bat --theme=ansi"
+
+export HOMEBREW_BINDIR="/opt/homebrew/bin"

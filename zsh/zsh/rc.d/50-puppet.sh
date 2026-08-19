@@ -141,8 +141,8 @@ puppet_git_status_all() {
 # function git_log_file() {
 #     filename="$1"
 #     pdir="$(echo $filename | cut -d'/' -f1)"
-#     fpath="$(echo $filename | sed "s/$pdir\///")"
-#     git --git-dir "$pdir/.git" log -p --reverse -- "$fpath"
+#     flpath="$(echo $filename | sed "s/$pdir\///")"
+#     git --git-dir "$pdir/.git" log -p --reverse -- "$flpath"
 # }
 
 # provide a commit message and it will commit and push all changes on all modules with that message

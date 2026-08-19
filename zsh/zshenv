@@ -1,50 +1,15 @@
 # Runs for ALL shells, interactive or not (login shells, scripts, tmux
-# run-shell, etc). Keep this file cheap and side-effect-free beyond
-# what those contexts actually need.
+# run-shell, etc). Keep it small and trim.
 
-case "$(uname -a)" in
-    Darwin*)
-        export DOT_OS="mac"
-        ;;
-    *WSL*)
-        export DOT_OS="wsl"
-        ;;
-    *)
-        export DOT_OS="linux"
-        ;;
-esac
-
-case "$(uname -p)" in
-    i386) export HOMEBREW_BINDIR="/usr/local/bin" ;;
-    *)    export HOMEBREW_BINDIR="/opt/homebrew/bin" ;;
-esac
-
-case "$(uname -s)" in
-    Darwin)
-        _brew_env_cache="${XDG_CACHE_HOME:-$HOME/.cache}/brew_shellenv.zsh"
-        [[ ! -f "$_brew_env_cache" ]] && $HOMEBREW_BINDIR/brew shellenv >| "$_brew_env_cache"
-        source "$_brew_env_cache"
-        ;;
-esac
-
-export EDITOR="nvim"
-
-export ZSH_CONF_DIR="$HOME/.config/zsh"
-
-function insert_path() {
-    [ $SHLVL -eq 1 ] && export PATH="$1:$PATH"
-}
-function append_path() {
-    [ $SHLVL -eq 1 ] && export PATH="$PATH:$1"
-}
+# case "$(uname -s)" in
+#     Darwin)
+#         _brew_env_cache="${XDG_CACHE_HOME:-$HOME/.cache}/brew_shellenv.zsh"
+#         [[ ! -f "$_brew_env_cache" ]] && /opt/homebrew/bin/brew shellenv >| "$_brew_env_cache"
+#         source "$_brew_env_cache"
+#         ;;
+# esac
 
 mkdir -p "$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
-# Configs that need to exist for every shell, including non-interactive
-# ones (e.g. commands tmux's run-shell invokes).
-# Interactive-only stuff (aliases that shadow real commands,
-# prompts, keybindings, plugin managers) lives in rc.d and is sourced
-# from zshrc instead.
-for f in "$ZSH_CONF_DIR"/env.d/*.sh; do
-    source "$f"
-done
+source "$HOME/.config/zsh/env.d/tmux.sh"

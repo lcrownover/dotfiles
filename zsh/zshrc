@@ -12,34 +12,15 @@
 
 setopt aliases
 
-# Source interactive-only configs from the conf dir
-for f in "$ZSH_CONF_DIR"/rc.d/*.sh; do
-    source "$f"
-done
-
+export EDITOR="nvim"
 export VISUAL="zed"
 export COLORTERM="truecolor"
 
 if [ -z $TMUX ]; then
-    if [[ "$DOT_OS" = "wsl" ]]; then
-        tmux new-session -A -s main -n ''
-    elif [[ "$TERM" = "xterm-kitty" ]]; then
-        tmux new-session -A -s main -n ''
-        # :
-    elif [[ "$TERM_PROGRAM" = "iTerm.app" ]]; then
-        :
-    elif [[ "$TERM_PROGRAM" = "vscode" ]]; then
-        :
-    elif [[ "$TERM_PROGRAM" = "WezTerm" ]]; then
-        :
-    elif [[ "$TERM_PROGRAM" = "ghostty" ]]; then
-        tmux new-session -A -s main -n ''
-        # :
-    elif [[ "$TERM" = "xterm-256color" ]]; then
-        # tmux new-session -A -s main -n ''
+    if [[ "$TERM" = "xterm-256color" ]]; then
         :
     else
-        :
+        tmux new-session -A -s main -n ''
     fi
 fi
 
@@ -59,12 +40,23 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
-zinit ice wait lucid
-zinit light zsh-users/zsh-autosuggestions
-zinit ice wait lucid atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay"
-zinit light zdharma-continuum/fast-syntax-highlighting
 
-eval "$(starship init zsh)"
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
+
+zinit ice as"command" from"gh-r" \
+          atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+          atpull"%atclone" src"init.zsh"
+zinit light starship/starship
+
+for f in "$HOME"/.config/zsh/rc.d/*.sh; do
+    source "$f"
+done
 
 # end performance testing
 # unsetopt xtrace

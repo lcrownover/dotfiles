@@ -9,7 +9,8 @@ aws-login() {
     else
         AWS_PROFILE="$1"
     fi
-    aws --profile "$AWS_PROFILE" sts get-caller-identity >/dev/null 2>&1 || aws sso login
+    [ "$AWS_PROFILE" = "" ] && return
+    aws --profile "$AWS_PROFILE" sts get-caller-identity >/dev/null 2>&1 || aws sso login --profile "$AWS_PROFILE"
     eval "$(aws configure export-credentials --profile "$AWS_PROFILE" --format env)"
 }
 
